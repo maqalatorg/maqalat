@@ -1,11 +1,10 @@
 import Link from "next/link";
-import { Clock } from "lucide-react";
+import { Clock, Calendar } from "lucide-react";
 import type { Article } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
 
 /**
- * Editorial article card — typography-first, no shadow chrome.
- * Divider-based layout keeps grid quiet and readable.
+ * Article card — DealPulse-style card with shadow, hover lift, emerald tag.
  */
 export function ArticleCard({ article }: { article: Article }) {
   const cluster = findCluster(article.frontmatter.cluster);
@@ -15,36 +14,33 @@ export function ArticleCard({ article }: { article: Article }) {
   );
 
   return (
-    <Link
-      href={`/${article.slug}`}
-      className="group block border-t border-slate-200 dark:border-slate-800 pt-6 pb-2 first:border-t-0 first:pt-0"
-    >
-      {/* Kicker: cluster name — small, uppercase, editorial */}
+    <Link href={`/${article.slug}`} className="card p-6 group block h-full flex flex-col">
+      {/* Cluster tag */}
       {cluster && (
-        <div className="text-[11px] uppercase tracking-widest text-emerald-800 dark:text-emerald-400 mb-3">
-          {cluster.titleAr}
+        <div className="mb-4">
+          <span className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 font-medium">
+            {cluster.emoji} {cluster.titleAr}
+          </span>
         </div>
       )}
 
       {/* Title */}
-      <h3
-        className="font-display text-xl sm:text-2xl leading-snug font-bold text-slate-900 dark:text-slate-100 group-hover:text-emerald-800 dark:group-hover:text-emerald-300 transition-colors"
-        style={{ letterSpacing: "-0.005em" }}
-      >
+      <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors leading-snug line-clamp-2">
         {article.frontmatter.title}
       </h3>
 
       {/* Excerpt */}
-      <p className="mt-3 text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+      <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed flex-1">
         {article.frontmatter.description}
       </p>
 
-      {/* Meta line */}
-      <div className="mt-4 flex items-center gap-3 text-xs text-slate-500 dark:text-slate-500">
-        <span>{date}</span>
-        <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+      {/* Meta */}
+      <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
         <span className="inline-flex items-center gap-1">
-          <Clock className="w-3 h-3" /> {article.readingMinutes} د
+          <Calendar className="w-3.5 h-3.5" /> {date}
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <Clock className="w-3.5 h-3.5" /> {article.readingMinutes} د
         </span>
       </div>
     </Link>
