@@ -6,6 +6,8 @@ import { SalaryCalendar } from "@/components/SalaryCalendar";
 import { HijriConverter } from "@/components/HijriConverter";
 import { AgeCalculator } from "@/components/AgeCalculator";
 import { AgeDifference } from "@/components/AgeDifference";
+import { PregnancyCalculator } from "@/components/PregnancyCalculator";
+import { MenstrualCycleCalculator } from "@/components/MenstrualCycleCalculator";
 
 export const mdxComponents: MDXComponents = {
   a: ({ href = "", children, ...rest }) => {
@@ -35,6 +37,8 @@ export const mdxComponents: MDXComponents = {
   HijriConverter,
   AgeCalculator,
   AgeDifference,
+  PregnancyCalculator,
+  MenstrualCycleCalculator,
 };
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
