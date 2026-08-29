@@ -65,6 +65,16 @@ export function getArticlesByCluster(clusterSlug: string): Article[] {
 }
 
 /**
+ * List popular articles.
+ * Placeholder: currently returns newest first (same as getAllArticles).
+ * TODO: when rating counts / view analytics land, sort by that instead.
+ */
+export function getPopularArticles(limit?: number): Article[] {
+  const list = getAllArticles();
+  return limit ? list.slice(0, limit) : list;
+}
+
+/**
  * Get related articles for a given article.
  * Priority:
  *   1. Same cluster, excluding self

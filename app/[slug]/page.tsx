@@ -15,6 +15,7 @@ import { RatingStars } from "@/components/RatingStars";
 import { CommentsSection } from "@/components/CommentsSection";
 import { JsonLd } from "@/components/JsonLd";
 import { ReadingProgress } from "@/components/ReadingProgress";
+import { ClusterIcon } from "@/components/ClusterIcon";
 
 // Prevent conflicts with static cluster/legal routes
 const RESERVED_SLUGS = new Set([
@@ -119,9 +120,10 @@ export default async function ArticlePage({
           {cluster && (
             <Link
               href={`/c/${cluster.slug}`}
-              className="inline-block text-xs px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 font-medium mb-4"
+              className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 font-medium mb-4"
             >
-              {cluster.emoji} {cluster.titleAr}
+              <ClusterIcon name={cluster.icon} className="w-3.5 h-3.5" strokeWidth={2} />
+              {cluster.titleAr}
             </Link>
           )}
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 leading-tight">

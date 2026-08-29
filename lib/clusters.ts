@@ -8,8 +8,7 @@ export type Cluster = {
   titleAr: string;
   titleEn: string;
   descriptionAr: string;
-  icon: string; // lucide-react icon name (rendered dynamically in Header)
-  emoji: string; // fallback / social display
+  icon: string; // lucide-react icon name (mapped in ClusterIcon.tsx)
   enabled: boolean;
 };
 
@@ -20,7 +19,6 @@ export const CLUSTERS: Cluster[] = [
     titleEn: "Calendar & Events",
     descriptionAr: "التحويل الهجري الميلادي، الإجازات الرسمية، والمواعيد الفلكية في السعودية.",
     icon: "CalendarDays",
-    emoji: "📅",
     enabled: true,
   },
   {
@@ -29,17 +27,15 @@ export const CLUSTERS: Cluster[] = [
     titleEn: "Universities & Education",
     descriptionAr: "شروط القبول، التخصصات، الرسوم، وشرح نظام نور.",
     icon: "GraduationCap",
-    emoji: "🎓",
     enabled: true,
   },
   {
     slug: "health",
     titleAr: "الصحة والمكمّلات",
     titleEn: "Health & Supplements",
-    descriptionAr: "معلومات موثّقة عن الفيتامينات، المكمّلات، والصحة العامة — بمصادر رسمية.",
+    descriptionAr: "معلومات موثّقة عن الفيتامينات، المكمّلات، والصحة العامة بمصادر رسمية.",
     icon: "HeartPulse",
-    emoji: "❤️",
-    enabled: false, // يُفعَّل بعد ٣ شهور — يحتاج E-E-A-T عالٍ
+    enabled: false,
   },
   {
     slug: "finance",
@@ -47,7 +43,6 @@ export const CLUSTERS: Cluster[] = [
     titleEn: "Finance & Investment",
     descriptionAr: "الأسهم السعودية والأمريكية، العملات الرقمية، والادخار.",
     icon: "TrendingUp",
-    emoji: "💹",
     enabled: false,
   },
   {
@@ -56,7 +51,6 @@ export const CLUSTERS: Cluster[] = [
     titleEn: "Cars",
     descriptionAr: "دليل قطع الغيار، مقارنات الموديلات، وصيانة السيارات.",
     icon: "Car",
-    emoji: "🚗",
     enabled: false,
   },
   {
@@ -65,7 +59,6 @@ export const CLUSTERS: Cluster[] = [
     titleEn: "Tutorials",
     descriptionAr: "شرح خطوة-بخطوة لأشهر التطبيقات والخدمات الحكومية.",
     icon: "BookOpen",
-    emoji: "📖",
     enabled: false,
   },
   {
@@ -74,7 +67,6 @@ export const CLUSTERS: Cluster[] = [
     titleEn: "Websites & Apps",
     descriptionAr: "مراجعات وتوصيات للمواقع والتطبيقات المفيدة.",
     icon: "Globe",
-    emoji: "🌐",
     enabled: false,
   },
   {
@@ -83,7 +75,6 @@ export const CLUSTERS: Cluster[] = [
     titleEn: "Fabrics",
     descriptionAr: "دليل أنواع الأقمشة، الخامات، والاختيار الأمثل.",
     icon: "Shirt",
-    emoji: "🧵",
     enabled: false,
   },
 ];

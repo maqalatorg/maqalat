@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArticleCard } from "@/components/ArticleCard";
+import { ClusterIcon } from "@/components/ClusterIcon";
 import { getArticlesByCluster } from "@/lib/blog";
 import { CLUSTERS, findCluster } from "@/lib/clusters";
 import { SITE_URL } from "@/lib/seo";
@@ -43,7 +44,12 @@ export default async function ClusterPage({
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <header className="text-center mb-10">
-        <div className="text-5xl mb-4">{cluster.emoji}</div>
+        <div className="inline-grid place-items-center w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 mb-5">
+          <ClusterIcon
+            name={cluster.icon}
+            className="w-8 h-8 text-emerald-700 dark:text-emerald-400"
+          />
+        </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100">
           {cluster.titleAr}
         </h1>

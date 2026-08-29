@@ -13,7 +13,7 @@ export function Footer() {
               مقالات
             </div>
             <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              مرجعك الحديث لكل ما تحتاج معرفته — محتوى عربي أصيل، مصادره رسمية، بلا فبركة.
+              مرجعك الحديث لكل ما تحتاج معرفته — محتوى عربي أصيل بمصادر رسمية موثّقة.
             </p>
           </div>
 
