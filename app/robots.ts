@@ -3,8 +3,7 @@ import { SITE_URL } from "@/lib/seo";
 
 /**
  * Robots policy — opt-in explicitly for major AI crawlers to improve
- * visibility in AI answer engines (ChatGPT, Perplexity, Gemini).
- * Lesson learned from نبض الصفقات (Deal Pulse KSA).
+ * visibility in AI answer engines (ChatGPT, Perplexity, Gemini, Claude).
  */
 export default function robots(): MetadataRoute.Robots {
   return {

@@ -70,7 +70,8 @@ export function getArticlesByCluster(clusterSlug: string): Article[] {
  *   1. Same cluster, excluding self
  *   2. If < 4 in same cluster, top up with newest from other clusters
  * Never returns fewer than the requested count if the site has enough articles.
- * (Fix for the Top-6 orphan trap from DealPulse.)
+ * (Prevents the classic Top-N orphan trap where later cluster articles never
+ *  surface as "related" because the algorithm only picks the newest few.)
  */
 export function getRelatedArticles(article: Article, count = 4): Article[] {
   const all = getAllArticles();

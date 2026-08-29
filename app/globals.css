@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ─── Design tokens — DealPulse-inspired system for Maqalat ────────────── */
+/* ─── Design tokens — Maqalat design system ────────────────────────────── */
 @theme {
   /* Fonts */
   --font-sans: var(--font-cairo), system-ui, -apple-system, sans-serif;
