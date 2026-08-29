@@ -1,26 +1,212 @@
 @import "tailwindcss";
 
+/* ─── Design tokens — DealPulse-inspired system for Maqalat ────────────── */
+@theme {
+  /* Fonts */
+  --font-sans: var(--font-cairo), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-cairo), system-ui, sans-serif;
+
+  /* Emerald palette (Saudi green) */
+  --color-emerald-50:  #ECFDF5;
+  --color-emerald-100: #D1FAE5;
+  --color-emerald-200: #A7F3D0;
+  --color-emerald-300: #6EE7B7;
+  --color-emerald-400: #34D399;
+  --color-emerald-500: #10B981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065F46;
+  --color-emerald-900: #064E3B;
+
+  /* Apple-inspired neutrals */
+  --color-cream-50:  #FEFCF9;
+  --color-cream-100: #FDF8F0;
+  --color-cream-200: #FAF1E1;
+
+  --color-ink-700: #334155;
+  --color-ink-800: #1E293B;
+  --color-ink-900: #0F172A;
+
+  /* Shadows */
+  --shadow-soft:       0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --shadow-card:       0 4px 24px -8px rgb(0 0 0 / 0.08), 0 2px 8px -4px rgb(0 0 0 / 0.04);
+  --shadow-card-hover: 0 12px 40px -12px rgb(16 185 129 / 0.20), 0 4px 16px -4px rgb(0 0 0 / 0.08);
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 0.4s ease forwards;
+  --animate-float:   float 6s ease-in-out infinite;
+}
+
+/* Keyframes */
+@keyframes fade-up {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* Dark-mode class strategy */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Root vars ────────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:       #FEFCF9;
+  --bg-2:     #FAF7F2;
+  --fg:       #0F172A;
+  --fg-muted: #64748B;
+  --accent:   #10B981;
+  --accent-2: #059669;
+  --border:   rgb(15 23 42 / 0.10);
+  --card:     rgb(255 255 255 / 0.92);
+  --card-h:   rgb(255 255 255 / 0.97);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --bg:       #0A0F1E;
+  --bg-2:     #0F1729;
+  --fg:       #F1F5F9;
+  --fg-muted: #94A3B8;
+  --accent:   #10B981;
+  --accent-2: #34D399;
+  --border:   rgb(255 255 255 / 0.10);
+  --card:     rgb(15 23 42 / 0.92);
+  --card-h:   rgb(15 23 42 / 0.97);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* { -webkit-tap-highlight-color: transparent; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-feature-settings: 'kern', 'liga', 'calt';
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ─── Watermark background — subtle logo + emerald radial gradients ────── */
+.watermark-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 20% 10%, rgb(16 185 129 / 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgb(16 185 129 / 0.06) 0%, transparent 50%);
+  background-repeat: no-repeat, no-repeat;
+  background-position: top left, bottom right;
+  background-size: 40% 40%, 50% 50%;
+}
+.watermark-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  opacity: 0.45;
+  backdrop-filter: blur(8px) saturate(110%);
+  -webkit-backdrop-filter: blur(8px) saturate(110%);
+}
+.dark .watermark-bg {
+  background-image:
+    radial-gradient(circle at 20% 10%, rgb(16 185 129 / 0.10) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgb(5 150 105 / 0.08) 0%, transparent 50%);
+}
+.dark .watermark-bg::before { opacity: 0.65; }
+
+/* ─── Card utility ─────────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+.card:hover {
+  background: var(--card-h);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* ─── Prose overrides for MDX articles ─────────────────────────────────── */
+.prose-maqalat {
+  color: var(--fg);
+  line-height: 1.85;
+  font-size: 1.05rem;
+}
+.prose-maqalat h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--fg);
+  scroll-margin-top: 6rem;
+}
+.prose-maqalat h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--fg);
+  scroll-margin-top: 6rem;
+}
+.prose-maqalat p { margin: 1rem 0; }
+.prose-maqalat a {
+  color: var(--accent-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s;
+}
+.prose-maqalat a:hover { color: var(--accent); }
+.prose-maqalat ul, .prose-maqalat ol { margin: 1rem 0; padding-inline-start: 1.5rem; }
+.prose-maqalat li { margin: 0.4rem 0; }
+.prose-maqalat blockquote {
+  border-inline-start: 4px solid var(--accent);
+  padding-inline-start: 1rem;
+  margin: 1.25rem 0;
+  color: var(--fg-muted);
+  font-style: italic;
+}
+.prose-maqalat img {
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-card);
+  margin: 1.5rem auto;
+  max-width: 100%;
+  height: auto;
+}
+.prose-maqalat code {
+  background: var(--bg-2);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 0.9em;
+  color: var(--accent-2);
+}
+.prose-maqalat table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+.prose-maqalat th, .prose-maqalat td {
+  border: 1px solid var(--border);
+  padding: 0.6rem 0.9rem;
+  text-align: start;
+}
+.prose-maqalat th {
+  background: var(--bg-2);
+  font-weight: 600;
 }
