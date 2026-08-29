@@ -2,9 +2,9 @@
 
 /* ─── Design tokens — Maqalat design system ────────────────────────────── */
 @theme {
-  /* Fonts */
+  /* Fonts — Cairo for body, Amiri as editorial serif for display */
   --font-sans: var(--font-cairo), system-ui, -apple-system, sans-serif;
-  --font-display: var(--font-cairo), system-ui, sans-serif;
+  --font-display: var(--font-amiri), Georgia, "Times New Roman", serif;
 
   /* Emerald palette (Saudi green) */
   --color-emerald-50:  #ECFDF5;
@@ -56,28 +56,35 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ─── Root vars ────────────────────────────────────────────────────────── */
+/* Editorial palette — deep emerald primary, warm off-white paper */
 :root {
-  --bg:       #FEFCF9;
-  --bg-2:     #FAF7F2;
-  --fg:       #0F172A;
-  --fg-muted: #64748B;
-  --accent:   #10B981;
-  --accent-2: #059669;
-  --border:   rgb(15 23 42 / 0.10);
-  --card:     rgb(255 255 255 / 0.92);
-  --card-h:   rgb(255 255 255 / 0.97);
+  --bg:        #FBF9F4;   /* warm paper */
+  --bg-2:      #F5F1E8;   /* alternate stripe */
+  --fg:        #111827;
+  --fg-muted:  #4B5563;
+  --fg-subtle: #9CA3AF;
+  --accent:    #065F46;   /* deep emerald — publication feel, not neon */
+  --accent-2:  #047857;
+  --accent-3:  #10B981;   /* bright accent for links only */
+  --border:    rgb(17 24 39 / 0.09);
+  --card:      #FFFFFF;
+  --card-h:    #FFFFFF;
+  --rule:      rgb(17 24 39 / 0.12);
 }
 
 .dark {
-  --bg:       #0A0F1E;
-  --bg-2:     #0F1729;
-  --fg:       #F1F5F9;
-  --fg-muted: #94A3B8;
-  --accent:   #10B981;
-  --accent-2: #34D399;
-  --border:   rgb(255 255 255 / 0.10);
-  --card:     rgb(15 23 42 / 0.92);
-  --card-h:   rgb(15 23 42 / 0.97);
+  --bg:        #0B1220;   /* deep ink */
+  --bg-2:      #0F172A;
+  --fg:        #F3F4F6;
+  --fg-muted:  #9CA3AF;
+  --fg-subtle: #6B7280;
+  --accent:    #34D399;
+  --accent-2:  #10B981;
+  --accent-3:  #6EE7B7;
+  --border:    rgb(255 255 255 / 0.08);
+  --card:      #101827;
+  --card-h:    #121C2E;
+  --rule:      rgb(255 255 255 / 0.10);
 }
 
 * { -webkit-tap-highlight-color: transparent; }
@@ -97,7 +104,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ─── Watermark background — subtle logo + emerald radial gradients ────── */
+/* ─── Site background — editorial paper feel, very subtle warm tint ────── */
 .watermark-bg {
   position: fixed;
   inset: 0;
@@ -105,27 +112,45 @@ body {
   pointer-events: none;
   background-color: var(--bg);
   background-image:
-    radial-gradient(circle at 20% 10%, rgb(16 185 129 / 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 90%, rgb(16 185 129 / 0.06) 0%, transparent 50%);
-  background-repeat: no-repeat, no-repeat;
-  background-position: top left, bottom right;
-  background-size: 40% 40%, 50% 50%;
-}
-.watermark-bg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--bg);
-  opacity: 0.45;
-  backdrop-filter: blur(8px) saturate(110%);
-  -webkit-backdrop-filter: blur(8px) saturate(110%);
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgb(6 95 70 / 0.05) 0%, transparent 60%);
 }
 .dark .watermark-bg {
   background-image:
-    radial-gradient(circle at 20% 10%, rgb(16 185 129 / 0.10) 0%, transparent 50%),
-    radial-gradient(circle at 80% 90%, rgb(5 150 105 / 0.08) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgb(16 185 129 / 0.10) 0%, transparent 60%);
 }
-.dark .watermark-bg::before { opacity: 0.65; }
+
+/* ─── Gradient text utility ─────────────────────────────────────────────── */
+.grad-emerald {
+  background: linear-gradient(135deg, #34D399 0%, #10B981 45%, #047857 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ─── Glass card variant ────────────────────────────────────────────────── */
+.card-glass {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+}
+.card-glass:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgb(16 185 129 / 0.35);
+}
+
+/* ─── Section divider ───────────────────────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border) 25%, var(--border) 75%, transparent);
+}
 
 /* ─── Card utility ─────────────────────────────────────────────────────── */
 .card {
