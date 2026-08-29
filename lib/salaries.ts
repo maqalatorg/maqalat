@@ -62,6 +62,14 @@ export const PAYMENT_TYPES: PaymentType[] = [
     day: 8,
     colorClass: "bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300",
   },
+  {
+    id: "sanad",
+    nameAr: "دعم ساند (تعويض التعطّل)",
+    shortAr: "ساند",
+    calendar: "hijri",
+    day: 27,
+    colorClass: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300",
+  },
 ];
 
 export type Payment = {
