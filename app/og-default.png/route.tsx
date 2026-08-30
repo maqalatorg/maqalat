@@ -1,33 +1,9 @@
 import { ImageResponse } from "next/og";
 import { SITE_NAME_AR, SITE_TAGLINE_AR } from "@/lib/seo";
 
-export const runtime = "edge";
-
-async function loadCairo(weight: "Bold" | "ExtraBold"): Promise<ArrayBuffer | null> {
-  const urls = [
-    `https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/cairo/static/Cairo-${weight}.ttf`,
-    `https://raw.githubusercontent.com/google/fonts/main/ofl/cairo/static/Cairo-${weight}.ttf`,
-  ];
-  for (const url of urls) {
-    try {
-      const res = await fetch(url, { cache: "force-cache" });
-      if (res.ok) return await res.arrayBuffer();
-    } catch {}
-  }
-  return null;
-}
+export const runtime = "nodejs";
 
 export async function GET() {
-  const [bold, extraBold] = await Promise.all([
-    loadCairo("Bold"),
-    loadCairo("ExtraBold"),
-  ]);
-
-  const fonts = [
-    ...(bold ? [{ name: "Cairo", data: bold, weight: 700 as const, style: "normal" as const }] : []),
-    ...(extraBold ? [{ name: "Cairo", data: extraBold, weight: 800 as const, style: "normal" as const }] : []),
-  ];
-
   return new ImageResponse(
     (
       <div
@@ -40,7 +16,7 @@ export async function GET() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "Cairo, sans-serif",
+          fontFamily: "sans-serif",
           position: "relative",
         }}
       >
@@ -131,7 +107,6 @@ export async function GET() {
     {
       width: 1200,
       height: 630,
-      fonts: fonts.length > 0 ? fonts : undefined,
       headers: {
         "cache-control": "public, immutable, no-transform, max-age=31536000",
       },
