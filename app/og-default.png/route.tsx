@@ -1,45 +1,41 @@
 import { ImageResponse } from "next/og";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import { SITE_NAME_AR, SITE_TAGLINE_AR } from "@/lib/seo";
+import { SITE_URL, SITE_NAME_AR, SITE_TAGLINE_AR } from "@/lib/seo";
 
 export const runtime = "nodejs";
-export const dynamic = "force-static";
+
+async function loadFont(filename: string): Promise<ArrayBuffer | null> {
+  try {
+    const res = await fetch(`${SITE_URL}/fonts/${filename}`, {
+      cache: "force-cache",
+    });
+    if (!res.ok) return null;
+    return await res.arrayBuffer();
+  } catch {
+    return null;
+  }
+}
 
 export async function GET() {
-  let cairoFont: Buffer | null = null;
-  let errMsg = "";
-  try {
-    cairoFont = readFileSync(
-      join(process.cwd(), "public", "fonts", "Cairo-VF.ttf"),
-    );
-  } catch (e) {
-    errMsg = e instanceof Error ? e.message : String(e);
-  }
+  const [bold, extraBold] = await Promise.all([
+    loadFont("Tajawal-Bold.ttf"),
+    loadFont("Tajawal-ExtraBold.ttf"),
+  ]);
 
-  // Fallback: if font couldn't load, still return a valid image (Latin/emoji only, no Arabic)
-  if (!cairoFont) {
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            background: "linear-gradient(135deg, #064E3B 0%, #10B981 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 48,
-            color: "white",
-            fontFamily: "sans-serif",
-          }}
-        >
-          maqalat.org {errMsg && `— ${errMsg.slice(0, 100)}`}
-        </div>
-      ),
-      { width: 1200, height: 630 },
-    );
-  }
+  const fonts = [
+    ...(bold
+      ? [{ name: "Tajawal", data: bold, weight: 700 as const, style: "normal" as const }]
+      : []),
+    ...(extraBold
+      ? [
+          {
+            name: "Tajawal",
+            data: extraBold,
+            weight: 800 as const,
+            style: "normal" as const,
+          },
+        ]
+      : []),
+  ];
 
   return new ImageResponse(
     (
@@ -48,12 +44,13 @@ export async function GET() {
         style={{
           width: "100%",
           height: "100%",
-          background: "linear-gradient(135deg, #064E3B 0%, #047857 45%, #10B981 100%)",
+          background:
+            "linear-gradient(135deg, #064E3B 0%, #047857 45%, #10B981 100%)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "Cairo",
+          fontFamily: fonts.length > 0 ? "Tajawal" : "sans-serif",
           position: "relative",
         }}
       >
@@ -146,10 +143,7 @@ export async function GET() {
     {
       width: 1200,
       height: 630,
-      fonts: [
-        { name: "Cairo", data: cairoFont, weight: 700, style: "normal" },
-        { name: "Cairo", data: cairoFont, weight: 800, style: "normal" },
-      ],
+      fonts: fonts.length > 0 ? fonts : undefined,
       headers: {
         "cache-control": "public, immutable, no-transform, max-age=31536000",
       },
