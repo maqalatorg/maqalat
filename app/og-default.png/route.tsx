@@ -1,7 +1,13 @@
 import { ImageResponse } from "next/og";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { SITE_NAME_AR, SITE_TAGLINE_AR } from "@/lib/seo";
 
 export const runtime = "nodejs";
+
+const cairoFont = readFileSync(
+  join(process.cwd(), "app", "og-default.png", "fonts", "Cairo-VF.ttf"),
+);
 
 export async function GET() {
   return new ImageResponse(
@@ -16,7 +22,7 @@ export async function GET() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "sans-serif",
+          fontFamily: "Cairo",
           position: "relative",
         }}
       >
@@ -28,7 +34,8 @@ export async function GET() {
             width: 500,
             height: 500,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%)",
+            background:
+              "radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%)",
           }}
         />
         <div
@@ -39,7 +46,8 @@ export async function GET() {
             width: 600,
             height: 600,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 70%)",
+            background:
+              "radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 70%)",
           }}
         />
 
@@ -107,6 +115,10 @@ export async function GET() {
     {
       width: 1200,
       height: 630,
+      fonts: [
+        { name: "Cairo", data: cairoFont, weight: 700, style: "normal" },
+        { name: "Cairo", data: cairoFont, weight: 800, style: "normal" },
+      ],
       headers: {
         "cache-control": "public, immutable, no-transform, max-age=31536000",
       },
