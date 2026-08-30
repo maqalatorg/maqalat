@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
     workerThreads: false,
     cpus: 1,
   },
+  outputFileTracingIncludes: {
+    "/og-default.png": ["./app/og-default.png/fonts/*.ttf"],
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },

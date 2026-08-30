@@ -4,12 +4,13 @@ import { join } from "node:path";
 import { SITE_NAME_AR, SITE_TAGLINE_AR } from "@/lib/seo";
 
 export const runtime = "nodejs";
-
-const cairoFont = readFileSync(
-  join(process.cwd(), "app", "og-default.png", "fonts", "Cairo-VF.ttf"),
-);
+export const dynamic = "force-static";
 
 export async function GET() {
+  const cairoFont = readFileSync(
+    join(process.cwd(), "app", "og-default.png", "fonts", "Cairo-VF.ttf"),
+  );
+
   return new ImageResponse(
     (
       <div
