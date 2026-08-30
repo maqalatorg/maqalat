@@ -7,7 +7,7 @@ import { getSearchIndex } from "@/lib/blog";
 const NAV = [
   { label: "الرئيسية", href: "/" },
   { label: "الأقسام", href: "/#sections" },
-  { label: "الأكثر قراءة", href: "/#popular" },
+  { label: "الأدوات", href: "/tools" },
   { label: "آخر المقالات", href: "/#latest" },
 ];
 

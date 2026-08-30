@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
     cpus: 1,
   },
   outputFileTracingIncludes: {
-    "/og-default.png": ["./app/og-default.png/fonts/*.ttf"],
+    "/og-default.png": ["./public/fonts/*.ttf"],
   },
   images: {
     remotePatterns: [
