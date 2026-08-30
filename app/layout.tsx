@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { JsonLd } from "@/components/JsonLd";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { GoogleAdSense } from "@/components/GoogleAdSense";
 import { siteJsonLd, SITE_URL, SITE_NAME_AR, SITE_TAGLINE_AR } from "@/lib/seo";
 
 const cairo = Cairo({
@@ -99,6 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </ThemeProvider>
         <Analytics />
         <GoogleAnalytics />
+        <GoogleAdSense />
       </body>
     </html>
   );
