@@ -1,31 +1,39 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ClusterIcon } from "@/components/ClusterIcon";
 import { getArticlesByCluster } from "@/lib/blog";
 import { CLUSTERS, findCluster } from "@/lib/clusters";
 import { SITE_URL } from "@/lib/seo";
+import { locales } from "@/i18n/config";
 
 export function generateStaticParams() {
-  return CLUSTERS.filter((c) => c.enabled).map((c) => ({ cluster: c.slug }));
+  return locales.flatMap((locale) =>
+    CLUSTERS.filter((c) => c.enabled).map((c) => ({ locale, cluster: c.slug })),
+  );
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ cluster: string }>;
+  params: Promise<{ locale: string; cluster: string }>;
 }): Promise<Metadata> {
-  const { cluster: slug } = await params;
+  const { locale, cluster: slug } = await params;
   const cluster = findCluster(slug);
   if (!cluster) return {};
+  const isEn = locale === "en";
+  const title = isEn && cluster.titleEn ? cluster.titleEn : cluster.titleAr;
+  const path = locale === "ar" ? `/c/${slug}` : `/${locale}/c/${slug}`;
+  const siteName = isEn ? "Maqalat" : "مقالات";
   return {
-    title: `${cluster.titleAr} — مقالات`,
+    title: `${title} — ${siteName}`,
     description: cluster.descriptionAr,
-    alternates: { canonical: `${SITE_URL}/c/${slug}` },
+    alternates: { canonical: `${SITE_URL}${path}` },
     openGraph: {
-      title: `${cluster.titleAr} — مقالات`,
+      title: `${title} — ${siteName}`,
       description: cluster.descriptionAr,
-      url: `${SITE_URL}/c/${slug}`,
+      url: `${SITE_URL}${path}`,
     },
   };
 }
@@ -33,9 +41,11 @@ export async function generateMetadata({
 export default async function ClusterPage({
   params,
 }: {
-  params: Promise<{ cluster: string }>;
+  params: Promise<{ locale: string; cluster: string }>;
 }) {
-  const { cluster: slug } = await params;
+  const { locale, cluster: slug } = await params;
+  if (!locales.includes(locale as (typeof locales)[number])) notFound();
+  setRequestLocale(locale);
   const cluster = findCluster(slug);
   if (!cluster || !cluster.enabled) notFound();
 

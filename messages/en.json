@@ -1,0 +1,45 @@
+{
+  "site": {
+    "name": "Maqalat",
+    "tagline": "Your Modern Reference",
+    "taglineFull": "Your modern reference for everything you need to know",
+    "description": "Your modern reference for everything you need to know — authentic content backed by official sources."
+  },
+  "nav": {
+    "home": "Home",
+    "sections": "Sections",
+    "tools": "Tools",
+    "latest": "Latest Articles",
+    "logoAria": "Maqalat — Home"
+  },
+  "footer": {
+    "sections": "Sections",
+    "site": "Site",
+    "about": "About",
+    "editorial": "Editorial Policy",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "contact": "Contact",
+    "rights": "All rights reserved",
+    "madeIn": "Made with love in Saudi Arabia"
+  },
+  "language": {
+    "switch": "Language",
+    "arabic": "العربية",
+    "english": "English"
+  },
+  "common": {
+    "readMore": "Read more",
+    "search": "Search",
+    "searchPlaceholder": "Search articles…",
+    "notFound": "Page not found",
+    "backHome": "Back to home",
+    "loading": "Loading…",
+    "publishedAt": "Published",
+    "updatedAt": "Updated",
+    "readingTime": "min read",
+    "share": "Share",
+    "copyLink": "Copy link",
+    "linkCopied": "Copied"
+  }
+}

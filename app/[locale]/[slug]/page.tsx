@@ -1,13 +1,15 @@
 import { MDXRemote } from "next-mdx-remote-client/rsc";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { Calendar, Clock, User } from "lucide-react";
+import { setRequestLocale } from "next-intl/server";
 
 import { getArticle, getAllArticles, getRelatedArticles } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
 import { articleJsonLd, faqJsonLd, SITE_URL } from "@/lib/seo";
 import { mdxComponents } from "@/mdx-components";
+import { Link } from "@/i18n/navigation";
+import { locales } from "@/i18n/config";
 
 import { ArticleCard } from "@/components/ArticleCard";
 import { FAQ } from "@/components/FAQ";
@@ -32,19 +34,22 @@ const RESERVED_SLUGS = new Set([
 ]);
 
 export async function generateStaticParams() {
-  return getAllArticles().map((a) => ({ slug: a.slug }));
+  // Only Arabic articles exist for now. English pages 404 gracefully
+  // until we add EN content in Phase 2.
+  return getAllArticles().map((a) => ({ locale: "ar", slug: a.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   if (RESERVED_SLUGS.has(slug)) return {};
   const article = getArticle(slug);
   if (!article) return {};
   const fm = article.frontmatter;
+  const path = locale === "ar" ? `/${slug}` : `/${locale}/${slug}`;
   return {
     title: fm.title,
     description: fm.description,
@@ -54,19 +59,22 @@ export async function generateMetadata({
       type: "article",
       publishedTime: fm.publishedAt,
       modifiedTime: fm.updatedAt,
-      url: `${SITE_URL}/${slug}`,
+      url: `${SITE_URL}${path}`,
       images: fm.cover ? [fm.cover] : ["/og-default.png"],
     },
-    alternates: { canonical: `${SITE_URL}/${slug}` },
+    alternates: { canonical: `${SITE_URL}${path}` },
   };
 }
 
 export default async function ArticlePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  if (!locales.includes(locale as (typeof locales)[number])) notFound();
+  setRequestLocale(locale);
+
   if (RESERVED_SLUGS.has(slug)) notFound();
 
   const article = getArticle(slug);
