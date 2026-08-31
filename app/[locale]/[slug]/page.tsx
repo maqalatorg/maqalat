@@ -77,6 +77,10 @@ export default async function ArticlePage({
 
   if (RESERVED_SLUGS.has(slug)) notFound();
 
+  // All articles are Arabic-only until Phase 2. English requests 404
+  // to prevent duplicate content on /en/{slug} while the AR canonical exists.
+  if (locale !== "ar") notFound();
+
   const article = getArticle(slug);
   if (!article) notFound();
 
