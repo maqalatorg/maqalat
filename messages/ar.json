@@ -28,6 +28,13 @@
     "arabic": "العربية",
     "english": "English"
   },
+  "notFound": {
+    "code": "٤٠٤",
+    "title": "الصفحة غير موجودة",
+    "body": "ربما تم نقل الصفحة أو حذفها. جرّب البحث أو العودة للرئيسية.",
+    "homeCta": "الرئيسية",
+    "searchCta": "بحث"
+  },
   "search": {
     "placeholder": "ابحث في كل شيء…",
     "ariaLabel": "ابحث",

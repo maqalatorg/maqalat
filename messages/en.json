@@ -28,6 +28,13 @@
     "arabic": "العربية",
     "english": "English"
   },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "body": "This page may have been moved or removed. Try searching or head back home.",
+    "homeCta": "Home",
+    "searchCta": "Search"
+  },
   "search": {
     "placeholder": "Search everything…",
     "ariaLabel": "Search",
