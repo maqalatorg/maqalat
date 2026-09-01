@@ -7,6 +7,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { GoogleAdSense } from "@/components/GoogleAdSense";
+import { PageViewTracker } from "@/components/PageViewTracker";
 import { SITE_URL } from "@/lib/seo";
 import { defaultLocale, isRtl } from "@/i18n/config";
 
@@ -73,6 +74,7 @@ export default async function RootLayout({
         <Analytics />
         <GoogleAnalytics />
         <GoogleAdSense />
+        <PageViewTracker />
       </body>
     </html>
   );
