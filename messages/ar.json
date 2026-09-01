@@ -28,6 +28,20 @@
     "arabic": "العربية",
     "english": "English"
   },
+  "search": {
+    "placeholder": "ابحث في كل شيء…",
+    "ariaLabel": "ابحث",
+    "clearLabel": "مسح البحث",
+    "paletteLabel": "بحث سريع",
+    "palettePlaceholder": "ابحث بكلمة واحدة… حتى لو الإملاء مختلف",
+    "close": "إغلاق",
+    "emptyStart": "ابدأ الكتابة للبحث في كل المقالات — يعمل حتى مع الأخطاء الإملائية.",
+    "noResultsFor": "لا نتائج مطابقة لـ«{query}» — جرّب كلمة أقصر أو إملاء مختلف.",
+    "noResultsShort": "لا نتائج لـ«{query}» — جرّب كلمة مختلفة.",
+    "openHint": "↵ للفتح",
+    "closeHint": "ESC للإغلاق",
+    "poweredBy": "مدعوم ببحث ذكي متسامح مع الأخطاء"
+  },
   "common": {
     "readMore": "اقرأ المزيد",
     "search": "بحث",

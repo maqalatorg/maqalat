@@ -1,9 +1,10 @@
 "use client";
 
 import Fuse from "fuse.js";
-import Link from "next/link";
 import { Search, X, Command } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 type IndexItem = {
   slug: string;
@@ -27,6 +28,7 @@ function normalizeArabic(s: string): string {
 }
 
 export function SearchBar({ index }: { index: IndexItem[] }) {
+  const t = useTranslations("search");
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
@@ -118,16 +120,16 @@ export function SearchBar({ index }: { index: IndexItem[] }) {
               setOpen(true);
             }}
             onFocus={() => setOpen(true)}
-            placeholder="ابحث في كل شيء…"
+            placeholder={t("placeholder")}
             className="w-full ps-4 pe-10 py-2.5 rounded-full bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 text-sm placeholder:text-slate-400 backdrop-blur transition-all"
-            aria-label="ابحث"
+            aria-label={t("ariaLabel")}
           />
           {query ? (
             <button
               type="button"
               onClick={() => setQuery("")}
               className="absolute end-10 top-1/2 -translate-y-1/2 w-5 h-5 grid place-items-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
-              aria-label="مسح البحث"
+              aria-label={t("clearLabel")}
             >
               <X className="w-3 h-3 text-slate-500" />
             </button>
@@ -158,7 +160,7 @@ export function SearchBar({ index }: { index: IndexItem[] }) {
         )}
         {open && query && results.length === 0 && (
           <div className="absolute top-full mt-2 w-full rounded-2xl bg-white dark:bg-slate-900 shadow-card border border-slate-200 dark:border-slate-800 z-50 p-4 text-sm text-slate-500">
-            لا نتائج مطابقة لـ«{query}» — جرّب كلمة أقصر أو إملاء مختلف.
+            {t("noResultsFor", { query })}
           </div>
         )}
       </div>
@@ -169,7 +171,7 @@ export function SearchBar({ index }: { index: IndexItem[] }) {
           <div
             className="w-full max-w-2xl rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden animate-[fade-up_0.2s_ease-out]"
             role="dialog"
-            aria-label="بحث سريع"
+            aria-label={t("paletteLabel")}
           >
             <div className="relative border-b border-slate-200 dark:border-slate-800">
               <Search className="absolute start-4 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-600" />
@@ -178,14 +180,14 @@ export function SearchBar({ index }: { index: IndexItem[] }) {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="ابحث بكلمة واحدة… حتى لو الإملاء مختلف"
+                placeholder={t("palettePlaceholder")}
                 className="w-full ps-12 pe-16 py-4 text-lg bg-transparent focus:outline-none placeholder:text-slate-400"
               />
               <button
                 type="button"
                 onClick={() => setPaletteOpen(false)}
                 className="absolute end-3 top-1/2 -translate-y-1/2 text-xs px-2 py-1 rounded border border-slate-200 dark:border-slate-700 text-slate-500"
-                aria-label="إغلاق"
+                aria-label={t("close")}
               >
                 ESC
               </button>
@@ -193,12 +195,12 @@ export function SearchBar({ index }: { index: IndexItem[] }) {
             <div className="max-h-96 overflow-y-auto">
               {results.length === 0 && !query && (
                 <div className="p-6 text-center text-slate-500 text-sm">
-                  ابدأ الكتابة للبحث في كل المقالات — يعمل حتى مع الأخطاء الإملائية.
+                  {t("emptyStart")}
                 </div>
               )}
               {results.length === 0 && query && (
                 <div className="p-6 text-center text-slate-500 text-sm">
-                  لا نتائج لـ«{query}» — جرّب كلمة مختلفة.
+                  {t("noResultsShort", { query })}
                 </div>
               )}
               {results.map((r) => (
@@ -218,10 +220,10 @@ export function SearchBar({ index }: { index: IndexItem[] }) {
               ))}
             </div>
             <div className="px-4 py-2.5 bg-slate-50 dark:bg-slate-950/50 border-t border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 flex items-center gap-3">
-              <span>↵ للفتح</span>
-              <span>ESC للإغلاق</span>
+              <span>{t("openHint")}</span>
+              <span>{t("closeHint")}</span>
               <span className="ms-auto flex items-center gap-1">
-                مدعوم ببحث ذكي متسامح مع الأخطاء
+                {t("poweredBy")}
               </span>
             </div>
           </div>

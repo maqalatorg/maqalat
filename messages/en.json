@@ -28,6 +28,20 @@
     "arabic": "العربية",
     "english": "English"
   },
+  "search": {
+    "placeholder": "Search everything…",
+    "ariaLabel": "Search",
+    "clearLabel": "Clear search",
+    "paletteLabel": "Quick search",
+    "palettePlaceholder": "Search by a single word — typo-tolerant",
+    "close": "Close",
+    "emptyStart": "Start typing to search all articles — works even with typos.",
+    "noResultsFor": "No matches for \"{query}\" — try a shorter word or different spelling.",
+    "noResultsShort": "No results for \"{query}\" — try a different word.",
+    "openHint": "↵ to open",
+    "closeHint": "ESC to close",
+    "poweredBy": "Powered by typo-tolerant smart search"
+  },
   "common": {
     "readMore": "Read more",
     "search": "Search",
