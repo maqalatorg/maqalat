@@ -1,0 +1,115 @@
+---
+title: "Hijri to Gregorian Converter 2026 — Interactive Tool & Full Guide"
+description: "Convert dates between the Umm al-Qura Hijri calendar and the Gregorian calendar with an interactive tool, official rules, and the most common conversion mistakes."
+cluster: "calendar"
+publishedAt: "2026-08-29"
+updatedAt: "2026-08-29"
+author: "Maqalat Team"
+tags:
+  - "Hijri calendar"
+  - "Gregorian calendar"
+  - "Date conversion"
+  - "Umm al-Qura"
+faq:
+  - q: "What is the difference between the Hijri and Gregorian calendars?"
+    a: "The Hijri calendar is lunar, based on the moon's cycle (about 354 days per year). The Gregorian calendar is solar, based on Earth's orbit around the sun (365 days). The gap of ~11 days per year means Hijri dates shift forward against the Gregorian calendar year after year."
+  - q: "Does the Umm al-Qura calendar differ from other Hijri calendars?"
+    a: "Yes. Umm al-Qura is the calendar officially adopted in Saudi Arabia, set by astronomical calculation at the Astronomy Center at KACST. It may differ by a day or two from the traditional calculation used in some other countries."
+  - q: "When does a day begin in the Hijri calendar?"
+    a: "At sunset — not at midnight. That is why 1 Ramadan effectively starts at maghrib on the Gregorian day before."
+  - q: "Why do different websites return different Hijri conversion results?"
+    a: "Each site relies on a different source: some use the Umm al-Qura astronomical calculation, some use the traditional calculation, and some use approximate formulas. For official use in Saudi Arabia, rely only on Umm al-Qura."
+  - q: "What are the official tools for date conversion?"
+    a: "The official Umm al-Qura website (ummulqura.org.sa) and the built-in calendar apps on iOS and Android, both of which support Hijri as a secondary calendar. The tool above uses the same Umm al-Qura data built into the browser."
+---
+
+Arabic-speaking users convert between Hijri and Gregorian dates every day — filling out a form, planning leave, or scheduling an official appointment. The tool below converts between both calendars using the Umm al-Qura data officially adopted in Saudi Arabia.
+
+<HijriConverter />
+
+## How does the tool work?
+
+The tool relies on the `Intl.DateTimeFormat` API in modern browsers with the `islamic-umalqura` option — the same official data used by the Umm al-Qura calendar in Saudi Arabia. No server, no internet connection required, and your data is never shared.
+
+---
+
+## The core difference between the two calendars
+
+| Criterion | Hijri calendar | Gregorian calendar |
+|---|---|---|
+| Basis | Moon's cycle around Earth | Earth's orbit around the sun |
+| Days per year | ~354 days | 365 (or 366 in a leap year) |
+| Start of the year | 1 Muharram | 1 January |
+| Epoch | Migration of the Prophet ﷺ (622 CE) | Birth of Christ |
+| Start of the day | At sunset | At midnight |
+| Fixed seasonal months | No — months rotate through the year | Yes — each month stays in its season |
+
+---
+
+## Quick conversion using the approximate formula
+
+To convert between years only (without day and month):
+
+- **Hijri → Gregorian**: `G ≈ H × 0.97 + 622`
+- **Gregorian → Hijri**: `H ≈ (G − 622) × 1.03`
+
+**Example**: 1447 AH ≈ 1447 × 0.97 + 622 ≈ **2025/2026 CE**
+
+> **Note**: This formula is approximate and only for the year. For an exact date (day and month), use the tool above.
+
+---
+
+## Official conversion tools
+
+### 1. The Umm al-Qura website — most accurate for Saudi Arabia
+
+- Link: [ummulqura.org.sa](https://www.ummulqura.org.sa)
+- The officially adopted calendar in the Kingdom of Saudi Arabia
+- Set by astronomical calculation at the **King Abdulaziz City for Science and Technology (KACST)**
+
+### 2. The calendar app on your phone
+
+- **iPhone**: Settings → General → Language & Region → Calendar → "Islamic, Umm al-Qura"
+- **Android**: When adding an event, select "Hijri calendar"
+
+### 3. Google Calendar
+
+Supports the Hijri calendar as a secondary calendar:
+- Settings → Add calendar → Browse → "Islamic Days".
+
+---
+
+## Common Mistakes
+
+### 1. Relying on unofficial websites
+
+Some websites use a different calendar than Umm al-Qura, producing a gap of one or two days. For official use — documents, contracts, government appointments — rely only on Umm al-Qura.
+
+### 2. Confusing when the day begins in each calendar
+
+In the Hijri calendar, the day starts at **sunset** (not midnight). That is why "1 Ramadan" effectively appears at maghrib on the preceding Gregorian day in astronomical tables.
+
+### 3. Hijri months are not a fixed length
+
+Each Hijri month is either 29 or 30 days, set by moon sighting in religious practice (and by astronomical calculation in Umm al-Qura). Converting a mid-month date can therefore differ by a day between sources.
+
+---
+
+## When does precise conversion matter?
+
+- **Official contracts**: The date is written in the calendar adopted by the issuing authority.
+- **National ID**: The Hijri date of birth is fixed for life — verify its conversion carefully.
+- **Medical appointments**: Some hospitals schedule appointments in Hijri; verify before booking.
+- **Exam dates (Qudurat / Tahsili)**: The Education & Training Evaluation Commission publishes dates in both calendars.
+
+---
+
+## Summary
+
+- **For daily conversion**: Use the tool above or your phone's calendar app.
+- **For official use**: Rely only on [ummulqura.org.sa](https://www.ummulqura.org.sa).
+- **Remember**: The Hijri year is 11 days shorter — don't treat it as equal to the Gregorian year.
+
+---
+
+**Read also**: [Age Calculator — Gregorian and Hijri](/age-calculator-guide) · [When is Payday? Saudi Salary Schedule](/saudi-salary-dates-2026-2027)

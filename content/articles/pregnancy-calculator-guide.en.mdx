@@ -1,0 +1,146 @@
+---
+title: "Pregnancy Calculator — Accurate Due Date and Current Week"
+description: "Interactive tool for estimated due date, current gestational week, and trimester — built on Naegele's rule with cycle-length correction."
+cluster: "calendar"
+publishedAt: "2026-08-29"
+author: "Maqalat Team"
+tags:
+  - "pregnancy calculator"
+  - "due date"
+  - "gestational weeks"
+  - "Naegele's rule"
+  - "first trimester"
+faq:
+  - q: "How is the estimated due date calculated?"
+    a: "By Naegele's rule, the international clinical standard: EDD = first day of the last menstrual period (LMP) + 280 days (40 weeks). If your cycle is longer or shorter than 28 days, add or subtract the difference."
+  - q: "How accurate is calendar dating versus ultrasound?"
+    a: "Calendar dating from LMP is accurate to ±2 weeks. First-trimester ultrasound (between week 7 and 13) is more accurate (±5 days) because it measures the fetus directly. When available, use ultrasound as the definitive reference."
+  - q: "When does the count of gestational weeks begin?"
+    a: "From the first day of the LMP — not from actual conception. So during the first two weeks of pregnancy you are not yet pregnant in biological terms. Fertilization occurs around the second week after LMP."
+  - q: "What are the three trimesters?"
+    a: "First trimester (weeks 1–13): the fetus forms; miscarriage risk is highest. Second trimester (14–27): stability and first movements. Third trimester (28–40): rapid growth and preparation for birth."
+  - q: "Can fetal sex be determined from dates?"
+    a: "No. Sex cannot be predicted from cycle or conception dates. Fetal sex typically becomes visible on ultrasound between weeks 18 and 20. Traditional charts (Marie Stopes, Chinese gender chart) are not scientific."
+---
+
+Two questions dominate early pregnancy: **when is the due date?** and **what week am I in right now?** This tool answers both to clinical accuracy and adjusts for your actual cycle length.
+
+<PregnancyCalculator />
+
+---
+
+## How the calculator works
+
+The tool applies **Naegele's rule** — the standard used across obstetric practice since the 19th century:
+
+> **Estimated due date = first day of LMP + 280 days (40 weeks)**
+
+Source: [Mayo Clinic — Pregnancy Due Date Calculator](https://www.mayoclinic.org).
+
+### Correction for irregular cycles
+
+The original rule assumes a 28-day cycle. In reality, normal cycles range from **21 to 35 days**. The calculator adjusts automatically:
+
+- 30-day cycle → adds 2 days to the due date
+- 26-day cycle → subtracts 2 days
+- and so on
+
+---
+
+## What the calculator tells you
+
+| Output | Formula |
+|---|---|
+| **Estimated due date** | LMP + 280 days + cycle correction |
+| **Current gestational week** | (today − LMP) ÷ 7 |
+| **Current trimester** | First: 1–13, Second: 14–27, Third: 28–40 |
+| **Days remaining until birth** | Due date − today |
+| **Approximate conception date** | LMP + 14 days (ovulation day) |
+
+---
+
+## Gestational weeks in detail
+
+### First trimester (weeks 1–13)
+
+| Week | Key event |
+|---|---|
+| 1–2 | Ovulation and fertilization |
+| 3 | Implantation in the uterus |
+| 4–6 | Neural tube and heart begin to form |
+| 7–9 | Limbs and facial features develop |
+| 10–13 | Primary organ formation completes |
+
+**Common symptoms**: morning sickness, fatigue, breast tenderness, frequent urination.
+
+**Health warning**: avoid medications without medical advice, and avoid smoking, alcohol, and X-rays.
+
+### Second trimester (weeks 14–27)
+
+| Week | Key event |
+|---|---|
+| 14–16 | Facial features sharpen; organs mature |
+| 17–20 | Fetal sex becomes visible on ultrasound |
+| 20 | First movements the mother can feel |
+| 24–27 | Senses develop (especially hearing) |
+
+**Common symptoms**: rising energy, better appetite, visible bump, fetal movement.
+
+**Important screenings**: gestational diabetes test (between weeks 24 and 28).
+
+### Third trimester (weeks 28–40)
+
+| Week | Key event |
+|---|---|
+| 28–32 | Rapid weight and brain growth |
+| 33–36 | Lungs mature in preparation for breathing |
+| 37 | Pregnancy is considered "full term" |
+| 38–40 | Fetus prepares for delivery |
+
+**Common symptoms**: heaviness, Braxton Hicks contractions, milk leakage.
+
+**True labor signs**: regular contractions every 5 minutes, rupture of membranes (water breaking), bloody show.
+
+---
+
+## When to call your doctor immediately
+
+- Vaginal bleeding at any stage
+- Severe abdominal or back pain
+- Severe headache with blurred vision
+- Sudden swelling of the face or hands
+- Absent fetal movement for more than 12 hours (in the second and third trimesters)
+- Fever above 38°C
+- Continuous vaginal fluid leakage (possible ruptured membranes)
+
+These are warning signs — do not wait.
+
+---
+
+## Calendar dating versus ultrasound
+
+| Criterion | Calendar (LMP) | Ultrasound (first trimester) |
+|---|---|---|
+| Accuracy | ±2 weeks | ±5 days |
+| Availability | Immediately after pregnancy is confirmed | Between week 7 and 13 |
+| Requirement | Accurate LMP date | Clinical exam |
+| Reliable with irregular cycles | No | Yes |
+
+**Recommendation**: use the calendar as an initial estimate and rely on ultrasound as the definitive reference.
+
+---
+
+## Trusted sources
+
+- [Mayo Clinic — Pregnancy Week by Week](https://www.mayoclinic.org)
+- [NIH — Pregnancy Health Info](https://www.nichd.nih.gov)
+- [ACOG — American College of Obstetricians and Gynecologists](https://www.acog.org)
+- [WHO — Antenatal Care Guidelines](https://www.who.int)
+
+---
+
+**Medical disclaimer**: This tool and article are informational only — not a substitute for medical advice. Consult an obstetrician-gynecologist for personalized care throughout your pregnancy.
+
+---
+
+**Read also**: [Menstrual cycle and fertility window calculator](/menstrual-cycle-calculator) · [Gregorian and Hijri age calculator](/age-calculator-guide)

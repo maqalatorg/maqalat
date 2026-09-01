@@ -1,0 +1,208 @@
+---
+title: "Zakat Calculator — Compute Your Cash and Gold Zakat Accurately"
+description: "Interactive tool to calculate zakat on cash, gold, silver, and trade goods, with a detailed breakdown of nisab, hawl, rate, and edge cases."
+cluster: "calendar"
+publishedAt: "2026-08-29"
+author: "Maqalat Team"
+tags:
+  - "zakat calculator"
+  - "zakat on wealth"
+  - "zakat on gold"
+  - "nisab"
+  - "hawl"
+faq:
+  - q: "What is the zakat rate?"
+    a: "2.5% (a quarter of a tenth) on cash, gold, silver, and trade goods once the wealth reaches the nisab threshold and a full hijri year (hawl) has passed."
+  - q: "What is the nisab for zakat on wealth?"
+    a: "The value of 85 grams of 24-karat gold (20 mithqal) at the current price, or 595 grams of silver — whichever is lower. In practice, most scholars today apply the gold nisab because it sits at the higher end. If a gram is worth 300 SAR, the nisab is roughly 25,500 SAR."
+  - q: "When is zakat due?"
+    a: "Once a lunar year (354 days) has passed on wealth that meets the nisab. The hawl begins the day your wealth first crosses the threshold. Many people fix a single hijri date each year (the first of Ramadan, for example) and settle their zakat in one payment to keep things simple."
+  - q: "Is zakat due on gold jewelry worn for adornment?"
+    a: "A classical disagreement. The majority (Maliki, Shafi'i, and Hanbali) hold that zakat is not due on jewelry worn for adornment. The Hanafi school holds that it is. The cautious position is to pay zakat on worn gold as a precaution."
+  - q: "How do I calculate zakat on shares?"
+    a: "If you hold shares for trading (buy and sell): 2.5% on the full market value. If you hold them long-term for dividends: 2.5% on the company's zakatable assets (cash and inventory minus debts) proportional to your share."
+  - q: "Are debts deducted before calculating zakat?"
+    a: "Yes — debts due within the current year are deducted from your total wealth before you calculate zakat. For long-term financing, only the installment due this year is deducted."
+  - q: "Who receives zakat?"
+    a: "The eight categories named in the Qur'an: the poor, the needy, those employed to administer it, those whose hearts are to be reconciled, freeing captives, debtors, in the path of God, and the wayfarer. In Saudi Arabia, zakat is distributed through ZATCA or approved charitable foundations."
+---
+
+Zakat is a pillar of Islam, and calculating it accurately is a religious duty. This interactive tool computes your zakat while accounting for the nisab threshold, the hawl (lunar year), and deductible debts.
+
+<ZakatCalculator />
+
+---
+
+## Core Rules of Zakat
+
+Zakat is due on every free, adult, sane Muslim who meets four conditions:
+
+| Condition | Details |
+|---|---|
+| **Full ownership** | The wealth is yours and you can freely dispose of it |
+| **Reaching the nisab** | Your wealth is worth 85 grams of gold or more |
+| **Completing the hawl** | A full lunar year has passed since reaching the nisab |
+| **Surplus beyond essential needs** | Beyond what covers your basic living expenses |
+
+---
+
+## Nisab — What Is the Threshold Today?
+
+**Gold nisab**: 85 grams (20 mithqal)
+**Silver nisab**: 595 grams (200 shar'i dirhams)
+
+**In Saudi Riyal** (approximate — moves with the market):
+
+| Price per gram | Nisab in SAR |
+|---|---|
+| 250 SAR | 21,250 SAR |
+| 280 SAR | 23,800 SAR |
+| 300 SAR | 25,500 SAR |
+| 330 SAR | 28,050 SAR |
+
+**How to find the current price**:
+- Saudi bank websites (Al Ahli, Al Rajhi)
+- Metals-pricing apps (Kitco / Gold Price)
+- Local gold shops (they quote by karat at the day's rate)
+
+---
+
+## Which Assets Are Zakatable?
+
+### 1. Cash in All Forms
+- Physical cash
+- Bank accounts (current and savings)
+- Investment transfers
+- Foreign currencies at their current value
+
+### 2. Gold and Silver
+- Gold jewelry (disputed for pieces in regular use)
+- Bullion
+- Gold coins
+- Vessels, if prohibited for use
+
+### 3. Trade Goods
+- Merchandise held for sale at market value
+- Real estate listed for sale (not for residence)
+- Business inventory
+
+### 4. Receivables
+- Debts owed by a solvent, acknowledging debtor
+- Confirmed salary entitlements
+
+### 5. Livestock (Camels, Cattle, Sheep), Crops, and Fruits
+These follow separate rules distinct from the 2.5% rate. Consult fiqh references for the specifics.
+
+---
+
+## What Is Not Zakatable?
+
+- **The family home** (even a large one)
+- **Personal vehicles** and daily necessities
+- **Furniture and personal clothing**
+- **Rental property** (zakat applies only to the rent collected)
+- **Tools of trade** (workshop machinery, clinic equipment)
+
+---
+
+## When Does the Hawl Begin?
+
+**From the day your wealth first crosses the nisab.** For example:
+
+- On 1 Muharram 1447 AH, your balance hit 30,000 SAR (above the nisab).
+- Your zakat year begins on that date.
+- On 1 Muharram 1448 AH (a full year later), you calculate zakat on your balance that day.
+
+**A simpler approach**: many people pick a fixed hijri date every year (25 Ramadan, for instance) and settle zakat in one payment, even if some of the wealth has not quite completed its own hawl (paid as a precaution).
+
+---
+
+## Worked Examples
+
+### Example 1: A Salaried Employee
+
+- Monthly salary: 15,000 SAR
+- Monthly savings: 5,000 SAR
+- After one year: 60,000 SAR in the account
+
+**Zakat**: 60,000 × 2.5% = **1,500 SAR**
+
+### Example 2: Cash Plus Gold Minus Debt
+
+- Bank balance: 40,000 SAR
+- Gold owned: 50 grams (at 300 SAR/gram) = 15,000 SAR
+- Debts owed: 10,000 SAR
+
+**Calculation**:
+- Assets: 40,000 + 15,000 = 55,000 SAR
+- After debts: 55,000 − 10,000 = 45,000 SAR
+- Above the nisab (25,500) → **Zakat = 45,000 × 2.5% = 1,125 SAR**
+
+### Example 3: A Shop Owner
+
+- Bank balance: 20,000 SAR
+- Inventory held for sale at cost: 150,000 SAR
+- Business debts: 30,000 SAR
+
+**Calculation**:
+- Assets: 20,000 + 150,000 = 170,000 SAR
+- After debts: 170,000 − 30,000 = 140,000 SAR
+- **Zakat = 140,000 × 2.5% = 3,500 SAR**
+
+---
+
+## Who Deserves Zakat?
+
+The eight categories named in the verse: «إِنَّمَا الصَّدَقَاتُ لِلْفُقَرَاءِ وَالْمَسَاكِينِ...»
+
+*"Zakat is only for the poor and the needy, and those employed to administer it..."* (Qur'an 9:60, Sahih International)
+
+1. **The poor** — those without enough to cover their needs
+2. **The needy** — those who have some but not all of their needs
+3. **Those employed to administer it** — collectors and distributors of zakat
+4. **Those whose hearts are to be reconciled** — to draw hearts toward Islam
+5. **Freeing captives** — historically freeing slaves; today, ransoming Muslim prisoners
+6. **Debtors** — those unable to repay what they owe
+7. **In the path of God** — jihad and its associated causes
+8. **The wayfarer** — a traveler cut off from their wealth
+
+**In Saudi Arabia**, you can pay through:
+- **ZATCA** (for companies)
+- **Approved charitable foundations** (Ihsan, Al Rahma, Birr Al Walidayn)
+- **Eligible individuals directly** (people you know and whose need you have verified)
+
+---
+
+## Common Mistakes
+
+**1. Skipping zakat on jewelry worn for adornment**
+The cautious Hanafi position pays it. Follow your school's ruling.
+
+**2. Delaying zakat without a valid reason**
+Zakat is a debt due immediately once the hawl completes. Delay without a legitimate excuse is sinful.
+
+**3. Ignoring receivables**
+Salaries owed to you before payday are part of your calculation.
+
+**4. Deducting all long-term debt at once**
+Do not. Deduct only the installment due within the current year.
+
+**5. Assuming shares are exempt**
+Shares are zakatable based on holding intent (trading or long-term dividends).
+
+---
+
+## Sources
+
+- [Council of Senior Scholars, Kingdom of Saudi Arabia](https://www.spa.gov.sa)
+- [Zakat, Tax and Customs Authority (ZATCA)](https://zatca.gov.sa)
+- [IslamWeb — Zakat Fatwas](https://www.islamweb.net)
+- *Fiqh al-Zakat* by Dr. Yusuf al-Qaradawi
+
+---
+
+**Disclaimer**: This tool is a working aid meant to simplify a standard case. For complex situations (large companies, investment funds, layered ownership), consult a qualified scholar or ZATCA directly.
+
+---
+
+**Read also**: [Islamic and Saudi Occasions Countdown](/countdown-ramadan-eid-national-day) · [Hijri–Gregorian Converter](/hijri-gregorian-converter-2026)

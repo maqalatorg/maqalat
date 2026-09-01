@@ -1,6 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { SalaryCalendar } from "@/components/SalaryCalendar";
 import { HijriConverter } from "@/components/HijriConverter";
