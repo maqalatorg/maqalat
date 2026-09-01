@@ -110,7 +110,7 @@ export async function fetchPageviews(sinceDays = 30): Promise<RawPageview[]> {
     collection(db, "pageviews"),
     where("createdAt", ">=", Timestamp.fromDate(since)),
     orderBy("createdAt", "desc"),
-    fsLimit(50000),
+    fsLimit(10000),
   );
   const snap = await getDocs(q);
   return snap.docs.map((d) => {
@@ -138,7 +138,7 @@ export async function fetchClicks(sinceDays = 30): Promise<RawClick[]> {
     collection(db, "clicks"),
     where("createdAt", ">=", Timestamp.fromDate(since)),
     orderBy("createdAt", "desc"),
-    fsLimit(50000),
+    fsLimit(10000),
   );
   const snap = await getDocs(q);
   return snap.docs.map((d) => {
