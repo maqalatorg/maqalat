@@ -16,7 +16,10 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  return <HomeBody />;
+}
 
+function HomeBody() {
   const t = useTranslations("home");
   const currentLocale = useLocale() as Locale;
   const isEn = currentLocale === "en";
