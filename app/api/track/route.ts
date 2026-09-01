@@ -1,7 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { recordPageview, recordClick } from "@/lib/analytics";
+import { getDb } from "@/lib/firebase";
 
 export const runtime = "nodejs";
+
+// GET /api/track — diagnostic: is Firestore configured?
+export async function GET() {
+  const configured = Boolean(getDb());
+  const envSet = {
+    NEXT_PUBLIC_FIREBASE_API_KEY: Boolean(process.env.NEXT_PUBLIC_FIREBASE_API_KEY),
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || null,
+  };
+  return NextResponse.json({ ok: configured, firestoreConfigured: configured, envSet });
+}
 
 /**
  * POST /api/track
@@ -58,8 +69,12 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ ok: false, error: "unknown kind" }, { status: 400 });
   } catch (err) {
-    // Fail silently to avoid disrupting UX — analytics is best-effort
+    // Fail silently to avoid disrupting UX — analytics is best-effort.
+    // Include hint in body for diagnostics (safe, not user-visible in normal flow).
     console.error("[track] error:", err);
-    return NextResponse.json({ ok: false }, { status: 200 });
+    return NextResponse.json(
+      { ok: false, hint: String(err instanceof Error ? err.message : err).slice(0, 200) },
+      { status: 200 },
+    );
   }
 }
