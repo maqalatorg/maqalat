@@ -1,31 +1,35 @@
 import type { MetadataRoute } from "next";
-import { getAllArticles } from "@/lib/blog";
+import {
+  getAllSlugs,
+  getArticle,
+  hasArabicVersion,
+  hasEnglishVersion,
+} from "@/lib/blog";
 import { ENABLED_CLUSTERS } from "@/lib/clusters";
 import { SITE_URL } from "@/lib/seo";
 
 /**
- * Sitemap strategy:
- * - Static pages (about, contact, /tools, legal) and cluster pages exist in
- *   both Arabic (canonical, no prefix) and English (/en/*). Emit one URL per
- *   locale with hreflang alternates so Google can pick the right version.
- * - Articles are currently Arabic-only (10 articles). English pages 404 until
- *   Phase 2 content lands, so we don't emit /en/{slug} URLs yet.
+ * Bilingual sitemap:
+ * - Static/cluster pages: emit AR + EN URLs with hreflang alternates (both languages exist for all UI pages).
+ * - Articles: emit only where the language file actually exists. Sibling naming
+ *   convention: {slug}.mdx (AR) + {slug}.en.mdx (EN). hreflang alternates
+ *   reference both when both exist.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const arPaths = ["/", "/about", "/privacy", "/terms", "/contact", "/editorial-policy", "/tools"];
+  const staticPaths = ["/", "/about", "/privacy", "/terms", "/contact", "/editorial-policy", "/tools"];
 
-  const staticPages: MetadataRoute.Sitemap = arPaths.flatMap((path) => {
-    const arUrl = `${SITE_URL}${path === "/" ? "" : path}`.replace(/\/$/, "") || SITE_URL;
-    const enUrl = `${SITE_URL}/en${path === "/" ? "" : path}`.replace(/\/$/, "");
+  const staticPages: MetadataRoute.Sitemap = staticPaths.flatMap((p) => {
+    const arUrl = p === "/" ? SITE_URL : `${SITE_URL}${p}`;
+    const enUrl = p === "/" ? `${SITE_URL}/en` : `${SITE_URL}/en${p}`;
     const alternates = {
       languages: { ar: arUrl, en: enUrl, "x-default": arUrl },
     };
-    const priority = path === "/" ? 1.0 : path === "/tools" ? 0.7 : 0.4;
+    const priority = p === "/" ? 1.0 : p === "/tools" ? 0.7 : 0.4;
     return [
       { url: arUrl, lastModified: now, priority, alternates },
-      { url: enUrl, lastModified: now, priority: priority * 0.7, alternates },
+      { url: enUrl, lastModified: now, priority: priority * 0.9, alternates },
     ];
   });
 
@@ -35,19 +39,51 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const alternates = { languages: { ar: arUrl, en: enUrl, "x-default": arUrl } };
     return [
       { url: arUrl, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8, alternates },
-      { url: enUrl, lastModified: now, changeFrequency: "weekly" as const, priority: 0.5, alternates },
+      { url: enUrl, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7, alternates },
     ];
   });
 
-  // Articles: Arabic only for now. When EN articles land, add /en/{slug} + alternates.
-  const articlePages: MetadataRoute.Sitemap = getAllArticles().map((a) => ({
-    url: `${SITE_URL}/${a.slug}`,
-    lastModified: a.frontmatter.updatedAt
-      ? new Date(a.frontmatter.updatedAt)
-      : new Date(a.frontmatter.publishedAt),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+  const articlePages: MetadataRoute.Sitemap = [];
+  for (const slug of getAllSlugs()) {
+    const hasAr = hasArabicVersion(slug);
+    const hasEn = hasEnglishVersion(slug);
+
+    const languages: Record<string, string> = {};
+    if (hasAr) languages.ar = `${SITE_URL}/${slug}`;
+    if (hasEn) languages.en = `${SITE_URL}/en/${slug}`;
+    languages["x-default"] = languages.ar || languages.en;
+    const alternates = { languages };
+
+    if (hasAr) {
+      const article = getArticle(slug, "ar");
+      if (article) {
+        articlePages.push({
+          url: `${SITE_URL}/${slug}`,
+          lastModified: article.frontmatter.updatedAt
+            ? new Date(article.frontmatter.updatedAt)
+            : new Date(article.frontmatter.publishedAt),
+          changeFrequency: "monthly",
+          priority: 0.7,
+          alternates,
+        });
+      }
+    }
+
+    if (hasEn) {
+      const article = getArticle(slug, "en");
+      if (article) {
+        articlePages.push({
+          url: `${SITE_URL}/en/${slug}`,
+          lastModified: article.frontmatter.updatedAt
+            ? new Date(article.frontmatter.updatedAt)
+            : new Date(article.frontmatter.publishedAt),
+          changeFrequency: "monthly",
+          priority: 0.7,
+          alternates,
+        });
+      }
+    }
+  }
 
   return [...staticPages, ...clusterPages, ...articlePages];
 }

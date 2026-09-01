@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ClusterIcon } from "@/components/ClusterIcon";
 import { getArticlesByCluster } from "@/lib/blog";
@@ -23,16 +23,17 @@ export async function generateMetadata({
   const cluster = findCluster(slug);
   if (!cluster) return {};
   const isEn = locale === "en";
-  const title = isEn && cluster.titleEn ? cluster.titleEn : cluster.titleAr;
+  const title = isEn ? cluster.titleEn : cluster.titleAr;
+  const description = isEn ? cluster.descriptionEn : cluster.descriptionAr;
   const path = locale === "ar" ? `/c/${slug}` : `/${locale}/c/${slug}`;
   const siteName = isEn ? "Maqalat" : "مقالات";
   return {
     title: `${title} — ${siteName}`,
-    description: cluster.descriptionAr,
+    description,
     alternates: { canonical: `${SITE_URL}${path}` },
     openGraph: {
       title: `${title} — ${siteName}`,
-      description: cluster.descriptionAr,
+      description,
       url: `${SITE_URL}${path}`,
     },
   };
@@ -49,7 +50,9 @@ export default async function ClusterPage({
   const cluster = findCluster(slug);
   if (!cluster || !cluster.enabled) notFound();
 
-  const articles = getArticlesByCluster(slug);
+  const isEn = locale === "en";
+  const t = await getTranslations({ locale, namespace: "cluster" });
+  const articles = getArticlesByCluster(slug, locale as "ar" | "en");
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
@@ -61,16 +64,16 @@ export default async function ClusterPage({
           />
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100">
-          {cluster.titleAr}
+          {isEn ? cluster.titleEn : cluster.titleAr}
         </h1>
         <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-          {cluster.descriptionAr}
+          {isEn ? cluster.descriptionEn : cluster.descriptionAr}
         </p>
       </header>
 
       {articles.length === 0 ? (
         <div className="card p-10 text-center text-slate-500">
-          لا توجد مقالات في هذا القسم بعد — قريباً بإذن الله.
+          {t("empty")}
         </div>
       ) : (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

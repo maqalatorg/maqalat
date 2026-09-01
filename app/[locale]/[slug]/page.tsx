@@ -2,9 +2,17 @@ import { MDXRemote } from "next-mdx-remote-client/rsc";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Calendar, Clock, User } from "lucide-react";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { getArticle, getAllArticles, getRelatedArticles } from "@/lib/blog";
+import {
+  getArticle,
+  getAllArticles,
+  getAllSlugs,
+  getRelatedArticles,
+  hasArabicVersion,
+  hasEnglishVersion,
+  type ArticleLocale,
+} from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
 import { articleJsonLd, faqJsonLd, SITE_URL } from "@/lib/seo";
 import { mdxComponents } from "@/mdx-components";
@@ -27,17 +35,24 @@ const RESERVED_SLUGS = new Set([
   "contact",
   "terms",
   "editorial-policy",
+  "tools",
   "search",
   "c",
   "api",
   "sitemap.xml",
   "robots.txt",
+  "ads.txt",
 ]);
 
 export async function generateStaticParams() {
-  // Only Arabic articles exist for now. English pages 404 gracefully
-  // until we add EN content in Phase 2.
-  return getAllArticles().map((a) => ({ locale: "ar", slug: a.slug }));
+  // Emit (locale, slug) combinations only where the file actually exists.
+  // AR articles for /{slug}; EN articles for /en/{slug} — no ghost pages.
+  const params: { locale: string; slug: string }[] = [];
+  for (const slug of getAllSlugs()) {
+    if (hasArabicVersion(slug)) params.push({ locale: "ar", slug });
+    if (hasEnglishVersion(slug)) params.push({ locale: "en", slug });
+  }
+  return params;
 }
 
 export async function generateMetadata({
@@ -47,10 +62,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   if (RESERVED_SLUGS.has(slug)) return {};
-  const article = getArticle(slug);
+
+  const loc = locale as ArticleLocale;
+  const article = getArticle(slug, loc);
   if (!article) return {};
+
   const fm = article.frontmatter;
-  const path = locale === "ar" ? `/${slug}` : `/${locale}/${slug}`;
+  const canonicalPath = loc === "ar" ? `/${slug}` : `/${loc}/${slug}`;
+
+  // Build hreflang alternates for whichever versions actually exist.
+  const languages: Record<string, string> = {};
+  if (hasArabicVersion(slug)) languages.ar = `${SITE_URL}/${slug}`;
+  if (hasEnglishVersion(slug)) languages.en = `${SITE_URL}/en/${slug}`;
+  languages["x-default"] = languages.ar || languages.en;
+
   return {
     title: fm.title,
     description: fm.description,
@@ -58,12 +83,16 @@ export async function generateMetadata({
       title: fm.title,
       description: fm.description,
       type: "article",
+      locale: loc === "en" ? "en_US" : "ar_SA",
       publishedTime: fm.publishedAt,
       modifiedTime: fm.updatedAt,
-      url: `${SITE_URL}${path}`,
+      url: `${SITE_URL}${canonicalPath}`,
       images: fm.cover ? [fm.cover] : ["/og-default.png"],
     },
-    alternates: { canonical: `${SITE_URL}${path}` },
+    alternates: {
+      canonical: `${SITE_URL}${canonicalPath}`,
+      languages,
+    },
   };
 }
 
@@ -78,21 +107,21 @@ export default async function ArticlePage({
 
   if (RESERVED_SLUGS.has(slug)) notFound();
 
-  // All articles are Arabic-only until Phase 2. English requests 404
-  // to prevent duplicate content on /en/{slug} while the AR canonical exists.
-  if (locale !== "ar") notFound();
-
-  const article = getArticle(slug);
+  const loc = locale as ArticleLocale;
+  const isEn = loc === "en";
+  const article = getArticle(slug, loc);
   if (!article) notFound();
 
+  const t = await getTranslations({ locale, namespace: "article" });
   const cluster = findCluster(article.frontmatter.cluster);
   const related = getRelatedArticles(article, 3);
 
-  const dateAr = new Date(article.frontmatter.publishedAt).toLocaleDateString("ar-SA", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const dateStr = new Date(article.frontmatter.publishedAt).toLocaleDateString(
+    isEn ? "en-US" : "ar-SA",
+    { year: "numeric", month: "long", day: "numeric" },
+  );
+
+  const clusterTitle = isEn ? cluster?.titleEn : cluster?.titleAr;
 
   return (
     <>
@@ -115,17 +144,21 @@ export default async function ArticlePage({
       <article className="max-w-3xl mx-auto px-4 py-10">
         {/* Breadcrumb */}
         <nav className="text-sm text-slate-500 mb-4 flex items-center gap-2">
-          <Link href="/" className="hover:text-emerald-700">الرئيسية</Link>
+          <Link href="/" className="hover:text-emerald-700">
+            {t("breadcrumbHome")}
+          </Link>
           <span>/</span>
           {cluster && (
             <>
               <Link href={`/c/${cluster.slug}`} className="hover:text-emerald-700">
-                {cluster.titleAr}
+                {clusterTitle}
               </Link>
               <span>/</span>
             </>
           )}
-          <span className="text-slate-700 line-clamp-1">{article.frontmatter.title}</span>
+          <span className="text-slate-700 line-clamp-1">
+            {article.frontmatter.title}
+          </span>
         </nav>
 
         {/* Header */}
@@ -136,7 +169,7 @@ export default async function ArticlePage({
               className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 font-medium mb-4"
             >
               <ClusterIcon name={cluster.icon} className="w-3.5 h-3.5" strokeWidth={2} />
-              {cluster.titleAr}
+              {clusterTitle}
             </Link>
           )}
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 leading-tight">
@@ -147,13 +180,15 @@ export default async function ArticlePage({
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-slate-500">
             <span className="inline-flex items-center gap-1.5">
-              <User className="w-4 h-4" /> {article.frontmatter.author || "فريق مقالات"}
+              <User className="w-4 h-4" />{" "}
+              {article.frontmatter.author || t("authorDefault")}
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Calendar className="w-4 h-4" /> {dateAr}
+              <Calendar className="w-4 h-4" /> {dateStr}
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Clock className="w-4 h-4" /> {article.readingMinutes} دقيقة قراءة
+              <Clock className="w-4 h-4" />{" "}
+              {t("readingMinutes", { count: article.readingMinutes })}
             </span>
           </div>
         </header>
@@ -166,7 +201,7 @@ export default async function ArticlePage({
         {/* Rating */}
         <section className="mt-12 card p-5">
           <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-3">
-            هل أفادك هذا المقال؟
+            {t("ratingQuestion")}
           </h2>
           <RatingStars slug={slug} />
         </section>
@@ -178,7 +213,7 @@ export default async function ArticlePage({
         {related.length > 0 && (
           <section className="mt-12">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">
-              مقالات ذات صلة
+              {t("relatedTitle")}
             </h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((a) => (

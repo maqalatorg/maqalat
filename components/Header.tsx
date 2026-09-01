@@ -1,14 +1,16 @@
 import { BookOpen } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { SearchBar } from "./SearchBar";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { getSearchIndex } from "@/lib/blog";
+import type { Locale } from "@/i18n/config";
 
 export function Header() {
   const t = useTranslations();
-  const searchIndex = getSearchIndex();
+  const locale = useLocale() as Locale;
+  const searchIndex = getSearchIndex(locale);
 
   const NAV = [
     { label: t("nav.home"), href: "/" },
