@@ -15,6 +15,7 @@ import { ArticleCard } from "@/components/ArticleCard";
 import { FAQ } from "@/components/FAQ";
 import { RatingStars } from "@/components/RatingStars";
 import { CommentsSection } from "@/components/CommentsSection";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { JsonLd } from "@/components/JsonLd";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { ClusterIcon } from "@/components/ClusterIcon";
@@ -186,6 +187,9 @@ export default async function ArticlePage({
             </div>
           </section>
         )}
+
+        {/* Newsletter */}
+        <NewsletterSignup source={`article:${slug}`} />
 
         {/* Comments */}
         <CommentsSection slug={slug} />

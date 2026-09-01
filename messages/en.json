@@ -41,5 +41,17 @@
     "share": "Share",
     "copyLink": "Copy link",
     "linkCopied": "Copied"
+  },
+  "newsletter": {
+    "title": "Maqalat Weekly",
+    "description": "Get our latest articles + rare curations every Sunday. No spam, unsubscribe anytime.",
+    "placeholder": "Your email address",
+    "subscribe": "Subscribe",
+    "sending": "Sending…",
+    "success": "Thanks — you're subscribed ✓",
+    "invalidEmail": "Invalid email address",
+    "genericError": "Could not subscribe, try later",
+    "serviceUnavailable": "Subscription service unavailable",
+    "privacy": "We never share your email. See our Privacy Policy."
   }
 }
