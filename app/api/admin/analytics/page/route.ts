@@ -18,25 +18,31 @@ export async function GET(req: NextRequest) {
   if (!path) return NextResponse.json({ ok: false, error: "missing path" }, { status: 400 });
   const days = Number(req.nextUrl.searchParams.get("days") || "30");
 
-  const [views, clicks] = await Promise.all([fetchPageviews(days), fetchClicks(days)]);
-  const cities = cityBreakdown(views, path);
-  const visitors = visitorBreakdown(views, path);
+  try {
+    const [views, clicks] = await Promise.all([fetchPageviews(days), fetchClicks(days)]);
+    const cities = cityBreakdown(views, path);
+    const visitors = visitorBreakdown(views, path);
 
-  const pageClicks = clicks.filter(
-    (c) => c.slug === (path.replace(/^\/(en\/)?/, "").replace(/\/$/, "") || "__home__"),
-  );
+    const pageClicks = clicks.filter(
+      (c) => c.slug === (path.replace(/^\/(en\/)?/, "").replace(/\/$/, "") || "__home__"),
+    );
 
-  return NextResponse.json({
-    ok: true,
-    path,
-    days,
-    totals: {
-      views: views.filter((v) => (v.path || "/") === path).length,
-      visitors: visitors.length,
-      clicks: pageClicks.length,
-    },
-    cities,
-    visitors,
-    clicks: pageClicks.slice(0, 100),
-  });
+    return NextResponse.json({
+      ok: true,
+      path,
+      days,
+      totals: {
+        views: views.filter((v) => (v.path || "/") === path).length,
+        visitors: visitors.length,
+        clicks: pageClicks.length,
+      },
+      cities,
+      visitors,
+      clicks: pageClicks.slice(0, 100),
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[analytics/page]", msg);
+    return NextResponse.json({ ok: false, error: msg }, { status: 200 });
+  }
 }

@@ -10,17 +10,23 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
   }
   const days = Number(req.nextUrl.searchParams.get("days") || "30");
-  const [views, clicks] = await Promise.all([fetchPageviews(days), fetchClicks(days)]);
-  const stats = aggregateByPage(views, clicks);
-  return NextResponse.json({
-    ok: true,
-    days,
-    totals: {
-      views: views.length,
-      clicks: clicks.length,
-      uniqueVisitors: new Set(views.map((v) => v.visitorId).filter(Boolean)).size,
-      pages: stats.length,
-    },
-    stats,
-  });
+  try {
+    const [views, clicks] = await Promise.all([fetchPageviews(days), fetchClicks(days)]);
+    const stats = aggregateByPage(views, clicks);
+    return NextResponse.json({
+      ok: true,
+      days,
+      totals: {
+        views: views.length,
+        clicks: clicks.length,
+        uniqueVisitors: new Set(views.map((v) => v.visitorId).filter(Boolean)).size,
+        pages: stats.length,
+      },
+      stats,
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[analytics/pages]", msg);
+    return NextResponse.json({ ok: false, error: msg }, { status: 200 });
+  }
 }

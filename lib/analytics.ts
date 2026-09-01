@@ -44,11 +44,18 @@ export type ClickInput = {
   region?: string;
 };
 
+/** Firestore rejects `undefined` field values — strip them before writing. */
+function stripUndefined<T extends Record<string, unknown>>(obj: T): Partial<T> {
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(obj)) if (v !== undefined) out[k] = v;
+  return out as Partial<T>;
+}
+
 export async function recordPageview(input: PageviewInput): Promise<void> {
   const db = getDb();
   if (!db) throw new Error("Firestore not configured");
   await addDoc(collection(db, "pageviews"), {
-    ...input,
+    ...stripUndefined(input),
     createdAt: serverTimestamp(),
   });
 }
@@ -57,7 +64,7 @@ export async function recordClick(input: ClickInput): Promise<void> {
   const db = getDb();
   if (!db) throw new Error("Firestore not configured");
   await addDoc(collection(db, "clicks"), {
-    ...input,
+    ...stripUndefined(input),
     createdAt: serverTimestamp(),
   });
 }
