@@ -58,6 +58,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/methodology" className="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300">
+                  {t("footer.methodology")}
+                </Link>
+              </li>
+              <li>
                 <Link href="/privacy" className="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300">
                   {t("footer.privacy")}
                 </Link>

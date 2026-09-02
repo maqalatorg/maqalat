@@ -34,12 +34,12 @@ export const CLUSTERS: Cluster[] = [
   },
   {
     slug: "health",
-    titleAr: "الصحة والمكمّلات",
-    titleEn: "Health & Supplements",
-    descriptionAr: "معلومات موثّقة عن الفيتامينات، المكمّلات، والصحة العامة بمصادر رسمية.",
-    descriptionEn: "Vitamins, supplements, and general health — sourced from primary medical authorities.",
+    titleAr: "الصحة والحاسبات الطبية",
+    titleEn: "Health & Medical Calculators",
+    descriptionAr: "حاسبات صحية موثّقة (كتلة الجسم، الحمل، الدورة الشهرية) ومعلومات طبية عامة بمصادر رسمية.",
+    descriptionEn: "Trusted medical calculators (BMI, pregnancy, menstrual cycle) and general health info from primary authorities.",
     icon: "HeartPulse",
-    enabled: false,
+    enabled: true,
   },
   {
     slug: "finance",

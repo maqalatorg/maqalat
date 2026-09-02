@@ -14,8 +14,87 @@ import {
   type ArticleLocale,
 } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
-import { articleJsonLd, faqJsonLd, SITE_URL } from "@/lib/seo";
+import {
+  articleJsonLd,
+  faqJsonLd,
+  breadcrumbJsonLd,
+  howToJsonLd,
+  SITE_URL,
+} from "@/lib/seo";
 import { mdxComponents } from "@/mdx-components";
+
+/**
+ * Slugs whose article body embeds an interactive tool — used to emit
+ * HowTo schema alongside the Article schema so Google can surface the
+ * step-by-step tool in rich results.
+ */
+const TOOL_HOWTO: Record<string, { name: string; description: string; totalTime: string; steps: { name: string; text: string }[] }> = {
+  "zakat-calculator-guide": {
+    name: "احسب زكاة مالك",
+    description: "خطوات حساب الزكاة الشرعية على النقود والذهب والفضة وعروض التجارة.",
+    totalTime: "PT3M",
+    steps: [
+      { name: "احسب النصاب", text: "احسب قيمة ٨٥ جراماً من الذهب بالسعر الحالي — لو مالك أقل، فلا زكاة." },
+      { name: "تحقّق من الحول", text: "تأكّد من مرور سنة قمرية (٣٥٤ يوماً) على بلوغ مالك للنصاب." },
+      { name: "أدرج الأصول", text: "اجمع النقد والودائع والذهب والفضة وعروض التجارة والمستحقّات." },
+      { name: "اطرح الديون", text: "اطرح الأقساط المستحقّة في السنة الحالية فقط، لا الأقساط طويلة الأمد كاملةً." },
+      { name: "احسب ٢٫٥٪", text: "الزكاة = صافي المال × ٢٫٥٪ — هذه القيمة المطلوب إخراجها." },
+    ],
+  },
+  "bmi-calculator-guide": {
+    name: "احسب مؤشر كتلة جسمك",
+    description: "خطوات حساب BMI وتحديد نطاق الوزن الصحي لطولك.",
+    totalTime: "PT1M",
+    steps: [
+      { name: "قِس طولك بالأمتار", text: "استخدم متراً وقياساً دقيقاً — الطول بالسنتيمتر ÷ ١٠٠ = بالمتر." },
+      { name: "قِس وزنك بالكيلوجرام", text: "على ميزان مضبوط في الصباح قبل الفطور بلا ملابس ثقيلة." },
+      { name: "طبّق المعادلة", text: "BMI = الوزن ÷ (الطول × الطول) — الأداة تحسبها لك." },
+      { name: "قارن مع WHO", text: "تحت ١٨٫٥ نحافة، ١٨٫٥-٢٤٫٩ طبيعي، فوق ٢٥ زيادة وزن." },
+    ],
+  },
+  "pregnancy-calculator-guide": {
+    name: "احسبي موعد الولادة",
+    description: "احسبي تاريخ الولادة والأسبوع الحالي بقاعدة Naegele مع تصحيح طول الدورة.",
+    totalTime: "PT1M",
+    steps: [
+      { name: "حدّدي تاريخ آخر دورة (LMP)", text: "اليوم الأول من آخر دورة شهرية — لا اليوم الأخير." },
+      { name: "أدخلي طول دورتك", text: "المتوسط بين ٢١ و٣٥ يوماً؛ ٢٨ إن كانت منتظمة." },
+      { name: "احصلي على تاريخ الولادة", text: "LMP + ٢٨٠ يوماً + تصحيح طول الدورة = التاريخ المتوقّع." },
+      { name: "راجعي بالسونار", text: "الفحص في الثلث الأول (٧-١٣ أسبوعاً) يعطي دقّة ±٥ أيام." },
+    ],
+  },
+  "menstrual-cycle-calculator": {
+    name: "احسبي دورتك ونافذة الخصوبة",
+    description: "توقّع الدورة القادمة، يوم التبويض، ونافذة الخصوبة بحسب طول دورتك.",
+    totalTime: "PT1M",
+    steps: [
+      { name: "أدخلي تاريخ آخر دورة", text: "اليوم الأول من نزول الحيض في آخر دورة." },
+      { name: "أدخلي طول دورتك", text: "المتوسط للدورات الثلاث الأخيرة (بين ٢١ و٣٥ يوماً)." },
+      { name: "احسبي التبويض", text: "التبويض قبل الدورة القادمة بـ١٤ يوماً — لا بعد الحالية." },
+      { name: "حدّدي نافذة الخصوبة", text: "٥ أيام قبل التبويض + يوم التبويض = ٦ أيام إجمالاً." },
+    ],
+  },
+  "saudi-salary-dates-2026-2027": {
+    name: "اعرف موعد راتبك",
+    description: "احسب موعد راتب الحكومة، المتقاعدين، حساب المواطن، والضمان المطوّر تلقائياً.",
+    totalTime: "PT30S",
+    steps: [
+      { name: "اختر نوع الدفع", text: "من قائمة التصفية اختر: راتب حكومي / متقاعدين / حساب المواطن / الضمان." },
+      { name: "اقرأ التاريخ الميلادي", text: "الجدول يعرض التاريخ التالي مع اليوم من الأسبوع." },
+      { name: "تحقّق من تعديل نهاية الأسبوع", text: "لو صادف الجمعة يُقدَّم للخميس، ولو صادف السبت يُؤجَّل للأحد." },
+    ],
+  },
+  "hijri-gregorian-converter-2026": {
+    name: "حوّل بين الهجري والميلادي",
+    description: "أداة تحويل تفاعلية بدقّة تقويم أم القرى المعتمَد.",
+    totalTime: "PT10S",
+    steps: [
+      { name: "اختر التقويم", text: "حدّد اتّجاه التحويل: هجري إلى ميلادي أو العكس." },
+      { name: "أدخل التاريخ", text: "اليوم والشهر والسنة في الحقول." },
+      { name: "اقرأ النتيجة", text: "التحويل فوري بحسب بيانات أم القرى دون خادم." },
+    ],
+  },
+};
 import { Link } from "@/i18n/navigation";
 import { locales } from "@/i18n/config";
 
@@ -35,6 +114,7 @@ const RESERVED_SLUGS = new Set([
   "contact",
   "terms",
   "editorial-policy",
+  "methodology",
   "tools",
   "search",
   "c",
@@ -135,10 +215,29 @@ export default async function ArticlePage({
           publishedAt: article.frontmatter.publishedAt,
           updatedAt: article.frontmatter.updatedAt,
           author: article.frontmatter.author,
+          locale: loc,
+          keywords: article.frontmatter.tags,
         })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: t("breadcrumbHome"), url: loc === "ar" ? "/" : `/${loc}` },
+          ...(cluster
+            ? [
+                {
+                  name: (isEn ? cluster.titleEn : cluster.titleAr) || cluster.slug,
+                  url: loc === "ar" ? `/c/${cluster.slug}` : `/${loc}/c/${cluster.slug}`,
+                },
+              ]
+            : []),
+          { name: article.frontmatter.title },
+        ])}
       />
       {article.frontmatter.faq && (
         <JsonLd data={faqJsonLd(article.frontmatter.faq)} />
+      )}
+      {TOOL_HOWTO[slug] && loc === "ar" && (
+        <JsonLd data={howToJsonLd(TOOL_HOWTO[slug])} />
       )}
 
       <article className="max-w-3xl mx-auto px-4 py-10">

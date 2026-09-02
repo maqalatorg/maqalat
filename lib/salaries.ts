@@ -1,13 +1,23 @@
 /**
  * Saudi salary + government payment schedules.
- * Rules (validated against SAMA + General Organization for Social Insurance publications):
- *   - Government employee salary: 27th of every HIJRI month
- *   - GOSI retirement pensions:    27th of every HIJRI month
- *   - Citizen Account (حساب المواطن): 10th of every GREGORIAN month
- *   - Developed Social Security (الضمان المطوّر): 1st of every GREGORIAN month
- *   - Old Social Security pension: 8th of every HIJRI month
- * If the calculated date falls on Fri/Sat (Saudi weekend), payment
- * is advanced to Thursday.
+ *
+ * Sources verified 2026-09-02:
+ *   - Government employee salary: 27 of every GREGORIAN month
+ *     (Ministry of Finance official schedule — mof.gov.sa/mediacenter/Payroll)
+ *   - GOSI retirement pensions:   1 of every GREGORIAN month
+ *     (Unified since May 1, 2024 — Saudi Gazette + GOSI announcement)
+ *   - Citizen Account:            10 of every GREGORIAN month (ca.gov.sa)
+ *   - Developed Social Security:  1 of every GREGORIAN month (hrsd.gov.sa)
+ *   - Old Social Security:        8 of every HIJRI month (legacy — for
+ *     beneficiaries who did not migrate to the developed programme)
+ *
+ * Sanad (تعويض التعطّل) is administered by GOSI. Its exact monthly
+ * disbursement date is not published officially in the same way; we
+ * omit it from the calendar until we can cite a primary source.
+ *
+ * Weekend rule (adjustForSaudiWeekend in ./hijri.ts):
+ *   Friday   → Thursday BEFORE
+ *   Saturday → Sunday   AFTER
  */
 
 import { adjustForSaudiWeekend, gregorianToHijri, hijriDayToGregorian } from "./hijri";
@@ -26,7 +36,7 @@ export const PAYMENT_TYPES: PaymentType[] = [
     id: "gov_salary",
     nameAr: "راتب الموظف الحكومي",
     shortAr: "الراتب",
-    calendar: "hijri",
+    calendar: "gregorian",
     day: 27,
     colorClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300",
   },
@@ -34,8 +44,8 @@ export const PAYMENT_TYPES: PaymentType[] = [
     id: "retirement",
     nameAr: "رواتب المتقاعدين (التأمينات)",
     shortAr: "المتقاعدين",
-    calendar: "hijri",
-    day: 27,
+    calendar: "gregorian",
+    day: 1,
     colorClass: "bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-300",
   },
   {
@@ -61,14 +71,6 @@ export const PAYMENT_TYPES: PaymentType[] = [
     calendar: "hijri",
     day: 8,
     colorClass: "bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300",
-  },
-  {
-    id: "sanad",
-    nameAr: "دعم ساند (تعويض التعطّل)",
-    shortAr: "ساند",
-    calendar: "hijri",
-    day: 27,
-    colorClass: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300",
   },
 ];
 

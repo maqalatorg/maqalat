@@ -91,13 +91,21 @@ export function formatWeekdayAr(date: Date): string {
 }
 
 /**
- * Saudi weekend adjustment: government/bank payments falling on
- * Friday (5) or Saturday (6) are advanced to Thursday (the last weekday).
+ * Saudi weekend adjustment for government payment dates.
+ *
+ * Official MoF rule (mof.gov.sa 2026 payroll schedule):
+ *   - Friday (day 5)   → Thursday BEFORE (subtract 1 day)
+ *   - Saturday (day 6) → Sunday AFTER  (add 1 day)
+ *
+ * This matches the published behaviour for salary payments, retiree
+ * pensions, and Citizen Account (ca.gov.sa published 2024+).
+ * Some legacy sources only mention the Thursday-before rule; the
+ * unified rule above is what the Ministry of Finance actually applies.
  */
 export function adjustForSaudiWeekend(date: Date): Date {
   const day = date.getDay();
   if (day === 5) return new Date(date.getTime() - 86400000); // Fri → Thu
-  if (day === 6) return new Date(date.getTime() - 2 * 86400000); // Sat → Thu
+  if (day === 6) return new Date(date.getTime() + 86400000); // Sat → Sun
   return date;
 }
 
