@@ -18,7 +18,7 @@ import { SITE_URL } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const staticPaths = ["/", "/about", "/privacy", "/terms", "/contact", "/editorial-policy", "/tools"];
+  const staticPaths = ["/", "/about", "/privacy", "/terms", "/contact", "/editorial-policy", "/methodology", "/tools"];
 
   const staticPages: MetadataRoute.Sitemap = staticPaths.flatMap((p) => {
     const arUrl = p === "/" ? SITE_URL : `${SITE_URL}${p}`;
