@@ -1,0 +1,356 @@
+---
+title: "OpenAI API — دليل البدء والتسعير"
+description: "دليل عملي لـOpenAI API 2026: كيف تبدأ، النماذج، التسعير، أمثلة كود، أفضل الممارسات."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "OpenAI API"
+  - "GPT-5 API"
+  - "برمجة AI"
+  - "المطوّرون"
+faq:
+  - q: "ما الفرق بين ChatGPT و OpenAI API؟"
+    a: "ChatGPT واجهة جاهزة. API طريقة استخدام النموذج من داخل تطبيقك عبر HTTP requests. تدفع لكل استفسار (لكل توكن)، لكن تحصل على مرونة كاملة."
+  - q: "كم يكلّف API؟"
+    a: "يعتمد على النموذج والاستخدام. GPT-5: $2 لمليون توكن مدخل + $10 لمليون توكن مخرج. GPT-5 mini: $0.15 + $0.60. للتطبيق المتوسّط: 5-50$/شهر."
+  - q: "هل أحتاج بطاقة ائتمان؟"
+    a: "نعم للـAPI. OpenAI تعطي 5$ مجاناً للحسابات الجديدة أحياناً (يتغيّر)، لكن للاستخدام الجدّي تحتاج طريقة دفع."
+  - q: "أيّ نموذج أستخدم في API؟"
+    a: "GPT-5 mini للاستخدام الشامل الاقتصادي. GPT-5 للجودة العالية. o3 للمهام المعقّدة. Whisper للصوت. DALL-E للصور."
+---
+
+OpenAI API يُتيح لك بناء تطبيقات تستخدم GPT-5 وSora وDALL-E داخلياً. هذا الدليل يشرح البدء بأمثلة عملية.
+
+## الفرق عن ChatGPT
+
+| ChatGPT | OpenAI API |
+|---|---|
+| واجهة جاهزة (chat.openai.com) | تطلب HTTP من كودك |
+| اشتراك شهري (20$) | دفع لكل استفسار |
+| لا برمجة | تحتاج معرفة برمجة |
+| للاستخدام الشخصي | لبناء تطبيقات |
+
+**متى تختار API**: تبني تطبيق، chatbot، أداة داخلية، أتمتة.
+
+## البدء
+
+### 1) إنشاء حساب OpenAI Platform
+
+- اذهب إلى [platform.openai.com](https://platform.openai.com)
+- سجّل الدخول بنفس حساب ChatGPT (أو أنشئ جديداً)
+- **حساب Platform مختلف عن ChatGPT حساب**
+
+### 2) أضف طريقة دفع
+
+- Settings → Billing → Add payment method
+- بطاقة Visa/MasterCard/AmEx مقبولة
+- اضبط "Auto-recharge" (رصيد تلقائي)
+
+### 3) أنشئ API Key
+
+- Dashboard → API Keys → Create new secret key
+- **احفظه فوراً** — لن يُعرَض مرّة ثانية
+- سمّه (مثل: "my-app-dev")
+
+**تحذير أمان**: لا ترفع API Key على GitHub! استخدم `.env` file.
+
+### 4) اختبر أوّل استدعاء
+
+**Python**:
+```python
+from openai import OpenAI
+
+client = OpenAI(api_key="sk-...")
+
+response = client.chat.completions.create(
+    model="gpt-5-mini",
+    messages=[
+        {"role": "system", "content": "أنت مساعد ذكي بالعربية."},
+        {"role": "user", "content": "ما عاصمة السعودية؟"}
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+**Node.js**:
+```javascript
+import OpenAI from "openai";
+
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+const response = await client.chat.completions.create({
+  model: "gpt-5-mini",
+  messages: [
+    { role: "system", content: "أنت مساعد ذكي بالعربية." },
+    { role: "user", content: "ما عاصمة السعودية؟" }
+  ]
+});
+
+console.log(response.choices[0].message.content);
+```
+
+## النماذج المتاحة
+
+### للنصّ
+
+| النموذج | Input/1M | Output/1M | متى |
+|---|---|---|---|
+| **gpt-5-mini** | $0.15 | $0.60 | الاستخدام الشامل |
+| **gpt-5** | $2.00 | $10.00 | جودة عالية |
+| **o3-mini** | $1.10 | $4.40 | تفكير متوسّط |
+| **o3** | $15.00 | $60.00 | تفكير معقّد |
+
+### للصور
+
+- **DALL-E 3**: $0.04 لكل صورة 1024×1024 (Standard)
+- **DALL-E 3 HD**: $0.08 لكل صورة
+
+### للصوت
+
+- **Whisper** (تفريغ): $0.006/دقيقة
+- **TTS** (نصّ إلى صوت): $15/مليون حرف
+
+### للفيديو
+
+- **Sora**: أسعار تختلف بحسب الجودة والمدّة
+
+## البارامترات المهمّة
+
+### model
+
+```python
+model="gpt-5"
+```
+
+### messages
+
+```python
+messages=[
+    {"role": "system", "content": "التعليمات"},
+    {"role": "user", "content": "السؤال"},
+    {"role": "assistant", "content": "ردّ سابق"},
+    {"role": "user", "content": "سؤال جديد"}
+]
+```
+
+### temperature
+
+عشوائية المخرج (0-2). 0 = ثابت. 1 = افتراضي.
+
+### max_tokens
+
+أقصى طول المخرج.
+
+### stream
+
+```python
+stream=True  # يعطي المخرج قطعة قطعة (مثل ChatGPT)
+```
+
+### response_format
+
+```python
+response_format={"type": "json_object"}  # يجبر JSON صحيح
+```
+
+## أمثلة تطبيقات
+
+### 1) شات بوت خدمة عملاء
+
+```python
+def chat(user_message, history):
+    history.append({"role": "user", "content": user_message})
+    response = client.chat.completions.create(
+        model="gpt-5-mini",
+        messages=[
+            {"role": "system", "content": "أنت مساعد خدمة عملاء لمتجر [X]. لا تجب على أسئلة خارج المنتجات."},
+            *history
+        ]
+    )
+    reply = response.choices[0].message.content
+    history.append({"role": "assistant", "content": reply})
+    return reply, history
+```
+
+### 2) تلخيص مقالات
+
+```python
+def summarize(article):
+    response = client.chat.completions.create(
+        model="gpt-5-mini",
+        messages=[
+            {"role": "system", "content": "لخّص المقال في 5 نقاط."},
+            {"role": "user", "content": article}
+        ]
+    )
+    return response.choices[0].message.content
+```
+
+### 3) تصنيف مشاعر
+
+```python
+def classify_sentiment(text):
+    response = client.chat.completions.create(
+        model="gpt-5-mini",
+        messages=[
+            {"role": "system", "content": "صنّف المشاعر: positive, negative, neutral. أعطِ الجواب فقط."},
+            {"role": "user", "content": text}
+        ],
+        temperature=0
+    )
+    return response.choices[0].message.content.strip()
+```
+
+### 4) استخراج بيانات
+
+```python
+def extract_data(text):
+    response = client.chat.completions.create(
+        model="gpt-5-mini",
+        messages=[
+            {"role": "system", "content": "استخرج المعلومات إلى JSON: {name, phone, email}."},
+            {"role": "user", "content": text}
+        ],
+        response_format={"type": "json_object"}
+    )
+    import json
+    return json.loads(response.choices[0].message.content)
+```
+
+### 5) توليد صور
+
+```python
+response = client.images.generate(
+    model="dall-e-3",
+    prompt="صورة مقهى سعودي حديث في الرياض، إضاءة دافئة",
+    size="1024x1024",
+    quality="standard",
+    n=1
+)
+image_url = response.data[0].url
+```
+
+### 6) تفريغ صوت (Whisper)
+
+```python
+audio_file = open("meeting.mp3", "rb")
+transcription = client.audio.transcriptions.create(
+    model="whisper-1",
+    file=audio_file,
+    language="ar"
+)
+print(transcription.text)
+```
+
+## أفضل الممارسات
+
+### 1) استخدم .env للـKeys
+
+```python
+# .env
+OPENAI_API_KEY=sk-...
+
+# code
+from dotenv import load_dotenv
+import os
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+```
+
+### 2) Rate Limiting
+
+OpenAI تحدّ الاستدعاءات في الدقيقة. للتطبيقات المكثّفة:
+
+```python
+import time
+from openai import RateLimitError
+
+def safe_call(messages, retries=3):
+    for i in range(retries):
+        try:
+            return client.chat.completions.create(model="gpt-5-mini", messages=messages)
+        except RateLimitError:
+            time.sleep(2 ** i)  # exponential backoff
+    raise Exception("Rate limit exceeded")
+```
+
+### 3) Streaming للاستجابة السريعة
+
+```python
+stream = client.chat.completions.create(
+    model="gpt-5",
+    messages=[...],
+    stream=True
+)
+for chunk in stream:
+    print(chunk.choices[0].delta.content or "", end="")
+```
+
+### 4) Caching
+
+خزّن استفسارات متكرّرة:
+
+```python
+from functools import lru_cache
+
+@lru_cache(maxsize=1000)
+def cached_summary(text):
+    return summarize(text)
+```
+
+### 5) Structured Output
+
+استخدم `response_format` للحصول على JSON صحيح دائماً:
+
+```python
+response = client.chat.completions.create(
+    model="gpt-5",
+    messages=[...],
+    response_format={"type": "json_object"}
+)
+```
+
+## أخطاء شائعة
+
+### 1) تسريب API Key
+
+**أخطر خطأ**. النتيجة: فاتورة صادمة.
+
+**الحلّ**: `.env` + `.gitignore` + لا commit للـkey.
+
+### 2) استخدام أغلى نموذج بلا حاجة
+
+GPT-5 حين GPT-5 mini يكفي = هدر مال.
+
+### 3) عدم تعامل مع الأخطاء
+
+Network errors, Rate limits, Invalid inputs — لا تسقط تطبيقك.
+
+### 4) لا Monitoring
+
+راقب استهلاكك يومياً. الفاتورة الشهرية قد تصدمك.
+
+### 5) نسيان الحدود
+
+- 128K توكن نافذة سياق (Standard)
+- 500 request/دقيقة (Free tier)
+- 30M token/دقيقة (Tier 5)
+
+## الفوترة والحدود
+
+- **الحدّ الشهري**: اضبط في Settings → Billing → Usage limits
+- **التنبيهات**: عند بلوغ 75% من الحدّ
+- **Auto-recharge**: يشحن رصيدك تلقائياً
+
+## المصادر الرسمية
+
+- [OpenAI API Documentation](https://platform.openai.com/docs)
+- [OpenAI Pricing](https://openai.com/api/pricing/)
+- [OpenAI Cookbook — أمثلة كود](https://cookbook.openai.com)
+- [OpenAI Status](https://status.openai.com)
+
+---
+
+**اقرأ أيضاً**: [ChatGPT — الدليل الشامل](/chatgpt-complete-guide-2026) · [Claude Code — دليل المطوّر](/claude-code-developer-guide) · [برومتات جاهزة للبرمجة](/ready-prompts-for-coding) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets)
