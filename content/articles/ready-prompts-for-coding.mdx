@@ -1,0 +1,368 @@
+---
+title: "30 برومت جاهز للبرمجة — انسخ واستخدم"
+description: "مكتبة برومتات جاهزة للبرمجة مع ChatGPT وClaude وCursor: مراجعة كود، اختبارات، refactor، تشخيص، توثيق."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "برومتات برمجية"
+  - "ChatGPT للمطوّرين"
+  - "Claude coding"
+  - "Cursor prompts"
+faq:
+  - q: "أيّ نموذج الأفضل للبرمجة؟"
+    a: "Claude Sonnet 4.7 حالياً — Cursor وWindsurf يستخدمانه افتراضياً. GPT-5 قريب جدّاً مع Code Interpreter. للأكواد المعقّدة الطويلة، Claude يتفوّق."
+  - q: "هل يمكن الوثوق بكود الذكاء الاصطناعي؟"
+    a: "كنقطة بداية، نعم. للإنتاج، لا. راجع كل سطر، افهم كل خطوة، اختبر قبل الدمج. النموذج قد يكتب كوداً يعمل لكنه غير آمن أو غير فعّال."
+  - q: "هل النموذج يعرف مكتبتي/إطاري الخاصّ؟"
+    a: "المكتبات الشائعة (React, Django, Express) يعرفها جيّداً. المكتبات النادرة أو الحديثة قد لا يعرفها. زوّده بالوثائق أو أمثلة إذا كان الإطار غامضاً."
+---
+
+المطوّرون كانوا من أوائل من استفاد من AI. Cursor وWindsurf ووIDEs الحديثة بنيت حوله. هذه 30 برومت اختُبرت لكل مهمّة برمجية.
+
+## للكتابة (10 برومتات)
+
+### 1) دالّة من الصفر
+
+```
+اكتب دالّة [Python/JavaScript/غيرها] تفعل: [الوصف].
+المتطلّبات:
+- Type hints كاملة
+- Docstring بأسلوب Google
+- تعامل مع الحالات الحدّية (empty input، null، negative)
+- Time complexity O([المطلوب])
+اذكر لماذا اخترت هذا التصميم.
+```
+
+### 2) API endpoint
+
+```
+اكتب endpoint في [Flask/Express/FastAPI] لـ:
+- المسار: [/api/users/:id]
+- الطريقة: [POST]
+- المدخل: [JSON schema]
+- المخرج: [JSON schema]
+- Auth: [JWT/API Key]
+- Validation، Error handling.
+```
+
+### 3) نموذج قاعدة بيانات
+
+```
+اكتب [SQL / Prisma / SQLAlchemy model] لـ:
+- الاسم: [users]
+- الحقول: [id، email، name، created_at]
+- الفهارس: [email unique]
+- العلاقات: [users have many posts]
+مع migration file.
+```
+
+### 4) اختبارات وحدة
+
+```
+اكتب اختبارات وحدة (unit tests) لهذه الدالّة: [ألصق].
+- استخدم [pytest / Jest].
+- 5+ حالات: happy path، edge cases، errors.
+- كل اختبار مستقلّ، بلا side effects.
+```
+
+### 5) React Component
+
+```
+اكتب React Component:
+- الاسم: [UserCard]
+- Props: [user object with name, email, avatar]
+- Style: [Tailwind CSS]
+- Interactivity: [hover animation، click to expand]
+- Accessible: proper ARIA labels.
+- TypeScript.
+```
+
+### 6) SQL Query
+
+```
+اكتب SQL query لـ:
+- الجدول: [orders]
+- المطلوب: [top 10 customers by total spending in last 30 days]
+- Include: customer name, total, order count.
+- Optimize for performance (correct indexes needed).
+```
+
+### 7) Regex
+
+```
+اكتب regex لـ:
+- Match: [emails / phone numbers / URLs]
+- Language: [Python / JavaScript]
+- Edge cases: [صف].
+اشرح كل جزء من الـ regex.
+```
+
+### 8) Shell Script
+
+```
+اكتب shell script (bash) لـ:
+- المهمّة: [backup all .log files older than 7 days, compress, upload to S3]
+- Error handling
+- Logging
+- إمكانية الإلغاء بـCtrl+C.
+```
+
+### 9) Docker
+
+```
+اكتب Dockerfile لـ:
+- التطبيق: [Node.js / Python Flask / إلخ]
+- Multi-stage build
+- Non-root user
+- Health check
+- .dockerignore.
+```
+
+### 10) CI/CD Pipeline
+
+```
+اكتب [GitHub Actions / GitLab CI] pipeline لـ:
+- Lint + Test + Build on PR
+- Deploy to staging on merge to develop
+- Deploy to prod on tag release
+- Slack notification on failure.
+```
+
+## للمراجعة (5 برومتات)
+
+### 11) Code Review شامل
+
+```
+راجع هذا الكود مراجعة شاملة: [ألصق].
+- Bugs
+- Security vulnerabilities
+- Performance
+- Readability
+- Best practices
+اذكر مستوى الأولوية لكل ملاحظة (Critical / High / Medium / Low).
+```
+
+### 12) Security Audit
+
+```
+افحص هذا الكود لثغرات أمنية: [ألصق].
+ابحث عن: SQL injection، XSS، CSRF، authentication issues، information leaks، insecure dependencies.
+اقترح إصلاحات محدّدة لكل ثغرة.
+```
+
+### 13) Performance Review
+
+```
+حلّل هذا الكود لأداء: [ألصق].
+- Bottlenecks
+- Time/Space complexity
+- Database N+1 queries
+- Unnecessary re-renders
+اقترح تحسينات مرتّبة حسب الأثر.
+```
+
+### 14) Best Practices Check
+
+```
+هل هذا الكود يتّبع best practices لـ[Python/React/إلخ]؟
+[ألصق]
+اذكر: ما يتّبع، ما لا يتّبع، كيف يُصلح.
+```
+
+### 15) Accessibility Audit
+
+```
+افحص هذا React component لـaccessibility (WCAG 2.1 AA):
+[ألصق]
+- Semantic HTML
+- ARIA labels
+- Keyboard navigation
+- Color contrast
+- Screen reader support.
+```
+
+## للتشخيص (5 برومتات)
+
+### 16) Bug Hunt
+
+```
+هذا الكود يعطي [الخطأ]: [ألصق الكود + الخطأ].
+- ما السبب المحتمل؟
+- كيف أشخّصه؟
+- ما الإصلاح؟
+```
+
+### 17) شرح خطأ Stack Trace
+
+```
+اشرح هذا Stack Trace: [ألصق].
+- ما المشكلة بالضبط؟
+- أين يجب أن أبحث في كودي؟
+- ما 3 أسباب محتملة؟
+```
+
+### 18) تشخيص أداء بطيء
+
+```
+تطبيقي بطيء. [صف الأعراض].
+- Stack: [صف: React + Node + PostgreSQL]
+- ما 5 أسباب محتملة مرتّبة حسب الاحتمال؟
+- كيف أُشخّص كل واحد؟
+```
+
+### 19) تشخيص Memory Leak
+
+```
+تطبيقي فيه memory leak. [صف الأعراض والstack].
+- ما الأسباب الشائعة؟
+- كيف أشخّص بأدوات [Chrome DevTools / Python memory_profiler]؟
+- خطوات تحقّق منهجية.
+```
+
+### 20) لماذا لا يعمل؟
+
+```
+هذا الكود لا يعمل كما أتوقّع: [ألصق].
+المتوقّع: [صف].
+الفعلي: [صف].
+- فكّر خطوة خطوة.
+- 3 أسباب محتملة.
+- كيف أختبر كل واحد.
+```
+
+## للتحسين (5 برومتات)
+
+### 21) Refactor
+
+```
+Refactor هذا الكود ليكون أنظف: [ألصق].
+- Same functionality
+- Better structure (SOLID principles)
+- Meaningful names
+- Smaller functions
+- Type hints
+اذكر ما غيّرت ولماذا.
+```
+
+### 22) تحسين أداء
+
+```
+حسّن أداء هذا الكود: [ألصق].
+- Same output
+- Less time/memory
+- إن كان لا يمكن، اشرح لماذا.
+```
+
+### 23) تحويل بين لغات
+
+```
+حوّل هذا الكود من [Python] إلى [TypeScript]:
+[ألصق]
+- احترم اصطلاحات اللغة الجديدة
+- استخدم مكتبات مقابلة
+- ملاحظات على الاختلافات المهمّة.
+```
+
+### 24) توسيع (Add Feature)
+
+```
+هذا كود موجود: [ألصق].
+أضف ميزة: [صف].
+- بأقلّ تعديل ممكن
+- بلا كسر الاختبارات الموجودة
+- مع اختبارات جديدة للميزة.
+```
+
+### 25) استخراج دالّة/مكوّن
+
+```
+هذا الكود طويل: [ألصق].
+استخرج منه [دالّة / مكوّن] لـ[الوظيفة].
+- Interface واضح
+- Reusable
+- Tests للجزء المستخرَج.
+```
+
+## للتوثيق والتعلّم (5 برومتات)
+
+### 26) اشرح كوداً
+
+```
+اشرح هذا الكود سطراً سطراً: [ألصق].
+- ماذا يفعل كل جزء؟
+- لماذا كُتب هكذا؟
+- ما البدائل؟
+جمهوري: [مبتدئ / متوسّط / متقدّم].
+```
+
+### 27) Docstring/Comments
+
+```
+أضف docstrings احترافية لهذه الدوالّ: [ألصق].
+- بأسلوب Google style
+- شرح الغرض، البارامترات، القيمة المعادة، الاستثناءات، مثال.
+```
+
+### 28) README
+
+```
+اكتب README.md شامل لهذا المشروع:
+- Purpose: [صف]
+- Features: [صف]
+- Tech stack: [صف]
+- Installation
+- Usage examples
+- API documentation
+- Contributing guide
+- License.
+```
+
+### 29) دليل مطوّر
+
+```
+اكتب دليل مطوّر لهذا الـcodebase: [ألصق نظرة عامّة].
+- Architecture overview
+- Key modules
+- Data flow
+- How to add [feature type]
+- Testing strategy
+- Deployment process.
+```
+
+### 30) تعلّم مفهوم من كود
+
+```
+علّمني [المفهوم: async/await، Generics، Closures] من خلال:
+- شرح الفكرة بمثال يومي
+- 3 أمثلة كود متدرّجة الصعوبة
+- 3 أخطاء شائعة يقع فيها المبتدئون
+- تمرين للتطبيق.
+اللغة: [Python / JavaScript / TypeScript].
+```
+
+## نصائح للاستخدام الأمثل
+
+1. **راجع دائماً** — الكود المولّد نقطة بداية، ليس نهاية
+2. **اختبر قبل الدمج** — اختبار وحدة على الأقلّ
+3. **افهم كل سطر** — لا تنسخ ما لا تفهم
+4. **حدّث المكتبات** — أعطِ النموذج آخر إصدار من المكتبات
+5. **استخدم Cursor أو Windsurf** لمشاريع كبيرة — تكامل أعمق
+
+## أدوات مكمّلة
+
+- **Cursor** — IDE مبنيّ على AI (20$/شهر)
+- **GitHub Copilot** — تكامل داخل VS Code (10$/شهر)
+- **Windsurf** — منافس Cursor
+- **Codeium** — بديل مجاني
+
+## المصادر الرسمية
+
+- [OpenAI Cookbook — Code Examples](https://cookbook.openai.com)
+- [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
+- [Cursor Docs](https://docs.cursor.sh)
+- [GitHub Copilot Docs](https://docs.github.com/copilot)
+
+---
+
+**اقرأ أيضاً**: [أفضل ١٠ أكواد Python يبحث عنها المطوّرون](/top-10-python-code-snippets) · [Claude Code — دليل المطوّر](/claude-code-developer-guide) · [برومتات جاهزة للكتابة](/ready-prompts-for-writing) · [هندسة البرومت — الدليل الشامل](/prompt-engineering-complete-guide)
