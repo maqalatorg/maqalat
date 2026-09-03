@@ -1,0 +1,314 @@
+---
+title: "Claude Code — دليل المطوّر الشامل"
+description: "دليل عملي لـClaude Code (CLI من Anthropic): التثبيت، الاستخدام، المهامّ الشائعة، وأفضل الممارسات."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Claude Code"
+  - "AI للمطوّرين"
+  - "CLI"
+  - "Anthropic"
+faq:
+  - q: "ما Claude Code؟"
+    a: "أداة سطر أوامر (CLI) من Anthropic تُشغّل Claude داخل التيرمينال. تتيح للنموذج قراءة مستودعك، تنفيذ أوامر، تعديل ملفّات، وإجراء عمليات معقّدة."
+  - q: "كيف يختلف عن Cursor؟"
+    a: "Cursor محرّر كامل بواجهة (IDE). Claude Code CLI للتيرمينال — أخفّ، أكثر مرونة، يتكامل مع أيّ IDE أو workflow."
+  - q: "كم يكلّف؟"
+    a: "متاح مع Claude Pro (20$) وClaude Team (25$/عضو) وMax. الاستخدام محدود بحدود اشتراكك. للاستخدام المكثّف: Max أو API."
+---
+
+**Claude Code** أداة سطر أوامر من Anthropic تُدخل Claude إلى تيرمينالك. المطوّرون يستخدمونها لأتمتة مهام معقّدة كانت تستغرق ساعات.
+
+## المتطلّبات
+
+- **Node.js 18+**
+- **حساب Claude** (Pro، Team، Max، أو API)
+- تيرمينال (macOS/Linux/Windows WSL)
+
+## التثبيت
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+بعد التثبيت:
+```bash
+claude
+```
+
+سيطلب تسجيل الدخول أوّل مرّة.
+
+## البدء
+
+### افتح مجلّد مشروع
+
+```bash
+cd /path/to/your/project
+claude
+```
+
+Claude يفتح المجلّد كمساحة عمله.
+
+### أوّل أوامر
+
+```
+> اقرأ هذا المستودع وأخبرني بنيته
+> اكتب دالّة تنفّذ [X]
+> راجع ملفّ src/auth.py وأخبرني بالمشاكل
+> شغّل الاختبارات وأخبرني ما فشل
+> اكتب documentation للـAPI في ملف API.md
+```
+
+Claude يقرأ الملفّات، ينفّذ الأوامر، يعدّل حسب طلبك — كل ذلك في التيرمينال.
+
+## المهامّ الشائعة
+
+### 1) قراءة وفهم مستودع
+
+```
+> اقرأ المستودع كاملاً ولخّص:
+> - المعمارية
+> - التقنيات المستخدمة
+> - أهمّ الملفّات
+> - الأنماط المتكرّرة
+```
+
+مفيد جدّاً للمطوّر الجديد على مشروع.
+
+### 2) كتابة كود جديد
+
+```
+> أضف endpoint جديد في src/api/routes.py:
+> - POST /users
+> - يستقبل: {name, email, password}
+> - يتحقّق من البيانات
+> - ينشئ مستخدماً في قاعدة البيانات
+> - يعيد token JWT
+> اتّبع أنماط الكود الموجود.
+```
+
+Claude يقرأ الأنماط الحالية، يكتب الكود بنفس الأسلوب.
+
+### 3) مراجعة كود
+
+```
+> راجع كل الملفّات في src/auth/ لثغرات أمنية:
+> - SQL Injection
+> - Password hashing
+> - JWT vulnerabilities
+> - Session management
+> اكتب تقريراً مع مستوى الأولوية.
+```
+
+### 4) Refactor
+
+```
+> Refactor ملفّ src/services/user.py:
+> - قسّم الدوالّ الطويلة
+> - أضف Type hints
+> - حسّن أسماء المتغيّرات
+> - احتفظ بالسلوك
+> شغّل الاختبارات بعد كل تعديل.
+```
+
+### 5) توليد اختبارات
+
+```
+> اكتب pytest tests شاملة لملفّ src/services/order.py:
+> - كل دالّة
+> - Happy path + Edge cases + Errors
+> - Mocks لقواعد البيانات
+> ضعها في tests/services/test_order.py
+```
+
+### 6) تشخيص Bugs
+
+```
+> شغّل الاختبارات
+> إذا فشلت اختبارات، اقرأ Stack Trace، شخّص السبب، اقترح إصلاحاً
+> إذا وافقتُ، طبّق الإصلاح.
+```
+
+### 7) توثيق
+
+```
+> اكتب README.md شامل لهذا المشروع:
+> - Purpose
+> - Tech stack
+> - Installation
+> - Usage
+> - API reference
+> - Contributing
+> - License
+```
+
+### 8) Migrations لقاعدة البيانات
+
+```
+> أضف عمود "phone_number" لجدول users
+> اكتب migration Alembic
+> حدّث الـmodel
+> حدّث الـtests المتأثّرة
+> شغّل الـmigration للتحقّق
+```
+
+### 9) Deployment
+
+```
+> اكتب Dockerfile لهذا التطبيق:
+> - Multi-stage build
+> - Non-root user
+> - Health check
+> اكتب docker-compose.yml مع Redis وPostgres
+> اختبر البناء محلياً
+```
+
+### 10) Git Operations
+
+```
+> اقرأ آخر 5 commits واكتب CHANGELOG.md
+> ثمّ اعمل commit بالتعديلات
+> ثمّ ادفع لـmain
+```
+
+**تحذير**: للأوامر الخطرة (push، delete، reset)، Claude Code يسأل تأكيداً.
+
+## أفضل الممارسات
+
+### 1) استخدم CLAUDE.md
+
+اصنع ملفّاً `CLAUDE.md` في جذر مشروعك يشرح:
+- بنية المشروع
+- الأنماط المتّبعة
+- ما يجب/لا يجب تعديله
+- كيفية تشغيل الاختبارات
+
+Claude Code يقرأه أوتوماتيكياً في كل جلسة.
+
+### 2) اعمل بخطوات صغيرة
+
+بدل "اكتب كامل التطبيق"، اقسم:
+- "اكتب model"
+- "اكتب endpoint"
+- "اكتب tests"
+- "اكتب documentation"
+
+كل خطوة تراجعها.
+
+### 3) استخدم Git branches
+
+قبل تعديلات كبيرة:
+```
+> اعمل branch جديد اسمه feature/new-auth
+> ثمّ ابدأ التعديلات
+```
+
+يسمح بالتراجع بأمان.
+
+### 4) راجع قبل commit
+
+لا تفوّض Claude بالـcommit بلا مراجعتك للتعديلات.
+
+### 5) لا ترفع Secrets
+
+راجع أنّ Claude لا يضع كلمات مرور، API keys في الكود.
+
+### 6) قيود الأوامر
+
+بعض الأوامر خطرة: `rm -rf`, `git push --force`, حذف قواعد بيانات. Claude Code يسأل تأكيداً، لكن كن حذراً.
+
+## Claude Code vs Cursor vs GitHub Copilot
+
+| المعيار | Claude Code | Cursor | Copilot |
+|---|---|---|---|
+| **الواجهة** | CLI (تيرمينال) | IDE كامل | Extension |
+| **النموذج** | Claude Sonnet/Opus | Claude/GPT (اختيار) | GPT + Claude |
+| **السعر** | مع Pro | 20$/شهر | 10$/شهر |
+| **الاستخدام الأمثل** | مهام معقّدة، أتمتة | البرمجة اليومية | إكمال كود سريع |
+| **يعرف المستودع كاملاً** | ✅ | ✅ | ❌ (يعرف الملفّ) |
+| **ينفّذ أوامر** | ✅ | ✅ | ❌ |
+| **يعمل في التيرمينال** | ✅ | ❌ | ❌ |
+
+**نصيحة**: كثير من المطوّرين يستخدمون **Cursor للبرمجة اليومية + Claude Code للمهام المعقّدة والأتمتة**.
+
+## Custom Commands
+
+اصنع أوامر مختصرة لمهامّك المتكرّرة:
+
+```bash
+# ~/.claude/commands/review.md
+راجع الملفّات المعدّلة في هذا الـcommit:
+- Bugs
+- Security
+- Performance
+اكتب تقريراً في review.md
+```
+
+استخدم:
+```
+> /review
+```
+
+## Hooks
+
+Claude Code يدعم hooks تُشغّل تلقائياً:
+
+```json
+{
+  "hooks": {
+    "beforeCommit": "npm test",
+    "afterEdit": "prettier --write ."
+  }
+}
+```
+
+**استخدامات**: اختبارات قبل commit، تنسيق تلقائي، lint، إلخ.
+
+## MCP Servers مع Claude Code
+
+Claude Code يدعم بروتوكول MCP:
+- GitHub
+- Google Drive
+- Slack
+- قواعد بيانات
+- APIs مخصّصة
+
+**مثال**:
+```
+> اقرأ آخر 10 issues من GitHub في مستودعنا
+> صنّفها حسب الأولوية
+> ابدأ بحلّ الأعلى
+```
+
+## أخطاء شائعة
+
+### 1) الثقة الكاملة
+
+Claude Code قوي، لكنه قد يخطئ. راجع كل تعديل.
+
+### 2) عدم استخدام Git
+
+قبل جلسة، commit ما لديك. تسمح بالتراجع.
+
+### 3) تفويض حذف بلا حذر
+
+`rm -rf`, `DROP TABLE` — كوارث محتملة.
+
+### 4) نسيان CLAUDE.md
+
+مشروع بلا CLAUDE.md = Claude Code يبدأ من الصفر كل مرّة.
+
+### 5) الاستخدام في Production بلا اختبار
+
+Claude Code في dev/staging أوّلاً. Production بعد تحقّق.
+
+## المصادر الرسمية
+
+- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [Claude Code GitHub](https://github.com/anthropics/claude-code)
+- [Anthropic Discord](https://discord.gg/anthropic)
+
+---
+
+**اقرأ أيضاً**: [Claude — الدليل الشامل](/claude-anthropic-complete-guide) · [Claude Artifacts و Projects](/claude-artifacts-and-projects) · [برومتات جاهزة للبرمجة](/ready-prompts-for-coding) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets)
