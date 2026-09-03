@@ -1,0 +1,245 @@
+---
+title: "DALL-E 3 و GPT-4o Image — التسجيل والاستخدام"
+description: "دليل عملي لتوليد الصور بـDALL-E 3 وGPT-4o Image داخل ChatGPT: التسجيل، البرومتات، التعديل التكراري."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "DALL-E 3"
+  - "GPT-4o Image"
+  - "OpenAI"
+  - "توليد الصور"
+faq:
+  - q: "هل DALL-E مجاني؟"
+    a: "مجاناً بحدود مع ChatGPT Free (3 صور/يوم). للاستخدام غير محدود: ChatGPT Plus (20$/شهر) يفتح أيضاً GPT-4o Image."
+  - q: "الفرق بين DALL-E 3 و GPT-4o Image؟"
+    a: "DALL-E 3 نموذج توليد صور. GPT-4o Image (2025) نموذج multimodal يفهم النصّ والصور معاً — يعطي جودة أعلى وفهماً أدقّ."
+---
+
+DALL-E من OpenAI يتفوّق في **فهم النصّ العربي والإنجليزي** ودقّة اتّباع البرومت. هذا الدليل شامل لاستخدامه.
+
+## قبل البدء
+
+**تحتاج**:
+- حساب ChatGPT (مجاني كافٍ للتجربة)
+- **Plus (20$/شهر)** للاستخدام المكثّف
+
+## كيف تصل إليه
+
+### داخل ChatGPT
+
+1. افتح [chat.openai.com](https://chat.openai.com)
+2. اطلب صورة مباشرة في المحادثة
+3. الصورة تُولَّد داخل المحادثة
+
+**مثال**:
+> "صمّم لي صورة مقهى سعودي حديث، إضاءة دافئة، أسلوب سينمائي، نسبة الأبعاد 16:9"
+
+### عبر ChatGPT App
+
+نفس الطريقة على الموبايل.
+
+### عبر API
+
+للمطوّرين:
+```python
+from openai import OpenAI
+
+client = OpenAI(api_key="sk-...")
+
+response = client.images.generate(
+    model="dall-e-3",
+    prompt="Traditional Saudi coffee scene, warm lighting, cinematic",
+    size="1024x1024",
+    quality="hd",
+    n=1
+)
+image_url = response.data[0].url
+```
+
+**تسعير API**:
+- Standard 1024×1024: $0.04
+- HD 1024×1024: $0.08
+- Standard 1792×1024 (widescreen): $0.08
+- HD 1792×1024: $0.12
+
+## كتابة برومت جيّد
+
+### النموذج يفهم اللغة الطبيعية
+
+بعكس Midjourney الذي يحتاج parameters تقنية، DALL-E يفهم:
+
+**مثال**:
+> "أريد صورة لمقهى سعودي حديث في الرياض، الجدار الخلفي فيه رسمة بخط عربي 'قهوتنا حكاية'، الطاولات خشبية، إضاءة دافئة، عدد قليل من الزبائن يشربون، الصورة بجودة سينمائية، النسبة 16:9"
+
+### البنية المثالية
+
+```
+[نوع الصورة]: photo / illustration / logo / 3D render
+[الموضوع]: ما تريد رؤيته
+[التفاصيل]: الألوان، العناصر، النصّ (إن وُجد)
+[الأسلوب]: cinematic, minimalist, watercolor, anime
+[الإضاءة]: warm, cool, natural, studio
+[الأبعاد]: 16:9 (widescreen), 1:1 (square), 9:16 (portrait)
+```
+
+### مثال متكامل
+
+```
+Photo of a traditional Saudi coffee (qahwa) ceremony, 
+close-up on golden dallah pouring into small cups (finjan),
+cardamom pods and dates in the frame,
+warm golden hour lighting,
+cinematic composition, shallow depth of field,
+photorealistic, high quality,
+16:9 aspect ratio
+```
+
+## أمثلة عملية سعودية
+
+### 1) صورة لمنشور LinkedIn
+
+```
+Professional photo of a modern Saudi office worker at a laptop,
+wearing traditional white thobe, sleek minimalist workspace,
+natural window light, professional atmosphere,
+photorealistic, LinkedIn-appropriate,
+1024×1024
+```
+
+### 2) شعار مبدئي
+
+```
+Modern minimalist logo for a Saudi tech startup called "Nuqta" (نقطة),
+Arabic calligraphy with a subtle tech element,
+warm earth tones (beige and gold),
+white background,
+scalable vector-style,
+1024×1024
+```
+
+### 3) هوية بصرية لموسم
+
+```
+Ramadan 2027 promotional graphic,
+crescent moon and Arabic geometric patterns,
+purple and gold color scheme,
+Arabic text 'رمضان كريم' prominently displayed,
+elegant and modern,
+Instagram post style, 1080×1080
+```
+
+### 4) مشهد سياحي
+
+```
+Cinematic photo of Al-Ula ancient rock formations at sunset,
+dramatic desert landscape,
+few tourists silhouetted in distance,
+warm orange and purple sky,
+epic composition, National Geographic style,
+16:9 widescreen
+```
+
+### 5) صورة توضيحية لمقال
+
+```
+Educational illustration explaining photosynthesis,
+tree with labeled parts, sun on top,
+Arabic labels: 'شمس', 'أكسجين', 'ثاني أكسيد الكربون',
+clean flat design, educational style,
+1024×1024
+```
+
+## ميّزات DALL-E داخل ChatGPT
+
+### التعديل التكراري
+
+بعد توليد صورة:
+```
+> اجعل الخلفية أزرق بدل الأبيض
+> غيّر الشخص لامرأة سعودية
+> أضف طاولة قهوة في المقدّمة
+```
+
+يعدّل نفس الصورة.
+
+### الشرح
+
+```
+> اشرح لي لماذا اخترت هذا التصميم
+> ما البدائل الممكنة؟
+```
+
+يشرح قراراته.
+
+### توليد متعدّد
+
+```
+> صمّم لي 3 نسخ مختلفة لنفس الفكرة
+```
+
+3 صور بأساليب مختلفة.
+
+## GPT-4o Image (الأحدث)
+
+OpenAI أطلقت GPT-4o Native Image Generation (مارس 2025):
+- **جودة أعلى** من DALL-E 3
+- **فهم أدقّ** للبرومت
+- **نصوص أوضح** داخل الصور
+- **اتّساق أفضل** بين محاولات
+
+**كيف تصل**: مضمّن داخل ChatGPT Plus/Pro تلقائياً.
+
+## قيود مهمّة
+
+### 1) لا أشخاص حقيقيون بأسماء
+
+لا يمكن توليد صور "Elon Musk" أو "الأمير محمد بن سلمان".
+
+### 2) قيود على المحتوى
+
+- لا محتوى جنسي
+- لا عنف صريح
+- لا محتوى مضلّل سياسي
+
+### 3) الحقوق
+
+- الصور المولّدة لك (بشروط ChatGPT)
+- لا يمكن ادّعاء حقوق الطبع
+- الاستخدام التجاري مسموح مع Plus
+
+### 4) صعوبات
+
+- **الأشخاص العرب** أحياناً يبدون غير طبيعيّين
+- **النصوص العربية** فيها أخطاء أحياناً
+- **الأيدي** ما زالت مشكلة (تحسّنت مع GPT-4o Image)
+
+## نصائح ذهبية
+
+1. **كن مفصّلاً** في البرومت — النموذج يستجيب للتفاصيل
+2. **اطلب تعديلاً** بدل توليد جديد
+3. **جرّب أساليب مختلفة** — cinematic vs illustration vs minimalist
+4. **حدّد الأبعاد** بوضوح في البرومت
+5. **راجع النصّ العربي** — النموذج قد يخطئ
+
+## مقارنة سريعة
+
+| المعيار | DALL-E 3 | Midjourney |
+|---|---|---|
+| **فهم النصّ** | ممتاز | جيّد |
+| **العربية** | ممتاز | متوسّط |
+| **الجمالية الفنية** | جيّدة | ممتازة |
+| **النصوص داخل الصور** | جيّد | ضعيف |
+| **السرعة** | سريع | متوسّط |
+| **السعر** | مع ChatGPT Plus | 10-120$/شهر |
+| **الواجهة** | ChatGPT (سهل) | Discord/Web |
+
+## المصادر الرسمية
+
+- [OpenAI DALL-E 3](https://openai.com/dall-e-3)
+- [ChatGPT](https://chat.openai.com)
+- [DALL-E API Docs](https://platform.openai.com/docs/guides/images)
+
+---
+
+**اقرأ أيضاً**: [أفضل مواقع توليد الصور](/best-ai-image-generation-sites) · [Midjourney — التسجيل والاستخدام](/midjourney-signup-and-usage-guide) · [ChatGPT — الدليل الشامل](/chatgpt-complete-guide-2026) · [الذكاء الاصطناعي في التصميم](/ai-in-design-and-creativity)

@@ -1,0 +1,226 @@
+---
+title: "Runway ML — دليل التسجيل والاستخدام"
+description: "دليل عملي لـRunway (منصّة توليد وتحرير فيديو بـAI): التسجيل، الأدوات، Gen-4، Motion Brush."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Runway"
+  - "AI video"
+  - "Gen-4"
+  - "Motion Brush"
+faq:
+  - q: "ما Runway؟"
+    a: "منصّة أمريكية (مقرّها نيويورك) لصنع وتحرير الفيديو بـAI. أطلقت Gen-1 (2023)، Gen-2 (2024)، Gen-4 (2026). استُخدمت في أفلام حقيقية (Everything Everywhere All at Once)."
+  - q: "أيّ ميّزات فريدة؟"
+    a: "Motion Brush (تحرّك جزءاً محدّداً من الصورة)، Green Screen Removal، Lip Sync، Frame Interpolation، Style Transfer، Text-to-Video."
+---
+
+**Runway** من الأوائل في توليد الفيديو بـAI، والأكثر تطوّراً في **التحكّم الإبداعي**. هذا الدليل شامل.
+
+## قبل البدء
+
+**تحتاج**:
+- إيميل
+- بطاقة ائتمان (للاشتراك)
+- متصفّح حديث
+
+## التسجيل
+
+1. اذهب إلى [runwayml.com](https://runwayml.com)
+2. اضغط "Get Started"
+3. سجّل بإيميل أو Google
+4. أكمل الملفّ الشخصي
+5. اشترك في خطّة (أو ابدأ Free)
+
+## الاشتراكات (2026)
+
+| الخطّة | السعر | Credits/شهر | الميّزات |
+|---|---|---|---|
+| **Free** | 0$ | 125 | تجربة أساسية |
+| **Standard** | 15$/شهر | 625 | أدوات كاملة |
+| **Pro** | 35$/شهر | 2250 | Priority processing |
+| **Unlimited** | 95$/شهر | غير محدود Relax | استخدام مكثّف |
+| **Enterprise** | مخصّص | مخصّص | فرق كبيرة |
+
+**Credits** = عملة داخلية. كل نوع generation يستهلك عدداً محدّداً.
+
+## الميّزات الأساسية
+
+### 1) Text-to-Video (Gen-4)
+
+اكتب برومت، احصل على فيديو:
+
+```
+Cinematic shot of a hummingbird flying near a Saudi date palm tree,
+warm afternoon light, slow-motion,
+photorealistic, high quality,
+5 seconds
+```
+
+**التكلفة**: 5-10 credits لكل ثانية.
+
+### 2) Image-to-Video
+
+ارفع صورة، Runway يحرّكها.
+
+**مثال**: صورة منتج → فيديو دوران بطيء.
+
+### 3) Video-to-Video
+
+ارفع فيديو، Runway يعدّل الأسلوب:
+- تحويل واقعي → أنمي
+- تحويل يومي → سينمائي
+- تغيير الفصل (صيف → شتاء)
+
+### 4) Motion Brush ⭐ الميّزة القاتلة
+
+بعد توليد فيديو، ترسم "brush" على منطقة محدّدة، وتحدّد كيف تتحرّك:
+- الأمواج تتحرّك يميناً
+- الأشجار تتمايل بالرياح
+- الوجه يبتسم
+
+**تحكّم دقيق** لا يوجد في Sora أو Veo.
+
+### 5) Frame Interpolation
+
+خذ صورتين، Runway ينشئ الحركة بينهما.
+
+**مثال**: صورة قبل + صورة بعد → فيديو تحوّل.
+
+### 6) Green Screen Removal
+
+إزالة خلفية الفيديو تلقائياً (بلا Chroma Key).
+
+### 7) Lip Sync
+
+خذ فيديو شخص، أضف صوتاً — Runway يحرّك الشفاه لتطابق.
+
+**قيود قانونية**: لا لأشخاص حقيقيّين بدون موافقة.
+
+### 8) Text-to-Image
+
+يوجد أيضاً في Runway توليد صور (لكن Midjourney/DALL-E أفضل).
+
+## الاستخدام العملي
+
+### 1) موك-أب لعميل
+
+```
+Modern Saudi coffee shop interior,
+customers enjoying coffee, warm lighting,
+slow camera pan from left to right,
+photorealistic, cinematic
+```
+
+استخدم Motion Brush لجعل البخار يتصاعد.
+
+### 2) بي-رول ليوتيوب
+
+```
+Aerial shot of Riyadh at night, city lights,
+Kingdom Tower prominent,
+slow zoom out revealing skyline,
+cinematic quality
+```
+
+### 3) إعلان منتج
+
+```
+Rotating product shot of a luxury perfume bottle,
+studio lighting, black background,
+premium commercial style,
+5 seconds
+```
+
+استخدم Motion Brush لدوران زجاجة العطر.
+
+### 4) تعديل مشهد موجود
+
+خذ فيديو صوّرته بموبايلك، حسّن جودته بـRunway:
+- Video-to-Video: أضف أسلوباً سينمائياً
+- Frame Interpolation: أضف slow-motion
+- Lip Sync: أضف تعليقاً صوتياً
+
+## واجهة المستخدم
+
+- **Home**: لوحة رئيسية بمشاريعك
+- **Generative**: توليد جديد
+- **Assets**: مكتبة الفيديوهات/الصور
+- **Editor**: تحرير المشاريع
+- **Templates**: قوالب جاهزة
+
+## Tips للاستخدام الأمثل
+
+### 1) استخدم Assets
+
+ارفع صورك ومرجعياتك للاستخدام في المشاريع.
+
+### 2) Style Reference
+
+أرفق صورة أسلوب مرجعي مع البرومت.
+
+### 3) Seed للاتّساق
+
+استخدم نفس seed للحصول على نفس النمط.
+
+### 4) Iteration بدل Perfection
+
+أوّل توليد نادراً ما يكون الأفضل. جرّب 5-10 محاولات.
+
+### 5) دمج مع أدوات أخرى
+
+- Sora للمقاطع الأطول
+- Veo للجودة العالية + الصوت
+- Runway للتحكّم الدقيق
+- CapCut/Premiere للتحرير النهائي
+
+## الاستخدامات الاحترافية
+
+Runway استُخدمت في أفلام حقيقية:
+- **Everything Everywhere All at Once** (2022)
+- **The Brutalist** (2024)
+- إعلانات عالمية (Nike، Coca-Cola، Puma)
+
+**اسم "أفلام صنعها AI"** بدأ من هنا.
+
+## قيود
+
+- **المدّة قصيرة** (4-10 ثانية للمقطع الواحد)
+- **الاتّساق بين مقاطع** صعب
+- **الأشخاص المتعدّدون** تحدّي
+- **Motion Brush يحتاج تعلّم**
+- **التكلفة تتراكم** — 60$/شهر عادي لمحترف
+
+## أخطاء شائعة
+
+### 1) توقّع فيلم كامل
+
+Runway يعطيك مقاطع، ليس فيلماً. التحرير جزء أساسي.
+
+### 2) تجاهل Motion Brush
+
+الميّزة الفريدة. تعلّمها.
+
+### 3) عدم استخدام Templates
+
+قوالب جاهزة توفّر وقتاً.
+
+### 4) نفاد Credits سريعاً
+
+راقب استهلاكك. Standard 625 credit كافي لـ 20-30 مقطع صغير.
+
+### 5) الاستخدام التجاري بلا مراجعة الحقوق
+
+اقرأ Terms قبل النشر التجاري.
+
+## المصادر الرسمية
+
+- [Runway](https://runwayml.com)
+- [Runway Academy](https://academy.runwayml.com)
+- [Runway Documentation](https://help.runwayml.com)
+- [Runway Blog](https://runwayml.com/blog)
+
+---
+
+**اقرأ أيضاً**: [أفضل مواقع توليد الفيديو](/best-ai-video-generation-sites) · [ChatGPT Advanced Voice و Sora](/chatgpt-advanced-voice-and-sora) · [Gemini Live و Veo 3](/gemini-live-and-veo) · [الذكاء الاصطناعي في المحتوى والإعلام](/ai-in-content-and-media)
