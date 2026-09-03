@@ -1,0 +1,293 @@
+---
+title: "أكواد أتمتة يومية — ادخل عصر الـAutomation"
+description: "مجموعة أكواد Python وBash لأتمتة مهامّك اليومية: ملفّات، إيميلات، تقارير، مواعيد."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Automation"
+  - "أتمتة"
+  - "Python scripts"
+  - "Bash"
+faq:
+  - q: "هل الأتمتة تحتاج معرفة برمجية عميقة؟"
+    a: "لا. Python وBash أساسيّتان كافيتان. مع ChatGPT، تكتب سكريبتاً في دقائق حتى لو كنت مبتدئاً."
+  - q: "أدوات مكمّلة للأتمتة؟"
+    a: "Zapier وMake.com للتكاملات بلا كود. Python + cron للسكريبتات المتقدّمة. Task Scheduler على Windows."
+---
+
+الأتمتة توفّر ساعات أسبوعياً. أفضل استثمار للمهنيّ. هذه أكواد جاهزة لأشهر مهام الأتمتة.
+
+## 1) نسخ احتياطي تلقائي
+
+```python
+import shutil
+from datetime import datetime
+from pathlib import Path
+
+def backup_folder(source: str, backup_root: str) -> str:
+    """نسخة احتياطية بالتاريخ."""
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+    backup_dir = Path(backup_root) / f"backup_{timestamp}"
+    shutil.copytree(source, backup_dir)
+    return str(backup_dir)
+
+# استخدام
+backup_folder("/Users/you/Documents/Important", "/Users/you/Backups")
+```
+
+**جدولة يومية (macOS/Linux)**:
+```bash
+crontab -e
+# أضف:
+0 2 * * * /usr/bin/python3 /path/to/backup.py
+```
+
+## 2) تنبيه Slack عند حدث
+
+```python
+import requests
+
+def send_slack_alert(webhook_url: str, message: str) -> None:
+    """إرسال رسالة Slack عبر Webhook."""
+    requests.post(webhook_url, json={"text": message})
+
+# استخدام مع Try/Except
+try:
+    # كودك
+    result = risky_operation()
+    send_slack_alert(WEBHOOK, f"✅ نجح: {result}")
+except Exception as e:
+    send_slack_alert(WEBHOOK, f"❌ فشل: {e}")
+```
+
+## 3) قراءة إيميلات (IMAP)
+
+```python
+import imaplib
+import email
+from email.header import decode_header
+
+def read_unread_emails(user: str, password: str, imap_server: str = "imap.gmail.com"):
+    """قراءة الإيميلات غير المقروءة."""
+    with imaplib.IMAP4_SSL(imap_server) as mail:
+        mail.login(user, password)
+        mail.select("inbox")
+        
+        _, msg_ids = mail.search(None, "UNSEEN")
+        
+        for msg_id in msg_ids[0].split():
+            _, msg_data = mail.fetch(msg_id, "(RFC822)")
+            email_body = email.message_from_bytes(msg_data[0][1])
+            
+            subject = decode_header(email_body["Subject"])[0][0]
+            if isinstance(subject, bytes):
+                subject = subject.decode()
+            
+            print(f"من: {email_body['From']}")
+            print(f"الموضوع: {subject}\n")
+```
+
+## 4) تصفية الصور بالحجم
+
+```python
+from PIL import Image
+from pathlib import Path
+
+def compress_images(folder: str, max_size_kb: int = 500) -> None:
+    """ضغط الصور الكبيرة."""
+    for img_path in Path(folder).glob("*.jpg"):
+        if img_path.stat().st_size > max_size_kb * 1024:
+            img = Image.open(img_path)
+            img.thumbnail((1920, 1920))
+            img.save(img_path, quality=80, optimize=True)
+            print(f"ضُغطت: {img_path.name}")
+```
+
+## 5) تقرير أسبوعي تلقائي
+
+```python
+import pandas as pd
+from datetime import datetime, timedelta
+
+def weekly_report(csv_file: str) -> str:
+    """تقرير الأسبوع الماضي من CSV."""
+    df = pd.read_csv(csv_file, parse_dates=["date"])
+    
+    week_ago = datetime.now() - timedelta(days=7)
+    recent = df[df["date"] >= week_ago]
+    
+    report = f"""
+    # تقرير الأسبوع {datetime.now().strftime('%Y-%m-%d')}
+    
+    - إجمالي المعاملات: {len(recent)}
+    - المبيعات: {recent['amount'].sum():,.2f} ريال
+    - المتوسّط: {recent['amount'].mean():,.2f} ريال
+    - أعلى معاملة: {recent['amount'].max():,.2f} ريال
+    """
+    return report
+```
+
+## 6) مراقبة موقع (Ping)
+
+```python
+import requests
+import time
+
+def monitor_website(url: str, check_interval: int = 60) -> None:
+    """مراقبة موقع وإرسال تنبيه إذا سقط."""
+    while True:
+        try:
+            r = requests.get(url, timeout=10)
+            if r.status_code != 200:
+                print(f"⚠️ {url} — HTTP {r.status_code}")
+                # send_alert()
+        except Exception as e:
+            print(f"❌ {url} — {e}")
+            # send_alert()
+        
+        time.sleep(check_interval)
+```
+
+## 7) تحويل PDF إلى نصّ
+
+```python
+import pypdf
+
+def pdf_to_text(pdf_path: str) -> str:
+    """استخراج نصّ من PDF."""
+    reader = pypdf.PdfReader(pdf_path)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text() + "\n"
+    return text
+
+# استخدام
+text = pdf_to_text("report.pdf")
+print(text[:500])
+```
+
+## 8) تعديل جماعي لأسماء الملفّات
+
+```python
+from pathlib import Path
+
+def bulk_rename(folder: str, pattern: str, replacement: str) -> None:
+    """تعديل جماعي لأسماء الملفّات."""
+    for file in Path(folder).iterdir():
+        if pattern in file.name:
+            new_name = file.name.replace(pattern, replacement)
+            file.rename(file.parent / new_name)
+            print(f"{file.name} → {new_name}")
+
+# استخدام
+bulk_rename("/photos/vacation", "IMG_", "vacation_")
+```
+
+## 9) استخراج بيانات من Excel لـJSON
+
+```python
+import pandas as pd
+import json
+
+def excel_to_json(excel_path: str, json_path: str, sheet: str = None) -> None:
+    """تحويل Excel إلى JSON."""
+    df = pd.read_excel(excel_path, sheet_name=sheet)
+    data = df.to_dict(orient="records")
+    
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+excel_to_json("customers.xlsx", "customers.json")
+```
+
+## 10) Bash — أتمتة بسيطة
+
+### مسح ملفّات مؤقّتة
+
+```bash
+#!/bin/bash
+# clean_temp.sh
+find /tmp -type f -mtime +7 -delete
+find ~/Downloads -type f -mtime +30 -delete
+echo "تمّ التنظيف"
+```
+
+### نسخة احتياطية لقاعدة بيانات
+
+```bash
+#!/bin/bash
+# backup_db.sh
+DATE=$(date +%Y%m%d_%H%M%S)
+BACKUP_DIR="/backups/db"
+mkdir -p "$BACKUP_DIR"
+
+pg_dump -U user dbname > "$BACKUP_DIR/db_$DATE.sql"
+gzip "$BACKUP_DIR/db_$DATE.sql"
+
+# احذف نسخ أقدم من 30 يوم
+find "$BACKUP_DIR" -name "*.sql.gz" -mtime +30 -delete
+```
+
+### مراقبة استخدام القرص
+
+```bash
+#!/bin/bash
+USAGE=$(df / | awk 'NR==2 {print $5}' | sed 's/%//')
+if [ "$USAGE" -gt 80 ]; then
+    echo "⚠️ القرص ممتلئ: $USAGE%"
+    # send alert
+fi
+```
+
+## جدولة السكريبتات
+
+### macOS/Linux (cron)
+
+```bash
+crontab -e
+
+# كل يوم الساعة 2 صباحاً
+0 2 * * * /usr/bin/python3 /path/to/backup.py
+
+# كل ساعة
+0 * * * * /path/to/monitor.sh
+
+# كل يوم اثنين 9 صباحاً
+0 9 * * 1 /path/to/weekly_report.py
+```
+
+### Windows (Task Scheduler)
+
+- افتح Task Scheduler
+- Create Basic Task
+- حدّد الجدول
+- اختر Action: Start a program
+- Program: python.exe
+- Arguments: `C:\path\to\script.py`
+
+## أدوات بلا كود
+
+- **Zapier** — 5000+ تكامل
+- **Make.com** (سابقاً Integromat) — أقوى وأرخص
+- **n8n** — مفتوح المصدر، ذاتي الاستضافة
+- **IFTTT** — للأتمتة الشخصية البسيطة
+
+## نصائح ذهبية
+
+1. **ابدأ بأتمتة مهمّة واحدة** — أنجزها، ثمّ توسّع
+2. **Logging** لكل سكريبت — تحتاج معرفة ما حدث
+3. **Error handling** — الأتمتة تفشل، جهّز التنبيهات
+4. **Idempotent** — السكريبت الذي يعمل مرّتَين لا يُنتج ضرراً
+5. **Environment variables** لـSecrets
+
+## المصادر الرسمية
+
+- [Python Documentation](https://docs.python.org)
+- [Crontab Guru](https://crontab.guru)
+- [Zapier Learn](https://zapier.com/learn)
+- [Automate the Boring Stuff (كتاب مجاني)](https://automatetheboringstuff.com)
+
+---
+
+**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [Web Scraping — دليل](/web-scraping-guide) · [أكواد Excel و Sheets](/excel-sheets-automation-code) · [OpenAI API — البدء](/openai-api-getting-started)

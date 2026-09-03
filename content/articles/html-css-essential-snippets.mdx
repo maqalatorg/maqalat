@@ -1,0 +1,487 @@
+---
+title: "أكواد HTML و CSS الأساسية — مكتبة المطوّر"
+description: "مجموعة أكواد HTML و CSS جاهزة: نماذج، layouts، responsive، animations، Dark Mode، RTL."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "HTML CSS"
+  - "أكواد ويب"
+  - "Responsive design"
+  - "RTL"
+faq:
+  - q: "هل ما زلت أحتاج CSS يدوياً في 2026؟"
+    a: "نعم. Tailwind CSS يبسّط، لكن فهم CSS الأساسي ضروري. الأدوات تُساعد، لا تستبدل الفهم."
+  - q: "كيف أدعم العربية RTL؟"
+    a: "أضف `dir='rtl'` على `<html>` أو `<body>`. استخدم `logical properties` (start/end بدل left/right) لدعم LTR/RTL معاً."
+---
+
+هذه أكواد HTML و CSS الأشهر لكل مطوّر ويب — من الأساسيات إلى الحديث.
+
+## بنية HTML أساسية
+
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عنوان الصفحة</title>
+    <meta name="description" content="وصف قصير">
+    
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:title" content="عنوان">
+    <meta property="og:description" content="وصف">
+    <meta property="og:image" content="https://example.com/image.jpg">
+    <meta property="og:url" content="https://example.com/page">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header></header>
+    <main></main>
+    <footer></footer>
+    
+    <script src="/app.js"></script>
+</body>
+</html>
+```
+
+## نماذج (Forms)
+
+```html
+<form action="/submit" method="POST">
+    <div class="form-group">
+        <label for="name">الاسم</label>
+        <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            required 
+            minlength="2"
+            placeholder="أدخل اسمك"
+        >
+    </div>
+    
+    <div class="form-group">
+        <label for="email">البريد الإلكتروني</label>
+        <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            required
+        >
+    </div>
+    
+    <div class="form-group">
+        <label for="phone">الجوّال</label>
+        <input 
+            type="tel" 
+            id="phone" 
+            name="phone" 
+            pattern="^\+?966[0-9]{9}$"
+            placeholder="+966501234567"
+        >
+    </div>
+    
+    <div class="form-group">
+        <label for="country">الدولة</label>
+        <select id="country" name="country">
+            <option value="SA">السعودية</option>
+            <option value="AE">الإمارات</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="message">الرسالة</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+    </div>
+    
+    <button type="submit">إرسال</button>
+</form>
+```
+
+## Layouts (Flexbox و Grid)
+
+### Flexbox
+
+```css
+/* Container */
+.flex-container {
+    display: flex;
+    justify-content: space-between;  /* أفقياً */
+    align-items: center;             /* عمودياً */
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Items */
+.flex-item {
+    flex: 1;                          /* يأخذ المساحة المتاحة */
+}
+
+.flex-item-fixed {
+    flex: 0 0 200px;                  /* عرض ثابت 200px */
+}
+```
+
+### Grid
+
+```css
+/* Grid 3 columns */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+/* Responsive Grid */
+.grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+/* Grid Areas */
+.layout {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+    grid-template-columns: 250px 1fr;
+    gap: 1rem;
+}
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main { grid-area: main; }
+.footer { grid-area: footer; }
+```
+
+### Center anything
+
+```css
+/* الطريقة الحديثة (Flexbox) */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Grid */
+.center-grid {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+```
+
+## Responsive
+
+```css
+/* Mobile First */
+.container {
+    padding: 1rem;
+    font-size: 14px;
+}
+
+@media (min-width: 640px) {
+    .container {
+        padding: 2rem;
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+```
+
+**Breakpoints موصى بها**:
+- Mobile: < 640px
+- Tablet: 640-1024px
+- Desktop: > 1024px
+
+## Dark Mode
+
+```css
+/* CSS Variables */
+:root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --primary: #2563eb;
+}
+
+[data-theme="dark"] {
+    --bg: #1a1a1a;
+    --text: #f5f5f5;
+    --primary: #60a5fa;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+}
+```
+
+**JavaScript للتبديل**:
+```javascript
+// تبديل
+document.documentElement.setAttribute("data-theme", "dark");
+
+// حفظ التفضيل
+localStorage.setItem("theme", "dark");
+
+// عند التحميل
+const theme = localStorage.getItem("theme") || "light";
+document.documentElement.setAttribute("data-theme", theme);
+
+// اكتشاف تفضيل النظام
+if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.setAttribute("data-theme", "dark");
+}
+```
+
+## RTL (العربية)
+
+```css
+/* Logical Properties (يعمل مع LTR وRTL) */
+.card {
+    margin-inline-start: 1rem;   /* left in LTR, right in RTL */
+    padding-inline-end: 2rem;
+    border-inline-start: 3px solid blue;
+    text-align: start;            /* left in LTR, right in RTL */
+}
+
+/* أو استخدم dir */
+[dir="rtl"] .icon {
+    transform: scaleX(-1);         /* اقلب الأيقونات إذا لزم */
+}
+```
+
+## Animations
+
+### Hover Effect
+
+```css
+.button {
+    background: #2563eb;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+```
+
+### Fade In on Scroll
+
+```css
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+```
+
+```javascript
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+```
+
+### Loading Spinner
+
+```css
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+```
+
+### Pulse
+
+```css
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+```
+
+## Cards
+
+```css
+.card {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-block-end: 1rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-block-end: 0.5rem;
+}
+
+.card-description {
+    color: #6b7280;
+    line-height: 1.6;
+}
+```
+
+## Sticky Header
+
+```css
+.header {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+```
+
+## Skip to Content (Accessibility)
+
+```html
+<a href="#main-content" class="skip-link">تخطّي إلى المحتوى</a>
+
+<style>
+.skip-link {
+    position: absolute;
+    top: -40px;
+    inset-inline-start: 0;
+    background: black;
+    color: white;
+    padding: 8px 16px;
+    z-index: 1000;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+</style>
+```
+
+## Modern CSS Techniques
+
+### Container Queries (2024+)
+
+```css
+.card-container {
+    container-type: inline-size;
+}
+
+@container (min-width: 400px) {
+    .card {
+        display: flex;
+        gap: 1rem;
+    }
+}
+```
+
+### :has() (parent selector)
+
+```css
+/* الحاوية إذا احتوت صورة */
+.card:has(img) {
+    padding: 0;
+}
+
+/* Form مع input معطّل */
+form:has(input:disabled) {
+    opacity: 0.5;
+}
+```
+
+### Nesting (بلا Sass)
+
+```css
+.card {
+    padding: 1rem;
+    
+    & h2 {
+        color: blue;
+    }
+    
+    &:hover {
+        background: #f5f5f5;
+    }
+}
+```
+
+## نصائح ذهبية
+
+1. **HTML دلالي** — `<article>`, `<nav>`, `<aside>` بدل `<div>` دائماً
+2. **Accessibility** — labels، ARIA، keyboard navigation
+3. **Mobile First** — ابدأ بالموبايل ثمّ الديسكتوب
+4. **CSS Variables** — للألوان والقيم المتكرّرة
+5. **Logical Properties** لدعم RTL/LTR
+6. **Performance** — تصغير الصور، lazy loading، CSS/JS minified
+
+## المصادر الرسمية
+
+- [MDN HTML](https://developer.mozilla.org/ar/docs/Web/HTML)
+- [MDN CSS](https://developer.mozilla.org/ar/docs/Web/CSS)
+- [Can I Use — دعم المتصفّحات](https://caniuse.com)
+- [CSS Tricks](https://css-tricks.com)
+
+---
+
+**اقرأ أيضاً**: [أكواد JavaScript الأساسية](/javascript-essential-snippets) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد Git الأساسية](/git-essential-commands) · [برومتات جاهزة للبرمجة](/ready-prompts-for-coding)

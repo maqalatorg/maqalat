@@ -1,0 +1,367 @@
+---
+title: "أكواد Bash و PowerShell — أتمتة سطر الأوامر"
+description: "أكواد Bash (macOS/Linux) وPowerShell (Windows) لأتمتة المهام اليومية: ملفّات، شبكة، مراقبة."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Bash scripts"
+  - "PowerShell"
+  - "أتمتة"
+  - "سطر الأوامر"
+faq:
+  - q: "أيّهما أستخدم؟"
+    a: "Bash على macOS/Linux (أو WSL على Windows). PowerShell على Windows. للأتمتة عبر الأنظمة: Python أفضل خيار."
+  - q: "هل PowerShell يعمل على macOS/Linux؟"
+    a: "نعم منذ 2016 — PowerShell 7+ متعدّد الأنظمة. لكن Bash أكثر شيوعاً على تلك الأنظمة."
+---
+
+أوامر سطر الأوامر توفّر وقتاً هائلاً. هذه أكواد جاهزة للأتمتة.
+
+## Bash (macOS / Linux / WSL)
+
+### إدارة الملفّات
+
+```bash
+#!/bin/bash
+
+# البحث عن ملفّات
+find /path -name "*.log" -type f
+find /path -mtime +7  # أقدم من 7 أيام
+find /path -size +100M  # أكبر من 100MB
+
+# البحث في المحتوى
+grep -r "pattern" /path
+grep -rn "TODO" .  # مع أرقام الأسطر
+grep -rl "pattern" .  # فقط أسماء الملفّات
+
+# نسخ/نقل
+cp -r source/ destination/
+mv old_name new_name
+
+# حذف بحذر
+rm file.txt
+rm -r folder/
+rm -rf /path  # خطر! تحقّق قبل التنفيذ
+
+# ضغط
+tar -czvf archive.tar.gz folder/
+unzip archive.zip
+```
+
+### معالجة نصّية
+
+```bash
+# عدّ الأسطر/الكلمات
+wc -l file.txt      # عدد الأسطر
+wc -w file.txt      # عدد الكلمات
+
+# استخراج أعمدة (CSV)
+cut -d',' -f1,3 data.csv  # العمود 1 و 3
+
+# استبدال (sed)
+sed -i 's/old/new/g' file.txt
+
+# فرز وإزالة مكرّرات
+sort file.txt | uniq
+sort -u file.txt
+
+# أوّل/آخر أسطر
+head -n 20 file.txt
+tail -n 20 file.txt
+tail -f app.log  # متابعة حيّة
+```
+
+### حلقات وشرطيات
+
+```bash
+# For loop
+for file in *.txt; do
+    echo "Processing: $file"
+    wc -l "$file"
+done
+
+# While
+count=0
+while [ $count -lt 5 ]; do
+    echo "Count: $count"
+    ((count++))
+done
+
+# If
+if [ -f "config.txt" ]; then
+    echo "الملفّ موجود"
+elif [ -d "config" ]; then
+    echo "مجلّد موجود"
+else
+    echo "لا شيء"
+fi
+
+# مقارنة
+if [[ "$name" == "أحمد" ]]; then
+    echo "مرحبا أحمد"
+fi
+```
+
+### الشبكة
+
+```bash
+# فحص اتصال
+ping -c 4 google.com
+
+# طلب HTTP
+curl https://api.example.com/users
+curl -X POST https://api.example.com/users \
+     -H "Content-Type: application/json" \
+     -d '{"name":"أحمد"}'
+
+# تحميل ملفّ
+wget https://example.com/file.zip
+curl -O https://example.com/file.zip
+
+# فحص منفذ
+nc -zv google.com 443
+```
+
+### مراقبة النظام
+
+```bash
+# استخدام القرص
+df -h                    # كل الأقسام
+du -sh /path/*           # حجم كل مجلّد
+
+# العمليات
+ps aux | grep python
+top                      # مراقبة حيّة
+htop                     # (أفضل، يحتاج تثبيت)
+
+# الذاكرة
+free -h                  # (Linux فقط)
+vm_stat                  # (macOS)
+
+# قتل عملية
+kill -9 <PID>
+pkill -f "process_name"
+```
+
+### مثال: سكريبت نسخ احتياطي
+
+```bash
+#!/bin/bash
+# backup.sh
+
+DATE=$(date +%Y%m%d_%H%M%S)
+SOURCE="/Users/you/Documents"
+BACKUP_DIR="/Users/you/Backups"
+BACKUP_FILE="$BACKUP_DIR/backup_$DATE.tar.gz"
+
+mkdir -p "$BACKUP_DIR"
+
+echo "بدء النسخ الاحتياطي..."
+tar -czf "$BACKUP_FILE" "$SOURCE"
+
+if [ $? -eq 0 ]; then
+    echo "✅ نجح النسخ: $BACKUP_FILE"
+    
+    # احذف نسخ أقدم من 30 يوم
+    find "$BACKUP_DIR" -name "backup_*.tar.gz" -mtime +30 -delete
+    echo "🗑️ حُذفت النسخ القديمة"
+else
+    echo "❌ فشل النسخ"
+    exit 1
+fi
+```
+
+**جدولة (cron)**:
+```bash
+crontab -e
+# كل يوم الساعة 2 صباحاً
+0 2 * * * /path/to/backup.sh
+```
+
+## PowerShell (Windows)
+
+### إدارة الملفّات
+
+```powershell
+# البحث
+Get-ChildItem -Path C:\Users -Filter "*.log" -Recurse
+Get-ChildItem | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-7) }
+
+# البحث في المحتوى
+Select-String -Path *.txt -Pattern "TODO"
+Get-ChildItem -Recurse | Select-String -Pattern "error"
+
+# نسخ/نقل
+Copy-Item source.txt -Destination dest.txt
+Move-Item old.txt new.txt
+
+# حذف
+Remove-Item file.txt
+Remove-Item -Recurse -Force folder\
+
+# ضغط
+Compress-Archive -Path folder\ -DestinationPath archive.zip
+Expand-Archive -Path archive.zip -DestinationPath extracted\
+```
+
+### معالجة نصّية
+
+```powershell
+# قراءة/كتابة
+$content = Get-Content file.txt
+Set-Content -Path file.txt -Value $newContent
+
+# استبدال
+(Get-Content file.txt) -replace 'old', 'new' | Set-Content file.txt
+
+# فرز وإزالة مكرّرات
+Get-Content file.txt | Sort-Object | Get-Unique
+
+# CSV
+Import-Csv data.csv | Where-Object { $_.age -gt 30 }
+```
+
+### حلقات وشرطيات
+
+```powershell
+# ForEach
+foreach ($file in Get-ChildItem *.txt) {
+    Write-Host "Processing: $($file.Name)"
+}
+
+# If
+if (Test-Path "config.txt") {
+    Write-Host "موجود"
+} elseif (Test-Path "config") {
+    Write-Host "مجلّد موجود"
+} else {
+    Write-Host "غير موجود"
+}
+
+# مقارنة
+if ($name -eq "أحمد") {
+    Write-Host "مرحبا أحمد"
+}
+```
+
+### الشبكة
+
+```powershell
+# فحص اتصال
+Test-Connection google.com
+
+# HTTP
+Invoke-RestMethod -Uri "https://api.example.com/users"
+Invoke-RestMethod -Uri "https://api.example.com/users" `
+                  -Method Post `
+                  -Body (@{name="أحمد"} | ConvertTo-Json) `
+                  -ContentType "application/json"
+
+# تحميل ملفّ
+Invoke-WebRequest -Uri "https://example.com/file.zip" -OutFile "file.zip"
+```
+
+### مراقبة النظام
+
+```powershell
+# القرص
+Get-PSDrive -PSProvider FileSystem
+
+# حجم مجلّد
+(Get-ChildItem -Recurse | Measure-Object -Property Length -Sum).Sum / 1MB
+
+# العمليات
+Get-Process | Where-Object { $_.WorkingSet64 -gt 100MB }
+Get-Process python
+
+# قتل عملية
+Stop-Process -Id 1234
+Get-Process notepad | Stop-Process
+
+# الخدمات
+Get-Service | Where-Object { $_.Status -eq "Running" }
+```
+
+### مثال: سكريبت مراقبة مساحة القرص
+
+```powershell
+# check_disk.ps1
+
+$drives = Get-PSDrive -PSProvider FileSystem
+$threshold = 80  # نسبة الامتلاء التي تُنشط التنبيه
+
+foreach ($drive in $drives) {
+    if ($drive.Used -and $drive.Free) {
+        $total = $drive.Used + $drive.Free
+        $percent = [math]::Round(($drive.Used / $total) * 100, 2)
+        
+        if ($percent -gt $threshold) {
+            Write-Warning "⚠️ القرص $($drive.Name): $percent%"
+            
+            # إرسال إيميل تنبيه (اختياري)
+            Send-MailMessage -To "admin@example.com" `
+                             -Subject "تنبيه مساحة القرص" `
+                             -Body "القرص $($drive.Name) استخدام $percent%"
+        }
+    }
+}
+```
+
+**جدولة (Task Scheduler)**:
+- افتح Task Scheduler
+- Create Basic Task
+- حدّد الجدول
+- Action: Start a program
+- Program: `powershell.exe`
+- Arguments: `-File C:\path\to\check_disk.ps1`
+
+## متغيّرات البيئة
+
+### Bash
+
+```bash
+# قراءة
+echo $HOME
+echo $PATH
+
+# تعيين مؤقّت (للجلسة)
+export API_KEY="sk-..."
+
+# دائم (~/.bashrc أو ~/.zshrc)
+echo 'export API_KEY="sk-..."' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### PowerShell
+
+```powershell
+# قراءة
+$env:USERNAME
+$env:PATH
+
+# تعيين مؤقّت
+$env:API_KEY = "sk-..."
+
+# دائم (System-wide)
+[System.Environment]::SetEnvironmentVariable("API_KEY", "sk-...", "User")
+```
+
+## نصائح ذهبية
+
+1. **`shellcheck` لـBash** — أداة تحقّق من الأخطاء
+2. **PowerShell ISE أو VS Code** — كتابة أفضل
+3. **دائماً استخدم quotes** حول متغيّرات فيها مسافات
+4. **`set -e` في Bash** — يوقف السكريبت عند أوّل خطأ
+5. **`$ErrorActionPreference = "Stop"` في PowerShell** — نفس الفكرة
+
+## المصادر الرسمية
+
+- [Bash Reference Manual](https://www.gnu.org/software/bash/manual/)
+- [PowerShell Docs](https://learn.microsoft.com/en-us/powershell/)
+- [ShellCheck](https://www.shellcheck.net)
+- [Explainshell.com](https://explainshell.com)
+
+---
+
+**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد أتمتة يومية](/ai-daily-automation-code) · [أكواد Git الأساسية](/git-essential-commands) · [Web Scraping](/web-scraping-guide)

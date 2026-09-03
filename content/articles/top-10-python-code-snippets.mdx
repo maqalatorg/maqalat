@@ -1,0 +1,343 @@
+---
+title: "أفضل 10 أكواد Python يبحث عنها المطوّرون"
+description: "مجموعة أكواد Python عملية يبحث عنها المطوّرون: قراءة ملفّات، APIs، Web Scraping، Data Analysis، Automation."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Python code"
+  - "أكواد بايثون"
+  - "برمجة"
+  - "code snippets"
+faq:
+  - q: "هل هذه الأكواد جاهزة للإنتاج؟"
+    a: "للتعلّم والاستخدام المبدئي نعم. للإنتاج، أضف: Error handling كامل، Logging، Tests، Type hints، Configuration management."
+  - q: "أيّ إصدار Python أستخدم؟"
+    a: "Python 3.12+ موصى به. كل الأمثلة تعمل على 3.10 وأعلى. للتوافقية، تحقّق من requirements كل مكتبة."
+---
+
+مجموعة أكواد Python عملية لأشهر المهام. كل كود جاهز للنسخ مع شرح، ويحلّ مشكلة حقيقية.
+
+## 1) قراءة وكتابة JSON
+
+```python
+import json
+from pathlib import Path
+
+def read_json(file_path: str) -> dict:
+    """Read a JSON file and return dict."""
+    return json.loads(Path(file_path).read_text(encoding="utf-8"))
+
+def write_json(data: dict, file_path: str, indent: int = 2) -> None:
+    """Write dict to JSON file with UTF-8."""
+    Path(file_path).write_text(
+        json.dumps(data, ensure_ascii=False, indent=indent),
+        encoding="utf-8"
+    )
+
+# استخدام
+config = read_json("config.json")
+config["updated_at"] = "2026-09-03"
+write_json(config, "config.json")
+```
+
+## 2) استدعاء REST API
+
+```python
+import requests
+from typing import Optional
+
+def fetch_data(url: str, headers: Optional[dict] = None, timeout: int = 30) -> dict:
+    """Fetch JSON from URL with error handling."""
+    response = requests.get(url, headers=headers or {}, timeout=timeout)
+    response.raise_for_status()  # يرفع HTTPError إذا فشل
+    return response.json()
+
+# استخدام
+data = fetch_data(
+    "https://api.example.com/users/123",
+    headers={"Authorization": "Bearer YOUR_TOKEN"}
+)
+print(data["name"])
+```
+
+**مع Retry Logic**:
+```python
+from time import sleep
+
+def fetch_with_retry(url: str, retries: int = 3) -> dict:
+    for i in range(retries):
+        try:
+            return fetch_data(url)
+        except requests.HTTPError as e:
+            if i == retries - 1:
+                raise
+            sleep(2 ** i)  # Exponential backoff
+```
+
+## 3) Web Scraping (BeautifulSoup)
+
+```python
+import requests
+from bs4 import BeautifulSoup
+
+def scrape_article_titles(url: str) -> list[str]:
+    """Extract article titles from a page."""
+    response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+    response.raise_for_status()
+    
+    soup = BeautifulSoup(response.text, "html.parser")
+    return [h2.get_text(strip=True) for h2 in soup.find_all("h2")]
+
+# استخدام
+titles = scrape_article_titles("https://example.com/blog")
+for title in titles:
+    print(title)
+```
+
+**تحذير**: راجع robots.txt وسياسات الموقع قبل السحب.
+
+## 4) قراءة Excel وكتابته (pandas)
+
+```python
+import pandas as pd
+
+# قراءة
+df = pd.read_excel("sales.xlsx", sheet_name="Q3")
+print(df.head())
+print(df.describe())
+
+# فلترة
+top_customers = df[df["total"] > 10000].sort_values("total", ascending=False)
+
+# تجميع
+by_region = df.groupby("region")["total"].sum().reset_index()
+
+# كتابة
+top_customers.to_excel("top_customers.xlsx", index=False)
+by_region.to_csv("by_region.csv", index=False)
+```
+
+## 5) إرسال إيميلات (SMTP)
+
+```python
+import smtplib
+from email.message import EmailMessage
+from email.utils import make_msgid
+
+def send_email(
+    from_addr: str,
+    to_addr: str,
+    subject: str,
+    body: str,
+    smtp_host: str,
+    smtp_port: int,
+    password: str
+) -> None:
+    """Send plain text email via SMTP."""
+    msg = EmailMessage()
+    msg["From"] = from_addr
+    msg["To"] = to_addr
+    msg["Subject"] = subject
+    msg["Message-ID"] = make_msgid()
+    msg.set_content(body)
+    
+    with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
+        server.login(from_addr, password)
+        server.send_message(msg)
+
+# استخدام (Gmail مع App Password)
+send_email(
+    from_addr="you@gmail.com",
+    to_addr="client@example.com",
+    subject="اجتماع الأسبوع القادم",
+    body="مرحباً،\n\nأودّ...",
+    smtp_host="smtp.gmail.com",
+    smtp_port=465,
+    password="your-app-password"  # ليست كلمة السرّ العادية
+)
+```
+
+## 6) العمل مع قواعد البيانات (SQLite)
+
+```python
+import sqlite3
+from contextlib import contextmanager
+
+@contextmanager
+def db_connection(db_path: str):
+    """Context manager for SQLite connections."""
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row  # الوصول كـdict
+    try:
+        yield conn
+        conn.commit()
+    except:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
+
+# إنشاء جدول
+with db_connection("app.db") as conn:
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            email TEXT UNIQUE
+        )
+    """)
+
+# إدراج
+with db_connection("app.db") as conn:
+    conn.execute(
+        "INSERT INTO users (name, email) VALUES (?, ?)",
+        ("أحمد", "ahmed@example.com")
+    )
+
+# استعلام
+with db_connection("app.db") as conn:
+    for row in conn.execute("SELECT * FROM users"):
+        print(row["name"], row["email"])
+```
+
+## 7) استدعاء ChatGPT API
+
+```python
+from openai import OpenAI
+import os
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+def ask_gpt(question: str, system: str = "You are a helpful assistant.") -> str:
+    """Ask ChatGPT a question."""
+    response = client.chat.completions.create(
+        model="gpt-5-mini",
+        messages=[
+            {"role": "system", "content": system},
+            {"role": "user", "content": question}
+        ]
+    )
+    return response.choices[0].message.content
+
+# استخدام
+answer = ask_gpt("ما عاصمة السعودية؟")
+print(answer)
+```
+
+## 8) معالجة الصور (Pillow)
+
+```python
+from PIL import Image
+from pathlib import Path
+
+def resize_and_watermark(input_path: str, output_path: str, size: tuple = (800, 800)) -> None:
+    """Resize image and add watermark."""
+    img = Image.open(input_path)
+    img.thumbnail(size)  # يحافظ على النسبة
+    
+    # حفظ
+    img.save(output_path, quality=85, optimize=True)
+
+def convert_to_webp(input_path: str) -> str:
+    """Convert image to WebP format."""
+    output = str(Path(input_path).with_suffix(".webp"))
+    Image.open(input_path).save(output, "WEBP", quality=80)
+    return output
+
+# استخدام
+resize_and_watermark("large.jpg", "medium.jpg")
+webp_path = convert_to_webp("photo.jpg")
+```
+
+## 9) أتمتة الملفّات
+
+```python
+from pathlib import Path
+import shutil
+from datetime import datetime, timedelta
+
+def organize_downloads(downloads_dir: str) -> None:
+    """Organize downloads folder by file type."""
+    dir_path = Path(downloads_dir)
+    
+    categories = {
+        "images": [".jpg", ".jpeg", ".png", ".gif", ".webp"],
+        "documents": [".pdf", ".docx", ".txt", ".xlsx"],
+        "videos": [".mp4", ".avi", ".mkv"],
+        "archives": [".zip", ".rar", ".7z"]
+    }
+    
+    for file in dir_path.iterdir():
+        if file.is_file():
+            for category, extensions in categories.items():
+                if file.suffix.lower() in extensions:
+                    target_dir = dir_path / category
+                    target_dir.mkdir(exist_ok=True)
+                    shutil.move(str(file), target_dir / file.name)
+                    break
+
+def delete_old_files(directory: str, days_old: int = 30) -> None:
+    """Delete files older than X days."""
+    cutoff = datetime.now() - timedelta(days=days_old)
+    for file in Path(directory).iterdir():
+        if file.is_file() and datetime.fromtimestamp(file.stat().st_mtime) < cutoff:
+            file.unlink()
+            print(f"Deleted: {file.name}")
+
+# استخدام
+organize_downloads("/Users/you/Downloads")
+delete_old_files("/tmp", days_old=7)
+```
+
+## 10) FastAPI Endpoint
+
+```python
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, EmailStr
+
+app = FastAPI()
+
+class UserCreate(BaseModel):
+    name: str
+    email: EmailStr
+    age: int
+
+users_db = {}
+
+@app.post("/users")
+async def create_user(user: UserCreate):
+    if user.email in users_db:
+        raise HTTPException(400, "Email already exists")
+    user_id = len(users_db) + 1
+    users_db[user.email] = {**user.dict(), "id": user_id}
+    return users_db[user.email]
+
+@app.get("/users/{email}")
+async def get_user(email: EmailStr):
+    if email not in users_db:
+        raise HTTPException(404, "User not found")
+    return users_db[email]
+
+# تشغيل: uvicorn main:app --reload
+```
+
+## نصائح ذهبية
+
+1. **استخدم Type hints دائماً** — يساعد IDE و AI
+2. **Handle errors** — لا تفترض النجاح
+3. **Use logging** بدل `print` للإنتاج
+4. **Write tests** — pytest معياري
+5. **Environment variables** لـSecrets، لا في الكود
+
+## المصادر الرسمية
+
+- [Python Docs](https://docs.python.org/3/)
+- [Requests](https://requests.readthedocs.io)
+- [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- [Pandas](https://pandas.pydata.org)
+- [FastAPI](https://fastapi.tiangolo.com)
+
+---
+
+**اقرأ أيضاً**: [أكواد أتمتة يومية](/ai-daily-automation-code) · [Web Scraping — دليل عملي](/web-scraping-guide) · [OpenAI API — دليل البدء](/openai-api-getting-started) · [Claude Code — دليل المطوّر](/claude-code-developer-guide)

@@ -1,0 +1,415 @@
+---
+title: "أكواد استدعاء APIs الذكاء الاصطناعي — OpenAI، Anthropic، Google"
+description: "أكواد جاهزة لاستدعاء OpenAI وAnthropic وGoogle Gemini APIs بـPython وJavaScript."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "OpenAI API code"
+  - "Anthropic API"
+  - "Gemini API"
+  - "AI integration"
+faq:
+  - q: "أيّ API الأرخص؟"
+    a: "Gemini Flash الأرخص ($0.10/M input). Claude Haiku ($0.25). GPT-5 mini ($0.15). للمهام العادية، الثلاثة متقاربة."
+  - q: "كيف أحمي API Key؟"
+    a: "استخدم .env محلياً. لا commit للـkey. استخدم secrets manager للـproduction (AWS Secrets Manager، Azure Key Vault، Google Secret Manager)."
+---
+
+كل نموذج AI رائد يوفّر API. المعرفة بها تفتح بناء تطبيقات ذكية. هذه أكواد جاهزة للثلاثة الكبار.
+
+## OpenAI API
+
+### Python
+
+```python
+from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# محادثة أساسية
+def ask_gpt(question: str, model: str = "gpt-5-mini") -> str:
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": "أنت مساعد ذكي."},
+            {"role": "user", "content": question}
+        ]
+    )
+    return response.choices[0].message.content
+
+# Streaming
+def stream_gpt(question: str):
+    stream = client.chat.completions.create(
+        model="gpt-5",
+        messages=[{"role": "user", "content": question}],
+        stream=True
+    )
+    for chunk in stream:
+        if chunk.choices[0].delta.content:
+            print(chunk.choices[0].delta.content, end="", flush=True)
+
+# JSON structured
+def extract_data(text: str) -> dict:
+    import json
+    response = client.chat.completions.create(
+        model="gpt-5-mini",
+        messages=[
+            {"role": "system", "content": "استخرج JSON: {name, phone, email}"},
+            {"role": "user", "content": text}
+        ],
+        response_format={"type": "json_object"}
+    )
+    return json.loads(response.choices[0].message.content)
+
+# توليد صورة
+def generate_image(prompt: str) -> str:
+    response = client.images.generate(
+        model="dall-e-3",
+        prompt=prompt,
+        size="1024x1024",
+        quality="standard",
+        n=1
+    )
+    return response.data[0].url
+
+# Whisper (تفريغ صوت)
+def transcribe_audio(audio_path: str) -> str:
+    with open(audio_path, "rb") as f:
+        transcription = client.audio.transcriptions.create(
+            model="whisper-1",
+            file=f,
+            language="ar"
+        )
+    return transcription.text
+```
+
+### Node.js
+
+```javascript
+import OpenAI from "openai";
+import dotenv from "dotenv";
+
+dotenv.config();
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// محادثة أساسية
+async function askGPT(question, model = "gpt-5-mini") {
+  const response = await client.chat.completions.create({
+    model,
+    messages: [
+      { role: "system", content: "أنت مساعد ذكي." },
+      { role: "user", content: question }
+    ]
+  });
+  return response.choices[0].message.content;
+}
+
+// Streaming
+async function streamGPT(question) {
+  const stream = await client.chat.completions.create({
+    model: "gpt-5",
+    messages: [{ role: "user", content: question }],
+    stream: true
+  });
+  
+  for await (const chunk of stream) {
+    process.stdout.write(chunk.choices[0].delta.content || "");
+  }
+}
+```
+
+## Anthropic (Claude) API
+
+### Python
+
+```python
+from anthropic import Anthropic
+import os
+
+client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+# محادثة أساسية
+def ask_claude(question: str, model: str = "claude-sonnet-4-7-20260101") -> str:
+    response = client.messages.create(
+        model=model,
+        max_tokens=1024,
+        system="أنت مساعد ذكي.",
+        messages=[
+            {"role": "user", "content": question}
+        ]
+    )
+    return response.content[0].text
+
+# Streaming
+def stream_claude(question: str):
+    with client.messages.stream(
+        model="claude-sonnet-4-7-20260101",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": question}]
+    ) as stream:
+        for text in stream.text_stream:
+            print(text, end="", flush=True)
+
+# Extended Thinking
+def ask_claude_thinking(question: str) -> tuple[str, str]:
+    """Returns (thinking, answer)."""
+    response = client.messages.create(
+        model="claude-opus-4-20260101",
+        max_tokens=2048,
+        thinking={"type": "enabled", "budget_tokens": 5000},
+        messages=[{"role": "user", "content": question}]
+    )
+    
+    thinking = ""
+    answer = ""
+    for block in response.content:
+        if block.type == "thinking":
+            thinking = block.thinking
+        elif block.type == "text":
+            answer = block.text
+    return thinking, answer
+
+# محادثة متعدّدة الأدوار
+def chat_history(messages: list, question: str) -> tuple[str, list]:
+    messages.append({"role": "user", "content": question})
+    response = client.messages.create(
+        model="claude-sonnet-4-7-20260101",
+        max_tokens=1024,
+        messages=messages
+    )
+    reply = response.content[0].text
+    messages.append({"role": "assistant", "content": reply})
+    return reply, messages
+
+# تحليل صورة
+def analyze_image(image_path: str, question: str) -> str:
+    import base64
+    with open(image_path, "rb") as f:
+        image_data = base64.standard_b64encode(f.read()).decode("utf-8")
+    
+    response = client.messages.create(
+        model="claude-sonnet-4-7-20260101",
+        max_tokens=1024,
+        messages=[{
+            "role": "user",
+            "content": [
+                {"type": "image", "source": {
+                    "type": "base64",
+                    "media_type": "image/jpeg",
+                    "data": image_data
+                }},
+                {"type": "text", "text": question}
+            ]
+        }]
+    )
+    return response.content[0].text
+```
+
+### Node.js
+
+```javascript
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+async function askClaude(question) {
+  const response = await client.messages.create({
+    model: "claude-sonnet-4-7-20260101",
+    max_tokens: 1024,
+    messages: [{ role: "user", content: question }]
+  });
+  return response.content[0].text;
+}
+```
+
+## Google Gemini API
+
+### Python
+
+```python
+import google.generativeai as genai
+import os
+
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+model = genai.GenerativeModel("gemini-2.5-pro")
+
+# محادثة أساسية
+def ask_gemini(question: str) -> str:
+    response = model.generate_content(question)
+    return response.text
+
+# مع system instruction
+model_with_system = genai.GenerativeModel(
+    "gemini-2.5-pro",
+    system_instruction="أنت مساعد ذكي بالعربية."
+)
+
+# Streaming
+def stream_gemini(question: str):
+    response = model.generate_content(question, stream=True)
+    for chunk in response:
+        print(chunk.text, end="", flush=True)
+
+# محادثة متعدّدة
+def chat_gemini():
+    chat = model.start_chat(history=[])
+    while True:
+        user_input = input("أنت: ")
+        if user_input.lower() == "خروج":
+            break
+        response = chat.send_message(user_input)
+        print("Gemini:", response.text)
+
+# تحليل صورة
+def analyze_image_gemini(image_path: str, question: str) -> str:
+    from PIL import Image
+    img = Image.open(image_path)
+    response = model.generate_content([question, img])
+    return response.text
+
+# سياق ضخم (فيديو أو كتاب)
+def analyze_video(video_path: str, question: str) -> str:
+    video_file = genai.upload_file(video_path)
+    response = model.generate_content([video_file, question])
+    return response.text
+```
+
+### Node.js
+
+```javascript
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+
+async function askGemini(question) {
+  const result = await model.generateContent(question);
+  return result.response.text();
+}
+```
+
+## مقارنة الأسعار (2026)
+
+| النموذج | Input/1M | Output/1M |
+|---|---|---|
+| **GPT-5 mini** | $0.15 | $0.60 |
+| **GPT-5** | $2.00 | $10.00 |
+| **Claude Haiku 4** | $0.25 | $1.25 |
+| **Claude Sonnet 4.7** | $3.00 | $15.00 |
+| **Claude Opus 4** | $15.00 | $75.00 |
+| **Gemini 2.5 Flash** | $0.10 | $0.40 |
+| **Gemini 2.5 Pro** | $1.25 | $5.00 |
+
+**استراتيجية اقتصادية**:
+- Prototype: النموذج الأرخص (Gemini Flash)
+- Production: النموذج الأدقّ لمهمّتك
+- Complex tasks: Opus أو o3
+
+## أفضل الممارسات
+
+### 1) .env للـSecrets
+
+```bash
+# .env (لا تضعه في Git)
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
+GOOGLE_API_KEY=...
+```
+
+```python
+# .gitignore
+.env
+*.env
+```
+
+### 2) Rate Limiting
+
+```python
+import time
+from openai import RateLimitError
+
+def safe_call(prompt, retries=3):
+    for i in range(retries):
+        try:
+            return ask_gpt(prompt)
+        except RateLimitError:
+            time.sleep(2 ** i)
+    raise Exception("Rate limit exceeded")
+```
+
+### 3) Caching
+
+```python
+from functools import lru_cache
+
+@lru_cache(maxsize=1000)
+def cached_ask(question: str) -> str:
+    return ask_gpt(question)
+```
+
+### 4) مراقبة التكاليف
+
+```python
+import logging
+
+logging.info(f"Tokens used: {response.usage.total_tokens}")
+logging.info(f"Cost estimate: ${response.usage.total_tokens * 0.000002}")
+```
+
+### 5) Async للطلبات المتوازية
+
+```python
+import asyncio
+from openai import AsyncOpenAI
+
+async_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+async def batch_process(questions: list):
+    tasks = [
+        async_client.chat.completions.create(
+            model="gpt-5-mini",
+            messages=[{"role": "user", "content": q}]
+        )
+        for q in questions
+    ]
+    return await asyncio.gather(*tasks)
+```
+
+## أخطاء شائعة
+
+### 1) نشر API Key على GitHub
+
+**كارثة**. راجع كل commit قبل الدفع.
+
+### 2) عدم معالجة الأخطاء
+
+Network fails, rate limits, invalid responses — لا تسقط تطبيقك.
+
+### 3) الاستخدام بلا حدّ أعلى
+
+اضبط `max_tokens` — لا تدفع لمخرج غير محدود.
+
+### 4) استخدام أغلى نموذج للمهام البسيطة
+
+Haiku/Flash/mini كافيان للمهام العادية.
+
+### 5) تجاهل Caching
+
+نفس السؤال مرّتَين = مضاعفة التكلفة. Cache للاستجابات المتكرّرة.
+
+## المصادر الرسمية
+
+- [OpenAI API Docs](https://platform.openai.com/docs)
+- [Anthropic API Docs](https://docs.anthropic.com/en/api)
+- [Google Gemini API](https://ai.google.dev/gemini-api/docs)
+- [OpenAI Cookbook](https://cookbook.openai.com)
+- [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
+
+---
+
+**اقرأ أيضاً**: [OpenAI API — دليل البدء](/openai-api-getting-started) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [Claude Code — دليل المطوّر](/claude-code-developer-guide) · [أكواد أتمتة يومية](/ai-daily-automation-code)

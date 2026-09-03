@@ -1,0 +1,342 @@
+---
+title: "أفضل أكواد JavaScript يبحث عنها المطوّرون"
+description: "أكواد JavaScript جاهزة للمطوّرين: DOM، Fetch، Async، Arrays، Objects، والأشهر في 2026."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "JavaScript"
+  - "JS snippets"
+  - "أكواد JS"
+  - "Web development"
+faq:
+  - q: "هل هذه الأكواد تعمل على المتصفّح و Node.js؟"
+    a: "معظمها نعم. أكواد DOM تعمل على المتصفّح فقط. أكواد fs (ملفّات) تعمل على Node.js فقط."
+  - q: "أستخدم TypeScript أم JavaScript؟"
+    a: "TypeScript للمشاريع الجادّة والفريقية. JavaScript للتعلّم والمشاريع الصغيرة. المفاهيم واحدة، TypeScript يضيف الأنواع."
+---
+
+JavaScript لغة الويب. هذه أكواد يومية لكل مطوّر ويب.
+
+## Arrays
+
+### فلترة، تحويل، تجميع
+
+```javascript
+const users = [
+  { id: 1, name: "أحمد", age: 30, city: "الرياض" },
+  { id: 2, name: "سارة", age: 25, city: "جدة" },
+  { id: 3, name: "خالد", age: 35, city: "الرياض" }
+];
+
+// فلترة
+const riyadhUsers = users.filter(u => u.city === "الرياض");
+
+// تحويل
+const names = users.map(u => u.name);
+
+// تجميع (Reduce)
+const totalAge = users.reduce((sum, u) => sum + u.age, 0);
+
+// Group By
+const byCity = users.reduce((acc, u) => {
+  (acc[u.city] = acc[u.city] || []).push(u);
+  return acc;
+}, {});
+
+// أوّل قيمة تطابق
+const first = users.find(u => u.age > 28);
+
+// تحقّق (هل يوجد)
+const hasAdmin = users.some(u => u.role === "admin");
+const allActive = users.every(u => u.status === "active");
+
+// ترتيب
+const sorted = [...users].sort((a, b) => a.age - b.age);
+
+// إزالة المكرّرات
+const unique = [...new Set([1, 2, 2, 3, 3, 4])];
+const uniqueObjects = Array.from(
+  new Map(users.map(u => [u.email, u])).values()
+);
+```
+
+## Objects
+
+```javascript
+const user = { name: "أحمد", email: "a@example.com", age: 30 };
+
+// Destructuring
+const { name, email } = user;
+
+// Rest & Spread
+const { age, ...withoutAge } = user;
+const updated = { ...user, age: 31 };
+
+// Object → Array
+Object.keys(user);    // ['name', 'email', 'age']
+Object.values(user);  // ['أحمد', 'a@example.com', 30]
+Object.entries(user); // [['name', 'أحمد'], ...]
+
+// Array → Object
+const entries = [["a", 1], ["b", 2]];
+const obj = Object.fromEntries(entries); // { a: 1, b: 2 }
+
+// نسخ عميق
+const deepCopy = JSON.parse(JSON.stringify(user)); // للـobjects البسيطة
+// أو structuredClone:
+const deepCopy2 = structuredClone(user);
+
+// دمج objects
+const merged = { ...obj1, ...obj2 };
+```
+
+## Async/Await
+
+```javascript
+// Fetch أساسي
+async function fetchUser(id) {
+  try {
+    const response = await fetch(`/api/users/${id}`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error("Fetch failed:", error);
+    return null;
+  }
+}
+
+// Fetch مع POST
+async function createUser(data) {
+  const response = await fetch("/api/users", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  return response.json();
+}
+
+// Parallel requests
+async function fetchAll(ids) {
+  const promises = ids.map(id => fetch(`/api/users/${id}`).then(r => r.json()));
+  return Promise.all(promises);
+}
+
+// Sequential (واحد تلو الآخر)
+async function fetchSequentially(ids) {
+  const results = [];
+  for (const id of ids) {
+    results.push(await fetchUser(id));
+  }
+  return results;
+}
+
+// مع Timeout
+async function fetchWithTimeout(url, timeout = 5000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    return await response.json();
+  } finally {
+    clearTimeout(id);
+  }
+}
+```
+
+## DOM Manipulation
+
+```javascript
+// اختيار العناصر
+const btn = document.querySelector("#myBtn");
+const items = document.querySelectorAll(".item");
+
+// إنشاء وإضافة
+const div = document.createElement("div");
+div.className = "card";
+div.textContent = "مرحبا";
+document.body.appendChild(div);
+
+// تعديل الأنماط
+btn.style.backgroundColor = "blue";
+btn.classList.add("active");
+btn.classList.toggle("hidden");
+
+// معالجة الأحداث
+btn.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log("Clicked!");
+});
+
+// Event Delegation
+document.querySelector("#list").addEventListener("click", (e) => {
+  if (e.target.matches(".delete-btn")) {
+    const item = e.target.closest(".item");
+    item.remove();
+  }
+});
+
+// نموذج (Form)
+document.querySelector("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData);
+  await createUser(data);
+});
+```
+
+## Strings
+
+```javascript
+// Template Literals
+const name = "أحمد";
+const greeting = `مرحبا ${name}، كيف حالك؟`;
+
+// طرق مفيدة
+"مرحبا".includes("مر");       // true
+"مرحبا".startsWith("م");      // true
+"مرحبا".padStart(10, "*");    // "*****مرحبا"
+"مرحبا".repeat(3);            // "مرحبامرحبامرحبا"
+" hello ".trim();             // "hello"
+
+// Split & Join
+const words = "one,two,three".split(",");
+const joined = words.join(" | ");
+
+// Replace
+"مرحبا مرحبا".replace("مرحبا", "أهلا");        // "أهلا مرحبا"
+"مرحبا مرحبا".replaceAll("مرحبا", "أهلا");     // "أهلا أهلا"
+
+// Regex
+const emails = "email: ahmed@x.com, sara@y.com".match(/[\w.]+@[\w.]+/g);
+```
+
+## Date
+
+```javascript
+// اليوم
+const now = new Date();
+
+// تنسيق عربي
+now.toLocaleDateString("ar-SA");       // "١٤٤٧/٣/٢٠ هـ"
+now.toLocaleDateString("ar-SA", {
+  calendar: "gregory"
+});                                     // "٢٠٢٦/٩/٣"
+
+// حساب فرق أيّام
+const daysBetween = Math.floor(
+  (new Date("2027-01-01") - new Date("2026-09-03")) / (1000 * 60 * 60 * 24)
+);
+
+// إضافة/طرح
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+// مكتبة أفضل للتواريخ المعقّدة: date-fns أو dayjs
+```
+
+## LocalStorage / SessionStorage
+
+```javascript
+// حفظ
+localStorage.setItem("user", JSON.stringify({ name: "أحمد", id: 1 }));
+
+// قراءة
+const user = JSON.parse(localStorage.getItem("user") || "null");
+
+// حذف
+localStorage.removeItem("user");
+localStorage.clear();
+
+// SessionStorage (يمسح مع إغلاق التبويب)
+sessionStorage.setItem("tempData", "...");
+```
+
+## Debounce & Throttle
+
+```javascript
+// Debounce (تنفيذ بعد توقّف)
+function debounce(fn, delay = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+}
+
+// استخدام: بحث حين يتوقّف المستخدم عن الكتابة
+const search = debounce((query) => {
+  fetch(`/search?q=${query}`);
+}, 500);
+
+// Throttle (تنفيذ مرّة كل فترة)
+function throttle(fn, limit = 300) {
+  let inThrottle = false;
+  return (...args) => {
+    if (!inThrottle) {
+      fn(...args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+```
+
+## Utility Functions
+
+```javascript
+// تأخير (Sleep)
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+// Retry
+async function retry(fn, retries = 3, delay = 1000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      await sleep(delay * Math.pow(2, i));
+    }
+  }
+}
+
+// Format Currency
+const formatSAR = (amount) =>
+  new Intl.NumberFormat("ar-SA", {
+    style: "currency",
+    currency: "SAR"
+  }).format(amount);
+
+formatSAR(1234.56); // "١٬٢٣٤٫٥٦ ر.س.‏"
+
+// Random ID
+const uid = () => Math.random().toString(36).substring(2, 15);
+
+// Deep Equal
+const deepEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
+// Copy to Clipboard
+async function copyToClipboard(text) {
+  await navigator.clipboard.writeText(text);
+}
+```
+
+## نصائح ذهبية
+
+1. **استخدم `const` افتراضياً، `let` عند الحاجة** — لا تستخدم `var`
+2. **`===` بدل `==`** — دائماً
+3. **Async/Await بدل .then chains** — أوضح
+4. **Optional Chaining** — `user?.address?.city`
+5. **Nullish Coalescing** — `value ?? defaultValue`
+
+## المصادر الرسمية
+
+- [MDN Web Docs](https://developer.mozilla.org)
+- [JavaScript.info](https://javascript.info)
+- [Node.js Docs](https://nodejs.org/docs)
+- [TypeScript Docs](https://www.typescriptlang.org/docs)
+
+---
+
+**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد HTML و CSS](/html-css-essential-snippets) · [أكواد Git الأساسية](/git-essential-commands) · [برومتات جاهزة للبرمجة](/ready-prompts-for-coding)

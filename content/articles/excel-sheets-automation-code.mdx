@@ -1,0 +1,335 @@
+---
+title: "أكواد Excel و Google Sheets — أتمتة البيانات"
+description: "أكواد Python وGoogle Apps Script لأتمتة Excel وSheets: قراءة، تحليل، توليد تقارير، دمج مع AI."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Excel automation"
+  - "Google Sheets"
+  - "pandas"
+  - "Apps Script"
+faq:
+  - q: "أيّ أداة أستخدم لأتمتة Excel؟"
+    a: "Python مع pandas وopenpyxl الأفضل للأتمتة المحلية. Google Apps Script لـSheets السحابية. Power Automate للتكاملات Microsoft."
+  - q: "هل يمكن تشغيل Python داخل Excel؟"
+    a: "نعم — Microsoft أطلقت Python in Excel (2024) للمشتركين. يعمل داخل خلية عبر PY(). للأتمتة المكثّفة، Python خارجي أقوى."
+---
+
+Excel وGoogle Sheets أدوات كل مهنيّ. أتمتتها توفّر ساعات. هذه أكواد جاهزة.
+
+## Python + Excel (openpyxl)
+
+### قراءة Excel
+
+```python
+from openpyxl import load_workbook
+
+wb = load_workbook("sales.xlsx")
+sheet = wb["Q3"]
+
+# قراءة خلية
+value = sheet["A1"].value
+
+# قراءة نطاق
+for row in sheet["A2:D10"]:
+    for cell in row:
+        print(cell.value)
+
+# قراءة كل الصفوف
+for row in sheet.iter_rows(min_row=2, values_only=True):
+    print(row)  # tuple of values
+```
+
+### كتابة Excel
+
+```python
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill
+
+wb = Workbook()
+sheet = wb.active
+sheet.title = "التقرير"
+
+# رأس الجدول
+headers = ["الاسم", "المبلغ", "التاريخ"]
+sheet.append(headers)
+
+# تنسيق الرأس
+for col in range(1, 4):
+    cell = sheet.cell(row=1, column=col)
+    cell.font = Font(bold=True, color="FFFFFF")
+    cell.fill = PatternFill("solid", fgColor="1F4E78")
+
+# البيانات
+data = [
+    ("أحمد", 5000, "2026-09-01"),
+    ("سارة", 3200, "2026-09-02"),
+]
+for row in data:
+    sheet.append(row)
+
+# حفظ
+wb.save("report.xlsx")
+```
+
+### Formulas
+
+```python
+sheet["E1"] = "الإجمالي"
+sheet["E2"] = "=SUM(B2:B10)"
+sheet["E3"] = "=AVERAGE(B2:B10)"
+sheet["E4"] = "=MAX(B2:B10)"
+```
+
+## Python + Excel (pandas — أقوى)
+
+### قراءة كل sheet
+
+```python
+import pandas as pd
+
+# sheet واحد
+df = pd.read_excel("sales.xlsx", sheet_name="Q3")
+
+# كل الـsheets
+all_sheets = pd.read_excel("sales.xlsx", sheet_name=None)
+for name, df in all_sheets.items():
+    print(f"{name}: {len(df)} صفوف")
+```
+
+### تحليل سريع
+
+```python
+# إحصاءات
+print(df.describe())
+
+# فلترة
+top_customers = df[df["amount"] > 10000].sort_values("amount", ascending=False)
+
+# تجميع
+by_region = df.groupby("region").agg({
+    "amount": ["sum", "mean", "count"],
+    "customer_id": "nunique"
+})
+
+# Pivot Table
+pivot = df.pivot_table(
+    index="region",
+    columns="product",
+    values="amount",
+    aggfunc="sum"
+)
+```
+
+### كتابة متعدّد Sheets
+
+```python
+with pd.ExcelWriter("report.xlsx", engine="openpyxl") as writer:
+    top_customers.to_excel(writer, sheet_name="أفضل العملاء", index=False)
+    by_region.to_excel(writer, sheet_name="حسب المنطقة")
+    pivot.to_excel(writer, sheet_name="جدول محوري")
+```
+
+## Python + Google Sheets (gspread)
+
+### الإعداد
+
+1. أنشئ Service Account في Google Cloud Console
+2. حمّل credentials.json
+3. شارك الـSheet مع email الـService Account
+
+```python
+import gspread
+from google.oauth2.service_account import Credentials
+
+scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+creds = Credentials.from_service_account_file("credentials.json", scopes=scopes)
+gc = gspread.authorize(creds)
+
+# افتح Sheet
+sheet = gc.open("my-sheet").sheet1
+
+# قراءة
+all_values = sheet.get_all_values()
+records = sheet.get_all_records()  # كـdict
+
+# كتابة
+sheet.update("A1", [["الاسم", "المبلغ"]])
+sheet.append_row(["أحمد", 5000])
+
+# تحديث خلية واحدة
+sheet.update_cell(2, 3, "قيمة جديدة")
+```
+
+## Google Apps Script (داخل Sheets)
+
+Apps Script يعمل داخل Sheets نفسه (Extensions → Apps Script).
+
+### تنسيق تلقائي
+
+```javascript
+function formatSheet() {
+  const sheet = SpreadsheetApp.getActiveSheet();
+  const range = sheet.getRange("A1:E1");
+  
+  range.setFontWeight("bold");
+  range.setBackground("#1F4E78");
+  range.setFontColor("#FFFFFF");
+  
+  sheet.autoResizeColumns(1, 5);
+}
+```
+
+### توليد تقرير أسبوعي
+
+```javascript
+function weeklyReport() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Data");
+  const data = sheet.getDataRange().getValues();
+  
+  const lastWeek = new Date();
+  lastWeek.setDate(lastWeek.getDate() - 7);
+  
+  const recent = data.filter(row => new Date(row[0]) >= lastWeek);
+  const total = recent.reduce((sum, row) => sum + row[2], 0);
+  
+  // إرسال إيميل
+  MailApp.sendEmail({
+    to: "you@example.com",
+    subject: "تقرير الأسبوع",
+    body: `إجمالي هذا الأسبوع: ${total} ريال\nعدد المعاملات: ${recent.length}`
+  });
+}
+```
+
+### تشغيل تلقائي (Trigger)
+
+في Apps Script: Triggers → Add Trigger → weeklyReport → Time-driven → Weekly.
+
+### دمج مع OpenAI في Sheets
+
+```javascript
+function askGPT(prompt) {
+  const url = "https://api.openai.com/v1/chat/completions";
+  const payload = {
+    model: "gpt-5-mini",
+    messages: [{role: "user", content: prompt}]
+  };
+  
+  const response = UrlFetchApp.fetch(url, {
+    method: "post",
+    contentType: "application/json",
+    headers: {"Authorization": "Bearer YOUR_API_KEY"},
+    payload: JSON.stringify(payload)
+  });
+  
+  return JSON.parse(response.getContentText()).choices[0].message.content;
+}
+
+// استخدم داخل خلية Sheets: =askGPT("لخّص هذا النصّ: " & A1)
+```
+
+## دمج AI مع Excel
+
+### تلخيص عمود نصوص
+
+```python
+import pandas as pd
+from openai import OpenAI
+
+client = OpenAI(api_key="sk-...")
+
+def summarize_text(text: str) -> str:
+    response = client.chat.completions.create(
+        model="gpt-5-mini",
+        messages=[
+            {"role": "system", "content": "لخّص في جملة واحدة."},
+            {"role": "user", "content": text}
+        ]
+    )
+    return response.choices[0].message.content
+
+df = pd.read_excel("reviews.xlsx")
+df["summary"] = df["review_text"].apply(summarize_text)
+df.to_excel("reviews_summarized.xlsx", index=False)
+```
+
+### تصنيف مشاعر
+
+```python
+def classify_sentiment(text: str) -> str:
+    response = client.chat.completions.create(
+        model="gpt-5-mini",
+        messages=[
+            {"role": "system", "content": "صنّف: positive / negative / neutral. الجواب فقط."},
+            {"role": "user", "content": text}
+        ]
+    )
+    return response.choices[0].message.content.strip()
+
+df["sentiment"] = df["review"].apply(classify_sentiment)
+```
+
+## أمثلة عملية سعودية
+
+### توليد فواتير من CSV
+
+```python
+import pandas as pd
+from openpyxl import Workbook
+from datetime import datetime
+
+customers = pd.read_csv("orders.csv")
+
+for _, row in customers.iterrows():
+    wb = Workbook()
+    ws = wb.active
+    
+    ws["A1"] = "فاتورة"
+    ws["A3"] = f"العميل: {row['name']}"
+    ws["A4"] = f"التاريخ: {datetime.now().strftime('%Y-%m-%d')}"
+    ws["A5"] = f"المبلغ: {row['amount']} ريال"
+    ws["A6"] = f"ضريبة القيمة المضافة (15%): {row['amount'] * 0.15}"
+    ws["A7"] = f"الإجمالي: {row['amount'] * 1.15}"
+    
+    wb.save(f"invoices/invoice_{row['order_id']}.xlsx")
+```
+
+### تقرير موحّد من عدّة ملفّات
+
+```python
+import pandas as pd
+from pathlib import Path
+
+dfs = []
+for file in Path("branches/").glob("*.xlsx"):
+    df = pd.read_excel(file)
+    df["branch"] = file.stem
+    dfs.append(df)
+
+combined = pd.concat(dfs, ignore_index=True)
+combined.to_excel("all_branches.xlsx", index=False)
+
+summary = combined.groupby("branch")["sales"].agg(["sum", "mean", "count"])
+summary.to_excel("summary.xlsx")
+```
+
+## نصائح ذهبية
+
+1. **pandas أقوى من openpyxl** — للتحليل
+2. **openpyxl أفضل للتنسيقات** — الألوان، الحدود
+3. **gspread للسحابة** — تكامل مع Google
+4. **Apps Script للأتمتة داخل Sheets** — بلا خادم خارجي
+5. **AI + Sheets** — قوّة قاتلة، حذر بالتكاليف
+
+## المصادر الرسمية
+
+- [openpyxl Docs](https://openpyxl.readthedocs.io)
+- [pandas Excel IO](https://pandas.pydata.org/docs/user_guide/io.html#excel-files)
+- [gspread Docs](https://docs.gspread.org)
+- [Google Apps Script](https://developers.google.com/apps-script)
+
+---
+
+**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد أتمتة يومية](/ai-daily-automation-code) · [Web Scraping — دليل](/web-scraping-guide) · [OpenAI API — دليل البدء](/openai-api-getting-started)

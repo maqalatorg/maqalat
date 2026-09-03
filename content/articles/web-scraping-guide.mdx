@@ -1,0 +1,338 @@
+---
+title: "Web Scraping — دليل عملي بـPython 2026"
+description: "دليل شامل لسحب البيانات من المواقع بـPython: BeautifulSoup، Playwright، Scrapy، مع القواعد القانونية."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Web Scraping"
+  - "Python"
+  - "BeautifulSoup"
+  - "Playwright"
+faq:
+  - q: "هل Web Scraping قانوني؟"
+    a: "يعتمد. البيانات العامّة (بلا تسجيل): غالباً قانوني إذا احترمت robots.txt وسياسة الموقع. البيانات المحميّة (بحساب): يحتاج موافقة. لا تسحب بيانات شخصية أو محتوى محميّ بحقوق."
+  - q: "أيّ أداة أستخدم؟"
+    a: "BeautifulSoup للمواقع البسيطة. Playwright للمواقع الحديثة (React، Vue). Scrapy للمشاريع الكبيرة. requests-html كبديل خفيف."
+---
+
+**Web Scraping** = استخراج بيانات من المواقع برمجياً. مفيد للأبحاث، مراقبة الأسعار، تحليل المنافسين. هذا الدليل يشرح الأدوات والقواعد.
+
+## القواعد القانونية والأخلاقية
+
+### قبل السحب
+
+1. **اقرأ robots.txt**: `https://example.com/robots.txt`
+2. **راجع Terms of Service**
+3. **تحقّق من API رسمي** — أفضل من السحب
+4. **راعِ Rate Limits** — لا تُثقل الخادم
+5. **لا تسحب بيانات شخصية** بلا موافقة (GDPR)
+6. **حقوق الطبع** — البيانات المسحوبة قد تكون محميّة
+
+### القاعدة الأخلاقية
+
+- **البيانات العامّة (بلا تسجيل)**: غالباً مقبولة
+- **البيانات خلف تسجيل**: تحتاج موافقة صريحة
+- **البيانات الشخصية**: احترم الخصوصية
+
+## المستوى 1: BeautifulSoup (المواقع البسيطة)
+
+للمواقع الثابتة (HTML يُرسل جاهزاً من الخادم).
+
+### التثبيت
+
+```bash
+pip install requests beautifulsoup4 lxml
+```
+
+### مثال: سحب عناوين مقالات
+
+```python
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://example.com/blog"
+headers = {"User-Agent": "Mozilla/5.0 (Educational Research Bot)"}
+
+response = requests.get(url, headers=headers, timeout=10)
+response.raise_for_status()
+
+soup = BeautifulSoup(response.text, "lxml")
+
+titles = soup.find_all("h2", class_="post-title")
+for title in titles:
+    print(title.get_text(strip=True))
+    print(title.find("a")["href"])
+```
+
+### مثال متقدّم: سحب جدول
+
+```python
+import pandas as pd
+
+# طريقة سريعة
+tables = pd.read_html("https://example.com/data")
+df = tables[0]
+print(df.head())
+
+# طريقة يدوية
+soup = BeautifulSoup(html, "lxml")
+rows = soup.find("table").find_all("tr")
+data = []
+for row in rows:
+    cells = [cell.get_text(strip=True) for cell in row.find_all(["td", "th"])]
+    data.append(cells)
+```
+
+## المستوى 2: Playwright (المواقع الحديثة)
+
+للمواقع التي تُحمّل محتوى بـJavaScript (React، Vue، Angular).
+
+### التثبيت
+
+```bash
+pip install playwright
+playwright install chromium
+```
+
+### مثال: سحب موقع React
+
+```python
+from playwright.sync_api import sync_playwright
+
+def scrape_dynamic_site(url: str):
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        page.goto(url)
+        
+        # انتظر حتى يظهر المحتوى
+        page.wait_for_selector(".product-card")
+        
+        # استخرج البيانات
+        products = page.query_selector_all(".product-card")
+        results = []
+        for product in products:
+            name = product.query_selector(".name").text_content()
+            price = product.query_selector(".price").text_content()
+            results.append({"name": name, "price": price})
+        
+        browser.close()
+        return results
+```
+
+### مثال: تسجيل دخول ثم سحب
+
+```python
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)  # False للمشاهدة
+    page = browser.new_page()
+    
+    # تسجيل الدخول
+    page.goto("https://example.com/login")
+    page.fill("input[name=email]", "you@example.com")
+    page.fill("input[name=password]", "your_password")
+    page.click("button[type=submit]")
+    page.wait_for_url("**/dashboard")
+    
+    # سحب البيانات
+    page.goto("https://example.com/private-data")
+    data = page.query_selector_all(".data-item")
+    
+    browser.close()
+```
+
+## المستوى 3: Scrapy (المشاريع الكبيرة)
+
+لسحب آلاف الصفحات بكفاءة.
+
+### التثبيت
+
+```bash
+pip install scrapy
+scrapy startproject myscraper
+```
+
+### Spider أساسي
+
+```python
+# myscraper/spiders/products.py
+import scrapy
+
+class ProductSpider(scrapy.Spider):
+    name = "products"
+    start_urls = ["https://example.com/products"]
+    
+    custom_settings = {
+        "DOWNLOAD_DELAY": 1,  # ثانية بين كل طلب
+        "USER_AGENT": "Mozilla/5.0 (Research Bot)"
+    }
+    
+    def parse(self, response):
+        for product in response.css("div.product"):
+            yield {
+                "name": product.css("h3::text").get(),
+                "price": product.css(".price::text").get(),
+                "url": product.css("a::attr(href)").get()
+            }
+        
+        # الصفحة التالية
+        next_page = response.css("a.next::attr(href)").get()
+        if next_page:
+            yield response.follow(next_page, self.parse)
+```
+
+### التشغيل
+
+```bash
+scrapy crawl products -o products.json
+```
+
+## أفضل الممارسات
+
+### 1) User-Agent صادق
+
+```python
+headers = {
+    "User-Agent": "MyResearchBot/1.0 (contact: you@example.com)"
+}
+```
+
+### 2) Rate Limiting
+
+```python
+import time
+
+for url in urls:
+    scrape(url)
+    time.sleep(2)  # 2 ثانية بين طلبات
+```
+
+### 3) Retry Logic
+
+```python
+from time import sleep
+
+def fetch_with_retry(url: str, max_retries: int = 3):
+    for i in range(max_retries):
+        try:
+            return requests.get(url, timeout=10)
+        except requests.RequestException:
+            if i == max_retries - 1:
+                raise
+            sleep(2 ** i)
+```
+
+### 4) Caching
+
+```python
+import requests_cache
+
+session = requests_cache.CachedSession(
+    "scraping_cache",
+    expire_after=3600  # ساعة
+)
+response = session.get(url)  # يُخزّن ولا يُعيد الطلب
+```
+
+### 5) Rotate User-Agents
+
+```python
+import random
+
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ...",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ...",
+    # إلخ
+]
+
+headers = {"User-Agent": random.choice(USER_AGENTS)}
+```
+
+### 6) Proxy Rotation (للمواقع الصارمة)
+
+```python
+proxies = [
+    "http://user:pass@proxy1.com:8080",
+    "http://user:pass@proxy2.com:8080",
+]
+
+response = requests.get(url, proxies={"http": random.choice(proxies)})
+```
+
+## بدائل السحب
+
+### 1) APIs الرسمية
+
+قبل السحب، ابحث:
+- Twitter/X API
+- YouTube Data API
+- GitHub API
+- Google Maps API
+
+**دائماً أفضل** من السحب.
+
+### 2) RSS Feeds
+
+كثير من المواقع الإخبارية توفّر RSS — استخدمها بدل السحب.
+
+### 3) Sitemap.xml
+
+```
+https://example.com/sitemap.xml
+```
+
+يعطيك قائمة URLs، أسرع من زحف الموقع.
+
+### 4) Third-Party Data Providers
+
+- **SimilarWeb** — بيانات مواقع
+- **Ahrefs API** — SEO
+- **DataForSEO** — SERP
+
+## أخطاء شائعة
+
+### 1) عدم احترام robots.txt
+
+عقوبة قانونية محتملة.
+
+### 2) طلبات كثيرة بلا Delay
+
+قد يُحظر IPك.
+
+### 3) نسيان User-Agent
+
+بعض المواقع ترفض requests بلا UA.
+
+### 4) عدم معالجة أخطاء الشبكة
+
+السكريبت يتعطّل من أوّل خطأ.
+
+### 5) سحب محتوى محميّ
+
+قضايا قانونية.
+
+## متى تستخدم AI بدل السحب
+
+**استخدم AI** إذا:
+- تحتاج فهم النصّ لا الترميز
+- الموقع يتغيّر كثيراً (Scraping يكسر)
+- كمّ البيانات صغير
+
+**استخدم Scraping** إذا:
+- تحتاج بيانات منظّمة بكميّة
+- تكرار عالٍ
+- دقّة عالية
+
+## المصادر الرسمية
+
+- [Beautiful Soup Docs](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- [Playwright Python](https://playwright.dev/python/)
+- [Scrapy Docs](https://docs.scrapy.org)
+- [Robots.txt Standard](https://www.robotstxt.org)
+
+---
+
+**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد أتمتة يومية](/ai-daily-automation-code) · [أكواد Excel و Sheets](/excel-sheets-automation-code) · [Claude Code — دليل المطوّر](/claude-code-developer-guide)

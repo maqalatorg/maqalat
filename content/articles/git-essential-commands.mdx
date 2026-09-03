@@ -1,0 +1,374 @@
+---
+title: "أكواد Git الأساسية — أوامر كل مطوّر يحتاجها"
+description: "دليل عملي لأوامر Git الأشهر: init، commit، branch، merge، rebase، مع حلّ مشاكل شائعة."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Git commands"
+  - "أكواد Git"
+  - "GitHub"
+  - "Version control"
+faq:
+  - q: "الفرق بين Git و GitHub؟"
+    a: "Git نظام تحكّم بالإصدارات (محلياً على جهازك). GitHub خدمة استضافة سحابية للـGit repositories. البدائل: GitLab، Bitbucket."
+  - q: "أيّهما أستخدم: Rebase أم Merge؟"
+    a: "Merge أسلم للفرق الكبيرة (يحافظ على التاريخ). Rebase أنظف للسجلّ (يحوّل التاريخ). القاعدة: لا Rebase على branch عام مُشارك."
+---
+
+Git معيار كل مطوّر. أوامره كثيرة، لكن 90% منها تحتاج 20 أمراً. هذا الدليل يشرحها.
+
+## البدء
+
+### تهيئة أوّل مرّة
+
+```bash
+# إعداد الاسم والإيميل
+git config --global user.name "اسمك"
+git config --global user.email "you@example.com"
+
+# اختصار للـeditor
+git config --global core.editor "code --wait"  # VS Code
+
+# اسم branch الافتراضي
+git config --global init.defaultBranch main
+```
+
+### بدء مشروع
+
+```bash
+# مشروع جديد
+git init
+git add .
+git commit -m "Initial commit"
+
+# استنساخ مشروع موجود
+git clone https://github.com/user/repo.git
+git clone git@github.com:user/repo.git  # SSH
+```
+
+## الأساسيات اليومية
+
+### الحالة والتغييرات
+
+```bash
+git status                    # ما الذي تغيّر
+git diff                      # ما التغييرات بالتفصيل
+git diff --staged             # التغييرات المُستَعدّة للـcommit
+
+git log                       # السجلّ
+git log --oneline             # مختصر
+git log --graph --all         # رسم بياني
+git log -p                    # مع التغييرات
+git log --author="اسم"        # حسب المؤلّف
+```
+
+### إضافة و Commit
+
+```bash
+# إضافة
+git add file.txt              # ملفّ محدّد
+git add src/                  # مجلّد
+git add .                     # كل التغييرات
+git add -p                    # تفاعلي (اختر أجزاءً)
+
+# Commit
+git commit -m "رسالة قصيرة"
+git commit -am "add + commit معاً"
+
+# تعديل آخر commit (قبل الدفع)
+git commit --amend -m "رسالة جديدة"
+git commit --amend --no-edit  # فقط إضافة ملفّات
+```
+
+### Push و Pull
+
+```bash
+# دفع
+git push                      # للـbranch الحالي
+git push origin main
+git push -u origin feature/x  # أوّل مرّة (يربط)
+
+# سحب
+git pull                      # مع merge
+git pull --rebase             # مع rebase (أنظف)
+
+# جلب بلا دمج
+git fetch
+git fetch --all
+```
+
+## Branches
+
+### إدارة Branches
+
+```bash
+git branch                    # قائمة الفروع المحلية
+git branch -a                 # كل الفروع (محلية + بعيدة)
+git branch -d feature/x       # حذف (إذا مُدمج)
+git branch -D feature/x       # حذف قسري
+
+# إنشاء وتبديل
+git checkout -b feature/new-login
+git switch -c feature/new-login  # الحديث (Git 2.23+)
+
+# التبديل
+git checkout main
+git switch main               # الحديث
+```
+
+### Merge
+
+```bash
+# مثال: دمج feature في main
+git checkout main
+git pull
+git merge feature/x
+
+# حلّ التعارضات
+# 1. عدّل الملفّات
+# 2. git add .
+# 3. git commit
+```
+
+### Rebase (للسجل النظيف)
+
+```bash
+# مثال: تحديث feature branch على أحدث main
+git checkout feature/x
+git rebase main
+
+# Interactive rebase (تنظيف commits)
+git rebase -i HEAD~5          # آخر 5 commits
+# في المحرّر: pick / squash / reword / drop
+```
+
+**تحذير**: لا rebase على branches مُشتركة (يعيد كتابة التاريخ).
+
+## التراجع
+
+### قبل Commit
+
+```bash
+# التخلّي عن تغييرات ملفّ
+git checkout file.txt         # القديم
+git restore file.txt          # الحديث
+
+# إزالة من الاستعداد
+git reset file.txt
+git restore --staged file.txt
+
+# التخلّي عن كل التغييرات
+git checkout .
+git restore .
+```
+
+### بعد Commit
+
+```bash
+# تراجع commit مع الاحتفاظ بالتغييرات
+git reset --soft HEAD~1
+
+# تراجع مع مسح التغييرات (خطر!)
+git reset --hard HEAD~1
+
+# إنشاء commit عكسي (آمن للـshared branches)
+git revert HEAD
+git revert <commit-hash>
+```
+
+### بعد Push (بحذر!)
+
+```bash
+# إذا لم يسحب أحد بعد
+git reset --hard HEAD~1
+git push --force-with-lease   # أأمن من --force
+```
+
+**تحذير**: `git push --force` قد يُدمّر عمل الآخرين. استخدم `--force-with-lease` — يفشل إذا حدث تغيير.
+
+## Stash (حفظ مؤقّت)
+
+```bash
+# حفظ تغييرات غير جاهزة
+git stash
+git stash save "وصف"
+
+# قائمة الـstashes
+git stash list
+
+# استعادة
+git stash pop                 # يستعيد ويحذف
+git stash apply               # يستعيد بلا حذف
+
+# حذف
+git stash drop
+git stash clear               # حذف كل الـstashes
+```
+
+## البحث في التاريخ
+
+```bash
+# البحث عن commit
+git log --grep="fix login"    # في رسائل commits
+git log --all --oneline -S "search_string"  # كود احتوى نصّاً
+
+# متى أُضيف/حُذف سطر
+git blame file.txt
+
+# البحث عن ملفّ
+git log --follow -- file.txt
+
+# Bisect (اكتشاف commit الذي كسر شيئاً)
+git bisect start
+git bisect bad
+git bisect good <commit-hash>
+# Git يقودك ثنائياً للـcommit المشكل
+```
+
+## Remote
+
+```bash
+# قائمة remotes
+git remote -v
+
+# إضافة remote
+git remote add upstream https://github.com/original/repo.git
+
+# دفع لكل الـbranches
+git push --all
+
+# حذف remote branch
+git push origin --delete feature/old
+```
+
+## Tags
+
+```bash
+# قائمة tags
+git tag
+
+# إنشاء
+git tag v1.0.0
+git tag -a v1.0.0 -m "Release 1.0"  # annotated
+
+# دفع tag
+git push origin v1.0.0
+git push --tags
+
+# حذف
+git tag -d v1.0.0
+git push origin :refs/tags/v1.0.0
+```
+
+## Git Hooks
+
+```bash
+# قبل commit
+.git/hooks/pre-commit         # اجعله قابلاً للتنفيذ
+#!/bin/bash
+npm test  # مثلاً
+```
+
+**أفضل**: استخدم Husky مع Node.js لإدارة hooks عبر المشروع.
+
+## workflows شائعة
+
+### GitHub Flow (بسيط)
+
+```bash
+# 1. اسحب أحدث main
+git checkout main
+git pull
+
+# 2. أنشئ feature branch
+git checkout -b feature/new-login
+
+# 3. اعمل commits
+git add .
+git commit -m "add login form"
+
+# 4. ادفع
+git push -u origin feature/new-login
+
+# 5. افتح Pull Request في GitHub
+# 6. Merge بعد المراجعة
+# 7. احذف الـbranch محلياً وبعيداً
+```
+
+### Git Flow (متقدّم)
+
+```bash
+# main = production
+# develop = staging
+# feature/x = ميّزة
+# release/1.0 = تحضير للإصدار
+# hotfix/x = إصلاح عاجل لـproduction
+```
+
+## حلّ مشاكل شائعة
+
+### 1) "Merge conflict"
+
+```bash
+# افتح الملفّ المتعارض
+# اختر التغييرات (يدوياً أو بأداة)
+git add file.txt
+git commit  # يكمل الـmerge
+```
+
+### 2) "Push rejected"
+
+```bash
+# سبب: تغييرات جديدة في الـremote
+git pull --rebase
+git push
+```
+
+### 3) "Detached HEAD"
+
+```bash
+# أنت على commit لا branch
+git checkout -b new-branch-name  # احفظ التغييرات
+```
+
+### 4) نسيت `.gitignore`
+
+```bash
+# إزالة ملفّ من التتبّع (بدون حذفه)
+git rm --cached file.txt
+
+# ثمّ أضفه لـ.gitignore
+echo "file.txt" >> .gitignore
+git commit -m "ignore file.txt"
+```
+
+### 5) Commit كبير أضفت فيه Secret
+
+```bash
+# استخدم BFG Repo-Cleaner أو git-filter-repo
+# ثمّ:
+git push --force-with-lease
+
+# **مهمّ**: غيّر الـSecret (تسرّب)
+```
+
+## نصائح ذهبية
+
+1. **Commits صغيرة متكرّرة** — لا commit ضخم
+2. **رسائل commit وصفية**: `feat: add user login`، `fix: correct email validation`
+3. **`.gitignore` من البداية** — أضف secrets، node_modules، عبر gitignore.io
+4. **Pull قبل Push** — تجنّب conflicts
+5. **لا `push --force` على main** — أبداً
+6. **استخدم SSH** بدل HTTPS للأمان والسرعة
+
+## المصادر الرسمية
+
+- [Git Documentation](https://git-scm.com/doc)
+- [Pro Git Book (مجاني)](https://git-scm.com/book/en/v2)
+- [GitHub Docs](https://docs.github.com)
+- [Git Cheatsheet](https://education.github.com/git-cheat-sheet-education.pdf)
+
+---
+
+**اقرأ أيضاً**: [أكواد Bash و PowerShell](/bash-powershell-automation) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد JavaScript الأساسية](/javascript-essential-snippets) · [Claude Code — دليل المطوّر](/claude-code-developer-guide)

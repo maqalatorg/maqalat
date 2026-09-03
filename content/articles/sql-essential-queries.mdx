@@ -1,0 +1,392 @@
+---
+title: "أكواد SQL جاهزة — أشهر 20 استعلاماً يبحث عنها المطوّر"
+description: "مكتبة استعلامات SQL جاهزة: SELECT، JOIN، GROUP BY، Window Functions، CTE، وأداء عالٍ."
+cluster: "ai"
+publishedAt: "2026-09-03"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "SQL queries"
+  - "أكواد SQL"
+  - "قواعد بيانات"
+  - "PostgreSQL"
+faq:
+  - q: "أيّ قاعدة بيانات أستخدم؟"
+    a: "PostgreSQL الأشمل والأقوى للتطبيقات الجدّية. MySQL شائع في الشركات القديمة. SQLite للتطبيقات الصغيرة. SQL Server في بيئات Microsoft."
+  - q: "هل هذه الاستعلامات تعمل على كل قواعد البيانات؟"
+    a: "الأساسية نعم. Window Functions تعمل على PostgreSQL، MySQL 8+، SQL Server، Oracle. SQLite دعم محدود لبعض الميزات المتقدّمة."
+---
+
+SQL لغة كل مطوّر يعمل مع البيانات. هذه 20 استعلاماً عملياً لأشهر الحالات.
+
+## الأساسيات (5 استعلامات)
+
+### 1) SELECT بأعمدة محدّدة
+
+```sql
+SELECT id, name, email, created_at
+FROM users
+WHERE country = 'SA'
+  AND created_at >= '2026-01-01'
+ORDER BY created_at DESC
+LIMIT 100;
+```
+
+### 2) COUNT + GROUP BY
+
+```sql
+SELECT country, COUNT(*) AS user_count
+FROM users
+GROUP BY country
+ORDER BY user_count DESC;
+```
+
+### 3) INSERT
+
+```sql
+INSERT INTO users (name, email, country)
+VALUES ('أحمد', 'ahmed@example.com', 'SA');
+
+-- إدراج متعدّد
+INSERT INTO users (name, email) VALUES
+  ('أحمد', 'a@example.com'),
+  ('سارة', 's@example.com'),
+  ('خالد', 'k@example.com');
+```
+
+### 4) UPDATE
+
+```sql
+UPDATE users
+SET status = 'active',
+    updated_at = NOW()
+WHERE id = 123;
+
+-- تحديث جماعي
+UPDATE orders
+SET discount = 10
+WHERE country = 'SA'
+  AND total > 1000;
+```
+
+### 5) DELETE (بحذر!)
+
+```sql
+-- دائماً استخدم WHERE
+DELETE FROM logs
+WHERE created_at < NOW() - INTERVAL '30 days';
+
+-- Preview قبل الحذف
+SELECT COUNT(*) FROM logs 
+WHERE created_at < NOW() - INTERVAL '30 days';
+```
+
+## JOINs (5 استعلامات)
+
+### 6) INNER JOIN
+
+```sql
+-- كل الطلبات مع أسماء العملاء
+SELECT o.id, o.total, u.name, u.email
+FROM orders o
+INNER JOIN users u ON u.id = o.user_id
+WHERE o.status = 'paid';
+```
+
+### 7) LEFT JOIN
+
+```sql
+-- كل العملاء + طلباتهم (إن وجدت)
+SELECT u.name, COUNT(o.id) AS order_count
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id
+GROUP BY u.id, u.name
+ORDER BY order_count DESC;
+```
+
+### 8) Multiple JOINs
+
+```sql
+-- عميل + طلب + منتج + شحن
+SELECT 
+  u.name AS customer,
+  o.id AS order_id,
+  p.name AS product,
+  s.tracking_number
+FROM orders o
+JOIN users u ON u.id = o.user_id
+JOIN order_items oi ON oi.order_id = o.id
+JOIN products p ON p.id = oi.product_id
+LEFT JOIN shipments s ON s.order_id = o.id
+WHERE o.created_at >= '2026-09-01';
+```
+
+### 9) SELF JOIN
+
+```sql
+-- الموظّفون مع مدرائهم
+SELECT 
+  e.name AS employee,
+  m.name AS manager
+FROM employees e
+LEFT JOIN employees m ON m.id = e.manager_id;
+```
+
+### 10) FULL OUTER JOIN
+
+```sql
+-- كل السجلّات من الجدولَين
+SELECT u.email, o.total
+FROM users u
+FULL OUTER JOIN orders o ON o.user_id = u.id;
+```
+
+## التجميع والتحليل (5 استعلامات)
+
+### 11) Top N per Group
+
+```sql
+-- أعلى 3 عملاء إنفاقاً لكل دولة
+SELECT * FROM (
+  SELECT 
+    u.country,
+    u.name,
+    SUM(o.total) AS total_spent,
+    ROW_NUMBER() OVER (
+      PARTITION BY u.country 
+      ORDER BY SUM(o.total) DESC
+    ) AS rank
+  FROM users u
+  JOIN orders o ON o.user_id = u.id
+  GROUP BY u.country, u.id, u.name
+) ranked
+WHERE rank <= 3;
+```
+
+### 12) Running Total (Window Function)
+
+```sql
+SELECT 
+  date,
+  amount,
+  SUM(amount) OVER (ORDER BY date) AS running_total
+FROM sales
+ORDER BY date;
+```
+
+### 13) Percentile
+
+```sql
+SELECT 
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY salary) AS median_salary,
+  PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY salary) AS p90_salary
+FROM employees;
+```
+
+### 14) Moving Average
+
+```sql
+SELECT 
+  date,
+  amount,
+  AVG(amount) OVER (
+    ORDER BY date
+    ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+  ) AS moving_avg_7day
+FROM sales;
+```
+
+### 15) HAVING (فلترة بعد التجميع)
+
+```sql
+-- الفئات التي لديها أكثر من 10 منتجات
+SELECT 
+  category,
+  COUNT(*) AS product_count
+FROM products
+GROUP BY category
+HAVING COUNT(*) > 10;
+```
+
+## الاستعلامات المتقدّمة (5 استعلامات)
+
+### 16) CTE (Common Table Expression)
+
+```sql
+WITH monthly_sales AS (
+  SELECT 
+    DATE_TRUNC('month', created_at) AS month,
+    SUM(total) AS total_sales
+  FROM orders
+  GROUP BY month
+),
+avg_sales AS (
+  SELECT AVG(total_sales) AS avg_monthly
+  FROM monthly_sales
+)
+SELECT 
+  m.month,
+  m.total_sales,
+  a.avg_monthly,
+  m.total_sales - a.avg_monthly AS diff_from_avg
+FROM monthly_sales m
+CROSS JOIN avg_sales a
+ORDER BY m.month;
+```
+
+### 17) Recursive CTE (شجرة تنظيمية)
+
+```sql
+WITH RECURSIVE org_tree AS (
+  -- المدير الأعلى
+  SELECT id, name, manager_id, 1 AS level
+  FROM employees
+  WHERE manager_id IS NULL
+  
+  UNION ALL
+  
+  -- الموظّفون الأدنى
+  SELECT e.id, e.name, e.manager_id, ot.level + 1
+  FROM employees e
+  JOIN org_tree ot ON e.manager_id = ot.id
+)
+SELECT * FROM org_tree ORDER BY level, name;
+```
+
+### 18) UPSERT (INSERT أو UPDATE)
+
+```sql
+-- PostgreSQL
+INSERT INTO users (id, name, email)
+VALUES (1, 'أحمد', 'ahmed@example.com')
+ON CONFLICT (id) DO UPDATE
+SET name = EXCLUDED.name,
+    email = EXCLUDED.email;
+
+-- MySQL
+INSERT INTO users (id, name, email)
+VALUES (1, 'أحمد', 'ahmed@example.com')
+ON DUPLICATE KEY UPDATE
+  name = VALUES(name),
+  email = VALUES(email);
+```
+
+### 19) JSON Operations (PostgreSQL)
+
+```sql
+-- استخراج قيمة من JSON
+SELECT 
+  id,
+  data->>'name' AS name,
+  data->'address'->>'city' AS city
+FROM users;
+
+-- فلترة بـJSON
+SELECT * FROM users
+WHERE data->>'country' = 'SA';
+
+-- تحديث حقل JSON
+UPDATE users
+SET data = jsonb_set(data, '{status}', '"active"')
+WHERE id = 1;
+```
+
+### 20) Pivot (تحويل صفوف إلى أعمدة)
+
+```sql
+-- PostgreSQL (باستخدام CASE)
+SELECT 
+  product_id,
+  SUM(CASE WHEN region = 'الرياض' THEN quantity ELSE 0 END) AS riyadh,
+  SUM(CASE WHEN region = 'جدة' THEN quantity ELSE 0 END) AS jeddah,
+  SUM(CASE WHEN region = 'الدمام' THEN quantity ELSE 0 END) AS dammam
+FROM sales
+GROUP BY product_id;
+```
+
+## نصائح للأداء
+
+### 1) استخدم الفهارس (Indexes)
+
+```sql
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_orders_user_created ON orders(user_id, created_at DESC);
+```
+
+### 2) EXPLAIN لتحليل الاستعلام
+
+```sql
+EXPLAIN ANALYZE
+SELECT * FROM orders WHERE user_id = 123;
+```
+
+### 3) LIMIT دائماً في الاستعلامات الاستكشافية
+
+```sql
+SELECT * FROM huge_table LIMIT 100;  -- لا تُحمّل كل الجدول
+```
+
+### 4) تجنّب SELECT *
+
+```sql
+-- سيّئ
+SELECT * FROM users;
+
+-- جيّد
+SELECT id, name, email FROM users;
+```
+
+### 5) استخدم Transactions للتعديلات المترابطة
+
+```sql
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;
+-- أو ROLLBACK إذا حصل خطأ
+```
+
+## أخطاء شائعة
+
+### 1) نسيان WHERE في UPDATE/DELETE
+
+كارثة. تحديث/حذف كل الجدول.
+
+### 2) SELECT * على جدول ضخم
+
+يستهلك ذاكرة، يبطئ الشبكة.
+
+### 3) N+1 Query Problem
+
+```python
+# سيّئ
+users = db.execute("SELECT * FROM users")
+for user in users:
+    orders = db.execute(f"SELECT * FROM orders WHERE user_id = {user.id}")
+```
+
+**الحلّ**: JOIN واحد.
+
+### 4) SQL Injection
+
+```python
+# خطر أمني
+db.execute(f"SELECT * FROM users WHERE email = '{email}'")
+
+# آمن
+db.execute("SELECT * FROM users WHERE email = ?", (email,))
+```
+
+### 5) عدم استخدام EXPLAIN
+
+استعلام بطيء بلا تشخيص = لا حلّ.
+
+## المصادر الرسمية
+
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+- [MySQL Documentation](https://dev.mysql.com/doc/)
+- [SQL Style Guide](https://www.sqlstyle.guide/)
+- [Mode SQL Tutorial](https://mode.com/sql-tutorial)
+
+---
+
+**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد أتمتة يومية](/ai-daily-automation-code) · [أكواد Excel و Sheets](/excel-sheets-automation-code) · [Web Scraping](/web-scraping-guide)
