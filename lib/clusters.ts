@@ -69,6 +69,15 @@ export const CLUSTERS: Cluster[] = [
     enabled: false,
   },
   {
+    slug: "ai",
+    titleAr: "الذكاء الاصطناعي",
+    titleEn: "Artificial Intelligence",
+    descriptionAr: "دليل عملي لأدوات الذكاء الاصطناعي، هندسة البرومت، ChatGPT وGemini وClaude، والاستخدام في العمل والمحتوى.",
+    descriptionEn: "Practical guide to AI tools, prompt engineering, ChatGPT, Gemini, Claude, and their use in work and content.",
+    icon: "Sparkles",
+    enabled: true,
+  },
+  {
     slug: "websites",
     titleAr: "المواقع والتطبيقات",
     titleEn: "Websites & Apps",

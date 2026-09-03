@@ -7,6 +7,7 @@ import {
   BookOpen,
   Globe,
   Shirt,
+  Sparkles,
   Folder,
   type LucideIcon,
 } from "lucide-react";
@@ -20,6 +21,7 @@ const ICONS: Record<string, LucideIcon> = {
   BookOpen,
   Globe,
   Shirt,
+  Sparkles,
 };
 
 export function ClusterIcon({
