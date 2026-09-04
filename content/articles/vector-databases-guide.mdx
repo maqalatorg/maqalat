@@ -1,0 +1,640 @@
+---
+title: "قواعد المتّجهات (Vector Databases) — دليل شامل"
+description: "شرح Vector Databases: Pinecone، Weaviate، Chroma، Qdrant، Milvus. متى تختار كلاً منها، الأسعار، والأداء."
+cluster: "ai"
+publishedAt: "2026-09-04"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Vector Database"
+  - "Pinecone"
+  - "Weaviate"
+  - "Chroma"
+  - "Embeddings"
+faq:
+  - q: "ما Vector Database؟"
+    a: "قاعدة بيانات مصمّمة لتخزين واسترجاع **Vectors** (متّجهات رقمية). تُستخدم أساساً في: RAG، البحث الدلالي، أنظمة التوصيات، الصور المشابهة. **الفرق عن SQL**: SQL يبحث بالمساواة الدقيقة، Vector DB بالتشابه (Similarity)."
+  - q: "لماذا نحتاجها؟"
+    a: "**Embeddings** تُحوّل النصّ/الصور إلى Vectors (مثل [0.234, -0.678, ..., 1024 قيمة]). البحث فيها **بالتشابه** (أقرب vectors)، ليس بالمطابقة. Vector DB **متخصّصة لهذا** — سريعة على مليارات vectors."
+  - q: "أشهر Vector Databases 2026؟"
+    a: "خمس رئيسية: (1) **Pinecone** — SaaS، الأشهر تجارياً، (2) **Weaviate** — مفتوح المصدر، سحابي، (3) **Chroma** — خفيف للتطوير، (4) **Qdrant** — مفتوح، أداء عالٍ، (5) **Milvus** — الأشمل للمؤسّسات. **Postgres + pgvector** بديل ممتاز إذا لديك Postgres."
+  - q: "متى أستخدم Vector DB؟"
+    a: "أربع حالات: (1) **RAG** (Retrieval Augmented Generation)، (2) **بحث دلالي** (Semantic Search)، (3) **أنظمة التوصيات** (منتجات مشابهة)، (4) **البحث بالصور/الصوت المشابه**. **لا تحتاجها إذا**: بحث بسيط بالكلمات، بيانات صغيرة (<10K)."
+  - q: "الأداء؟ الأسعار؟"
+    a: "**Pinecone**: أسعار من 70$/شهر (Starter)، ممتاز الأداء. **Weaviate Cloud**: من 25$/شهر. **Qdrant Cloud**: مجاني بحدود، مدفوع للـProduction. **Chroma**: مجاني (self-hosted). **pgvector**: مجاني (مع Postgres). **الأداء عام**: كلها < 100ms لملايين vectors."
+  - q: "هل يمكنني بناء واحد بنفسي؟"
+    a: "نعم، لكن غير موصى للـProduction. **بدائل بسيطة**: NumPy مع Cosine Similarity (للـ<100K vectors). **مكتبات جاهزة**: FAISS (Facebook)، Annoy (Spotify)، HNSWlib. **لكن Vector DBs الجاهزة أوفر** في الجهد على المدى الطويل."
+  - q: "الفرق بين Approximate و Exact Search؟"
+    a: "**Exact**: يفحص كل vector، بطيء على المليارات. **Approximate (ANN)**: خوارزميات مثل HNSW، IVF — أسرع بـ100-1000x، **بدقّة 95-99%**. كل Vector DBs الحديثة تستخدم ANN. **الفرق بالنسبة لك**: نتائج ممتازة بسرعة عالية."
+---
+
+**Vector Databases** عمود فقري تطبيقات AI الحديثة. من RAG إلى أنظمة التوصيات، لا يمكن الاستغناء عنها. هذا الدليل شامل — تقنياً، وعملياً.
+
+## المفهوم
+
+### ما Vectors
+
+**Vector** = قائمة أرقام تمثّل شيئاً في **فضاء متعدّد الأبعاد**.
+
+**مثال**:
+- كلمة "قهوة" → [0.234, -0.678, 0.112, ..., 1024 قيمة]
+- كلمة "شاي" → [0.245, -0.665, 0.098, ..., 1024 قيمة] (قريبة)
+- كلمة "سيّارة" → [-0.789, 0.234, -0.556, ..., 1024 قيمة] (بعيدة)
+
+**الفكرة**: **المعاني المتشابهة = Vectors قريبة**.
+
+### ما Embeddings
+
+**نماذج** تُحوّل نصّ/صورة إلى vector:
+- **OpenAI text-embedding-3-large**: 3072 بُعد
+- **OpenAI text-embedding-3-small**: 1536 بُعد
+- **Cohere Embed**: 1024 بُعد
+- **BGE-M3** (مفتوح، ممتاز للعربية): 1024 بُعد
+
+### البحث بالتشابه
+
+**Similarity Metrics**:
+- **Cosine Similarity**: الأشهر — يقيس الزاوية
+- **Euclidean Distance**: المسافة الفعلية
+- **Dot Product**: للأداء العالي
+
+**النتيجة**: تعطي vector، تحصل على أقرب N vectors في القاعدة.
+
+## لماذا Vector DBs
+
+### المشكلة
+
+**استعلام**: "لديّ مليون document، أريد الأكثر شبهاً بسؤال المستخدم"
+
+**بلا Vector DB**:
+- Load كل الـEmbeddings في RAM
+- Cosine بين السؤال وكل document
+- 1M عملية = بطيء
+
+**مع Vector DB**:
+- بحث خوارزمي متطوّر (HNSW، IVF)
+- **< 100ms** لملايين vectors
+- **مليارات** ممكنة
+
+### الميّزات الإضافية
+
+- **Metadata Filtering**: "أعطني أقرب documents في قسم 'التسويق'"
+- **Persistence**: بيانات دائمة
+- **Scaling**: إضافة nodes
+- **Backup & Recovery**
+- **APIs جاهزة**
+
+## Pinecone — الرائد التجاري
+
+### الخلفية
+
+**التأسيس**: 2019
+**المؤسّس**: Edo Liberty (سابقاً Amazon)
+**التمويل**: 138+ مليون$
+**التقييم**: 750 مليون$ (2023)، تقارير عن 2+ مليار$ (2024-2025)
+
+### الميّزات
+
+- **SaaS كامل** — لا إدارة خادم
+- **Serverless**: يتوسّع تلقائياً
+- **سريع جدّاً**: <100ms على مليارات
+- **Multi-region**
+- **Enterprise-grade** security
+- **Namespaces** لتنظيم البيانات
+
+### الأسعار
+
+- **Starter**: مجاني (100K vectors)
+- **Standard**: 70$/شهر (Serverless starts ~$2/GB/شهر)
+- **Enterprise**: مخصّص
+
+### الأنسب لـ
+
+- **Startups** تريد سرعة
+- **Production RAG** بلا قلق DevOps
+- **بلا فريق infra كبير**
+
+### مثال كود
+
+```python
+from pinecone import Pinecone
+
+pc = Pinecone(api_key="...")
+
+# إنشاء Index
+pc.create_index(
+    name="my-index",
+    dimension=1536,
+    metric="cosine"
+)
+
+index = pc.Index("my-index")
+
+# رفع vectors
+index.upsert(vectors=[
+    ("id1", [0.1, 0.2, ...], {"category": "tech"}),
+    ("id2", [0.3, 0.4, ...], {"category": "sports"}),
+])
+
+# استعلام
+results = index.query(
+    vector=[0.15, 0.25, ...],
+    top_k=5,
+    filter={"category": "tech"}
+)
+```
+
+## Weaviate — مفتوح المصدر السحابي
+
+### الخلفية
+
+**التأسيس**: 2019
+**النوع**: Open Source + Managed Cloud
+**GitHub**: 10K+ نجمة
+
+### الميّزات
+
+- **Modular**: تختار Embedding Model (OpenAI، Cohere، محلي)
+- **Hybrid Search**: Vector + Keyword
+- **GraphQL API** (بجانب REST)
+- **Multi-modal** (نصّ + صور + صوت)
+- **Multi-tenancy**
+
+### الأسعار
+
+- **Self-hosted**: مجاني
+- **Weaviate Cloud**: من 25$/شهر
+- **Enterprise**: مخصّص
+
+### الأنسب لـ
+
+- Multi-modal (نصّ + صور)
+- تريد GraphQL
+- مرونة السحابي والمحلي
+
+### مثال
+
+```python
+import weaviate
+
+client = weaviate.Client("http://localhost:8080")
+
+# Schema
+client.schema.create_class({
+    "class": "Article",
+    "vectorizer": "text2vec-openai",
+    "properties": [
+        {"name": "title", "dataType": ["string"]},
+        {"name": "content", "dataType": ["text"]}
+    ]
+})
+
+# رفع
+client.data_object.create(
+    {"title": "...", "content": "..."},
+    "Article"
+)
+
+# استعلام
+result = client.query.get("Article", ["title"]).with_near_text({
+    "concepts": ["AI"]
+}).with_limit(5).do()
+```
+
+## Chroma — للتطوير السريع
+
+### الخلفية
+
+**التأسيس**: 2022
+**النوع**: Open Source
+**التمويل**: 18+ مليون$
+**الرؤية**: "SQLite للـVectors"
+
+### الميّزات
+
+- **خفيف جدّاً**
+- **In-process** (لا خادم)
+- **مثالي للـPrototypes**
+- **يعمل محلياً**
+
+### الأسعار
+
+- **Local**: مجاني
+- **Chroma Cloud** (قادم): مدفوع
+
+### الأنسب لـ
+
+- **التطوير**
+- **الاختبار**
+- **Notebooks Jupyter**
+- **Prototypes سريعة**
+
+### مثال
+
+```python
+import chromadb
+
+client = chromadb.Client()
+
+collection = client.create_collection("my_collection")
+
+collection.add(
+    documents=["مقالة 1", "مقالة 2"],
+    metadatas=[{"source": "a"}, {"source": "b"}],
+    ids=["id1", "id2"]
+)
+
+results = collection.query(
+    query_texts=["استعلام"],
+    n_results=2
+)
+```
+
+**بسيط جدّاً** — لا Embedding model يدوي (يستخدم default).
+
+## Qdrant — الأداء العالي
+
+### الخلفية
+
+**التأسيس**: 2021 (برلين)
+**النوع**: Open Source
+**اللغة**: Rust (سريع جدّاً)
+
+### الميّزات
+
+- **أداء ممتاز** (أسرع من Pinecone في بعض الاختبارات)
+- **مفتوح المصدر**
+- **Payload filtering** متقدّم
+- **Distributed** (multi-node)
+
+### الأسعار
+
+- **Self-hosted**: مجاني
+- **Qdrant Cloud**: مجاني للتجربة (1GB)، مدفوع للـProduction
+
+### الأنسب لـ
+
+- **الأداء المتطرّف**
+- **مطوّرو Rust**
+- **بيئات محدودة الموارد**
+
+## Milvus — للمؤسّسات الكبيرة
+
+### الخلفية
+
+**التأسيس**: 2019 (Zilliz)
+**النوع**: Open Source (Apache 2.0)
+**التمويل**: Zilliz (الشركة الأمّ) 100+ مليون$
+
+### الميّزات
+
+- **الأشمل** — كل الميّزات
+- **مصمّم للمليارات** vectors
+- **Distributed** كامل
+- **Cloud-native** (Kubernetes)
+- **GPU support** للـEmbeddings الكبيرة
+
+### الأنسب لـ
+
+- **مؤسّسات كبرى**
+- **بيانات ضخمة** (100M+ vectors)
+- **فرق DevOps متمرّسة**
+
+## pgvector — Postgres Extension
+
+### المفهوم
+
+**pgvector** = extension لـPostgreSQL يُتيح تخزين واستعلام vectors.
+
+### المزايا
+
+- **مدمج مع DB موجود** — لا خادم إضافي
+- **ACID transactions**
+- **SQL familiar**
+- **مجاني**
+
+### القيود
+
+- **الأداء أقلّ** من Vector DBs المتخصّصة على المليارات
+- **مثالي لـ**: <10M vectors
+
+### مثال
+
+```sql
+CREATE EXTENSION vector;
+
+CREATE TABLE items (
+    id bigserial PRIMARY KEY,
+    content text,
+    embedding vector(1536)
+);
+
+INSERT INTO items (content, embedding)
+VALUES ('نصّ', '[0.1, 0.2, ...]');
+
+SELECT content
+FROM items
+ORDER BY embedding <-> '[0.1, 0.2, ...]'
+LIMIT 5;
+```
+
+**بسيط + قوي**.
+
+## المقارنة السريعة
+
+| المعيار | Pinecone | Weaviate | Chroma | Qdrant | Milvus | pgvector |
+|---|---|---|---|---|---|---|
+| **النوع** | SaaS | مفتوح | مفتوح | مفتوح | مفتوح | Postgres |
+| **السعر** | مدفوع | مجاني/مدفوع | مجاني | مجاني/مدفوع | مجاني | مجاني |
+| **الأداء** | ممتاز | ممتاز | متوسّط | ممتاز | ممتاز | جيّد (لبيانات <10M) |
+| **السهولة** | ✅ الأسهل | متوسّط | ✅ للتطوير | متوسّط | معقّد | ✅ إن Postgres موجود |
+| **الأنسب لـ** | Production بلا صداع | مرونة | Prototypes | أداء + مفتوح | Enterprise كبير | Postgres shops |
+
+## اختيار Vector DB
+
+### قرار سريع
+
+**استخدم Pinecone إذا**:
+- ✅ لا وقت لإدارة infrastructure
+- ✅ ميزانية 70$+/شهر
+- ✅ تريد Production فوراً
+
+**استخدم Weaviate إذا**:
+- ✅ Multi-modal (نصّ + صور)
+- ✅ GraphQL
+- ✅ مزيج سحابي/محلي
+
+**استخدم Chroma إذا**:
+- ✅ Prototype
+- ✅ اختبار محلي
+- ✅ Notebook Jupyter
+
+**استخدم Qdrant إذا**:
+- ✅ الأداء أولوية
+- ✅ Self-hosted جادّ
+- ✅ Filtering معقّد
+
+**استخدم Milvus إذا**:
+- ✅ مليارات vectors
+- ✅ فريق DevOps متمرّس
+- ✅ Enterprise scale
+
+**استخدم pgvector إذا**:
+- ✅ Postgres موجود أصلاً
+- ✅ <10M vectors
+- ✅ لا تريد خادم إضافي
+
+## Embeddings — الاختيار
+
+### للإنجليزية
+
+**OpenAI text-embedding-3-large**:
+- الأدقّ (لكن مكلف)
+- 3072 بُعد
+
+**OpenAI text-embedding-3-small**:
+- توازن ممتاز
+- 1536 بُعد
+- **الأشهر**
+
+**Cohere Embed English v3**:
+- منافس ممتاز
+- API سهل
+
+### للعربية
+
+**Cohere Embed Multilingual v3**:
+- **جيّد جدّاً للعربية**
+- 100+ لغة
+
+**BGE-M3 (BAAI)**:
+- **مفتوح، ممتاز للعربية**
+- 100+ لغة
+- **مجاناً**
+
+**text-embedding-3-large**:
+- جيّد للعربية
+- لكن ليس الأمثل
+
+### مفتوحة المصدر
+
+- **BGE-M3** — الأفضل عالمياً للمفتوح
+- **Nomic Embed** — منافس
+- **sentence-transformers** — عائلة شاملة
+
+### التسعير
+
+**OpenAI**:
+- text-embedding-3-large: $0.13/M توكن
+- text-embedding-3-small: $0.02/M توكن
+
+**Cohere**:
+- Embed 3: $0.10/M توكن
+
+**Self-hosted (BGE-M3)**:
+- مجاني (تحتاج GPU للسرعة)
+
+## الأنماط الشائعة
+
+### 1) RAG بسيط
+
+```
+مستندات → chunks → embeddings → Vector DB
+سؤال → embedding → بحث → أعلى 5 chunks → LLM → إجابة
+```
+
+### 2) Hybrid Search
+
+```
+سؤال → embedding + keyword search
+دمج النتائج (RRF - Reciprocal Rank Fusion)
+```
+
+### 3) Multi-vector
+
+- كل document = عدّة vectors (عنوان، محتوى، summary)
+- بحث في كل، دمج
+
+### 4) Re-ranking
+
+```
+Vector Search → 100 نتيجة
+Re-ranker (Cohere Rerank، Cross-encoder) → 10 نتيجة نهائية
+```
+
+### 5) Semantic Cache
+
+- استعلام جديد
+- ابحث في cache
+- إذا مشابه لسابق (>0.95 similarity)، أعِد الجواب المحفوظ
+
+**الأثر**: توفير تكاليف LLM API.
+
+## أفضل الممارسات
+
+### 1) Chunk size
+
+- **512-1024 توكن** موصى
+- **Overlap 10-20%**
+- تجربة أهمّ من قاعدة
+
+### 2) Metadata
+
+- ضع كل ما تحتاج للـFiltering
+- **مثال**: source، date، category، language
+
+### 3) Indexing Strategy
+
+- **HNSW**: الأشهر، توازن سرعة/دقّة
+- **IVF**: للبيانات الضخمة
+- **Flat**: للدقّة القصوى (بطيء)
+
+### 4) الاختبار
+
+- **Recall@K**: كم النتائج الصحيحة في أعلى K
+- **Precision@K**: كم من أعلى K صحيحة
+- **MRR (Mean Reciprocal Rank)**
+
+### 5) المراقبة
+
+- Latency
+- Recall
+- Cost
+- Storage
+
+### 6) التحديث
+
+- **Batch updates**: أفضل من single
+- **Deletion strategies**: soft vs hard
+
+## Vector DB للعربية
+
+### التحدّيات
+
+- **Embeddings العربية** أقلّ نضجاً
+- **Tokenization** يختلف
+
+### الحلول
+
+**1) استخدم BGE-M3 أو Cohere Multilingual**:
+- **الأفضل حالياً للعربية**
+
+**2) اختبر بلغتك**:
+- **قسِم بيانات اختبار**
+- قِس Recall
+
+**3) Consider tokenization**:
+- بعض الأدوات تُقسم العربية سيئاً
+- استخدم مكتبات عربية (CAMeL Tools)
+
+## في السحابة
+
+### Managed Vector DBs
+
+- **Pinecone**
+- **Weaviate Cloud**
+- **Qdrant Cloud**
+- **Zilliz (Milvus Cloud)**
+- **Vespa Cloud**
+
+### السحابات الكبرى
+
+- **AWS**: OpenSearch Vector Engine، Amazon Aurora + pgvector
+- **Google Cloud**: Vertex AI Vector Search
+- **Azure**: Cosmos DB Vector، AI Search
+- **Oracle**: Autonomous Database with AI Vector Search
+
+**السعودية**: **HUMAIN Cloud** (متوقّع) سيوفّر Vector DBs محلياً.
+
+## استخدامات ما وراء RAG
+
+### 1) أنظمة التوصيات
+
+- **Spotify**: يقترح موسيقى مشابهة
+- **Netflix**: أفلام
+- **Amazon**: منتجات
+- **كل هذا Vector-based**
+
+### 2) البحث بالصور
+
+- **Pinterest**: صور مشابهة
+- **Google Lens**: تعرّف بصريّ
+- **Reverse Image Search**
+
+### 3) كشف الاحتيال
+
+- سلوك مشبوه = vector قريب من احتيال سابق
+
+### 4) الأمن السيبراني
+
+- Malware detection
+- Anomaly detection
+
+### 5) الطبّ
+
+- صور طبّية مشابهة
+- أنماط أمراض
+
+## المستقبل
+
+### الاتّجاهات
+
+**1) Multi-modal Native**:
+- Vectors تجمع نصّ + صور + صوت
+- كلها في vector واحد
+
+**2) Learned Indexing**:
+- ML يُحسّن هيكل الفهرس
+- أسرع بكثير
+
+**3) Serverless**:
+- كل شيء Serverless
+- بلا إدارة
+
+**4) Vector Databases in the LLM**:
+- LLMs تحوي memory داخلي مبنيّ على Vector concepts
+
+**5) Standards**:
+- توحيد APIs
+- Portability بين مزوّدين
+
+## للسعودي — من أين تبدأ
+
+### 1) للتعلّم
+
+- ابدأ بـ**Chroma** محلياً
+- 15 دقيقة = تشغيل RAG بسيط
+
+### 2) للـPrototype
+
+- **Chroma** أو **Qdrant Free**
+
+### 3) للـProduction الصغير
+
+- **pgvector** (إذا Postgres موجود)
+- أو **Pinecone Starter**
+
+### 4) للـProduction الجادّ
+
+- **Pinecone** أو **Qdrant Cloud**
+- **Weaviate** إذا Multi-modal
+
+### 5) للـEnterprise
+
+- **Milvus** أو **Vespa**
+- **بفريق DevOps**
+
+## المصادر الرسمية
+
+- [Pinecone](https://www.pinecone.io)
+- [Weaviate](https://weaviate.io)
+- [Chroma](https://www.trychroma.com)
+- [Qdrant](https://qdrant.tech)
+- [Milvus](https://milvus.io)
+- [pgvector](https://github.com/pgvector/pgvector)
+- [LangChain Vector Stores](https://python.langchain.com/docs/integrations/vectorstores/)
+- [Cohere Embed](https://cohere.com/embed)
+- [BGE Models](https://huggingface.co/BAAI)
+
+---
+
+**اقرأ أيضاً**: [RAG — التعزيز بالاسترجاع](/rag-retrieval-augmented-generation) · [LangChain — بناء تطبيقات AI](/langchain-guide) · [Fine-tuning و LoRA](/fine-tuning-lora-guide) · [OpenAI API — دليل البدء](/openai-api-getting-started)
