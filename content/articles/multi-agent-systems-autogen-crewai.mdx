@@ -1,0 +1,550 @@
+---
+title: "الأنظمة متعدّدة الوكلاء — AutoGen و CrewAI و LangGraph"
+description: "دليل شامل لـMulti-Agent Systems: AutoGen (Microsoft)، CrewAI، LangGraph. متى تستخدمها، وأمثلة عملية."
+cluster: "ai"
+publishedAt: "2026-09-04"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Multi-Agent"
+  - "AutoGen"
+  - "CrewAI"
+  - "LangGraph"
+  - "AI Agents"
+faq:
+  - q: "ما Multi-Agent Systems؟"
+    a: "أنظمة تُوظّف **عدّة وكلاء AI** يعملون معاً لحلّ مهمّة معقّدة. **بدل وكيل واحد** يفعل كل شيء، لكل وكيل تخصّص: أحدهم يبحث، آخر يكتب، آخر يراجع. **مستوحاة من فرق العمل البشرية**."
+  - q: "متى نحتاجها؟"
+    a: "أربع حالات: (1) **مهمّة متعدّدة الخطوات** معقّدة، (2) **تحتاج تخصّصات متعدّدة**، (3) **قرارات مترابطة** (وكيل يعتمد على مخرج آخر)، (4) **workflows موازية** (وكلاء يعملون في نفس الوقت). **بسيطة**: لا تحتاج."
+  - q: "أشهر الأدوات؟"
+    a: "ثلاثة رئيسية: (1) **AutoGen** (Microsoft، مفتوح) — الأشمل، (2) **CrewAI** — الأسهل، مبنيّ على الأدوار، (3) **LangGraph** (LangChain) — قابل للتحكّم بدقّة. **الأنسب لك**: يعتمد على مشروعك."
+  - q: "AutoGen vs CrewAI vs LangGraph؟"
+    a: "**AutoGen**: قوي جدّاً، محادثات بين وكلاء، Microsoft يدعمه. **CrewAI**: أبسط، Role-based، مثالي للمبتدئ. **LangGraph**: Graph-based، تحكّم دقيق، مثالي للمعقّد. **قاعدة**: ابدأ بـCrewAI، تعمّق بـLangGraph."
+  - q: "أمثلة استخدام؟"
+    a: "خمسة: (1) **بحث + كتابة تقرير** (باحث + كاتب + مراجع)، (2) **تطوير برمجي** (Product Manager + Developer + QA)، (3) **خدمة عملاء** (فرز + متخصّص + مراجعة)، (4) **تحليل مالي** (بيانات + تحليل + تقرير)، (5) **حملة تسويقية** (بحث + إبداع + قياس)."
+  - q: "التكلفة؟"
+    a: "**مضاعفة** استدعاءات LLM. **وكيل واحد** يستدعي 1-3 مرّات، **5 وكلاء** يستدعون 15-50 مرّة. **الاحتساب**: إذا مهمّة واحدة تكلّف 0.01$، بـMulti-agent 0.15-0.50$. **الفائدة**: جودة أعلى بكثير."
+  - q: "المخاطر؟"
+    a: "خمسة: (1) **الكلفة المتضاعفة**، (2) **البطء** (خطوات متعدّدة)، (3) **صعوبة التصحيح** (أيّ وكيل أخطأ؟)، (4) **الاعتماد الزائد**، (5) **الأمان** (كل وكيل نقطة هجوم محتمَلة). **الحلّ**: Monitoring دقيق، أدوات مثل LangSmith."
+---
+
+**Multi-Agent Systems** أحدث اتّجاهات AI. **فرق من الوكلاء** يعملون معاً — تقليد فرق البشر. من مساعد واحد إلى **شركة كاملة من AI Agents**. هذا الدليل شامل.
+
+## المفهوم
+
+### الفكرة
+
+**وكيل واحد** (Single Agent):
+- LLM + Tools + Memory
+- يحلّ مهمّة كاملة
+
+**وكلاء متعدّدون** (Multi-Agent):
+- كل واحد **متخصّص**
+- **يتعاونون**
+- كل واحد يفعل ما يجيده
+
+### الأدوار الشائعة
+
+**فريق تقرير**:
+- **باحث**: يبحث المعلومات
+- **كاتب**: يصيغ المسوّدة
+- **مراجع**: يفحص ويدقّق
+- **ناشر**: يُقدّم النهائي
+
+**فريق برمجة**:
+- **Product Manager**: يفهم المتطلّبات
+- **Architect**: يصمّم
+- **Developer**: يكتب الكود
+- **QA**: يختبر
+- **DevOps**: ينشر
+
+**فريق تسويق**:
+- **باحث سوق**
+- **كاتب محتوى**
+- **مصمّم**
+- **مسوّق**
+
+## Microsoft AutoGen
+
+### الخلفية
+
+- **Microsoft Research** (2023)
+- مفتوح المصدر
+- **الأشهر أكاديمياً**
+- التعاون بين Microsoft + جامعات
+
+### الفكرة
+
+**Conversational Agents**:
+- الوكلاء يتحدّثون مع بعضهم
+- كل رسالة تُخصّب المشكلة
+
+### مثال بسيط
+
+```python
+from autogen import AssistantAgent, UserProxyAgent
+
+# وكيل مساعد
+assistant = AssistantAgent(
+    name="assistant",
+    llm_config={"model": "gpt-5"}
+)
+
+# وكيل يمثّل المستخدم
+user_proxy = UserProxyAgent(
+    name="user_proxy",
+    code_execution_config={"work_dir": "coding"}
+)
+
+# محادثة
+user_proxy.initiate_chat(
+    assistant,
+    message="اكتب لي برنامج Python يحلّل بيانات مبيعاتي في sales.csv"
+)
+```
+
+**النتيجة**: المساعد يقترح كود، user_proxy ينفّذه، يعطي نتائج، المساعد يعدّل حتى النجاح.
+
+### AutoGen Studio
+
+**واجهة رسومية**:
+- تصميم الوكلاء
+- بناء Workflows بلا كود
+- تجريب
+
+**رابط**: [microsoft.github.io/autogen](https://microsoft.github.io/autogen)
+
+### الأنماط
+
+**Two-Agent Chat**:
+- محادثة بين وكيلَين
+
+**Group Chat**:
+- عدّة وكلاء
+- مدير المحادثة يوجّه
+
+**Sequential Chat**:
+- خطوات متتالية
+
+**Nested Chats**:
+- محادثات داخل محادثات (Recursive)
+
+### الأنسب لـ
+
+- **الأبحاث**
+- **مشاريع معقّدة**
+- **من يريد قوّة تكرارية**
+
+## CrewAI
+
+### الخلفية
+
+- **CrewAI** (2024)
+- مفتوح المصدر
+- **الأسرع نموّاً** كأداة Multi-Agent
+- **الأسهل** بين الأدوات
+
+### الفكرة
+
+**Role-Based Agents**:
+- كل وكيل له **دور واضح**
+- **Goal، Backstory، Tools**
+
+### مثال
+
+```python
+from crewai import Agent, Task, Crew
+
+# الوكيل 1: باحث
+researcher = Agent(
+    role="باحث سوق",
+    goal="جمع أحدث اتّجاهات AI في السعودية",
+    backstory="خبير 10 سنوات في أبحاث السوق",
+    tools=[search_tool]
+)
+
+# الوكيل 2: كاتب
+writer = Agent(
+    role="كاتب تقارير",
+    goal="كتابة تقارير احترافية بناءً على البحث",
+    backstory="كاتب صحفي بخبرة 15 سنة"
+)
+
+# المهمّة 1: البحث
+research_task = Task(
+    description="ابحث آخر تطوّرات AI السعودية 2026",
+    agent=researcher,
+    expected_output="ملخّص شامل بالمصادر"
+)
+
+# المهمّة 2: الكتابة
+writing_task = Task(
+    description="اكتب تقرير 1000 كلمة",
+    agent=writer,
+    expected_output="تقرير احترافي"
+)
+
+# الفريق
+crew = Crew(
+    agents=[researcher, writer],
+    tasks=[research_task, writing_task],
+    process="sequential"  # أو hierarchical
+)
+
+result = crew.kickoff()
+print(result)
+```
+
+**بساطة مذهلة** — 30 سطر لفريق كامل.
+
+### الميّزات
+
+- **Sequential** أو **Hierarchical** processes
+- **Memory** مشتركة بين الوكلاء
+- **Tools** مخصّصة لكل وكيل
+- **Delegation** — وكيل يفوّض لآخر
+
+### الأنسب لـ
+
+- **المبتدئين في Multi-Agent**
+- **Prototypes سريعة**
+- **الأدوار الواضحة**
+
+**رابط**: [crewai.com](https://www.crewai.com)
+
+## LangGraph (LangChain)
+
+فصّلناها في [مقال LangChain](/langchain-guide) — لكن باختصار:
+
+### الفكرة
+
+**Graph-based**:
+- عقد (Nodes) = خطوات
+- حواف (Edges) = المسار
+- **State** مشترك
+
+### الميّزة
+
+- **تحكّم دقيق**
+- **Workflows معقّدة**
+- **Conditional Logic**
+- **Human-in-the-Loop**
+
+### مثال
+
+```python
+from langgraph.graph import StateGraph
+from typing import TypedDict
+
+class State(TypedDict):
+    research: str
+    draft: str
+    final: str
+
+def research(state):
+    # وكيل بحث
+    state["research"] = do_research()
+    return state
+
+def write(state):
+    # وكيل كتابة
+    state["draft"] = write_draft(state["research"])
+    return state
+
+def review(state):
+    # وكيل مراجعة
+    state["final"] = review_draft(state["draft"])
+    return state
+
+workflow = StateGraph(State)
+workflow.add_node("research", research)
+workflow.add_node("write", write)
+workflow.add_node("review", review)
+
+workflow.set_entry_point("research")
+workflow.add_edge("research", "write")
+workflow.add_edge("write", "review")
+
+app = workflow.compile()
+```
+
+### الأنسب لـ
+
+- **Workflows معقّدة**
+- **الإنتاج الجادّ**
+- **من يحتاج تحكّماً كاملاً**
+
+## أدوات أخرى
+
+### Swarm (OpenAI)
+
+- **OpenAI** أطلقته 2024
+- **تجريبي**
+- **بسيط جدّاً**
+- **الفكرة**: Handoffs بين وكلاء
+
+### MetaGPT
+
+- **يحاكي شركة كاملة**
+- CEO، Product Manager، Engineer، QA
+- **الأنسب**: تطوير برامج كاملة
+
+### AgentGPT
+
+- **بسيط في المتصفّح**
+- تدخل هدفاً، وكلاء ينفّذون
+- **للتجربة**
+
+### BabyAGI
+
+- **الأصل** (2023)
+- بسيط
+- **قديم لكن تاريخي**
+
+### AutoGPT
+
+- **الأول** الذي انتشر (2023)
+- **الآن أقلّ استخداماً** لصالح الأدوات الحديثة
+
+## الأنماط (Patterns)
+
+### 1) Sequential
+
+**A → B → C**
+- A ينهي، B يبدأ
+- **بسيط**
+
+### 2) Parallel
+
+**A + B + C معاً**
+- **أسرع**
+- **مستقلّون**
+
+### 3) Hierarchical
+
+**Manager → Workers**
+- Manager يوزّع
+- Workers ينفّذون
+- Manager يجمع
+
+### 4) Peer-to-Peer
+
+- كل الوكلاء متساوون
+- يتحدّثون بحرّية
+- **مناسب للعصف الذهني**
+
+### 5) Debate
+
+- وكلاء يتناقشون
+- كل واحد يحاول إقناع الآخر
+- **نتيجة أعمق**
+
+### 6) Reflection
+
+- الوكيل يراجع نفسه
+- **يحسّن مخرجه**
+
+## استخدامات عملية
+
+### 1) بحث + تقرير
+
+**الفريق**:
+- **باحث**: Perplexity، Google
+- **محلّل**: يفهم البيانات
+- **كاتب**: يصوغ التقرير
+- **مراجع**: يدقّق
+
+**الأثر**: تقرير احترافي في **ساعات** بدل أيّام.
+
+### 2) تطوير برمجي
+
+**الفريق**:
+- **PM**: يحدّد المتطلّبات
+- **Architect**: يصمّم
+- **Coder**: يكتب
+- **Tester**: يختبر
+- **Reviewer**: يراجع
+
+**الأثر**: **MetaGPT** يبني تطبيقات كاملة.
+
+### 3) خدمة العملاء
+
+**الفريق**:
+- **Router**: يفرز الاستفسار
+- **Specialist**: يجيب (مالي، تقني، عام)
+- **Escalation**: إذا معقّد
+
+### 4) حملة تسويقية
+
+**الفريق**:
+- **Market Researcher**
+- **Copywriter**
+- **Designer** (مع Midjourney)
+- **Optimizer** (A/B testing)
+
+### 5) القرارات المالية
+
+**الفريق**:
+- **Data Collector**
+- **Analyst**
+- **Risk Assessor**
+- **Decision Maker**
+
+**تحذير YMYL**: للاستثمار الحقيقي، مستشار CMA-مرخّص.
+
+## المخاطر
+
+### 1) الكلفة
+
+**LLM calls تتضاعف**:
+- 1 وكيل = 1-3 استدعاءات
+- 5 وكلاء = 15-50 استدعاء
+
+**التحسين**:
+- استخدم نماذج أرخص للمهام البسيطة
+- Cache المخرجات
+- Prompt Engineering
+
+### 2) البطء
+
+**كل خطوة تأخذ ثوانٍ**:
+- 5 وكلاء = 30 ثانية-3 دقائق
+- **غير مناسب للـReal-time**
+
+**الحلّ**:
+- Parallel processing
+- نماذج أسرع (Haiku، Flash)
+
+### 3) التصحيح
+
+**أيّ وكيل أخطأ؟**:
+- صعب تتبّع
+- **الحلّ**: LangSmith، Helicone
+
+### 4) الاعتماد الزائد
+
+- **نظام معقّد** = فرص أخطاء
+- **KISS Principle**: Keep It Simple
+
+**قاعدة**: **ابدأ بـSingle Agent**، انتقل إذا لزم.
+
+### 5) الأمان
+
+- كل وكيل نقطة هجوم
+- Prompt Injection قد ينتشر
+- **الحلّ**: Guardrails، Least Privilege
+
+## Best Practices
+
+### 1) Clear Roles
+
+- كل وكيل **دور محدّد**
+- **backstory غنيّ**
+- **tools مناسبة**
+
+### 2) Structured Communication
+
+- **JSON بين الوكلاء**
+- **format واضح**
+- **تجنّب الطول**
+
+### 3) Human-in-the-Loop
+
+- خطوة تأكيد قبل التنفيذ
+- خصوصاً للأفعال الخطيرة
+
+### 4) Monitoring
+
+- **LangSmith، Helicone**
+- **كل خطوة مسجّلة**
+
+### 5) Fallbacks
+
+- إذا وكيل فشل، **آخر بديل**
+- Graceful degradation
+
+### 6) Cost Awareness
+
+- **راقب التكلفة**
+- **حدود لكل وكيل**
+
+### 7) Testing
+
+- **اختبار كل وكيل** منفرداً
+- **اختبار النظام كاملاً**
+- **Edge cases**
+
+## متى تستخدم Multi-Agent
+
+### استخدمها إذا
+
+- ✅ مهمّة **متعدّدة الخطوات معقّدة**
+- ✅ **تحتاج تخصّصات مختلفة**
+- ✅ **الوقت متاح** (ليس Real-time حرج)
+- ✅ **الميزانية كافية**
+
+### لا تستخدمها إذا
+
+- ❌ مهمّة بسيطة (وكيل واحد يكفي)
+- ❌ Real-time (بطيء)
+- ❌ ميزانية ضيّقة
+- ❌ لا فريق تقنيّ
+
+## المستقبل
+
+### الاتّجاهات (2027-2030)
+
+**1) وكلاء أذكى**:
+- **AGI-adjacent** capabilities
+- **تعلّم من التجربة**
+
+**2) شركات AI بالكامل**:
+- **CEO Agent + PM + Devs + Sales**
+- **لكن بلا بشر**؟
+- **نقاش أخلاقي**
+
+**3) Standards**:
+- **MCP** يوسّع
+- **Agent-to-Agent protocols**
+
+**4) الحوكمة**:
+- **من مسؤول** إذا فشل نظام Multi-Agent؟
+- تشريعات
+
+**5) للسعودية**:
+- **HUMAIN** ستستخدم Multi-Agent
+- **الشركات السعودية** تتبنّى
+- **الفرص المهنية** كبيرة
+
+## للسعودي
+
+### التعلّم
+
+**المسار**:
+1. **CrewAI أوّلاً** (سهل)
+2. **LangGraph** (قوة)
+3. **AutoGen** (إذا للأبحاث)
+
+### الفرص
+
+**HUMAIN، G42، الشركات الكبرى**:
+- **Multi-Agent Engineers** = طلب متزايد
+- **رواتب**: 25-60K ريال/شهر
+
+### الاستخدام العملي
+
+**Startup سعودي**:
+- **CrewAI** لأتمتة داخلية
+- **بحث + تسويق + دعم**
+- **مسار الشركة كلها** بـ5-10 وكلاء
+
+## المصادر الرسمية
+
+- [Microsoft AutoGen](https://microsoft.github.io/autogen/)
+- [CrewAI](https://www.crewai.com)
+- [LangGraph](https://langchain-ai.github.io/langgraph/)
+- [OpenAI Swarm](https://github.com/openai/swarm)
+- [MetaGPT](https://github.com/geekan/MetaGPT)
+
+---
+
+**اقرأ أيضاً**: [LangChain — بناء تطبيقات AI](/langchain-guide) · [MCP — بروتوكول سياق النموذج](/mcp-model-context-protocol) · [MLOps](/mlops-guide) · [Cursor — محرّر الكود الذكيّ](/cursor-ai-code-editor)

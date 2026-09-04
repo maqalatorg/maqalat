@@ -1,0 +1,440 @@
+---
+title: "مزوّدو السحابة للـAI — AWS، Azure، Google Cloud"
+description: "مقارنة شاملة لأكبر مزوّدي السحابة للـAI: AWS Bedrock، Azure OpenAI، Google Vertex AI، مع خيارات سعودية."
+cluster: "ai"
+publishedAt: "2026-09-04"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "AWS AI"
+  - "Azure OpenAI"
+  - "Google Vertex AI"
+  - "Cloud AI"
+  - "HUMAIN Cloud"
+faq:
+  - q: "ما مزوّدو السحابة الرئيسيّون للـAI؟"
+    a: "ثلاثة كبار: (1) **AWS** (Amazon Web Services) — الأكبر، 33% حصّة سوقية، **Bedrock** منصّته للـAI، (2) **Microsoft Azure** — 24%، شراكة عميقة مع OpenAI، (3) **Google Cloud** — 11%، Vertex AI + Gemini. تشمل أيضاً: **Oracle Cloud** (Cohere شريك)، **IBM Cloud** (watsonx)، **Alibaba Cloud** (الصين)."
+  - q: "أيّهم الأفضل للـAI؟"
+    a: "**Azure** إذا تريد GPT (شراكة OpenAI). **Google Cloud** إذا تريد Gemini، أو تحبّ TensorFlow. **AWS** إذا تريد **الأشمل** (Claude عبر Bedrock، Llama، Mistral، Stable Diffusion، إلخ). للسعودية: **جميعهم لديهم مراكز بيانات**."
+  - q: "ما مراكز البيانات السعودية؟"
+    a: "**Google Cloud Riyadh** (افتُتح 2023). **Oracle Cloud Riyadh + Jeddah**. **AWS** لديه Local Zones في السعودية (بدأ 2024). **Microsoft Azure** يستثمر في Data Center سعودي (متوقّع 2026). **HUMAIN Cloud** (سعودية، من PIF) تُطلَق تدريجياً."
+  - q: "ما HUMAIN Cloud؟"
+    a: "الذراع السحابي لـHUMAIN. **البنية التحتية السيادية** للسعودية. تعتمد على NVIDIA + AMD chips. **الأنسب لـ**: الحكومي، الحسّاس، الشركات التي تريد بيانات في السعودية. **متوقّع**: توسّع كبير 2026-2028."
+  - q: "كم يكلّف Cloud AI؟"
+    a: "بحسب الاستخدام. **البدء**: مجاناً بحدود (كل مزوّد له Free Tier). **الاستخدام الحقيقي**: **10-1000$/شهر** لتطبيق متوسّط. **Enterprise**: يبدأ من 5,000$/شهر. **التوفير**: استخدم أرخص نموذج مناسب، Reserve Instances، Auto-scaling."
+  - q: "ما الفرق بين Cloud AI و OpenAI Direct؟"
+    a: "**OpenAI Direct**: تشتري من OpenAI مباشرة، سهل، محدود بنماذجها. **Azure OpenAI**: نفس نماذج OpenAI، لكن مع بنية Azure المؤسّسية (SLA، Compliance، Regional Deployment، Private Networking). **الأنسب مؤسّسياً**: Azure OpenAI. للأفراد والـStartups: OpenAI Direct."
+  - q: "هل يمكن للسعودي استخدام Azure OpenAI؟"
+    a: "نعم. **Azure متاح بالكامل** في السعودية. **الفوترة** بالدولار (تحتاج بطاقة دولية أو حساب مؤسّسي). **يجب**: التسجيل، طلب الوصول لـOpenAI models (يستغرق أيّاماً). للـProduction الجادّ: حساب Enterprise مع Microsoft."
+---
+
+**مزوّدو السحابة** يوفّرون البنية التحتية لأغلب تطبيقات AI العالمية. الاختيار بينهم يُشكّل مستقبل مشروعك. هذا الدليل شامل — مع تركيز على الخيارات السعودية.
+
+## المشهد
+
+### حصص السوق (2026)
+
+- **AWS**: 33% (الأكبر)
+- **Azure**: 24%
+- **Google Cloud**: 11%
+- **Alibaba Cloud**: 4%
+- **باقي**: 28% (Oracle، IBM، مزوّدون محلّيون)
+
+### الحجم
+
+- **الإنفاق العالمي على Cloud**: 700+ مليار$ (2026)
+- **حصّة AI منه**: 30%+ (يتزايد بسرعة)
+- **السعودية**: 5+ مليار$ Cloud spending سنوياً
+
+## AWS
+
+### الخلفية
+
+- **Amazon Web Services**
+- **الأكبر** منذ 2006
+- **الأشمل** — كل الخدمات
+
+### AI Services
+
+**Amazon Bedrock**:
+- منصّة للنماذج المتعدّدة
+- **Anthropic Claude** (استثمرت Amazon 4 مليار$)
+- **Meta Llama**
+- **Mistral**
+- **AI21 Jurassic**
+- **Stability Stable Diffusion**
+- **Amazon Titan** (نماذج AWS الخاصّة)
+- **Cohere**
+
+**Amazon SageMaker**:
+- منصّة ML شاملة
+- تدريب، نشر، مراقبة
+- **الأشهر** للـData Scientists
+
+**Amazon Q**:
+- **Amazon's AI Assistant**
+- منافس ChatGPT للـEnterprise
+- **Amazon Q Developer** — منافس Copilot للمطوّرين
+
+**Amazon Rekognition** (رؤية):
+- تحليل الصور والفيديو
+- التعرّف على الوجوه (مثير للجدل)
+
+**Amazon Polly**: توليد صوت
+**Amazon Transcribe**: تفريغ صوت (بالعربية جيّد)
+**Amazon Translate**: ترجمة
+
+### السعودية
+
+- **AWS Local Zones** في السعودية (منذ 2024)
+- **Amazon مركز جدّة**
+- **بيانات محلّية**
+
+### الأسعار
+
+- **Free Tier**: 12 شهر
+- **On-demand**: أغلى، مرن
+- **Reserved Instances**: أرخص 50-70% مع التزام سنوي
+- **Savings Plans**: مرن
+
+## Microsoft Azure
+
+### الخلفية
+
+- **Microsoft Azure**
+- **الثاني عالمياً**
+- **الشراكة مع OpenAI** — 13+ مليار$
+
+### AI Services
+
+**Azure OpenAI Service**:
+- **نماذج OpenAI** (GPT-5, GPT-4o, o3, DALL-E 3, Whisper)
+- **بنية Azure المؤسّسية**
+- **Compliance، SLA، Regional**
+- **الأشمل مؤسّسياً** لـOpenAI
+
+**Azure AI Studio**:
+- منصّة موحّدة لبناء تطبيقات
+- **Prompt Flow** (للتصميم البصريّ)
+- **Content Safety** (Guardrails)
+
+**Azure AI Search** (سابقاً Cognitive Search):
+- **RAG جاهز**
+- Vector Search
+- Semantic Search
+
+**Azure Machine Learning**:
+- ML شامل
+- **MLOps** كامل
+
+**Azure Cognitive Services**:
+- Vision، Speech، Language، Decision
+- **الأنضج مؤسّسياً**
+
+**Copilot Studio**:
+- بناء وكلاء بلا كود
+- منافس Custom GPTs
+
+### السعودية
+
+- **Azure Saudi Arabia** — Data Center **افتُتح 2024**
+- **بيانات محلّية**
+- **Compliance مع PDPL**
+
+### الأسعار
+
+- Pay-as-you-go
+- Reserved Instances
+- **Enterprise agreements** (خصومات ضخمة)
+
+### الأنسب لـ
+
+- شركات تستخدم Microsoft (Office، Windows)
+- تريد GPT مع بنية مؤسّسية
+- **الاندماج مع M365**
+
+## Google Cloud (GCP)
+
+### الخلفية
+
+- **الثالث** لكن الأسرع نموّاً
+- **Google DeepMind** يقود الأبحاث
+
+### AI Services
+
+**Vertex AI**:
+- منصّة ML الرئيسية
+- **Gemini** مدمج
+- **Model Garden** — 130+ نموذج
+- **Anthropic Claude** أيضاً متاح
+
+**Gemini على Vertex AI**:
+- الوصول المؤسّسي لـGemini
+- **Gemini 2.5 Pro, Ultra**
+
+**Vertex AI Vector Search**:
+- Vector Database مُدارة
+
+**AutoML**:
+- ML بلا كود
+
+**Speech-to-Text**، **Text-to-Speech**:
+- ممتاز للعربية
+
+**Translation AI**:
+- 133+ لغة
+
+**Document AI**:
+- استخراج بيانات من مستندات
+
+**Contact Center AI (CCAI)**:
+- مركز اتّصال ذكيّ
+
+**BigQuery ML**:
+- ML داخل قاعدة البيانات
+- **قوي جدّاً**
+
+### السعودية
+
+- **Google Cloud Riyadh** — **افتُتح 2023**
+- بيانات محلّية
+- تكامل عميق مع Google Workspace
+
+### الأسعار
+
+- **Free Tier**: 300$ credit + 90 يوم
+- **Committed Use Discounts**
+- **الأرخص عادةً** بين الثلاثة الكبار
+
+### الأنسب لـ
+
+- Google Workspace users
+- Data-heavy applications
+- تريد Gemini
+
+## المقارنة
+
+| المعيار | AWS | Azure | Google Cloud |
+|---|---|---|---|
+| **الحصّة السوقية** | ✅ 33% | 24% | 11% |
+| **AI Models** | ✅ الأشمل | GPT، Claude، إلخ | Gemini، Claude، إلخ |
+| **البنية** | ✅ الأكبر | ممتاز | ممتاز |
+| **السعودية** | Local Zones | ✅ Data Center | ✅ Data Center |
+| **التكامل** | Amazon services | ✅ Microsoft M365 | ✅ Google Workspace |
+| **السعر** | متوسّط | متوسّط | ✅ أرخص عادةً |
+| **الأنسب لـ** | التنوّع، الأشمل | Microsoft shops | Data + AI |
+
+## Oracle Cloud
+
+**متزايد الأهمّية**:
+- **Cohere partnership** (Cohere للـEnterprise)
+- **Databases + AI**
+- **Oracle Cloud Riyadh + Jeddah** (السعودية)
+
+**الأنسب لـ**:
+- Oracle Database customers
+- Financial services
+
+## IBM Cloud
+
+**watsonx**:
+- منصّة IBM للـAI
+- **الأنسب مؤسّسياً**
+- Compliance عالٍ
+
+**الأنسب لـ**:
+- شركات تستخدم IBM
+- Banking، Healthcare
+
+## HUMAIN Cloud (السعودية)
+
+### الخلفية
+
+- من **HUMAIN** (شركة PIF للـAI)
+- **الذراع السحابي**
+- **البدء تدريجياً 2026-2028**
+
+### الميّزات المتوقّعة
+
+- **البنية التحتية السيادية**
+- **NVIDIA + AMD chips**
+- **مراكز بيانات** ضخمة في السعودية
+- **بيانات لا تخرج المملكة**
+- **Compliance مع PDPL, NCA**
+
+### الأنسب لـ
+
+- **الحكومي السعودي**
+- **الشركات الحسّاسة** (بنوك، صحّة، طاقة)
+- **HUMAIN Models** بشكل خاصّ
+
+### التوقّعات
+
+- **2026**: Beta محدود
+- **2027-2028**: توسّع تجاري
+- **2030**: قد يكون **الخيار الافتراضي** للسعودي
+
+## اختيار المزوّد
+
+### قرار سريع
+
+**استخدم AWS إذا**:
+- ✅ تريد أوسع خيارات
+- ✅ تحبّ Claude، Llama، Stable Diffusion
+- ✅ لديك Amazon services أخرى
+
+**استخدم Azure إذا**:
+- ✅ تريد GPT بمستوى مؤسّسي
+- ✅ تستخدم Microsoft 365
+- ✅ الاندماج مع Windows، Office
+
+**استخدم Google Cloud إذا**:
+- ✅ تريد Gemini
+- ✅ Data-heavy (BigQuery)
+- ✅ تستخدم Google Workspace
+
+**استخدم Oracle إذا**:
+- ✅ Oracle DB مركز عملك
+- ✅ Financial services
+
+**استخدم HUMAIN Cloud إذا**:
+- ✅ حكومي سعودي
+- ✅ بيانات حسّاسة يجب أن تبقى محلّياً
+- ✅ Compliance صارمة
+
+## استخدامات عملية
+
+### 1) شات بوت خدمة العملاء
+
+**Stack**:
+- Azure OpenAI (GPT-5)
+- Azure AI Search (RAG)
+- Azure Bot Service
+
+**التكلفة**: 500-5,000$/شهر (بحسب الحجم)
+
+### 2) تحليل المستندات
+
+**Stack**:
+- AWS Textract (OCR)
+- Bedrock Claude (تحليل)
+- S3 (تخزين)
+
+**التكلفة**: 100-1,000$/شهر
+
+### 3) توليد المحتوى
+
+**Stack**:
+- Vertex AI Gemini
+- Cloud Storage
+- Cloud Functions
+
+### 4) تدريب نموذج مخصّص
+
+**Stack**:
+- AWS SageMaker + GPUs
+- **يبدأ من 1,000$** لتجربة
+
+## Cost Optimization
+
+### 1) اختر النموذج الأنسب
+
+- **GPT-5 mini** بدل GPT-5 حين ممكن
+- **Claude Haiku** بدل Opus
+- **Gemini Flash** بدل Pro
+
+### 2) استخدم Caching
+
+- **Prompt Caching** — Anthropic، OpenAI يدعمان
+- توفير 50-90% للاستفسارات المتكرّرة
+
+### 3) Batch Processing
+
+- OpenAI Batch API: خصم 50%
+- Anthropic Batch: خصم 50%
+
+### 4) Reserved Capacity
+
+- التزام سنوي = خصم 30-70%
+- **للاستخدام الثابت**
+
+### 5) Multi-cloud
+
+- استخدم الأرخص لكل مهمّة
+- Meta Llama على أرخص مزوّد
+
+## الأمان والخصوصية
+
+### للسعودية — PDPL
+
+**قواعد**:
+- بيانات المواطنين تفضّل بقاؤها **محلّياً**
+- **Cross-border transfer** يحتاج إذن
+- **Right to erasure** إلزامي
+
+**اختر مزوّداً لديه Data Center سعودي**:
+- Google Cloud Riyadh
+- Azure Saudi Arabia
+- Oracle Cloud Riyadh
+- **HUMAIN Cloud** (الأنسب سيادياً)
+
+### الحكومي
+
+- **NCA (الأمن السيبراني)**: معايير صارمة
+- **الجهات الحكومية** تُفضّل **HUMAIN Cloud** أو **STC Cloud**
+
+### الشركات الخاصّة
+
+- بحسب الحجم والحسّاسية
+- **البنوك، الصحّة، الطاقة**: محلّي أفضل
+- **المشاريع العامّة**: أيّ مزوّد
+
+## مقارنة الأسعار — استخدام حقيقي
+
+**سيناريو**: تطبيق شات بوت يستقبل 100,000 استفسار/شهر بمتوسّط 500 توكن مدخل + 500 مخرج.
+
+**GPT-5 mini على Azure**:
+- 50M input tokens × $0.15/M = $7.50
+- 50M output tokens × $0.60/M = $30
+- **Total**: ~$40/شهر (بلا حساب Infrastructure)
+
+**Claude Haiku على AWS Bedrock**:
+- Input: 50M × $0.25/M = $12.50
+- Output: 50M × $1.25/M = $62.50
+- **Total**: ~$75/شهر
+
+**Gemini Flash على Vertex AI**:
+- Input: 50M × $0.10/M = $5
+- Output: 50M × $0.40/M = $20
+- **Total**: ~$25/شهر (**الأرخص**)
+
+**النتيجة**: للاستخدام العالي، **الفرق كبير**. اختر بحكمة.
+
+## نصيحة نهائية
+
+**للـStartup السعودي**:
+1. **ابدأ بـFree Tier** (كل مزوّد)
+2. **جرّب Azure OpenAI** للـGPT، **AWS Bedrock** لـClaude، **Vertex AI** لـGemini
+3. **قِس الأداء والتكلفة**
+4. **اختر بناءً على البيانات**
+
+**للمؤسّسة السعودية**:
+- **Data محلّية**: Google Cloud Riyadh أو Oracle
+- **Microsoft heavy**: Azure
+- **الحكومي**: HUMAIN Cloud (قادم)
+
+**للمطوّر الفرد**:
+- **OpenAI Direct** أبسط للبدء
+- **Cloud** لاحقاً عند التوسّع
+
+## المصادر الرسمية
+
+- [AWS Bedrock](https://aws.amazon.com/bedrock/)
+- [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/ai-services/openai-service)
+- [Google Cloud Vertex AI](https://cloud.google.com/vertex-ai)
+- [Oracle Cloud AI](https://www.oracle.com/artificial-intelligence/)
+- [HUMAIN](https://humain.ai)
+- [SDAIA](https://sdaia.gov.sa)
+
+---
+
+**اقرأ أيضاً**: [OpenAI API — دليل البدء](/openai-api-getting-started) · [HUMAIN — شركة الذكاء الاصطناعي السعودية](/humain-saudi-ai-company) · [RAG — التعزيز بالاسترجاع](/rag-retrieval-augmented-generation) · [LangChain — بناء تطبيقات AI](/langchain-guide)

@@ -1,0 +1,528 @@
+---
+title: "MLOps — تشغيل نماذج AI في الإنتاج"
+description: "دليل شامل لـMLOps: من التدريب إلى الإنتاج. أدوات (MLflow، Kubeflow، Weights & Biases)، Best Practices، ومسار مهنيّ."
+cluster: "ai"
+publishedAt: "2026-09-04"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "MLOps"
+  - "LLMOps"
+  - "MLflow"
+  - "Kubeflow"
+  - "Weights & Biases"
+faq:
+  - q: "ما MLOps؟"
+    a: "Machine Learning Operations — منهجيّة لتشغيل نماذج ML في الإنتاج بموثوقية. مستوحاة من DevOps لكن للـML. تشمل: **CI/CD للنماذج**، **مراقبة الأداء**، **إعادة التدريب التلقائي**، **إدارة البيانات**، **التوثيق**. **الأثر**: نماذج تعمل موثوقاً، تتحسّن، تصمد."
+  - q: "ما الفرق بين MLOps و LLMOps؟"
+    a: "**MLOps**: عام (Classical ML + Deep Learning). **LLMOps**: مخصّص لـLarge Language Models. **LLMOps تحدّيات إضافية**: (1) Prompt Management، (2) RAG evaluation، (3) Token cost tracking، (4) Hallucination detection، (5) Guardrails. **الأدوات المخصّصة**: LangSmith، Helicone، Arize."
+  - q: "أشهر أدوات MLOps؟"
+    a: "خمسة رئيسية: (1) **MLflow** — الأشهر، مفتوح، (2) **Weights & Biases** — الأفضل للتجارب، (3) **Kubeflow** — Kubernetes-native، (4) **Databricks** — منصّة شاملة، (5) **AWS SageMaker / Azure ML / Vertex AI** — سحابية. **LLMOps**: LangSmith، Helicone، Langfuse."
+  - q: "متى أحتاج MLOps؟"
+    a: "أربع حالات: (1) **نماذج في الإنتاج** (ليس تجارب Jupyter Notebook)، (2) **عدّة نماذج** يحتاجون تنسيقاً، (3) **بيانات تتغيّر** (نموذج يحتاج إعادة تدريب)، (4) **فريق** (أكثر من data scientist). **إذا مبتدئ**: تعلّم الأساسيات، لا تُطبّق كل شيء فوراً."
+  - q: "ما راتب MLOps Engineer؟"
+    a: "**عالمياً**: 130-250K$/سنة (الولايات المتحدة). **السعودية**: 20,000-45,000 ريال/شهر (240-540K/سنة). **مطلوب جدّاً** — كل شركة تنشر AI تحتاجه. **HUMAIN، أرامكو، STC، البنوك** يوظّفون بكثافة."
+  - q: "من أين أبدأ؟"
+    a: "**المسار**: (1) **Python + Data Science** (ابدأ بـPandas، Scikit-learn)، (2) **Docker + Kubernetes** (النشر)، (3) **MLflow** أساسياً، (4) **Cloud** (AWS SageMaker أو Azure ML)، (5) **مشروع كامل** من End-to-End. **الموارد**: Coursera MLOps Specialization (Andrew Ng)، MadeWithML."
+  - q: "MLOps vs DevOps؟"
+    a: "**DevOps**: للـSoftware — code + config = deployment. **MLOps**: للـML — code + config + **data + model + experiments** = deployment. **التعقيد الإضافي**: البيانات تتغيّر، النموذج يتقادم، إعادة التدريب دورية، Monitoring مختلف (Accuracy، Drift، Bias)."
+---
+
+**MLOps** — التخصّص الأسرع نموّاً في عالم AI. من نموذج في Jupyter Notebook إلى تطبيق يخدم مليون مستخدم — MLOps هو الجسر. هذا الدليل شامل.
+
+## المفهوم
+
+### المشكلة
+
+**Data Scientist يبني نموذجاً ممتازاً في Jupyter Notebook**:
+- **دقّة 95%**
+- محلياً على لابتوبه
+
+**السؤال**: **كيف يصير هذا نظاماً يعمل 24/7 لمليون مستخدم**؟
+
+**الإجابة**: **MLOps**.
+
+### التعريف
+
+**MLOps**: منهجيّة + أدوات + ثقافة لبناء، نشر، وصيانة نماذج ML في الإنتاج بموثوقية وقابلية للتوسّع.
+
+**العناصر**:
+- **Automation**
+- **CI/CD**
+- **Monitoring**
+- **Retraining**
+- **Governance**
+- **Reproducibility**
+
+## المراحل
+
+### 1) Development (التطوير)
+
+- Data Scientist يجرّب
+- Jupyter Notebooks
+- **Experiments** كثيرة
+
+**الأدوات**:
+- **Weights & Biases** — تتبّع التجارب
+- **MLflow Tracking** — بديل مفتوح
+- **DVC** (Data Version Control)
+
+### 2) Data Management (إدارة البيانات)
+
+- **Feature Store**: مكتبة Features جاهزة
+- **Feast**: مفتوح
+- **Tecton**: تجاري
+- **Databricks Feature Store**
+
+### 3) Training (التدريب)
+
+- تدريب تلقائي
+- Hyperparameter Tuning
+- **Kubeflow Pipelines**، **Argo Workflows**
+
+**Distributed Training**:
+- Ray
+- Horovod
+- PyTorch Distributed
+
+### 4) Model Registry
+
+- **حفظ الإصدارات**
+- **مقارنتها**
+- **الإصدار الحالي في الإنتاج**
+
+**الأدوات**:
+- **MLflow Model Registry**
+- **Weights & Biases Model Registry**
+- **Neptune AI**
+
+### 5) Deployment (النشر)
+
+**أنواع**:
+- **REST API** (الأشهر — Flask، FastAPI + Docker)
+- **Batch** (مرّة يومياً)
+- **Streaming** (Real-time)
+- **Edge** (على الجهاز)
+
+**الأدوات**:
+- **Kubernetes** (K8s) — المعيار
+- **KServe** (سابقاً KFServing)
+- **BentoML**
+- **Seldon**
+
+### 6) Monitoring (المراقبة)
+
+**ماذا نراقب**:
+- **Model Performance** (Accuracy، Latency)
+- **Data Drift** (البيانات تغيّرت؟)
+- **Concept Drift** (المفاهيم تغيّرت؟)
+- **Bias**
+- **Costs**
+
+**الأدوات**:
+- **Arize AI** — الأشهر
+- **Fiddler AI**
+- **WhyLabs**
+- **Evidently AI** (مفتوح)
+
+### 7) Retraining (إعادة التدريب)
+
+- تلقائي عند اكتشاف Drift
+- بيانات جديدة
+- نسخة جديدة
+
+### 8) Governance
+
+- **Model Cards**: توثيق شامل
+- **Compliance** (GDPR، PDPL)
+- **Bias Audits**
+
+## الأدوات — تفصيلي
+
+### MLflow — الأشهر
+
+**Databricks (2018)**، مفتوح.
+
+**المكوّنات**:
+- **Tracking**: كل تجربة تُسجَّل
+- **Projects**: Reproducible
+- **Models**: Registry
+- **Deployment**: نشر
+- **AI Gateway**: LLMs
+
+**مثال**:
+```python
+import mlflow
+
+with mlflow.start_run():
+    mlflow.log_param("learning_rate", 0.01)
+    mlflow.log_metric("accuracy", 0.95)
+    mlflow.sklearn.log_model(model, "model")
+```
+
+**مجاناً** (Self-hosted)، Databricks Cloud (مدفوع).
+
+### Weights & Biases
+
+**W&B** — الأفضل للـExperiment Tracking.
+
+**الميّزات**:
+- **Runs** — كل تجربة مسجّلة
+- **Sweeps** — Hyperparameter Tuning
+- **Reports** — تشارك النتائج
+- **Model Registry**
+- **W&B Prompts** (للـLLMs)
+
+**التسعير**:
+- **مجاني** للأفراد
+- **50-200$/شهر/user** للفرق
+
+### Kubeflow
+
+- **Kubernetes-native**
+- **قوي جدّاً** للمؤسّسات
+- **معقّد** للـSetup
+
+**المكوّنات**:
+- **Pipelines**
+- **KServe** (Deployment)
+- **Katib** (Hyperparameter Tuning)
+
+### Databricks
+
+**منصّة شاملة**:
+- Data + ML + AI
+- **Unity Catalog** (Governance)
+- **Delta Lake** (Data Lake)
+- **MLflow مدمج**
+
+**السعر**: مؤسّسي (يبدأ من آلاف$/شهر).
+
+### السحابيّات
+
+**AWS SageMaker**:
+- **الأشمل** من AWS
+- Notebooks، Training، Deployment، Monitoring
+- **الأنسب لـAWS shops**
+
+**Azure Machine Learning**:
+- منافس SageMaker
+- **الأنسب لـAzure shops**
+
+**Vertex AI**:
+- Google
+- **الأنسب لـGCP shops**
+
+## LLMOps — التخصّص الجديد
+
+### التحدّيات الإضافية
+
+**LLMs مختلفة عن ML التقليدي**:
+- **Prompts** (بدل Features)
+- **Costs** (Token-based)
+- **Hallucinations**
+- **RAG** (تعقيد إضافي)
+- **Evaluation** (كيف نُقيس جودة نصّ؟)
+
+### الأدوات المخصّصة
+
+**LangSmith** (LangChain):
+- الأشهر
+- Tracing، Evaluation، Monitoring
+- 5,000 traces مجاناً/شهر
+
+**Helicone**:
+- Observability مفتوح
+- LLM-focused
+
+**Langfuse**:
+- مفتوح، يمكن استضافته ذاتياً
+- **مجاني**
+
+**Arize AI**:
+- شامل، بجودة عالية
+- MLOps + LLMOps
+
+**PromptLayer**:
+- Prompt Management
+- A/B Testing
+
+**Comet**:
+- منافس W&B، LLM support
+
+### Prompt Management
+
+**التحدّي**: أي Prompt يعطي أفضل نتيجة؟
+
+**الأدوات**:
+- **LangSmith Prompt Hub**
+- **PromptLayer**
+- **Weights & Biases Prompts**
+
+**الحلّ**:
+- Version Control للـPrompts
+- A/B Testing
+- Rollback إذا خطأ
+
+### Evaluation
+
+**التحدّي**: نموذج نصّي — كيف نُقيسه؟
+
+**الأدوات**:
+- **Ragas** (لـRAG)
+- **TruLens** (شامل)
+- **LangSmith Evaluators**
+- **Deepeval**
+
+**Metrics**:
+- **Faithfulness** (الإجابة من المصادر)
+- **Answer Relevancy**
+- **Context Precision**
+- **Toxicity**
+- **Bias**
+
+## Best Practices
+
+### 1) Version Everything
+
+- **Code**: Git
+- **Data**: DVC، LakeFS
+- **Models**: MLflow، W&B
+- **Prompts**: LangSmith
+
+### 2) Reproducibility
+
+- **Docker containers**
+- **Poetry، Conda** for dependencies
+- **Random seeds** ثابتة
+
+### 3) CI/CD
+
+- **GitHub Actions، GitLab CI، Jenkins**
+- الاختبار قبل النشر
+- Rollback في حالة الفشل
+
+### 4) Monitoring من اليوم الأوّل
+
+- لا تنشر نموذجاً بلا Monitoring
+- **Alerts** فورية
+
+### 5) Rollback Strategy
+
+- **Blue-Green Deployment**
+- **Canary Releases** (5% مستخدمين، ثمّ 20%، ثمّ 100%)
+- **A/B Testing**
+
+### 6) Documentation
+
+- **Model Cards**
+- **Data Cards**
+- **Runbooks** للـIncidents
+
+### 7) الأمان
+
+- **Secrets management** (Vault، AWS Secrets Manager)
+- **Model access control**
+- **PII detection & redaction**
+
+## مسار مهنيّ
+
+### الأدوار
+
+**MLOps Engineer**:
+- **بناء البنية التحتية**
+- 130-250K$/سنة (US)، 20-45K ريال/شهر (السعودية)
+
+**ML Engineer**:
+- **بناء وتشغيل النماذج**
+- مماثل
+
+**AI Platform Engineer**:
+- **بناء منصّات AI**
+- **HUMAIN، G42** يوظّفون بكثافة
+
+**LLMOps Engineer**:
+- **مخصّص LLMs**
+- طلب متزايد
+
+### المهارات المطلوبة
+
+**تقنية**:
+- **Python** (essential)
+- **Docker + Kubernetes**
+- **Cloud** (AWS/Azure/GCP)
+- **CI/CD** (GitHub Actions)
+- **Monitoring tools**
+- **MLflow أو W&B**
+
+**غير تقنيّة**:
+- **Communication** مع Data Scientists
+- **Software Engineering** best practices
+- **DevOps mindset**
+
+### طريق البدء
+
+**1) Python + ML أساسي** (شهرَين):
+- Scikit-learn
+- بناء نموذج بسيط
+
+**2) Docker + Kubernetes** (شهر):
+- Containerization
+- K8s basics
+
+**3) MLflow** (أسبوعَين):
+- Experiment tracking
+- Model registry
+
+**4) Cloud (اختر واحداً)** (شهر):
+- AWS SageMaker أو
+- Azure ML أو
+- Vertex AI
+
+**5) مشروع End-to-End** (شهرَين):
+- بناء تطبيق كامل
+- من data → training → deployment → monitoring
+
+**6) المسار المتقدّم**:
+- Kubeflow
+- Ray for distributed
+- Advanced monitoring
+
+**المصادر**:
+- **MadeWithML** (Goku Mohandas) — الأشهر مجاناً
+- **MLOps Specialization** (Coursera، Andrew Ng)
+- **Full Stack Deep Learning**
+
+## MLOps في السعودية
+
+### الطلب
+
+- **HUMAIN**: يوظّف بكثافة
+- **أرامكو Digital**: Data + ML كبيرة
+- **STC، Mobily**: للشبكات
+- **البنوك (SNB، الراجحي)**: للـFraud، Personalization
+- **G42 (الإمارات)**: منافس، يجذب سعوديّين
+
+### الرواتب
+
+- **Junior MLOps**: 15-25K ريال/شهر
+- **Mid**: 25-40K
+- **Senior**: 40-60K+
+- **Principal / Lead**: 60K+
+
+### الفرص
+
+- **مشاريع Vision 2030** ضخمة
+- **HUMAIN وحدها** ستحتاج مئات
+- **الأمن السيبراني + MLOps** مطلوب بشدّة
+
+## الاتّجاهات المستقبلية
+
+### 1) AutoML + AutoMLOps
+
+- تلقائي أكثر
+- **Google Vertex AI AutoML**
+- **H2O.ai**
+
+### 2) Serverless ML
+
+- **AWS SageMaker Serverless**
+- **Modal**، **Replicate**
+- **بلا إدارة infra**
+
+### 3) Edge MLOps
+
+- نشر على الأجهزة الطرفية
+- **موبايل، IoT**
+- **Federated Learning**
+
+### 4) LLM-specific tooling
+
+- ينضج شهرياً
+- **Prompt Management، RAG evaluation**
+
+### 5) Governance & Compliance
+
+- **EU AI Act** يفرض
+- **Model documentation** إلزامية
+
+## استخدامات حقيقية
+
+### Netflix
+
+- MLOps ناضج جدّاً
+- **مئات النماذج** في الإنتاج (توصيات، بحث، محتوى)
+- **Metaflow** — أداتهم المفتوحة
+
+### Uber
+
+- Michelangelo Platform (MLOps داخلي)
+- **آلاف النماذج** لتحديد الأسعار، المسارات، الاحتيال
+
+### Airbnb
+
+- Bighead Platform
+- **توصيات، بحث، تسعير**
+
+### Spotify
+
+- **Kubeflow-based**
+- **توصيات موسيقية**
+
+### Amazon
+
+- SageMaker (استخدام داخلي أوّلاً)
+- كل شيء بـML
+
+## Common Pitfalls
+
+### 1) Neglecting Monitoring
+
+- **يعمل الآن** ≠ سيعمل غداً
+- **Data drift** حتمي
+
+### 2) No Rollback Plan
+
+- إذا نموذج جديد أسوأ، **يجب** الرجوع للسابق
+- **Blue-Green** أساسي
+
+### 3) Overengineering
+
+- Startup صغير لا يحتاج Kubeflow
+- **ابدأ بسيطاً** (Docker + FastAPI + MLflow)
+
+### 4) Underestimating Data
+
+- **البيانات > النموذج**
+- بيانات سيّئة = نموذج سيّئ
+
+### 5) Neglecting Bias
+
+- نماذج قد تكون متحيّزة
+- **Bias Audits** دورية
+
+## نصيحة نهائية
+
+**MLOps مهارة حاسمة** لعصر AI. **الطلب أكبر من العرض** — أفضل وقت للبدء.
+
+**للسعودي**:
+- **الفرصة تاريخية** — HUMAIN وحدها ستحتاج مئات
+- **ابدأ من اليوم**
+- **6 أشهر** كافية لمستوى مبدئي
+
+**للفريق**:
+- **لا تنشر بلا MLOps** — كارثة
+- **MLOps Engineer** أوّل توظيف بعد Data Scientists
+
+## المصادر الرسمية
+
+- [MLflow](https://mlflow.org)
+- [Weights & Biases](https://wandb.ai)
+- [Kubeflow](https://www.kubeflow.org)
+- [Made With ML](https://madewithml.com)
+- [Full Stack Deep Learning](https://fullstackdeeplearning.com)
+- [MLOps Community](https://mlops.community)
+- [LangSmith](https://smith.langchain.com)
+
+---
+
+**اقرأ أيضاً**: [مزوّدو السحابة للـAI](/cloud-providers-for-ai) · [LangChain — بناء تطبيقات AI](/langchain-guide) · [Fine-tuning و LoRA](/fine-tuning-lora-guide) · [Vector Databases](/vector-databases-guide)
