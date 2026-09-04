@@ -1,0 +1,325 @@
+---
+title: "Meta AI و FAIR — Llama والرؤية المفتوحة"
+description: "Meta AI: FAIR، Yann LeCun، Llama (الأشهر مفتوح المصدر)، والاستراتيجية المفتوحة."
+cluster: "ai"
+publishedAt: "2026-09-04"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Meta AI"
+  - "FAIR"
+  - "Yann LeCun"
+  - "Llama"
+  - "Open Source AI"
+faq:
+  - q: "ما Meta AI؟"
+    a: "قسم Meta (Facebook سابقاً) للـAI. **FAIR (Facebook AI Research)** تأسّس 2013، **Yann LeCun** رئيسه (Chief AI Scientist). **Meta AI** الآن يشمل: FAIR + منتجات (Meta AI chatbot في WhatsApp/Instagram) + Llama."
+  - q: "من Yann LeCun؟"
+    a: "**Chief AI Scientist في Meta**. **حاصل على Turing Award (2018)** — نوبل الحوسبة، مع Bengio وHinton. **من مؤسّسي Deep Learning** (CNNs — Convolutional Neural Networks). **PhD من Sorbonne + Bell Labs**. **متحفّظ عن AGI** (10-20 سنة). **رأس مالياً**: الشخصية الأعلى تأثيراً في AI بعد Hinton."
+  - q: "ما Llama؟"
+    a: "عائلة نماذج Meta المفتوحة. **Llama 1** (فبراير 2023) — تسرّب للجمهور. **Llama 2** (يوليو 2023): رسمياً مفتوح. **Llama 3** (2024): قفزة. **Llama 4** (2025): الأحدث. **الأشهر مفتوح المصدر عالمياً**. تفصيل في [Llama و Mistral](/llama-mistral-open-source-ai)."
+  - q: "لماذا Meta مفتوحة؟"
+    a: "استراتيجية LeCun وMark Zuckerberg. **الأسباب**: (1) الشفافية = أمان، (2) المجتمع يحسّن، (3) Meta تستفيد من التحسينات، (4) تنافس OpenAI/Anthropic المغلقة. **الأثر**: **Llama = أساس آلاف التطبيقات**."
+  - q: "ما Meta AI chatbot؟"
+    a: "شات بوت في WhatsApp، Instagram، Facebook. **مبنيّ على Llama**. **مجاني، بلا حدود عملية**. **العربية جيّدة**. **الأثر**: 100+ مليون مستخدم شهرياً بعد إطلاق 2024."
+  - q: "متى AGI حسب LeCun؟"
+    a: "**LeCun المتحفّظ**: **10-20 سنة على الأقلّ**. **الحجّة**: LLMs طريق مسدود لوحده. تحتاج **World Models** (نماذج تفهم العالم فيزيائياً كطفل 5 سنوات). **يعمل على** JEPA — بديل معماري لـTransformer."
+  - q: "Meta في السعودية؟"
+    a: "**Meta لديها مكتب** في الرياض ودبي. **Llama يُستخدم بكثافة** في المشاريع السعودية (HUMAIN، KAUST، شركات ناشئة). **الاستثمار السعودي في Meta**: أسهم على NASDAQ متاحة."
+---
+
+**Meta AI + FAIR** — نموذج مختلف عن OpenAI وAnthropic. **مفتوح المصدر**، **بحث علنيّ**، **Yann LeCun** يقود بفلسفة معاكسة. **Llama = أساس نصف تطبيقات AI عالمياً**. هذا الدليل شامل.
+
+## FAIR — Facebook AI Research
+
+### التأسيس
+
+- **2013**
+- Mark Zuckerberg + Yann LeCun
+- **LeCun تركّ NYU** لقيادة FAIR
+
+### الفلسفة
+
+- **بحث علنيّ**
+- **نشر الأوراق**
+- **مفتوح المصدر**
+- **Long-term thinking**
+
+### المقارّ
+
+- **Menlo Park (المقرّ الرئيسي)**
+- **Paris** (LeCun يقضي وقتاً كبيراً)
+- **New York, London, Montreal, Seattle, Tel Aviv**
+
+## Yann LeCun
+
+### الخلفية
+
+**مواليد 1960** (فرنسا).
+
+**PhD**: Sorbonne (1987).
+
+**Bell Labs** (1988-1996):
+- **طوّر CNNs** (Convolutional Neural Networks)
+- **الأساس** للـComputer Vision
+
+**AT&T Labs** (1996-2003)
+
+**NYU** (2003+):
+- **Professor**
+- **NYU Center for Data Science**
+
+**Meta/Facebook** (2013+):
+- **Chief AI Scientist**
+
+### الإنجازات
+
+**Turing Award (2018)**:
+- **مع Bengio وHinton**
+- **"Godfathers of Deep Learning"**
+
+**CNNs**:
+- **ما زالت أساس Computer Vision**
+- **ImageNet revolution 2012** مبنيّة عليها
+
+### الرؤية
+
+**متحفّظ عن AGI**:
+- **LLMs طريق مسدود لوحده**
+- **AGI في 10-20 سنة على الأقلّ**
+- **يحتاج World Models**
+
+**JEPA** (Joint Embedding Predictive Architecture):
+- **بديل معماري**
+- **يفهم فيزياء العالم**
+- **قيد التطوير في FAIR**
+
+### الشخصية
+
+- **صريح ومباشر**
+- **يجادل على تويتر/X**
+- **يقلّل من الضجيج**
+- **متحدّث عربي محبوب**
+- **يزور السعودية** أحياناً (KAUST)
+
+## Llama — الرحلة
+
+### Llama 1 (فبراير 2023)
+
+- **7B، 13B، 33B، 65B** معاملات
+- **بحثيّ فقط**
+- **تسرّب للـ4chan** خلال أسبوع
+- **الأثر**: المجتمع بدأ يبني عليه
+
+### Llama 2 (يوليو 2023)
+
+- **7B، 13B، 70B**
+- **رسمياً مفتوح** (Llama License)
+- **تجاري مسموح** (بشروط للـ700M+ users)
+
+### Code Llama (أغسطس 2023)
+
+- **متخصّص في البرمجة**
+- منافس Copilot المفتوح
+
+### Llama 3 (أبريل 2024)
+
+- **8B، 70B**
+- **قفزة كبيرة**
+- **يعادل GPT-4** في كثير
+
+### Llama 3.1 (يوليو 2024)
+
+- **405B** — أضخم نموذج مفتوح
+- **سياق 128K توكن**
+
+### Llama 3.2 (سبتمبر 2024)
+
+- **1B، 3B** — للأجهزة الطرفية
+- **11B، 90B** — Multi-modal (Vision)
+
+### Llama 3.3 (ديسمبر 2024)
+
+- **70B** بأداء 405B
+- **كفاءة عالية**
+
+### Llama 4 (2025)
+
+- الأحدث
+- Multi-modal كامل
+- MoE (Mixture of Experts)
+
+## Meta AI Chatbot
+
+### الإطلاق
+
+**سبتمبر 2023**:
+- **Meta AI** في WhatsApp، Instagram، Facebook
+- **مبنيّ على Llama**
+
+### الميّزات
+
+- **مجاناً**
+- **بلا حدود عملية**
+- **العربية جيّدة**
+- **مدمج مع تطبيقاتك اليومية**
+
+### الأرقام
+
+- **100+ مليون مستخدم** شهرياً (2024)
+- **يتزايد بسرعة**
+
+### مقارنة
+
+- **ChatGPT**: 500M+ (لكن تطبيق منفصل)
+- **Meta AI**: مدمج (WhatsApp = 2 مليار مستخدم)
+- **Meta AI قد يتفوّق** عدداً قريباً
+
+## المنتجات الأخرى
+
+### Meta Ray-Ban Smart Glasses
+
+- **نظّارات ذكيّة** + AI
+- **Meta AI مدمج**
+- **الأشهر عالمياً** في نظّارات AI
+
+### Meta Quest 3/4 (VR)
+
+- Multi-modal AI مدمج
+- تجارب غامرة
+
+### AI Studio
+
+- بناء **شخصيّات AI مخصّصة**
+- منافس Character.ai
+
+### Movie Gen (2024)
+
+- **توليد فيديو**
+- منافس Sora
+- **بحثيّ**، لم يُطلَق تجارياً بعد
+
+### Audiobox
+
+- **توليد صوت + موسيقى**
+- منافس ElevenLabs
+
+## الاستراتيجية المفتوحة
+
+### لماذا مفتوح؟
+
+**Mark Zuckerberg يقول**:
+1. **الشفافية = أمان**
+2. **المجتمع يُحسّن**
+3. **Meta تستفيد** من التحسينات
+4. **تجنّب الاحتكار** (OpenAI، Google)
+
+**LeCun يضيف**:
+- **العلم يجب أن يكون مفتوحاً**
+- **المفتوح المصدر جزء من DNA الويب**
+
+### الأثر
+
+- **Llama = أساس آلاف التطبيقات**
+- **Hugging Face** ملأى بتنويعات
+- **الشركات الناشئة** بدل بناء نموذج، تُعدّل Llama
+
+### الانتقاد
+
+- **البعض يخشى**: نماذج مفتوحة قد تُستخدم بشكل سيّئ
+- **الرد**: النماذج المغلقة يمكن اختراقها أيضاً، والمنفعة أكبر
+
+## FAIR Research
+
+### أهمّ الأوراق
+
+**PyTorch**:
+- **إطار عمل Deep Learning**
+- Meta طوّرها
+- **الأشهر عالمياً** (تنافس TensorFlow من Google)
+
+**SAM (Segment Anything Model)** (2023):
+- **نموذج قصّ الصور** الأشهر
+- **مفتوح**
+
+**DINO، DINOv2**:
+- **Self-supervised learning**
+- Vision
+
+**Nougat**:
+- **قراءة الأوراق العلمية**
+
+**No Language Left Behind (NLLB)**:
+- ترجمة **200 لغة**
+- **يشمل اللغات النادرة**
+
+### مساهمات مفتوحة المصدر
+
+**Llama**، **PyTorch**، **Detectron2**، **fastText**، **ONNX** (مع Microsoft)، والمزيد.
+
+## Meta AI vs OpenAI vs Anthropic
+
+| المعيار | Meta AI | OpenAI | Anthropic |
+|---|---|---|---|
+| **الأولوية** | Open Source | Product + Growth | Safety |
+| **النموذج الرئيسي** | Llama (مفتوح) | GPT (مغلق) | Claude (مغلق) |
+| **الأبحاث** | ✅ علنية | جزئياً | ✅ علنية Safety |
+| **التمويل** | Meta (ذاتي) | Microsoft، آخرون | Amazon، آخرون |
+| **AGI Timeline** | 10-20 سنة (LeCun) | 2027 (Altman) | متحفّظ (Amodei) |
+
+## المستقبل
+
+### التوقّعات
+
+**2027**:
+- **Llama 5/6**
+- **World Models** أوّلية (LeCun)
+- **Meta AI في كل تطبيق**
+
+**2028-2030**:
+- **نظّارات AI شائعة**
+- **VR + AI متطوّر**
+- **JEPA يُثبت** أو يفشل
+
+### التحدّيات
+
+**1) المنافسة**:
+- OpenAI، Google بقوّة
+
+**2) المفتوح vs الإيرادات**:
+- كيف Meta تُحقّق ربحاً؟
+
+**3) الحوكمة**:
+- **Zuckerberg متّهم** بتجاهل الأمان
+- **Cambridge Analytica** إرث
+
+## Meta AI في السعودية والعربية
+
+### Llama العربي
+
+- **جيّد** لكن ليس الأمثل
+- **يحتاج Fine-tuning** للعربية
+- **ALLaM، Falcon، Jais** أفضل عربياً
+
+### Meta AI Chatbot
+
+- **يعمل بالعربية**
+- **مجاني على WhatsApp** (المنصّة الأشهر)
+- **الأثر**: **الأكثر انتشاراً** بين شات بوتات العرب
+
+### الاستخدام
+
+- **مسوّقون** يستخدمون Llama بعد Fine-tuning
+- **KAUST** أبحاث
+- **الشركات الناشئة** تبني عليه
+
+## المصادر الرسمية
+
+- [Meta AI](https://ai.meta.com)
+- [FAIR](https://ai.meta.com/research/)
+- [Llama](https://llama.com)
+- [Yann LeCun على X](https://twitter.com/ylecun)
+- [PyTorch](https://pytorch.org)
+
+---
+
+**اقرأ أيضاً**: [Llama و Mistral](/llama-mistral-open-source-ai) · [OpenAI — قصّة الشركة](/openai-company-deep-dive) · [Anthropic — الشركة الأخلاقية](/anthropic-company-deep-dive) · [Google DeepMind](/google-deepmind-deep-dive)

@@ -1,0 +1,383 @@
+---
+title: "Google DeepMind — عملاق الأبحاث في AI"
+description: "دليل شامل لـGoogle DeepMind: Demis Hassabis، AlphaFold، AlphaGo، GraphCast، Gemini، وأعمق أبحاث AI عالمياً."
+cluster: "ai"
+publishedAt: "2026-09-04"
+author: "فريق مقالات — قسم التقنية"
+tags:
+  - "Google DeepMind"
+  - "Demis Hassabis"
+  - "AlphaFold"
+  - "AlphaGo"
+  - "Gemini"
+faq:
+  - q: "ما DeepMind؟"
+    a: "شركة أبحاث AI بريطانية، أُسّست 2010 في لندن من قِبل **Demis Hassabis** (طبيب أعصاب + مبرمج ألعاب)، **Shane Legg**، **Mustafa Suleyman**. **استحوذت عليها Google** 2014 بـ**650 مليون$**. **دُمجت مع Google Brain** 2023 لتصبح **Google DeepMind**. أعمق مركز أبحاث AI عالمياً."
+  - q: "من Demis Hassabis؟"
+    a: "**CEO Google DeepMind**. **مبرمج ألعاب موهوب** (Theme Park في سنّ 17)، **PhD في علم الأعصاب** (UCL). **حاصل على جائزة نوبل في الكيمياء (2024)** عن AlphaFold. **Knighthood** (2024) من الملك تشارلز. **رجل النهضة** في AI."
+  - q: "ما AlphaFold؟"
+    a: "**اختراق تاريخي** — نموذج DeepMind لتوقّع بنية البروتينات. **AlphaFold 2** (2020) حلّ مشكلة عمرها 50 سنة (كيف يطوى البروتين). **AlphaFold 3** (2024) توسّع للـDNA، RNA، الأدوية. **200+ مليون بنية بروتين** متاحة مجاناً. **جائزة نوبل الكيمياء 2024**."
+  - q: "ما AlphaGo؟"
+    a: "**نموذج DeepMind للعبة Go**. **2016**: هزم Lee Sedol (بطل العالم) 4-1. **حدث تاريخي** لأنّ Go يُعتبر أعقد من الشطرنج بمرّات. **أثبت** أنّ AI يستطيع القدرات المعرفية المعقّدة. **AlphaZero** (2017): تفوّق على AlphaGo بلا بيانات بشرية."
+  - q: "ما GraphCast؟"
+    a: "نموذج DeepMind للتنبّؤ بالطقس (2023). **يتفوّق على ECMWF** (المعيار العالمي) في **90% من المتغيّرات**. **بسرعة أعلى 1000x**. **مفتوح المصدر**. **الأثر**: ثورة في الأرصاد العالمية. [تفصيل](/ai-in-weather-forecasting)."
+  - q: "علاقة DeepMind بـGemini؟"
+    a: "**Gemini من DeepMind** (بعد الدمج 2023). Google Brain كان يبني PaLM، DeepMind يبني Gopher/Chinchilla. **الدمج** أنتج **Gemini** كمنافس GPT. **Gemini 2.5** الآن — تفصيل في [Gemini — الدليل الشامل](/gemini-google-complete-guide)."
+  - q: "متى AGI حسب DeepMind؟"
+    a: "**Demis Hassabis متحفّظ**: **10-15 سنة** (تصريحات 2024-2025). **أقلّ تفاؤلاً من Altman** (2027). **يرى أنّ AGI يتطلّب** فهماً أعمق للذكاء نفسه، ليس فقط توسيع النماذج."
+---
+
+**Google DeepMind** — **أعمق مركز أبحاث AI** عالمياً. من هزيمة بطل العالم في Go إلى حلّ مشكلة بروتينات عمرها 50 سنة، إلى ثورة الأرصاد. **Demis Hassabis** = واحد من أعقل عقول العصر. هذا الدليل شامل.
+
+## التأسيس
+
+### 2010
+
+**Demis Hassabis** + **Shane Legg** + **Mustafa Suleyman**:
+- **لندن، بريطانيا**
+- **رؤية**: بناء AGI (Artificial General Intelligence)
+- **البدء**: 15 موظّف
+
+### الخلفيات
+
+**Demis Hassabis** (CEO):
+- **مبرمج ألعاب** في الشركات الكبرى (Theme Park في 17 سنة)
+- **بطل شطرنج** (Master level في الطفولة)
+- **PhD في علم الأعصاب** (UCL)
+- **عبقري متعدّد التخصّصات**
+
+**Shane Legg** (Chief AGI Scientist):
+- **PhD في AGI** (نظري)
+- **الرؤية الطويلة**
+
+**Mustafa Suleyman**:
+- **الأعمال والسياسات**
+- **غادر 2019** لأسس Inflection AI، ثمّ الآن Microsoft AI
+
+## استحواذ Google (2014)
+
+### الصفقة
+
+- **650 مليون$**
+- **Google Alphabet** استحوذت
+- **شرط الاستحواذ**: **DeepMind Ethics Board مستقلّ**
+
+### الاستقلاليّة
+
+- **DeepMind بقيت لندن** (بلا نقل)
+- **مستقلّة تقنياً** حتى 2023
+- **حرّية بحثية**
+
+## اندماج 2023 — Google DeepMind
+
+### السياق
+
+**Google Brain** كان مركز AI الرئيسي في Google (Mountain View).
+**DeepMind** كان في لندن.
+
+**بعد نجاح ChatGPT (2022)**:
+- Google **تخلّفت**
+- **الحاجة للتوحيد**
+
+### الاندماج
+
+**أبريل 2023**:
+- **Google Brain + DeepMind = Google DeepMind**
+- **Demis Hassabis** = CEO
+- **جمع القوى**
+
+**النتيجة**:
+- **Gemini** — أوّل نموذج مشترك
+- **ديسمبر 2023** — إطلاق
+- **يتحسّن باستمرار**
+
+## الإنجازات الكبرى
+
+### 1) AlphaGo (2016) — الحدث التاريخي
+
+**Go**: لعبة صينية عمرها 2500 سنة، **أعقد من الشطرنج**.
+
+**Lee Sedol** — كوري، بطل عالم.
+
+**مارس 2016 — سيول**:
+- **AlphaGo vs Lee Sedol**
+- **AlphaGo فاز 4-1**
+- **صدمة عالمية**
+
+**Move 37** (Game 2):
+- حركة **لم يفكّر بها أيّ إنسان**
+- **لحظة تاريخية** في AI
+
+**الأثر**:
+- **بشّر بعصر جديد** في AI
+- **الاستثمار انفجر**
+- **Documentary على Netflix** (AlphaGo)
+
+### 2) AlphaZero (2017)
+
+- **تعلّم بلا بيانات بشرية**
+- **بمعرفة القواعد فقط**
+- **هزم AlphaGo، Stockfish (الشطرنج)، Elmo (شوغي)**
+
+**الأثر**:
+- **تعلّم Self-play** كطريقة قوية
+- **General intelligence** غير محدود بالبيانات
+
+### 3) MuZero (2019)
+
+- **بلا معرفة القواعد**
+- يتعلّم كل شيء من الصفر
+- **قفزة إضافية**
+
+### 4) AlphaFold (2020) — نوبل الكيمياء
+
+**المشكلة**:
+- البروتين = سلسلة أحماض أمينية
+- **تطوي إلى شكل ثلاثي الأبعاد**
+- **الشكل يحدّد الوظيفة**
+- **حلّ الطيّة** = مشكلة عمرها 50 سنة
+
+**AlphaFold 2** (2020):
+- **حلّ المشكلة** بدقّة تعادل التجارب المختبرية
+- **CASP14 competition**: نتائج مذهلة
+
+**AlphaFold 3** (2024):
+- **يشمل DNA, RNA, أدوية**
+- **قاعدة بيانات مفتوحة**: 200+ مليون بنية بروتين
+
+**الأثر**:
+- **ثورة في علم الأحياء والأدوية**
+- **تسريع اكتشاف الأدوية**
+- **Nobel Prize في الكيمياء 2024** لـDemis Hassabis وJohn Jumper
+
+### 5) GraphCast (2023) — ثورة الطقس
+
+فصّلناها في [AI في التنبّؤ بالطقس](/ai-in-weather-forecasting).
+
+**التلخيص**:
+- **يتفوّق ECMWF في 90% من المتغيّرات**
+- **بسرعة 1000x**
+- **مفتوح المصدر**
+
+### 6) AlphaProof + AlphaGeometry (2024)
+
+**AlphaGeometry** (يناير 2024):
+- **يحلّ مسائل هندسية IMO**
+- **مستوى ميدالية فضّية** في الأولمبياد
+
+**AlphaProof** (يوليو 2024):
+- **يحلّ 4 من 6 مسائل IMO 2024**
+- **مستوى ميدالية فضّية**
+- **قفزة في Reasoning الرياضي**
+
+### 7) Gemini (2023-الآن)
+
+- **النموذج الرئيسي**
+- **Gemini 2.5 Pro** الحالي
+- **يعادل أو يقارب GPT-5**
+
+### 8) Project Astra (2024)
+
+- **AI Assistant المستقبل**
+- **يرى، يسمع، يتحدّث** في الوقت الفعلي
+- **قدّم في Google I/O 2024**
+
+### 9) Veo (2024) — توليد الفيديو
+
+- منافس Sora
+- **Veo 3** (2025) الأفضل حالياً
+- تفصيل في [Gemini Live و Veo 3](/gemini-live-and-veo)
+
+### 10) Genie (2024)
+
+- **يولّد ألعاباً كاملة** من صورة
+- **تجريبي**، لكن مذهل
+
+## نموذج البحث
+
+### الفلسفة
+
+**DeepMind** = **بحث علميّ عميق**:
+- **مقالات في Nature, Science**
+- **مؤتمرات كبرى**: NeurIPS، ICML، ICLR
+- **نشر الأوراق** بشفافية
+
+### الأولويّات
+
+**1) Neuroscience-inspired AI**:
+- Hassabis طبيب أعصاب
+- **الإلهام من الدماغ البشري**
+
+**2) Scientific Discovery**:
+- **AlphaFold** نموذج
+- **AI + العلوم** يوسّعان الحدود
+
+**3) AGI Path**:
+- تسعى لـAGI **بحذر**
+- ليس بأيّ ثمن
+
+### الفريق
+
+- **2,000+ باحث ومهندس**
+- **مقارّ**: لندن (الأكبر)، Mountain View، Zurich، Toronto، Montreal، بلغاريا
+- **بيئة أكاديمية** أكثر من Silicon Valley
+
+## Demis Hassabis — الشخصية
+
+### الخلفية
+
+- **مواليد 1976** (لندن)
+- **أبوه قبرصيّ**، أمّه سنغافورية
+- **بطل شطرنج** طفولة
+- **مبرمج ألعاب ناجح**
+
+### الإنجازات
+
+- **PhD Neuroscience** (UCL)
+- **DeepMind** (2010)
+- **Knighthood** (2024)
+- **Nobel Prize** (2024)
+
+### الرؤية
+
+- **AGI في 10-15 سنة**
+- **متحفّظ** مقارنة بـAltman
+- **AI = الاختراق العلميّ الأعظم في التاريخ**
+
+### الأسلوب
+
+- **متواضع** — نادراً في العناوين
+- **يتحدّث بعلم**، ليس ضجيجاً
+- **يحبّ الشطرنج، الألعاب**
+- **يقود بأمثلة**
+
+## Gemini — منتج DeepMind الرئيسي
+
+### الإطلاق
+
+**ديسمبر 2023**:
+- **Gemini 1.0** — Ultra، Pro، Nano
+- **يعمل مع Bard** (الآن Gemini)
+
+### الأجيال
+
+- **Gemini 1.0** (2023)
+- **Gemini 1.5** (2024): سياق مليون توكن
+- **Gemini 2.0** (2024)
+- **Gemini 2.5** (2025): الحالي
+
+### التفوّق
+
+- **سياق مليون توكن** (الأكبر)
+- **Multi-modal** (نصّ + صور + صوت + فيديو)
+- **تكامل مع Google Workspace**
+- **Deep Research** (منافس Perplexity)
+
+## Google DeepMind vs OpenAI vs Anthropic
+
+| المعيار | Google DeepMind | OpenAI | Anthropic |
+|---|---|---|---|
+| **التأسيس** | 2010 | 2015 | 2021 |
+| **الحجم** | 2,000+ | 3,000+ | 1,000+ |
+| **الأولوية** | البحث العلميّ | التسارع + التوسّع | السلامة + التفسير |
+| **الإنجازات** | AlphaFold، AlphaGo | ChatGPT | Claude، Constitutional AI |
+| **التقييم** | جزء من Google (1.9T$) | 300+ B$ | 60+ B$ |
+| **الفلسفة** | Scientific | Product | Safety-first |
+
+## المنتجات
+
+**للأفراد**:
+- **Gemini** (chat)
+- **NotebookLM** (بحث)
+- **Google AI Studio** (تجربة API)
+
+**للمطوّرين**:
+- **Vertex AI**
+- **Gemini API**
+- **Gemma** (نماذج مفتوحة)
+
+**للأبحاث**:
+- **AlphaFold Database**
+- **Genie**
+- **GraphCast (مفتوح)**
+
+## القضايا
+
+### 1) الاندماج
+
+- **Google Brain + DeepMind** = **صعوبات ثقافية**
+- **بيئات مختلفة**
+- **تحسّن مع الوقت**
+
+### 2) التخلّف عن OpenAI
+
+- **Google كانت الرائدة** (Transformer paper 2017 من Google!)
+- **لكن ChatGPT سبقهم**
+- **يلحقون بجهد**
+
+### 3) الاستقالات
+
+- بعض كبار الباحثين غادروا
+- **الحفاظ على المواهب** تحدٍّ
+
+## Google DeepMind في السعودية
+
+### الوجود
+
+- **Gemini متاح** بالكامل
+- **Google Cloud Riyadh** (منذ 2023)
+- **Vertex AI** للسعوديّين
+- **NotebookLM** مجاناً
+
+### الشراكات
+
+- **KAUST** — أبحاث تعاونية محتمَلة
+- **HUMAIN** — قد تستخدم Gemini
+
+### للسعودي
+
+- **Gemini Advanced** ($20/شهر) بديل ممتاز
+- **NotebookLM** أفضل للطلاب
+
+## المستقبل
+
+### التوقّعات
+
+**2027**:
+- **Gemini 3/4**
+- **AlphaFold 4** (بروتينات + أدوية)
+- **مساعِدين شخصيّين** حقيقيّين (Astra)
+
+**2028-2030**:
+- **AGI**؟ (Hassabis: بعيد نسبياً)
+- **اختراقات علمية** أكبر
+- **دور محوريّ في المناخ والصحّة**
+
+### التحدّيات
+
+**1) المنافسة**:
+- OpenAI، Anthropic، xAI
+- **DeepMind يحتاج التسويق**
+
+**2) الحوكمة**:
+- **Google Alphabet** مسؤول
+- **Ethics Board** موجود
+
+**3) AGI Safety**:
+- **إذا وصلوا AGI أوّلاً**، كيف يديرونه؟
+
+## نصيحة نهائية
+
+**Google DeepMind** = **مصدر أعمق ابتكارات AI** علمياً. **AlphaFold وحده** يستحقّ نوبل. **Gemini** ينمو ليصير منافساً حقيقياً. **إذا تحبّ العلم العميق**، DeepMind الأنسب للمتابعة.
+
+## المصادر الرسمية
+
+- [Google DeepMind](https://deepmind.google)
+- [Gemini](https://gemini.google.com)
+- [DeepMind Research](https://deepmind.google/discover/research/)
+- [AlphaFold Database](https://alphafold.ebi.ac.uk)
+- [Nature Papers by DeepMind](https://www.nature.com/subjects/machine-learning)
+
+---
+
+**اقرأ أيضاً**: [Gemini — الدليل الشامل](/gemini-google-complete-guide) · [Anthropic — الشركة الأخلاقية](/anthropic-company-deep-dive) · [OpenAI — قصّة الشركة](/openai-company-deep-dive) · [AI في التنبّؤ بالطقس](/ai-in-weather-forecasting)
