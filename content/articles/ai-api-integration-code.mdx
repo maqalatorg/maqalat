@@ -1,9 +1,9 @@
 ---
-title: "أكواد استدعاء APIs الذكاء الاصطناعي — OpenAI، Anthropic، Google"
+title: "أكواد استدعاء APIs الذكاء الاصطناعي، OpenAI، Anthropic، Google"
 description: "أكواد جاهزة لاستدعاء OpenAI وAnthropic وGoogle Gemini APIs بـPython وJavaScript."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "OpenAI API code"
   - "Anthropic API"
@@ -312,17 +312,17 @@ async function askGemini(question) {
 
 ## أفضل الممارسات
 
-### 1) .env للـSecrets
+### 1).env للـSecrets
 
 ```bash
-# .env (لا تضعه في Git)
+#.env (لا تضعه في Git)
 OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
 GOOGLE_API_KEY=...
 ```
 
 ```python
-# .gitignore
+#.gitignore
 .env
 *.env
 ```
@@ -388,11 +388,11 @@ async def batch_process(questions: list):
 
 ### 2) عدم معالجة الأخطاء
 
-Network fails, rate limits, invalid responses — لا تسقط تطبيقك.
+Network fails, rate limits, invalid responses، لا تسقط تطبيقك.
 
 ### 3) الاستخدام بلا حدّ أعلى
 
-اضبط `max_tokens` — لا تدفع لمخرج غير محدود.
+اضبط `max_tokens`، لا تدفع لمخرج غير محدود.
 
 ### 4) استخدام أغلى نموذج للمهام البسيطة
 
@@ -412,4 +412,4 @@ Haiku/Flash/mini كافيان للمهام العادية.
 
 ---
 
-**اقرأ أيضاً**: [OpenAI API — دليل البدء](/openai-api-getting-started) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [Claude Code — دليل المطوّر](/claude-code-developer-guide) · [أكواد أتمتة يومية](/ai-daily-automation-code)
+**اقرأ أيضاً**: [OpenAI API، دليل البدء](/openai-api-getting-started) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [Claude Code، دليل المطوّر](/claude-code-developer-guide) · [أكواد أتمتة يومية](/ai-daily-automation-code)

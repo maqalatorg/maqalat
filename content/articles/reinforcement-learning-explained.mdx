@@ -1,21 +1,21 @@
 ---
 title: "التعلّم المعزَّز (Reinforcement Learning): من AlphaGo إلى o1"
-description: "شرح شامل لـ RL — المفاهيم الأساسية، الأنواع (Q-Learning, PPO, DPO)، أشهر الإنجازات (AlphaGo, ChatGPT, o1)، والتطبيقات في الروبوتات والألعاب."
+description: "شرح لـ RL، المفاهيم الأساسية، الأنواع (Q-Learning, PPO, DPO)، أشهر الإنجازات (AlphaGo, ChatGPT, o1)، والتطبيقات في الروبوتات والألعاب."
 cluster: "ai"
 publishedAt: "2026-09-04"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags: ["ذكاء اصطناعي", "Reinforcement Learning", "AlphaGo", "شرح تقني", "RLHF"]
 faq:
   - q: "ما هو Reinforcement Learning؟"
     a: "نوع من تعلّم الآلة يتعلّم فيه العامل (Agent) عبر التفاعل مع بيئة (Environment) والحصول على مكافآت (Rewards). يختلف عن Supervised Learning (لا يحتاج بيانات مصنّفة) و Unsupervised (له هدف واضح). المثال الكلاسيكي: تعلّم لعب لعبة بالتجربة."
   - q: "ما فرق RL عن Supervised Learning؟"
-    a: "Supervised: يتعلّم من أمثلة (مدخل + إخراج صحيح). RL: يتعلّم من التجربة والمكافأة — لا يوجد 'إجابة صحيحة'، فقط إشارة إيجابية أو سلبية. RL يعمل حين لا يمكن جمع أمثلة صريحة (لعب شطرنج ضدّ نفسه، قيادة سيارة)."
+    a: "Supervised: يتعلّم من أمثلة (مدخل + إخراج صحيح). RL: يتعلّم من التجربة والمكافأة، لا يوجد 'إجابة صحيحة'، فقط إشارة إيجابية أو سلبية. RL يعمل حين لا يمكن جمع أمثلة صريحة (لعب شطرنج ضدّ نفسه، قيادة سيارة)."
   - q: "ما AlphaGo؟"
     a: "برنامج DeepMind الذي هزم بطل العالم في Go عام 2016. Go لعبة أعقد من الشطرنج بمليارات المرّات (10^170 لوحة محتملة). AlphaGo استخدمت شبكات عصبية + Monte Carlo Tree Search + Self-play. لحظة فارقة في تاريخ AI."
   - q: "ما PPO؟"
-    a: "Proximal Policy Optimization — خوارزمية RL طوّرتها OpenAI 2017. المعيار الحالي لتدريب معظم نماذج LLM بـ RLHF. مزايا: مستقرّة، فعّالة، تعمل جيّداً في مجالات متعدّدة. تُستخدم في ChatGPT, Claude, Gemini."
+    a: "Proximal Policy Optimization، خوارزمية RL طوّرتها OpenAI 2017. المعيار الحالي لتدريب معظم نماذج LLM بـ RLHF. مزايا: مستقرّة، فعّالة، تعمل جيّداً في مجالات متعدّدة. تُستخدم في ChatGPT, Claude, Gemini."
   - q: "ما DPO؟"
-    a: "Direct Preference Optimization — بديل حديث (2023) أبسط رياضياً من PPO. يتخطّى نموذج المكافأة الوسيط. أصبح شائعاً جداً في تدريب النماذج المفتوحة. Llama 3 Instruct، Zephyr، وكثير من الفاين تيونات المفتوحة تستخدمه."
+    a: "Direct Preference Optimization، بديل حديث (2023) أبسط رياضياً من PPO. يتخطّى نموذج المكافأة الوسيط. أصبح شائعاً جداً في تدريب النماذج المفتوحة. Llama 3 Instruct، Zephyr، وكثير من الفاين تيونات المفتوحة تستخدمه."
   - q: "كيف يعمل RL في LLM (RLHF)؟"
     a: "المرحلة 1: SFT (تدريب على أمثلة). المرحلة 2: جمع تفضيلات بشرية (أيّ إجابة أفضل بين اثنتين). المرحلة 3: تدريب نموذج مكافأة على التفضيلات. المرحلة 4: PPO يُدرّب النموذج لتعظيم المكافأة. النتيجة: نموذج يفعل ما يريده البشر."
   - q: "ما إنجازات RL الحديثة؟"
@@ -59,7 +59,7 @@ Reinforcement Learning غيّر مسار AI ثلاث مرّات: 2013 (DeepMind 
 
 ### Policy (π)
 
-استراتيجية العامل — دالة تربط الحالة بالعمل: π(a|s).
+استراتيجية العامل، دالة تربط الحالة بالعمل: π(a|s).
 
 ### Value Function (V)
 
@@ -85,15 +85,15 @@ Reinforcement Learning غيّر مسار AI ثلاث مرّات: 2013 (DeepMind 
 ## Exploration vs Exploitation
 
 **المفاضلة الأزلية**:
-- **Exploitation**: افعل ما تعرف أنه ينجح.
-- **Exploration**: جرّب أشياء جديدة قد تكون أفضل.
+- Exploitation: افعل ما تعرف أنه ينجح.
+- Exploration: جرّب أشياء جديدة قد تكون أفضل.
 
 **مثال**: مطعمك المفضّل ممتاز، لكن هل تجرّب مطعماً جديداً؟
 
 **الحلول**:
-- **ε-greedy**: عشوائي بنسبة ε، الأفضل بنسبة (1-ε).
-- **UCB (Upper Confidence Bound)**: توازن رياضي.
-- **Thompson Sampling**: احتمالية.
+- ε-greedy: عشوائي بنسبة ε، الأفضل بنسبة (1-ε).
+- UCB (Upper Confidence Bound): توازن رياضي.
+- Thompson Sampling: احتمالية.
 
 ## أنواع RL
 
@@ -103,16 +103,16 @@ Reinforcement Learning غيّر مسار AI ثلاث مرّات: 2013 (DeepMind 
 
 **أشهر الخوارزميات**:
 - **Q-Learning** (1989): تُحدَّث Q-table تدريجياً.
-- **DQN** (2013، DeepMind): Deep Q-Network — Q-Learning + شبكات عصبية.
-- **A2C / A3C**: Actor-Critic — يجمع بين تعلّم السياسة والقيمة.
+- **DQN** (2013، DeepMind): Deep Q-Network، Q-Learning + شبكات عصبية.
+- A2C / A3C: Actor-Critic، يجمع بين تعلّم السياسة والقيمة.
 - **PPO** (2017): الأكثر شعبية اليوم.
-- **SAC**: للمهامّ المستمرّة (روبوتات).
+- SAC: للمهامّ المستمرّة (روبوتات).
 
 ### 2. Model-Based
 
 العامل يبني نموذجاً للبيئة، ثم يخطّط.
 
-- **AlphaZero, MuZero**: يخطّطان بـ Monte Carlo Tree Search.
+- AlphaZero, MuZero: يخطّطان بـ Monte Carlo Tree Search.
 - أقلّ شيوعاً لكن قوّي في مجالات معيّنة.
 
 ### 3. On-Policy vs Off-Policy
@@ -146,18 +146,18 @@ DeepMind نشرت [Playing Atari with Deep Reinforcement Learning](https://arxiv
 
 **النتيجة**: هزم **Lee Sedol** (18 لقب عالمي) 4-1 في مارس 2016.
 
-**اللحظة الشهيرة**: Move 37 في المباراة الثانية — حركة أذهلت الخبراء، احتمال بشري 1/10000.
+**اللحظة الشهيرة**: Move 37 في المباراة الثانية، حركة أذهلت الخبراء، احتمال بشري 1/10000.
 
 ### 2017: AlphaZero
 
-- **بدأ من الصفر** — بلا بيانات بشرية.
+- **بدأ من الصفر**، بلا بيانات بشرية.
 - تعلّم Go, Chess, Shogi بـ **Self-play فقط**.
 - 24 ساعة تدريب = تفوّق على أفضل المحرّكات (Stockfish للشطرنج).
-- **حركاته "إبداعية"** — تختلف عن أسلوب البشر التاريخي.
+- **حركاته "إبداعية"**، تختلف عن أسلوب البشر التاريخي.
 
 ### 2019: AlphaStar
 
-- StarCraft II — لعبة استراتيجية معقّدة (اقتصاد + حرب + معلومات ناقصة).
+- StarCraft II، لعبة استراتيجية معقّدة (اقتصاد + حرب + معلومات ناقصة).
 - تعلّم من مباريات بشرية + Self-play.
 - **مستوى Grandmaster** (أعلى 0.2%).
 
@@ -190,7 +190,7 @@ DeepMind نشرت [Playing Atari with Deep Reinforcement Learning](https://arxiv
 
 ### 2024: DeepSeek R1
 
-- **مسار RL جديد**: البدء من نموذج أساسي بدون SFT — مباشرة RL.
+- مسار RL جديد: البدء من نموذج أساسي بدون SFT، مباشرة RL.
 - تعلّم الاستدلال من الصفر.
 - منافس o1 بتكلفة أقلّ.
 
@@ -214,19 +214,19 @@ DeepMind نشرت [Playing Atari with Deep Reinforcement Learning](https://arxiv
 - النموذج ينتج ردوداً.
 - نموذج المكافأة يُقيّمها.
 - PPO يُحدّث النموذج ليحصل على مكافآت أعلى.
-- **مع قيد KL divergence** — لا يبتعد كثيراً عن SFT النموذج.
+- **مع قيد KL divergence**، لا يبتعد كثيراً عن SFT النموذج.
 
 ### الأدوات
 
-- **TRL من Hugging Face**: مكتبة رسمية لـ RLHF.
+- TRL من Hugging Face: مكتبة رسمية لـ RLHF.
 - **DeepSpeed-Chat** من Microsoft.
 - **OpenRLHF**.
 
-## DPO — البديل الأنيق
+## DPO، البديل الأنيق
 
 **Direct Preference Optimization** (يناير 2024).
 
-**المشكلة مع RLHF**: معقّد — يحتاج نموذج مكافأة + PPO + KL بحسابات دقيقة.
+**المشكلة مع RLHF**: معقّد، يحتاج نموذج مكافأة + PPO + KL بحسابات دقيقة.
 
 **فكرة DPO**: تخطّي نموذج المكافأة. **صيغة رياضية مباشرة** تُدرّب النموذج من التفضيلات مباشرة.
 
@@ -243,7 +243,7 @@ DeepMind نشرت [Playing Atari with Deep Reinforcement Learning](https://arxiv
 
 **المنتقدون**: قد يفشل في المواقف المعقّدة حيث PPO يتفوّق.
 
-## ORPO, KTO — الأحدث
+## ORPO, KTO، الأحدث
 
 **ORPO** (Odds Ratio Preference Optimization): يجمع SFT و preference alignment في مرحلة واحدة.
 
@@ -261,12 +261,12 @@ DeepMind نشرت [Playing Atari with Deep Reinforcement Learning](https://arxiv
 
 - تدريب في **محاكاة** (MuJoCo, Isaac Sim).
 - نقل السياسة لروبوت حقيقي.
-- التحدّي: "reality gap" — الاختلافات بين المحاكاة والواقع.
+- التحدّي: "reality gap"، الاختلافات بين المحاكاة والواقع.
 
 ### نجاحات
 
 - **OpenAI Rubik's Cube** (2019): يد آلية تحلّ مكعّب روبيك.
-- **Boston Dynamics Atlas**: parkour، رقص.
+- Boston Dynamics Atlas: parkour، رقص.
 - **RT-2** (Google, 2023): يفهم أوامر لغوية.
 
 ## تطبيقات أخرى
@@ -274,16 +274,16 @@ DeepMind نشرت [Playing Atari with Deep Reinforcement Learning](https://arxiv
 ### التوصيات
 
 - YouTube, Netflix يستخدمان RL لتوصية محتوى.
-- **الهدف**: تعظيم وقت المشاهدة (مثير للجدل أخلاقياً).
+- الهدف: تعظيم وقت المشاهدة (مثير للجدل أخلاقياً).
 
 ### التداول المالي
 
 - Hedge funds تُدرّب agents على أسواق تاريخية.
-- **تحذير**: الأسواق ليست ثابتة — استراتيجية RL قد تفشل في ظروف جديدة.
+- تحذير: الأسواق ليست ثابتة، استراتيجية RL قد تفشل في ظروف جديدة.
 
 ### الطاقة
 
-- Google تستخدم RL لتحسين تبريد مراكز البيانات — توفير 40%.
+- Google تستخدم RL لتحسين تبريد مراكز البيانات، توفير 40%.
 - التحكّم بشبكات الكهرباء.
 
 ### الصحّة
@@ -300,7 +300,7 @@ DeepMind نشرت [Playing Atari with Deep Reinforcement Learning](https://arxiv
 
 ### 1. Sample Efficiency
 
-RL يحتاج ملايين التجارب — للألعاب مقبول، للعالم الحقيقي صعب.
+RL يحتاج ملايين التجارب، للألعاب مقبول، للعالم الحقيقي صعب.
 
 ### 2. Reward Hacking
 
@@ -318,22 +318,22 @@ RL يحتاج ملايين التجارب — للألعاب مقبول، للع
 
 ### 5. الاستقرار
 
-تدريب RL معروف بعدم الاستقرار — hyperparameters حسّاسة جداً.
+تدريب RL معروف بعدم الاستقرار، hyperparameters حسّاسة جداً.
 
 ## للتعمّق
 
-- **Sutton & Barto** — كتاب [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book.html) — المرجع الكلاسيكي المجّاني.
-- **David Silver** — دورة UCL على YouTube.
-- **OpenAI Spinning Up** — دورة عملية.
-- **Hugging Face RL Course** — مجّانية.
+- **Sutton & Barto**، كتاب [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book.html)، المرجع الكلاسيكي المجّاني.
+- **David Silver**، دورة UCL على YouTube.
+- **OpenAI Spinning Up**، دورة عملية.
+- **Hugging Face RL Course**، مجّانية.
 
 ## المستقبل
 
-- **RL على تفكير النماذج**: أكثر مثل o1/o3.
-- **Multi-agent RL**: أنظمة تتعاون/تتنافس.
-- **World Models**: نماذج تتخيّل مستقبل البيئة (Ha & Schmidhuber).
-- **Curriculum Learning**: تدريب من السهل للصعب.
-- **Meta-RL**: تعلّم كيف تتعلّم بسرعة في مهامّ جديدة.
+- RL على تفكير النماذج: أكثر مثل o1/o3.
+- Multi-agent RL: أنظمة تتعاون/تتنافس.
+- World Models: نماذج تتخيّل مستقبل البيئة (Ha & Schmidhuber).
+- Curriculum Learning: تدريب من السهل للصعب.
+- Meta-RL: تعلّم كيف تتعلّم بسرعة في مهامّ جديدة.
 
 ---
 

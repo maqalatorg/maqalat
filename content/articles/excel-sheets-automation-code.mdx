@@ -1,9 +1,9 @@
 ---
-title: "أكواد Excel و Google Sheets — أتمتة البيانات"
+title: "أكواد Excel و Google Sheets، أتمتة البيانات"
 description: "أكواد Python وGoogle Apps Script لأتمتة Excel وSheets: قراءة، تحليل، توليد تقارير، دمج مع AI."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Excel automation"
   - "Google Sheets"
@@ -13,7 +13,7 @@ faq:
   - q: "أيّ أداة أستخدم لأتمتة Excel؟"
     a: "Python مع pandas وopenpyxl الأفضل للأتمتة المحلية. Google Apps Script لـSheets السحابية. Power Automate للتكاملات Microsoft."
   - q: "هل يمكن تشغيل Python داخل Excel؟"
-    a: "نعم — Microsoft أطلقت Python in Excel (2024) للمشتركين. يعمل داخل خلية عبر PY(). للأتمتة المكثّفة، Python خارجي أقوى."
+    a: "نعم، Microsoft أطلقت Python in Excel (2024) للمشتركين. يعمل داخل خلية عبر PY(). للأتمتة المكثّفة، Python خارجي أقوى."
 ---
 
 Excel وGoogle Sheets أدوات كل مهنيّ. أتمتتها توفّر ساعات. هذه أكواد جاهزة.
@@ -38,7 +38,7 @@ for row in sheet["A2:D10"]:
 
 # قراءة كل الصفوف
 for row in sheet.iter_rows(min_row=2, values_only=True):
-    print(row)  # tuple of values
+    print(row) # tuple of values
 ```
 
 ### كتابة Excel
@@ -82,7 +82,7 @@ sheet["E3"] = "=AVERAGE(B2:B10)"
 sheet["E4"] = "=MAX(B2:B10)"
 ```
 
-## Python + Excel (pandas — أقوى)
+## Python + Excel (pandas، أقوى)
 
 ### قراءة كل sheet
 
@@ -152,7 +152,7 @@ sheet = gc.open("my-sheet").sheet1
 
 # قراءة
 all_values = sheet.get_all_values()
-records = sheet.get_all_records()  # كـdict
+records = sheet.get_all_records() # كـdict
 
 # كتابة
 sheet.update("A1", [["الاسم", "المبلغ"]])
@@ -317,11 +317,11 @@ summary.to_excel("summary.xlsx")
 
 ## نصائح ذهبية
 
-1. **pandas أقوى من openpyxl** — للتحليل
-2. **openpyxl أفضل للتنسيقات** — الألوان، الحدود
-3. **gspread للسحابة** — تكامل مع Google
-4. **Apps Script للأتمتة داخل Sheets** — بلا خادم خارجي
-5. **AI + Sheets** — قوّة قاتلة، حذر بالتكاليف
+1. **pandas أقوى من openpyxl**، للتحليل
+2. **openpyxl أفضل للتنسيقات**، الألوان، الحدود
+3. **gspread للسحابة**، تكامل مع Google
+4. **Apps Script للأتمتة داخل Sheets**، بلا خادم خارجي
+5. **AI + Sheets**، قوّة قاتلة، حذر بالتكاليف
 
 ## المصادر الرسمية
 
@@ -332,4 +332,4 @@ summary.to_excel("summary.xlsx")
 
 ---
 
-**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد أتمتة يومية](/ai-daily-automation-code) · [Web Scraping — دليل](/web-scraping-guide) · [OpenAI API — دليل البدء](/openai-api-getting-started)
+**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد أتمتة يومية](/ai-daily-automation-code) · [Web Scraping، دليل](/web-scraping-guide) · [OpenAI API، دليل البدء](/openai-api-getting-started)

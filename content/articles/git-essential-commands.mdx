@@ -1,9 +1,9 @@
 ---
-title: "أكواد Git الأساسية — أوامر كل مطوّر يحتاجها"
+title: "أكواد Git الأساسية، أوامر كل مطوّر يحتاجها"
 description: "دليل عملي لأوامر Git الأشهر: init، commit، branch، merge، rebase، مع حلّ مشاكل شائعة."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Git commands"
   - "أكواد Git"
@@ -28,7 +28,7 @@ git config --global user.name "اسمك"
 git config --global user.email "you@example.com"
 
 # اختصار للـeditor
-git config --global core.editor "code --wait"  # VS Code
+git config --global core.editor "code --wait" # VS Code
 
 # اسم branch الافتراضي
 git config --global init.defaultBranch main
@@ -39,12 +39,12 @@ git config --global init.defaultBranch main
 ```bash
 # مشروع جديد
 git init
-git add .
+git add.
 git commit -m "Initial commit"
 
 # استنساخ مشروع موجود
 git clone https://github.com/user/repo.git
-git clone git@github.com:user/repo.git  # SSH
+git clone git@github.com:user/repo.git # SSH
 ```
 
 ## الأساسيات اليومية
@@ -52,25 +52,25 @@ git clone git@github.com:user/repo.git  # SSH
 ### الحالة والتغييرات
 
 ```bash
-git status                    # ما الذي تغيّر
-git diff                      # ما التغييرات بالتفصيل
-git diff --staged             # التغييرات المُستَعدّة للـcommit
+git status # ما الذي تغيّر
+git diff # ما التغييرات بالتفصيل
+git diff --staged # التغييرات المُستَعدّة للـcommit
 
-git log                       # السجلّ
-git log --oneline             # مختصر
-git log --graph --all         # رسم بياني
-git log -p                    # مع التغييرات
-git log --author="اسم"        # حسب المؤلّف
+git log # السجلّ
+git log --oneline # مختصر
+git log --graph --all # رسم بياني
+git log -p # مع التغييرات
+git log --author="اسم" # حسب المؤلّف
 ```
 
 ### إضافة و Commit
 
 ```bash
 # إضافة
-git add file.txt              # ملفّ محدّد
-git add src/                  # مجلّد
-git add .                     # كل التغييرات
-git add -p                    # تفاعلي (اختر أجزاءً)
+git add file.txt # ملفّ محدّد
+git add src/ # مجلّد
+git add. # كل التغييرات
+git add -p # تفاعلي (اختر أجزاءً)
 
 # Commit
 git commit -m "رسالة قصيرة"
@@ -78,20 +78,20 @@ git commit -am "add + commit معاً"
 
 # تعديل آخر commit (قبل الدفع)
 git commit --amend -m "رسالة جديدة"
-git commit --amend --no-edit  # فقط إضافة ملفّات
+git commit --amend --no-edit # فقط إضافة ملفّات
 ```
 
 ### Push و Pull
 
 ```bash
 # دفع
-git push                      # للـbranch الحالي
+git push # للـbranch الحالي
 git push origin main
-git push -u origin feature/x  # أوّل مرّة (يربط)
+git push -u origin feature/x # أوّل مرّة (يربط)
 
 # سحب
-git pull                      # مع merge
-git pull --rebase             # مع rebase (أنظف)
+git pull # مع merge
+git pull --rebase # مع rebase (أنظف)
 
 # جلب بلا دمج
 git fetch
@@ -103,18 +103,18 @@ git fetch --all
 ### إدارة Branches
 
 ```bash
-git branch                    # قائمة الفروع المحلية
-git branch -a                 # كل الفروع (محلية + بعيدة)
-git branch -d feature/x       # حذف (إذا مُدمج)
-git branch -D feature/x       # حذف قسري
+git branch # قائمة الفروع المحلية
+git branch -a # كل الفروع (محلية + بعيدة)
+git branch -d feature/x # حذف (إذا مُدمج)
+git branch -D feature/x # حذف قسري
 
 # إنشاء وتبديل
 git checkout -b feature/new-login
-git switch -c feature/new-login  # الحديث (Git 2.23+)
+git switch -c feature/new-login # الحديث (Git 2.23+)
 
 # التبديل
 git checkout main
-git switch main               # الحديث
+git switch main # الحديث
 ```
 
 ### Merge
@@ -127,7 +127,7 @@ git merge feature/x
 
 # حلّ التعارضات
 # 1. عدّل الملفّات
-# 2. git add .
+# 2. git add.
 # 3. git commit
 ```
 
@@ -139,7 +139,7 @@ git checkout feature/x
 git rebase main
 
 # Interactive rebase (تنظيف commits)
-git rebase -i HEAD~5          # آخر 5 commits
+git rebase -i HEAD~5 # آخر 5 commits
 # في المحرّر: pick / squash / reword / drop
 ```
 
@@ -151,16 +151,16 @@ git rebase -i HEAD~5          # آخر 5 commits
 
 ```bash
 # التخلّي عن تغييرات ملفّ
-git checkout file.txt         # القديم
-git restore file.txt          # الحديث
+git checkout file.txt # القديم
+git restore file.txt # الحديث
 
 # إزالة من الاستعداد
 git reset file.txt
 git restore --staged file.txt
 
 # التخلّي عن كل التغييرات
-git checkout .
-git restore .
+git checkout.
+git restore.
 ```
 
 ### بعد Commit
@@ -182,10 +182,10 @@ git revert <commit-hash>
 ```bash
 # إذا لم يسحب أحد بعد
 git reset --hard HEAD~1
-git push --force-with-lease   # أأمن من --force
+git push --force-with-lease # أأمن من --force
 ```
 
-**تحذير**: `git push --force` قد يُدمّر عمل الآخرين. استخدم `--force-with-lease` — يفشل إذا حدث تغيير.
+**تحذير**: `git push --force` قد يُدمّر عمل الآخرين. استخدم `--force-with-lease`، يفشل إذا حدث تغيير.
 
 ## Stash (حفظ مؤقّت)
 
@@ -198,20 +198,20 @@ git stash save "وصف"
 git stash list
 
 # استعادة
-git stash pop                 # يستعيد ويحذف
-git stash apply               # يستعيد بلا حذف
+git stash pop # يستعيد ويحذف
+git stash apply # يستعيد بلا حذف
 
 # حذف
 git stash drop
-git stash clear               # حذف كل الـstashes
+git stash clear # حذف كل الـstashes
 ```
 
 ## البحث في التاريخ
 
 ```bash
 # البحث عن commit
-git log --grep="fix login"    # في رسائل commits
-git log --all --oneline -S "search_string"  # كود احتوى نصّاً
+git log --grep="fix login" # في رسائل commits
+git log --all --oneline -S "search_string" # كود احتوى نصّاً
 
 # متى أُضيف/حُذف سطر
 git blame file.txt
@@ -250,7 +250,7 @@ git tag
 
 # إنشاء
 git tag v1.0.0
-git tag -a v1.0.0 -m "Release 1.0"  # annotated
+git tag -a v1.0.0 -m "Release 1.0" # annotated
 
 # دفع tag
 git push origin v1.0.0
@@ -258,16 +258,16 @@ git push --tags
 
 # حذف
 git tag -d v1.0.0
-git push origin :refs/tags/v1.0.0
+git push origin:refs/tags/v1.0.0
 ```
 
 ## Git Hooks
 
 ```bash
 # قبل commit
-.git/hooks/pre-commit         # اجعله قابلاً للتنفيذ
+.git/hooks/pre-commit # اجعله قابلاً للتنفيذ
 #!/bin/bash
-npm test  # مثلاً
+npm test # مثلاً
 ```
 
 **أفضل**: استخدم Husky مع Node.js لإدارة hooks عبر المشروع.
@@ -285,7 +285,7 @@ git pull
 git checkout -b feature/new-login
 
 # 3. اعمل commits
-git add .
+git add.
 git commit -m "add login form"
 
 # 4. ادفع
@@ -314,7 +314,7 @@ git push -u origin feature/new-login
 # افتح الملفّ المتعارض
 # اختر التغييرات (يدوياً أو بأداة)
 git add file.txt
-git commit  # يكمل الـmerge
+git commit # يكمل الـmerge
 ```
 
 ### 2) "Push rejected"
@@ -329,7 +329,7 @@ git push
 
 ```bash
 # أنت على commit لا branch
-git checkout -b new-branch-name  # احفظ التغييرات
+git checkout -b new-branch-name # احفظ التغييرات
 ```
 
 ### 4) نسيت `.gitignore`
@@ -339,7 +339,7 @@ git checkout -b new-branch-name  # احفظ التغييرات
 git rm --cached file.txt
 
 # ثمّ أضفه لـ.gitignore
-echo "file.txt" >> .gitignore
+echo "file.txt" >>.gitignore
 git commit -m "ignore file.txt"
 ```
 
@@ -355,11 +355,11 @@ git push --force-with-lease
 
 ## نصائح ذهبية
 
-1. **Commits صغيرة متكرّرة** — لا commit ضخم
-2. **رسائل commit وصفية**: `feat: add user login`، `fix: correct email validation`
-3. **`.gitignore` من البداية** — أضف secrets، node_modules، عبر gitignore.io
-4. **Pull قبل Push** — تجنّب conflicts
-5. **لا `push --force` على main** — أبداً
+1. **Commits صغيرة متكرّرة**، لا commit ضخم
+2. رسائل commit وصفية: `feat: add user login`، `fix: correct email validation`
+3. **`.gitignore` من البداية**، أضف secrets، node_modules، عبر gitignore.io
+4. **Pull قبل Push**، تجنّب conflicts
+5. **لا `push --force` على main**، أبداً
 6. **استخدم SSH** بدل HTTPS للأمان والسرعة
 
 ## المصادر الرسمية
@@ -371,4 +371,4 @@ git push --force-with-lease
 
 ---
 
-**اقرأ أيضاً**: [أكواد Bash و PowerShell](/bash-powershell-automation) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد JavaScript الأساسية](/javascript-essential-snippets) · [Claude Code — دليل المطوّر](/claude-code-developer-guide)
+**اقرأ أيضاً**: [أكواد Bash و PowerShell](/bash-powershell-automation) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد JavaScript الأساسية](/javascript-essential-snippets) · [Claude Code، دليل المطوّر](/claude-code-developer-guide)

@@ -1,9 +1,9 @@
 ---
-title: "OpenAI API — دليل البدء والتسعير"
+title: "OpenAI API، دليل البدء والتسعير"
 description: "دليل عملي لـOpenAI API 2026: كيف تبدأ، النماذج، التسعير، أمثلة كود، أفضل الممارسات."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "OpenAI API"
   - "GPT-5 API"
@@ -50,7 +50,7 @@ OpenAI API يُتيح لك بناء تطبيقات تستخدم GPT-5 وSora وD
 ### 3) أنشئ API Key
 
 - Dashboard → API Keys → Create new secret key
-- **احفظه فوراً** — لن يُعرَض مرّة ثانية
+- **احفظه فوراً**، لن يُعرَض مرّة ثانية
 - سمّه (مثل: "my-app-dev")
 
 **تحذير أمان**: لا ترفع API Key على GitHub! استخدم `.env` file.
@@ -104,8 +104,8 @@ console.log(response.choices[0].message.content);
 
 ### للصور
 
-- **DALL-E 3**: $0.04 لكل صورة 1024×1024 (Standard)
-- **DALL-E 3 HD**: $0.08 لكل صورة
+- DALL-E 3: $0.04 لكل صورة 1024×1024 (Standard)
+- DALL-E 3 HD: $0.08 لكل صورة
 
 ### للصوت
 
@@ -114,7 +114,7 @@ console.log(response.choices[0].message.content);
 
 ### للفيديو
 
-- **Sora**: أسعار تختلف بحسب الجودة والمدّة
+- Sora: أسعار تختلف بحسب الجودة والمدّة
 
 ## البارامترات المهمّة
 
@@ -146,13 +146,13 @@ messages=[
 ### stream
 
 ```python
-stream=True  # يعطي المخرج قطعة قطعة (مثل ChatGPT)
+stream=True # يعطي المخرج قطعة قطعة (مثل ChatGPT)
 ```
 
 ### response_format
 
 ```python
-response_format={"type": "json_object"}  # يجبر JSON صحيح
+response_format={"type": "json_object"} # يجبر JSON صحيح
 ```
 
 ## أمثلة تطبيقات
@@ -246,10 +246,10 @@ print(transcription.text)
 
 ## أفضل الممارسات
 
-### 1) استخدم .env للـKeys
+### 1) استخدم.env للـKeys
 
 ```python
-# .env
+#.env
 OPENAI_API_KEY=sk-...
 
 # code
@@ -272,7 +272,7 @@ def safe_call(messages, retries=3):
         try:
             return client.chat.completions.create(model="gpt-5-mini", messages=messages)
         except RateLimitError:
-            time.sleep(2 ** i)  # exponential backoff
+            time.sleep(2 ** i) # exponential backoff
     raise Exception("Rate limit exceeded")
 ```
 
@@ -326,7 +326,7 @@ GPT-5 حين GPT-5 mini يكفي = هدر مال.
 
 ### 3) عدم تعامل مع الأخطاء
 
-Network errors, Rate limits, Invalid inputs — لا تسقط تطبيقك.
+Network errors, Rate limits, Invalid inputs، لا تسقط تطبيقك.
 
 ### 4) لا Monitoring
 
@@ -340,17 +340,17 @@ Network errors, Rate limits, Invalid inputs — لا تسقط تطبيقك.
 
 ## الفوترة والحدود
 
-- **الحدّ الشهري**: اضبط في Settings → Billing → Usage limits
-- **التنبيهات**: عند بلوغ 75% من الحدّ
-- **Auto-recharge**: يشحن رصيدك تلقائياً
+- الحدّ الشهري: اضبط في Settings → Billing → Usage limits
+- التنبيهات: عند بلوغ 75% من الحدّ
+- Auto-recharge: يشحن رصيدك تلقائياً
 
 ## المصادر الرسمية
 
 - [OpenAI API Documentation](https://platform.openai.com/docs)
 - [OpenAI Pricing](https://openai.com/api/pricing/)
-- [OpenAI Cookbook — أمثلة كود](https://cookbook.openai.com)
+- [OpenAI Cookbook، أمثلة كود](https://cookbook.openai.com)
 - [OpenAI Status](https://status.openai.com)
 
 ---
 
-**اقرأ أيضاً**: [ChatGPT — الدليل الشامل](/chatgpt-complete-guide-2026) · [Claude Code — دليل المطوّر](/claude-code-developer-guide) · [برومتات جاهزة للبرمجة](/ready-prompts-for-coding) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets)
+**اقرأ أيضاً**: [ChatGPT، الدليل الشامل](/chatgpt-complete-guide-2026) · [Claude Code، دليل المطوّر](/claude-code-developer-guide) · [برومتات جاهزة للبرمجة](/ready-prompts-for-coding) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets)

@@ -1,9 +1,9 @@
 ---
-title: "Chain of Thought — سلسلة التفكير في البرومت"
+title: "Chain of Thought، سلسلة التفكير في البرومت"
 description: "شرح تقنية Chain of Thought للحصول على تفكير أعمق من ChatGPT وClaude وGemini، مع أمثلة عملية."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Chain of Thought"
   - "سلسلة التفكير"
@@ -15,7 +15,7 @@ faq:
   - q: "متى تستخدمها؟"
     a: "المسائل الرياضية، الاستدلال المنطقي، القرارات متعدّدة المتغيّرات، تحليل نصوص معقّدة، مسائل الفيزياء، تشخيص الأخطاء البرمجية."
   - q: "هل تعمل مع كل النماذج؟"
-    a: "نعم. GPT-5، Claude Sonnet 4.7، Gemini 2.5 — كلها تتحسّن بها. النماذج الأحدث (o3، Claude Extended Thinking، Gemini Deep Think) تفعّلها داخلياً بشكل تلقائي."
+    a: "نعم. GPT-5، Claude Sonnet 4.7، Gemini 2.5، كلها تتحسّن بها. النماذج الأحدث (o3، Claude Extended Thinking، Gemini Deep Think) تفعّلها داخلياً بشكل تلقائي."
   - q: "هل تعمل مع الأسئلة السهلة؟"
     a: "قد تكون overkill. للأسئلة البسيطة (ما عاصمة فرنسا؟) لا حاجة. للأسئلة المتوسّطة والمعقّدة، تحسّن الأداء."
 ---
@@ -66,15 +66,15 @@ faq:
 ### الطريقة 3: البنى الحديثة (Reasoning Models)
 
 النماذج الأحدث تفعّل التفكير داخلياً:
-- **OpenAI o3** — يفكّر دقائق قبل الرد
-- **Claude Extended Thinking** — عمق تفكير قابل للتحكّم
-- **Gemini 2.5 Pro Deep Think** — تفكير موازٍ
+- **OpenAI o3**، يفكّر دقائق قبل الرد
+- **Claude Extended Thinking**، عمق تفكير قابل للتحكّم
+- **Gemini 2.5 Pro Deep Think**، تفكير موازٍ
 
-لا تحتاج إضافة "فكّر خطوة" — النموذج يفعلها تلقائياً.
+لا تحتاج إضافة "فكّر خطوة"، النموذج يفعلها تلقائياً.
 
 ## أنواع Chain of Thought
 
-### 1) Sequential — تسلسلي
+### 1) Sequential، تسلسلي
 
 خطوة تليها أخرى، كل واحدة تعتمد على السابقة.
 
@@ -157,13 +157,13 @@ divide(None, 2) → TypeError
 
 ### 2) الأسئلة الإبداعية البحتة
 
-"اكتب قصيدة عن الغروب" — التفكير التسلسلي يقتل الإبداع.
+"اكتب قصيدة عن الغروب"، التفكير التسلسلي يقتل الإبداع.
 
 ### 3) حين النموذج ليس عنده معلومة أصلاً
 
 Chain of Thought تُنظّم التفكير، لا تخترع معرفة.
 
-## نموذج o3 و Claude Extended Thinking — التفكير الداخلي
+## نموذج o3 و Claude Extended Thinking، التفكير الداخلي
 
 النماذج الحديثة "المفكّرة" (Reasoning Models) تفعّل Chain of Thought داخلياً:
 
@@ -171,7 +171,7 @@ Chain of Thought تُنظّم التفكير، لا تخترع معرفة.
 - يفكّر دقائق قبل الرد
 - سلسلة استدلاله مخفية (لا تراها)
 - أفضل النماذج في الرياضيات والبرمجة المعقّدة
-- **الكلفة**: 10-100 ضعف النموذج العادي على API
+- الكلفة: 10-100 ضعف النموذج العادي على API
 
 **Claude Extended Thinking**:
 - تفعّل بضغطة زرّ (أو `<thinking>` في API)
@@ -182,25 +182,25 @@ Chain of Thought تُنظّم التفكير، لا تخترع معرفة.
 - تفكير موازٍ (parallel thinking)
 - يقارن عدّة مسارات
 
-**متى تستخدمها**: مسائل تستحقّ الوقت والتكلفة — قرار مالي كبير، كود معقّد، تشخيص طبّي (استرشادي).
+**متى تستخدمها**: مسائل تستحقّ الوقت والتكلفة، قرار مالي كبير، كود معقّد، تشخيص طبّي (استرشادي).
 
 **متى لا**: للاستخدام اليومي، النماذج العادية أسرع وأرخص.
 
 ## نصائح للاستخدام الأمثل
 
-1. **جرّب مع/بدون CoT** لنفس المسألة — قارن الجودة
+1. **جرّب مع/بدون CoT** لنفس المسألة، قارن الجودة
 2. **اطلب من النموذج تصحيح نفسه** بعد التفكير: "راجع خطواتك، هل من خطأ؟"
 3. **للمسائل الحسّاسة**، استخدم Self-Consistency (اسأل 3 مرّات بصياغات مختلفة، قارن)
-4. **لا تُخفي التفكير** إذا أرسلت المخرج لعميل — فكّر أنت، أعطه الإجابة النهائية
-5. **CoT + Reasoning Model**: للمسائل الأصعب
+4. **لا تُخفي التفكير** إذا أرسلت المخرج لعميل، فكّر أنت، أعطه الإجابة النهائية
+5. CoT + Reasoning Model: للمسائل الأصعب
 
 ## المصادر الرسمية
 
-- [Chain-of-Thought Prompting — الورقة الأصلية](https://arxiv.org/abs/2201.11903)
-- [OpenAI — o1/o3 Reasoning](https://openai.com/index/introducing-openai-o1)
-- [Anthropic — Extended Thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
-- [Google — Gemini Deep Think](https://blog.google/technology/google-deepmind/gemini-model-updates-june-2025/)
+- [Chain-of-Thought Prompting، الورقة الأصلية](https://arxiv.org/abs/2201.11903)
+- [OpenAI، o1/o3 Reasoning](https://openai.com/index/introducing-openai-o1)
+- [Anthropic، Extended Thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+- [Google، Gemini Deep Think](https://blog.google/technology/google-deepmind/gemini-model-updates-june-2025/)
 
 ---
 
-**اقرأ أيضاً**: [هندسة البرومت — الدليل الشامل](/prompt-engineering-complete-guide) · [قواعد كتابة البرومت الفعّال](/effective-prompt-writing-rules) · [Few-Shot Prompting](/few-shot-prompting-guide) · [Meta-Prompting](/meta-prompting-guide)
+**اقرأ أيضاً**: [هندسة البرومت، الدليل الشامل](/prompt-engineering-complete-guide) · [قواعد كتابة البرومت الفعّال](/effective-prompt-writing-rules) · [Few-Shot Prompting](/few-shot-prompting-guide) · [Meta-Prompting](/meta-prompting-guide)

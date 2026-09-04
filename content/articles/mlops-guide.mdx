@@ -1,9 +1,9 @@
 ---
-title: "MLOps — تشغيل نماذج AI في الإنتاج"
-description: "دليل شامل لـMLOps: من التدريب إلى الإنتاج. أدوات (MLflow، Kubeflow، Weights & Biases)، Best Practices، ومسار مهنيّ."
+title: "MLOps، تشغيل نماذج AI في الإنتاج"
+description: "دليل لـMLOps: من التدريب إلى الإنتاج. أدوات (MLflow، Kubeflow، Weights & Biases)، Best Practices، ومسار مهنيّ."
 cluster: "ai"
 publishedAt: "2026-09-04"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "MLOps"
   - "LLMOps"
@@ -12,22 +12,22 @@ tags:
   - "Weights & Biases"
 faq:
   - q: "ما MLOps؟"
-    a: "Machine Learning Operations — منهجيّة لتشغيل نماذج ML في الإنتاج بموثوقية. مستوحاة من DevOps لكن للـML. تشمل: **CI/CD للنماذج**، **مراقبة الأداء**، **إعادة التدريب التلقائي**، **إدارة البيانات**، **التوثيق**. **الأثر**: نماذج تعمل موثوقاً، تتحسّن، تصمد."
+    a: "Machine Learning Operations، منهجيّة لتشغيل نماذج ML في الإنتاج بموثوقية. مستوحاة من DevOps لكن للـML. تشمل: **CI/CD للنماذج**، **مراقبة الأداء**، **إعادة التدريب التلقائي**، **إدارة البيانات**، **التوثيق**. **الأثر**: نماذج تعمل موثوقاً، تتحسّن، تصمد."
   - q: "ما الفرق بين MLOps و LLMOps؟"
     a: "**MLOps**: عام (Classical ML + Deep Learning). **LLMOps**: مخصّص لـLarge Language Models. **LLMOps تحدّيات إضافية**: (1) Prompt Management، (2) RAG evaluation، (3) Token cost tracking، (4) Hallucination detection، (5) Guardrails. **الأدوات المخصّصة**: LangSmith، Helicone، Arize."
   - q: "أشهر أدوات MLOps؟"
-    a: "خمسة رئيسية: (1) **MLflow** — الأشهر، مفتوح، (2) **Weights & Biases** — الأفضل للتجارب، (3) **Kubeflow** — Kubernetes-native، (4) **Databricks** — منصّة شاملة، (5) **AWS SageMaker / Azure ML / Vertex AI** — سحابية. **LLMOps**: LangSmith، Helicone، Langfuse."
+    a: "خمسة رئيسية: (1) **MLflow**، الأشهر، مفتوح، (2) **Weights & Biases**، الأفضل للتجارب، (3) **Kubeflow**، Kubernetes-native، (4) **Databricks**، منصّة شاملة، (5) **AWS SageMaker / Azure ML / Vertex AI**، سحابية. **LLMOps**: LangSmith، Helicone، Langfuse."
   - q: "متى أحتاج MLOps؟"
     a: "أربع حالات: (1) **نماذج في الإنتاج** (ليس تجارب Jupyter Notebook)، (2) **عدّة نماذج** يحتاجون تنسيقاً، (3) **بيانات تتغيّر** (نموذج يحتاج إعادة تدريب)، (4) **فريق** (أكثر من data scientist). **إذا مبتدئ**: تعلّم الأساسيات، لا تُطبّق كل شيء فوراً."
   - q: "ما راتب MLOps Engineer؟"
-    a: "**عالمياً**: 130-250K$/سنة (الولايات المتحدة). **السعودية**: 20,000-45,000 ريال/شهر (240-540K/سنة). **مطلوب جدّاً** — كل شركة تنشر AI تحتاجه. **HUMAIN، أرامكو، STC، البنوك** يوظّفون بكثافة."
+    a: "**عالمياً**: 130-250K$/سنة (الولايات المتحدة). **السعودية**: 20,000-45,000 ريال/شهر (240-540K/سنة). **مطلوب جدّاً**، كل شركة تنشر AI تحتاجه. **HUMAIN، أرامكو، STC، البنوك** يوظّفون بكثافة."
   - q: "من أين أبدأ؟"
     a: "**المسار**: (1) **Python + Data Science** (ابدأ بـPandas، Scikit-learn)، (2) **Docker + Kubernetes** (النشر)، (3) **MLflow** أساسياً، (4) **Cloud** (AWS SageMaker أو Azure ML)، (5) **مشروع كامل** من End-to-End. **الموارد**: Coursera MLOps Specialization (Andrew Ng)، MadeWithML."
   - q: "MLOps vs DevOps؟"
-    a: "**DevOps**: للـSoftware — code + config = deployment. **MLOps**: للـML — code + config + **data + model + experiments** = deployment. **التعقيد الإضافي**: البيانات تتغيّر، النموذج يتقادم، إعادة التدريب دورية، Monitoring مختلف (Accuracy، Drift، Bias)."
+    a: "**DevOps**: للـSoftware، code + config = deployment. **MLOps**: للـML، code + config + **data + model + experiments** = deployment. **التعقيد الإضافي**: البيانات تتغيّر، النموذج يتقادم، إعادة التدريب دورية، Monitoring مختلف (Accuracy، Drift، Bias)."
 ---
 
-**MLOps** — التخصّص الأسرع نموّاً في عالم AI. من نموذج في Jupyter Notebook إلى تطبيق يخدم مليون مستخدم — MLOps هو الجسر. هذا الدليل شامل.
+**MLOps**، التخصّص الأسرع نموّاً في عالم AI. من نموذج في Jupyter Notebook إلى تطبيق يخدم مليون مستخدم، MLOps هو الجسر. هذا الدليل شامل.
 
 ## المفهوم
 
@@ -62,15 +62,15 @@ faq:
 - **Experiments** كثيرة
 
 **الأدوات**:
-- **Weights & Biases** — تتبّع التجارب
-- **MLflow Tracking** — بديل مفتوح
+- **Weights & Biases**، تتبّع التجارب
+- **MLflow Tracking**، بديل مفتوح
 - **DVC** (Data Version Control)
 
 ### 2) Data Management (إدارة البيانات)
 
-- **Feature Store**: مكتبة Features جاهزة
-- **Feast**: مفتوح
-- **Tecton**: تجاري
+- Feature Store: مكتبة Features جاهزة
+- Feast: مفتوح
+- Tecton: تجاري
 - **Databricks Feature Store**
 
 ### 3) Training (التدريب)
@@ -98,13 +98,13 @@ faq:
 ### 5) Deployment (النشر)
 
 **أنواع**:
-- **REST API** (الأشهر — Flask، FastAPI + Docker)
+- **REST API** (الأشهر، Flask، FastAPI + Docker)
 - **Batch** (مرّة يومياً)
 - **Streaming** (Real-time)
 - **Edge** (على الجهاز)
 
 **الأدوات**:
-- **Kubernetes** (K8s) — المعيار
+- **Kubernetes** (K8s)، المعيار
 - **KServe** (سابقاً KFServing)
 - **BentoML**
 - **Seldon**
@@ -119,7 +119,7 @@ faq:
 - **Costs**
 
 **الأدوات**:
-- **Arize AI** — الأشهر
+- **Arize AI**، الأشهر
 - **Fiddler AI**
 - **WhyLabs**
 - **Evidently AI** (مفتوح)
@@ -132,22 +132,22 @@ faq:
 
 ### 8) Governance
 
-- **Model Cards**: توثيق شامل
+- Model Cards: توثيق شامل
 - **Compliance** (GDPR، PDPL)
 - **Bias Audits**
 
-## الأدوات — تفصيلي
+## الأدوات، تفصيلي
 
-### MLflow — الأشهر
+### MLflow، الأشهر
 
 **Databricks (2018)**، مفتوح.
 
 **المكوّنات**:
-- **Tracking**: كل تجربة تُسجَّل
-- **Projects**: Reproducible
-- **Models**: Registry
-- **Deployment**: نشر
-- **AI Gateway**: LLMs
+- Tracking: كل تجربة تُسجَّل
+- Projects: Reproducible
+- Models: Registry
+- Deployment: نشر
+- AI Gateway: LLMs
 
 **مثال**:
 ```python
@@ -163,12 +163,12 @@ with mlflow.start_run():
 
 ### Weights & Biases
 
-**W&B** — الأفضل للـExperiment Tracking.
+**W&B**، الأفضل للـExperiment Tracking.
 
 **الميّزات**:
-- **Runs** — كل تجربة مسجّلة
-- **Sweeps** — Hyperparameter Tuning
-- **Reports** — تشارك النتائج
+- **Runs**، كل تجربة مسجّلة
+- **Sweeps**، Hyperparameter Tuning
+- **Reports**، تشارك النتائج
 - **Model Registry**
 - **W&B Prompts** (للـLLMs)
 
@@ -212,7 +212,7 @@ with mlflow.start_run():
 - Google
 - **الأنسب لـGCP shops**
 
-## LLMOps — التخصّص الجديد
+## LLMOps، التخصّص الجديد
 
 ### التحدّيات الإضافية
 
@@ -265,7 +265,7 @@ with mlflow.start_run():
 
 ### Evaluation
 
-**التحدّي**: نموذج نصّي — كيف نُقيسه؟
+**التحدّي**: نموذج نصّي، كيف نُقيسه؟
 
 **الأدوات**:
 - **Ragas** (لـRAG)
@@ -284,10 +284,10 @@ with mlflow.start_run():
 
 ### 1) Version Everything
 
-- **Code**: Git
-- **Data**: DVC، LakeFS
-- **Models**: MLflow، W&B
-- **Prompts**: LangSmith
+- Code: Git
+- Data: DVC، LakeFS
+- Models: MLflow، W&B
+- Prompts: LangSmith
 
 ### 2) Reproducibility
 
@@ -388,7 +388,7 @@ with mlflow.start_run():
 - Advanced monitoring
 
 **المصادر**:
-- **MadeWithML** (Goku Mohandas) — الأشهر مجاناً
+- **MadeWithML** (Goku Mohandas)، الأشهر مجاناً
 - **MLOps Specialization** (Coursera، Andrew Ng)
 - **Full Stack Deep Learning**
 
@@ -396,18 +396,18 @@ with mlflow.start_run():
 
 ### الطلب
 
-- **HUMAIN**: يوظّف بكثافة
-- **أرامكو Digital**: Data + ML كبيرة
-- **STC، Mobily**: للشبكات
-- **البنوك (SNB، الراجحي)**: للـFraud، Personalization
-- **G42 (الإمارات)**: منافس، يجذب سعوديّين
+- HUMAIN: يوظّف بكثافة
+- أرامكو Digital: Data + ML كبيرة
+- STC، Mobily: للشبكات
+- البنوك (SNB، الراجحي): للـFraud، Personalization
+- G42 (الإمارات): منافس، يجذب سعوديّين
 
 ### الرواتب
 
-- **Junior MLOps**: 15-25K ريال/شهر
-- **Mid**: 25-40K
-- **Senior**: 40-60K+
-- **Principal / Lead**: 60K+
+- Junior MLOps: 15-25K ريال/شهر
+- Mid: 25-40K
+- Senior: 40-60K+
+- Principal / Lead: 60K+
 
 ### الفرص
 
@@ -451,7 +451,7 @@ with mlflow.start_run():
 
 - MLOps ناضج جدّاً
 - **مئات النماذج** في الإنتاج (توصيات، بحث، محتوى)
-- **Metaflow** — أداتهم المفتوحة
+- **Metaflow**، أداتهم المفتوحة
 
 ### Uber
 
@@ -502,15 +502,15 @@ with mlflow.start_run():
 
 ## نصيحة نهائية
 
-**MLOps مهارة حاسمة** لعصر AI. **الطلب أكبر من العرض** — أفضل وقت للبدء.
+**MLOps مهارة حاسمة** لعصر AI. **الطلب أكبر من العرض**، أفضل وقت للبدء.
 
 **للسعودي**:
-- **الفرصة تاريخية** — HUMAIN وحدها ستحتاج مئات
+- **الفرصة تاريخية**، HUMAIN وحدها ستحتاج مئات
 - **ابدأ من اليوم**
 - **6 أشهر** كافية لمستوى مبدئي
 
 **للفريق**:
-- **لا تنشر بلا MLOps** — كارثة
+- **لا تنشر بلا MLOps**، كارثة
 - **MLOps Engineer** أوّل توظيف بعد Data Scientists
 
 ## المصادر الرسمية
@@ -525,4 +525,4 @@ with mlflow.start_run():
 
 ---
 
-**اقرأ أيضاً**: [مزوّدو السحابة للـAI](/cloud-providers-for-ai) · [LangChain — بناء تطبيقات AI](/langchain-guide) · [Fine-tuning و LoRA](/fine-tuning-lora-guide) · [Vector Databases](/vector-databases-guide)
+**اقرأ أيضاً**: [مزوّدو السحابة للـAI](/cloud-providers-for-ai) · [LangChain، بناء تطبيقات AI](/langchain-guide) · [Fine-tuning و LoRA](/fine-tuning-lora-guide) · [Vector Databases](/vector-databases-guide)

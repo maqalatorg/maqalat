@@ -1,9 +1,9 @@
 ---
-title: "أكواد HTML و CSS الأساسية — مكتبة المطوّر"
+title: "أكواد HTML و CSS الأساسية، مكتبة المطوّر"
 description: "مجموعة أكواد HTML و CSS جاهزة: نماذج، layouts، responsive، animations، Dark Mode، RTL."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "HTML CSS"
   - "أكواد ويب"
@@ -16,7 +16,7 @@ faq:
     a: "أضف `dir='rtl'` على `<html>` أو `<body>`. استخدم `logical properties` (start/end بدل left/right) لدعم LTR/RTL معاً."
 ---
 
-هذه أكواد HTML و CSS الأشهر لكل مطوّر ويب — من الأساسيات إلى الحديث.
+هذه أكواد HTML و CSS الأشهر لكل مطوّر ويب، من الأساسيات إلى الحديث.
 
 ## بنية HTML أساسية
 
@@ -116,19 +116,19 @@ faq:
 /* Container */
 .flex-container {
     display: flex;
-    justify-content: space-between;  /* أفقياً */
-    align-items: center;             /* عمودياً */
+    justify-content: space-between; /* أفقياً */
+    align-items: center; /* عمودياً */
     gap: 1rem;
     flex-wrap: wrap;
 }
 
 /* Items */
 .flex-item {
-    flex: 1;                          /* يأخذ المساحة المتاحة */
+    flex: 1; /* يأخذ المساحة المتاحة */
 }
 
 .flex-item-fixed {
-    flex: 0 0 200px;                  /* عرض ثابت 200px */
+    flex: 0 0 200px; /* عرض ثابت 200px */
 }
 ```
 
@@ -260,15 +260,15 @@ if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
 ```css
 /* Logical Properties (يعمل مع LTR وRTL) */
 .card {
-    margin-inline-start: 1rem;   /* left in LTR, right in RTL */
+    margin-inline-start: 1rem; /* left in LTR, right in RTL */
     padding-inline-end: 2rem;
     border-inline-start: 3px solid blue;
-    text-align: start;            /* left in LTR, right in RTL */
+    text-align: start; /* left in LTR, right in RTL */
 }
 
 /* أو استخدم dir */
-[dir="rtl"] .icon {
-    transform: scaleX(-1);         /* اقلب الأيقونات إذا لزم */
+[dir="rtl"].icon {
+    transform: scaleX(-1); /* اقلب الأيقونات إذا لزم */
 }
 ```
 
@@ -436,7 +436,7 @@ document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 }
 ```
 
-### :has() (parent selector)
+###:has() (parent selector)
 
 ```css
 /* الحاوية إذا احتوت صورة */
@@ -468,18 +468,18 @@ form:has(input:disabled) {
 
 ## نصائح ذهبية
 
-1. **HTML دلالي** — `<article>`, `<nav>`, `<aside>` بدل `<div>` دائماً
-2. **Accessibility** — labels، ARIA، keyboard navigation
-3. **Mobile First** — ابدأ بالموبايل ثمّ الديسكتوب
-4. **CSS Variables** — للألوان والقيم المتكرّرة
+1. **HTML دلالي**، `<article>`, `<nav>`, `<aside>` بدل `<div>` دائماً
+2. **Accessibility**، labels، ARIA، keyboard navigation
+3. **Mobile First**، ابدأ بالموبايل ثمّ الديسكتوب
+4. **CSS Variables**، للألوان والقيم المتكرّرة
 5. **Logical Properties** لدعم RTL/LTR
-6. **Performance** — تصغير الصور، lazy loading، CSS/JS minified
+6. **Performance**، تصغير الصور، lazy loading، CSS/JS minified
 
 ## المصادر الرسمية
 
 - [MDN HTML](https://developer.mozilla.org/ar/docs/Web/HTML)
 - [MDN CSS](https://developer.mozilla.org/ar/docs/Web/CSS)
-- [Can I Use — دعم المتصفّحات](https://caniuse.com)
+- [Can I Use، دعم المتصفّحات](https://caniuse.com)
 - [CSS Tricks](https://css-tricks.com)
 
 ---

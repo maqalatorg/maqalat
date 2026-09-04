@@ -1,9 +1,9 @@
 ---
-title: "Claude Code — دليل المطوّر الشامل"
+title: "Claude Code، دليل المطوّر الشامل"
 description: "دليل عملي لـClaude Code (CLI من Anthropic): التثبيت، الاستخدام، المهامّ الشائعة، وأفضل الممارسات."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Claude Code"
   - "AI للمطوّرين"
@@ -13,7 +13,7 @@ faq:
   - q: "ما Claude Code؟"
     a: "أداة سطر أوامر (CLI) من Anthropic تُشغّل Claude داخل التيرمينال. تتيح للنموذج قراءة مستودعك، تنفيذ أوامر، تعديل ملفّات، وإجراء عمليات معقّدة."
   - q: "كيف يختلف عن Cursor؟"
-    a: "Cursor محرّر كامل بواجهة (IDE). Claude Code CLI للتيرمينال — أخفّ، أكثر مرونة، يتكامل مع أيّ IDE أو workflow."
+    a: "Cursor محرّر كامل بواجهة (IDE). Claude Code CLI للتيرمينال، أخفّ، أكثر مرونة، يتكامل مع أيّ IDE أو workflow."
   - q: "كم يكلّف؟"
     a: "متاح مع Claude Pro (20$) وClaude Team (25$/عضو) وMax. الاستخدام محدود بحدود اشتراكك. للاستخدام المكثّف: Max أو API."
 ---
@@ -60,7 +60,7 @@ Claude يفتح المجلّد كمساحة عمله.
 > اكتب documentation للـAPI في ملف API.md
 ```
 
-Claude يقرأ الملفّات، ينفّذ الأوامر، يعدّل حسب طلبك — كل ذلك في التيرمينال.
+Claude يقرأ الملفّات، ينفّذ الأوامر، يعدّل حسب طلبك، كل ذلك في التيرمينال.
 
 ## المهامّ الشائعة
 
@@ -226,9 +226,9 @@ Claude Code يقرأه أوتوماتيكياً في كل جلسة.
 | **النموذج** | Claude Sonnet/Opus | Claude/GPT (اختيار) | GPT + Claude |
 | **السعر** | مع Pro | 20$/شهر | 10$/شهر |
 | **الاستخدام الأمثل** | مهام معقّدة، أتمتة | البرمجة اليومية | إكمال كود سريع |
-| **يعرف المستودع كاملاً** | ✅ | ✅ | ❌ (يعرف الملفّ) |
-| **ينفّذ أوامر** | ✅ | ✅ | ❌ |
-| **يعمل في التيرمينال** | ✅ | ❌ | ❌ |
+| **يعرف المستودع كاملاً** | | | (يعرف الملفّ) |
+| **ينفّذ أوامر** | | | |
+| **يعمل في التيرمينال** | | | |
 
 **نصيحة**: كثير من المطوّرين يستخدمون **Cursor للبرمجة اليومية + Claude Code للمهام المعقّدة والأتمتة**.
 
@@ -258,7 +258,7 @@ Claude Code يدعم hooks تُشغّل تلقائياً:
 {
   "hooks": {
     "beforeCommit": "npm test",
-    "afterEdit": "prettier --write ."
+    "afterEdit": "prettier --write."
   }
 }
 ```
@@ -293,7 +293,7 @@ Claude Code قوي، لكنه قد يخطئ. راجع كل تعديل.
 
 ### 3) تفويض حذف بلا حذر
 
-`rm -rf`, `DROP TABLE` — كوارث محتملة.
+`rm -rf`, `DROP TABLE`، كوارث محتملة.
 
 ### 4) نسيان CLAUDE.md
 
@@ -311,4 +311,4 @@ Claude Code في dev/staging أوّلاً. Production بعد تحقّق.
 
 ---
 
-**اقرأ أيضاً**: [Claude — الدليل الشامل](/claude-anthropic-complete-guide) · [Claude Artifacts و Projects](/claude-artifacts-and-projects) · [برومتات جاهزة للبرمجة](/ready-prompts-for-coding) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets)
+**اقرأ أيضاً**: [Claude، الدليل الشامل](/claude-anthropic-complete-guide) · [Claude Artifacts و Projects](/claude-artifacts-and-projects) · [برومتات جاهزة للبرمجة](/ready-prompts-for-coding) · [أفضل ١٠ أكواد Python](/top-10-python-code-snippets)

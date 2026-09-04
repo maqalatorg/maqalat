@@ -1,9 +1,9 @@
 ---
-title: "قواعد المتّجهات (Vector Databases) — دليل شامل"
+title: "قواعد المتّجهات (Vector Databases)، دليل شامل"
 description: "شرح Vector Databases: Pinecone، Weaviate، Chroma، Qdrant، Milvus. متى تختار كلاً منها، الأسعار، والأداء."
 cluster: "ai"
 publishedAt: "2026-09-04"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Vector Database"
   - "Pinecone"
@@ -14,9 +14,9 @@ faq:
   - q: "ما Vector Database؟"
     a: "قاعدة بيانات مصمّمة لتخزين واسترجاع **Vectors** (متّجهات رقمية). تُستخدم أساساً في: RAG، البحث الدلالي، أنظمة التوصيات، الصور المشابهة. **الفرق عن SQL**: SQL يبحث بالمساواة الدقيقة، Vector DB بالتشابه (Similarity)."
   - q: "لماذا نحتاجها؟"
-    a: "**Embeddings** تُحوّل النصّ/الصور إلى Vectors (مثل [0.234, -0.678, ..., 1024 قيمة]). البحث فيها **بالتشابه** (أقرب vectors)، ليس بالمطابقة. Vector DB **متخصّصة لهذا** — سريعة على مليارات vectors."
+    a: "**Embeddings** تُحوّل النصّ/الصور إلى Vectors (مثل [0.234, -0.678, ..., 1024 قيمة]). البحث فيها **بالتشابه** (أقرب vectors)، ليس بالمطابقة. Vector DB **متخصّصة لهذا**، سريعة على مليارات vectors."
   - q: "أشهر Vector Databases 2026؟"
-    a: "خمس رئيسية: (1) **Pinecone** — SaaS، الأشهر تجارياً، (2) **Weaviate** — مفتوح المصدر، سحابي، (3) **Chroma** — خفيف للتطوير، (4) **Qdrant** — مفتوح، أداء عالٍ، (5) **Milvus** — الأشمل للمؤسّسات. **Postgres + pgvector** بديل ممتاز إذا لديك Postgres."
+    a: "خمس رئيسية: (1) **Pinecone**، SaaS، الأشهر تجارياً، (2) **Weaviate**، مفتوح المصدر، سحابي، (3) **Chroma**، خفيف للتطوير، (4) **Qdrant**، مفتوح، أداء عالٍ، (5) **Milvus**، الأشمل للمؤسّسات. **Postgres + pgvector** بديل ممتاز إذا لديك Postgres."
   - q: "متى أستخدم Vector DB؟"
     a: "أربع حالات: (1) **RAG** (Retrieval Augmented Generation)، (2) **بحث دلالي** (Semantic Search)، (3) **أنظمة التوصيات** (منتجات مشابهة)، (4) **البحث بالصور/الصوت المشابه**. **لا تحتاجها إذا**: بحث بسيط بالكلمات، بيانات صغيرة (<10K)."
   - q: "الأداء؟ الأسعار؟"
@@ -24,10 +24,10 @@ faq:
   - q: "هل يمكنني بناء واحد بنفسي؟"
     a: "نعم، لكن غير موصى للـProduction. **بدائل بسيطة**: NumPy مع Cosine Similarity (للـ<100K vectors). **مكتبات جاهزة**: FAISS (Facebook)، Annoy (Spotify)، HNSWlib. **لكن Vector DBs الجاهزة أوفر** في الجهد على المدى الطويل."
   - q: "الفرق بين Approximate و Exact Search؟"
-    a: "**Exact**: يفحص كل vector، بطيء على المليارات. **Approximate (ANN)**: خوارزميات مثل HNSW، IVF — أسرع بـ100-1000x، **بدقّة 95-99%**. كل Vector DBs الحديثة تستخدم ANN. **الفرق بالنسبة لك**: نتائج ممتازة بسرعة عالية."
+    a: "**Exact**: يفحص كل vector، بطيء على المليارات. **Approximate (ANN)**: خوارزميات مثل HNSW، IVF، أسرع بـ100-1000x، **بدقّة 95-99%**. كل Vector DBs الحديثة تستخدم ANN. **الفرق بالنسبة لك**: نتائج ممتازة بسرعة عالية."
 ---
 
-**Vector Databases** عمود فقري تطبيقات AI الحديثة. من RAG إلى أنظمة التوصيات، لا يمكن الاستغناء عنها. هذا الدليل شامل — تقنياً، وعملياً.
+**Vector Databases** عمود فقري تطبيقات AI الحديثة. من RAG إلى أنظمة التوصيات، لا يمكن الاستغناء عنها. هذا الدليل شامل، تقنياً، وعملياً.
 
 ## المفهوم
 
@@ -36,26 +36,26 @@ faq:
 **Vector** = قائمة أرقام تمثّل شيئاً في **فضاء متعدّد الأبعاد**.
 
 **مثال**:
-- كلمة "قهوة" → [0.234, -0.678, 0.112, ..., 1024 قيمة]
-- كلمة "شاي" → [0.245, -0.665, 0.098, ..., 1024 قيمة] (قريبة)
-- كلمة "سيّارة" → [-0.789, 0.234, -0.556, ..., 1024 قيمة] (بعيدة)
+- كلمة "قهوة" → [0.234, -0.678, 0.112,..., 1024 قيمة]
+- كلمة "شاي" → [0.245, -0.665, 0.098,..., 1024 قيمة] (قريبة)
+- كلمة "سيّارة" → [-0.789, 0.234, -0.556,..., 1024 قيمة] (بعيدة)
 
 **الفكرة**: **المعاني المتشابهة = Vectors قريبة**.
 
 ### ما Embeddings
 
 **نماذج** تُحوّل نصّ/صورة إلى vector:
-- **OpenAI text-embedding-3-large**: 3072 بُعد
-- **OpenAI text-embedding-3-small**: 1536 بُعد
-- **Cohere Embed**: 1024 بُعد
+- OpenAI text-embedding-3-large: 3072 بُعد
+- OpenAI text-embedding-3-small: 1536 بُعد
+- Cohere Embed: 1024 بُعد
 - **BGE-M3** (مفتوح، ممتاز للعربية): 1024 بُعد
 
 ### البحث بالتشابه
 
 **Similarity Metrics**:
-- **Cosine Similarity**: الأشهر — يقيس الزاوية
-- **Euclidean Distance**: المسافة الفعلية
-- **Dot Product**: للأداء العالي
+- Cosine Similarity: الأشهر، يقيس الزاوية
+- Euclidean Distance: المسافة الفعلية
+- Dot Product: للأداء العالي
 
 **النتيجة**: تعطي vector، تحصل على أقرب N vectors في القاعدة.
 
@@ -77,13 +77,13 @@ faq:
 
 ### الميّزات الإضافية
 
-- **Metadata Filtering**: "أعطني أقرب documents في قسم 'التسويق'"
-- **Persistence**: بيانات دائمة
-- **Scaling**: إضافة nodes
+- Metadata Filtering: "أعطني أقرب documents في قسم 'التسويق'"
+- Persistence: بيانات دائمة
+- Scaling: إضافة nodes
 - **Backup & Recovery**
 - **APIs جاهزة**
 
-## Pinecone — الرائد التجاري
+## Pinecone، الرائد التجاري
 
 ### الخلفية
 
@@ -94,18 +94,18 @@ faq:
 
 ### الميّزات
 
-- **SaaS كامل** — لا إدارة خادم
-- **Serverless**: يتوسّع تلقائياً
-- **سريع جدّاً**: <100ms على مليارات
+- **SaaS كامل**، لا إدارة خادم
+- Serverless: يتوسّع تلقائياً
+- سريع جدّاً: <100ms على مليارات
 - **Multi-region**
 - **Enterprise-grade** security
 - **Namespaces** لتنظيم البيانات
 
 ### الأسعار
 
-- **Starter**: مجاني (100K vectors)
-- **Standard**: 70$/شهر (Serverless starts ~$2/GB/شهر)
-- **Enterprise**: مخصّص
+- Starter: مجاني (100K vectors)
+- Standard: 70$/شهر (Serverless starts ~$2/GB/شهر)
+- Enterprise: مخصّص
 
 ### الأنسب لـ
 
@@ -131,19 +131,19 @@ index = pc.Index("my-index")
 
 # رفع vectors
 index.upsert(vectors=[
-    ("id1", [0.1, 0.2, ...], {"category": "tech"}),
-    ("id2", [0.3, 0.4, ...], {"category": "sports"}),
+    ("id1", [0.1, 0.2,...], {"category": "tech"}),
+    ("id2", [0.3, 0.4,...], {"category": "sports"}),
 ])
 
 # استعلام
 results = index.query(
-    vector=[0.15, 0.25, ...],
+    vector=[0.15, 0.25,...],
     top_k=5,
     filter={"category": "tech"}
 )
 ```
 
-## Weaviate — مفتوح المصدر السحابي
+## Weaviate، مفتوح المصدر السحابي
 
 ### الخلفية
 
@@ -153,17 +153,17 @@ results = index.query(
 
 ### الميّزات
 
-- **Modular**: تختار Embedding Model (OpenAI، Cohere، محلي)
-- **Hybrid Search**: Vector + Keyword
+- Modular: تختار Embedding Model (OpenAI، Cohere، محلي)
+- Hybrid Search: Vector + Keyword
 - **GraphQL API** (بجانب REST)
 - **Multi-modal** (نصّ + صور + صوت)
 - **Multi-tenancy**
 
 ### الأسعار
 
-- **Self-hosted**: مجاني
-- **Weaviate Cloud**: من 25$/شهر
-- **Enterprise**: مخصّص
+- Self-hosted: مجاني
+- Weaviate Cloud: من 25$/شهر
+- Enterprise: مخصّص
 
 ### الأنسب لـ
 
@@ -200,7 +200,7 @@ result = client.query.get("Article", ["title"]).with_near_text({
 }).with_limit(5).do()
 ```
 
-## Chroma — للتطوير السريع
+## Chroma، للتطوير السريع
 
 ### الخلفية
 
@@ -218,7 +218,7 @@ result = client.query.get("Article", ["title"]).with_near_text({
 
 ### الأسعار
 
-- **Local**: مجاني
+- Local: مجاني
 - **Chroma Cloud** (قادم): مدفوع
 
 ### الأنسب لـ
@@ -249,9 +249,9 @@ results = collection.query(
 )
 ```
 
-**بسيط جدّاً** — لا Embedding model يدوي (يستخدم default).
+**بسيط جدّاً**، لا Embedding model يدوي (يستخدم default).
 
-## Qdrant — الأداء العالي
+## Qdrant، الأداء العالي
 
 ### الخلفية
 
@@ -268,8 +268,8 @@ results = collection.query(
 
 ### الأسعار
 
-- **Self-hosted**: مجاني
-- **Qdrant Cloud**: مجاني للتجربة (1GB)، مدفوع للـProduction
+- Self-hosted: مجاني
+- Qdrant Cloud: مجاني للتجربة (1GB)، مدفوع للـProduction
 
 ### الأنسب لـ
 
@@ -277,7 +277,7 @@ results = collection.query(
 - **مطوّرو Rust**
 - **بيئات محدودة الموارد**
 
-## Milvus — للمؤسّسات الكبيرة
+## Milvus، للمؤسّسات الكبيرة
 
 ### الخلفية
 
@@ -287,7 +287,7 @@ results = collection.query(
 
 ### الميّزات
 
-- **الأشمل** — كل الميّزات
+- **الأشمل**، كل الميّزات
 - **مصمّم للمليارات** vectors
 - **Distributed** كامل
 - **Cloud-native** (Kubernetes)
@@ -299,7 +299,7 @@ results = collection.query(
 - **بيانات ضخمة** (100M+ vectors)
 - **فرق DevOps متمرّسة**
 
-## pgvector — Postgres Extension
+## pgvector، Postgres Extension
 
 ### المفهوم
 
@@ -307,7 +307,7 @@ results = collection.query(
 
 ### المزايا
 
-- **مدمج مع DB موجود** — لا خادم إضافي
+- **مدمج مع DB موجود**، لا خادم إضافي
 - **ACID transactions**
 - **SQL familiar**
 - **مجاني**
@@ -315,7 +315,7 @@ results = collection.query(
 ### القيود
 
 - **الأداء أقلّ** من Vector DBs المتخصّصة على المليارات
-- **مثالي لـ**: <10M vectors
+- مثالي لـ: <10M vectors
 
 ### مثال
 
@@ -329,11 +329,11 @@ CREATE TABLE items (
 );
 
 INSERT INTO items (content, embedding)
-VALUES ('نصّ', '[0.1, 0.2, ...]');
+VALUES ('نصّ', '[0.1, 0.2,...]');
 
 SELECT content
 FROM items
-ORDER BY embedding <-> '[0.1, 0.2, ...]'
+ORDER BY embedding <-> '[0.1, 0.2,...]'
 LIMIT 5;
 ```
 
@@ -346,7 +346,7 @@ LIMIT 5;
 | **النوع** | SaaS | مفتوح | مفتوح | مفتوح | مفتوح | Postgres |
 | **السعر** | مدفوع | مجاني/مدفوع | مجاني | مجاني/مدفوع | مجاني | مجاني |
 | **الأداء** | ممتاز | ممتاز | متوسّط | ممتاز | ممتاز | جيّد (لبيانات <10M) |
-| **السهولة** | ✅ الأسهل | متوسّط | ✅ للتطوير | متوسّط | معقّد | ✅ إن Postgres موجود |
+| **السهولة** | الأسهل | متوسّط | للتطوير | متوسّط | معقّد | إن Postgres موجود |
 | **الأنسب لـ** | Production بلا صداع | مرونة | Prototypes | أداء + مفتوح | Enterprise كبير | Postgres shops |
 
 ## اختيار Vector DB
@@ -354,36 +354,36 @@ LIMIT 5;
 ### قرار سريع
 
 **استخدم Pinecone إذا**:
-- ✅ لا وقت لإدارة infrastructure
-- ✅ ميزانية 70$+/شهر
-- ✅ تريد Production فوراً
+- لا وقت لإدارة infrastructure
+- ميزانية 70$+/شهر
+- تريد Production فوراً
 
 **استخدم Weaviate إذا**:
-- ✅ Multi-modal (نصّ + صور)
-- ✅ GraphQL
-- ✅ مزيج سحابي/محلي
+- Multi-modal (نصّ + صور)
+- GraphQL
+- مزيج سحابي/محلي
 
 **استخدم Chroma إذا**:
-- ✅ Prototype
-- ✅ اختبار محلي
-- ✅ Notebook Jupyter
+- Prototype
+- اختبار محلي
+- Notebook Jupyter
 
 **استخدم Qdrant إذا**:
-- ✅ الأداء أولوية
-- ✅ Self-hosted جادّ
-- ✅ Filtering معقّد
+- الأداء أولوية
+- Self-hosted جادّ
+- Filtering معقّد
 
 **استخدم Milvus إذا**:
-- ✅ مليارات vectors
-- ✅ فريق DevOps متمرّس
-- ✅ Enterprise scale
+- مليارات vectors
+- فريق DevOps متمرّس
+- Enterprise scale
 
 **استخدم pgvector إذا**:
-- ✅ Postgres موجود أصلاً
-- ✅ <10M vectors
-- ✅ لا تريد خادم إضافي
+- Postgres موجود أصلاً
+- <10M vectors
+- لا تريد خادم إضافي
 
-## Embeddings — الاختيار
+## Embeddings، الاختيار
 
 ### للإنجليزية
 
@@ -417,9 +417,9 @@ LIMIT 5;
 
 ### مفتوحة المصدر
 
-- **BGE-M3** — الأفضل عالمياً للمفتوح
-- **Nomic Embed** — منافس
-- **sentence-transformers** — عائلة شاملة
+- **BGE-M3**، الأفضل عالمياً للمفتوح
+- **Nomic Embed**، منافس
+- **sentence-transformers**، عائلة شاملة
 
 ### التسعير
 
@@ -480,18 +480,18 @@ Re-ranker (Cohere Rerank، Cross-encoder) → 10 نتيجة نهائية
 ### 2) Metadata
 
 - ضع كل ما تحتاج للـFiltering
-- **مثال**: source، date، category، language
+- مثال: source، date، category، language
 
 ### 3) Indexing Strategy
 
-- **HNSW**: الأشهر، توازن سرعة/دقّة
-- **IVF**: للبيانات الضخمة
-- **Flat**: للدقّة القصوى (بطيء)
+- HNSW: الأشهر، توازن سرعة/دقّة
+- IVF: للبيانات الضخمة
+- Flat: للدقّة القصوى (بطيء)
 
 ### 4) الاختبار
 
-- **Recall@K**: كم النتائج الصحيحة في أعلى K
-- **Precision@K**: كم من أعلى K صحيحة
+- Recall@K: كم النتائج الصحيحة في أعلى K
+- Precision@K: كم من أعلى K صحيحة
 - **MRR (Mean Reciprocal Rank)**
 
 ### 5) المراقبة
@@ -503,8 +503,8 @@ Re-ranker (Cohere Rerank، Cross-encoder) → 10 نتيجة نهائية
 
 ### 6) التحديث
 
-- **Batch updates**: أفضل من single
-- **Deletion strategies**: soft vs hard
+- Batch updates: أفضل من single
+- Deletion strategies: soft vs hard
 
 ## Vector DB للعربية
 
@@ -538,10 +538,10 @@ Re-ranker (Cohere Rerank، Cross-encoder) → 10 نتيجة نهائية
 
 ### السحابات الكبرى
 
-- **AWS**: OpenSearch Vector Engine، Amazon Aurora + pgvector
-- **Google Cloud**: Vertex AI Vector Search
-- **Azure**: Cosmos DB Vector، AI Search
-- **Oracle**: Autonomous Database with AI Vector Search
+- AWS: OpenSearch Vector Engine، Amazon Aurora + pgvector
+- Google Cloud: Vertex AI Vector Search
+- Azure: Cosmos DB Vector، AI Search
+- Oracle: Autonomous Database with AI Vector Search
 
 **السعودية**: **HUMAIN Cloud** (متوقّع) سيوفّر Vector DBs محلياً.
 
@@ -549,15 +549,15 @@ Re-ranker (Cohere Rerank، Cross-encoder) → 10 نتيجة نهائية
 
 ### 1) أنظمة التوصيات
 
-- **Spotify**: يقترح موسيقى مشابهة
-- **Netflix**: أفلام
-- **Amazon**: منتجات
+- Spotify: يقترح موسيقى مشابهة
+- Netflix: أفلام
+- Amazon: منتجات
 - **كل هذا Vector-based**
 
 ### 2) البحث بالصور
 
-- **Pinterest**: صور مشابهة
-- **Google Lens**: تعرّف بصريّ
+- Pinterest: صور مشابهة
+- Google Lens: تعرّف بصريّ
 - **Reverse Image Search**
 
 ### 3) كشف الاحتيال
@@ -597,7 +597,7 @@ Re-ranker (Cohere Rerank، Cross-encoder) → 10 نتيجة نهائية
 - توحيد APIs
 - Portability بين مزوّدين
 
-## للسعودي — من أين تبدأ
+## للسعودي، من أين تبدأ
 
 ### 1) للتعلّم
 
@@ -637,4 +637,4 @@ Re-ranker (Cohere Rerank، Cross-encoder) → 10 نتيجة نهائية
 
 ---
 
-**اقرأ أيضاً**: [RAG — التعزيز بالاسترجاع](/rag-retrieval-augmented-generation) · [LangChain — بناء تطبيقات AI](/langchain-guide) · [Fine-tuning و LoRA](/fine-tuning-lora-guide) · [OpenAI API — دليل البدء](/openai-api-getting-started)
+**اقرأ أيضاً**: [RAG، التعزيز بالاسترجاع](/rag-retrieval-augmented-generation) · [LangChain، بناء تطبيقات AI](/langchain-guide) · [Fine-tuning و LoRA](/fine-tuning-lora-guide) · [OpenAI API، دليل البدء](/openai-api-getting-started)

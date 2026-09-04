@@ -3,7 +3,7 @@ title: "أكواد React و Next.js الأساسية 2026"
 description: "مجموعة أكواد جاهزة لـReact 19 و Next.js 15: Components، Hooks، Server Actions، Data Fetching."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "React"
   - "Next.js"
@@ -57,7 +57,7 @@ function UserProfile({ userId }) {
         setLoading(false);
       });
     
-    return () => controller.abort();  // Cleanup
+    return () => controller.abort(); // Cleanup
   }, [userId]);
   
   if (loading) return <p>جاري التحميل...</p>;
@@ -74,9 +74,9 @@ const initialState = { count: 0, step: 1 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "INCREMENT": return { ...state, count: state.count + state.step };
-    case "DECREMENT": return { ...state, count: state.count - state.step };
-    case "SET_STEP": return { ...state, step: action.step };
+    case "INCREMENT": return {...state, count: state.count + state.step };
+    case "DECREMENT": return {...state, count: state.count - state.step };
+    case "SET_STEP": return {...state, step: action.step };
     case "RESET": return initialState;
     default: return state;
   }
@@ -122,7 +122,7 @@ export function useTheme() {
 function Header() {
   const { theme, setTheme } = useTheme();
   return (
-    <button onClick={() => setTheme(t => t === "light" ? "dark" : "light")}>
+    <button onClick={() => setTheme(t => t === "light" ? "dark": "light")}>
       {theme}
     </button>
   );
@@ -199,13 +199,13 @@ import { useOptimistic } from "react";
 function TodoList({ todos, addTodo }) {
   const [optimisticTodos, addOptimistic] = useOptimistic(
     todos,
-    (state, newTodo) => [...state, { ...newTodo, sending: true }]
+    (state, newTodo) => [...state, {...newTodo, sending: true }]
   );
   
   async function submit(formData) {
     const newTodo = { id: Math.random(), text: formData.get("text") };
     addOptimistic(newTodo);
-    await addTodo(newTodo);  // API call
+    await addTodo(newTodo); // API call
   }
   
   return (
@@ -216,7 +216,7 @@ function TodoList({ todos, addTodo }) {
       </form>
       <ul>
         {optimisticTodos.map(todo => (
-          <li key={todo.id} style={{ opacity: todo.sending ? 0.5 : 1 }}>
+          <li key={todo.id} style={{ opacity: todo.sending ? 0.5: 1 }}>
             {todo.text}
           </li>
         ))}
@@ -232,7 +232,7 @@ function TodoList({ todos, addTodo }) {
 import { use, Suspense } from "react";
 
 function UserProfile({ userPromise }) {
-  const user = use(userPromise);  // ينتظر الـPromise
+  const user = use(userPromise); // ينتظر الـPromise
   return <div>{user.name}</div>;
 }
 
@@ -254,17 +254,17 @@ function App() {
 
 ```
 app/
-├── layout.tsx        # Root layout
-├── page.tsx          # /
+├── layout.tsx # Root layout
+├── page.tsx # /
 ├── about/
-│   └── page.tsx      # /about
+│ └── page.tsx # /about
 ├── blog/
-│   ├── page.tsx      # /blog
-│   └── [slug]/
-│       └── page.tsx  # /blog/:slug
+│ ├── page.tsx # /blog
+│ └── [slug]/
+│ └── page.tsx # /blog/:slug
 ├── api/
-│   └── users/
-│       └── route.ts  # /api/users
+│ └── users/
+│ └── route.ts # /api/users
 └── globals.css
 ```
 
@@ -419,12 +419,12 @@ export default function Error({ error, reset }) {
 
 ## نصائح ذهبية
 
-1. **Server Components افتراضياً** — لا تضف `use client` إلا للحاجة
-2. **Fetch في Server Components** — بلا useEffect
+1. **Server Components افتراضياً**، لا تضف `use client` إلا للحاجة
+2. **Fetch في Server Components**، بلا useEffect
 3. **TypeScript دائماً** للمشاريع الجادّة
-4. **App Router بدل Pages** — الحديث والأفضل
-5. **Server Actions للـForms** — تجنّب API routes لكل شيء
-6. **Image من next/image** — تحسين تلقائي
+4. **App Router بدل Pages**، الحديث والأفضل
+5. **Server Actions للـForms**، تجنّب API routes لكل شيء
+6. **Image من next/image**، تحسين تلقائي
 
 ## المصادر الرسمية
 

@@ -1,9 +1,9 @@
 ---
-title: "MCP — بروتوكول سياق النموذج"
+title: "MCP، بروتوكول سياق النموذج"
 description: "شرح Model Context Protocol من Anthropic: كيف يربط AI بأدواتك (Google Drive، GitHub، Slack، قواعد بيانات) بأمان."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "MCP"
   - "Model Context Protocol"
@@ -11,7 +11,7 @@ tags:
   - "Anthropic"
 faq:
   - q: "ما MCP؟"
-    a: "بروتوكول أنشأته Anthropic أواخر 2024 يربط النماذج اللغوية بأدواتك (ملفّات، APIs، قواعد بيانات) بأمان. صار معياراً صناعياً — OpenAI وGoogle يدعمانه أيضاً."
+    a: "بروتوكول أنشأته Anthropic أواخر 2024 يربط النماذج اللغوية بأدواتك (ملفّات، APIs، قواعد بيانات) بأمان. صار معياراً صناعياً، OpenAI وGoogle يدعمانه أيضاً."
   - q: "من يحتاجه؟"
     a: "المستخدم المتقدّم الذي يريد AI يقرأ Google Drive، GitHub، Slack، قاعدة بياناته. المطوّر الذي يبني تطبيقات AI. المؤسّسة التي تريد AI مربوطاً بأنظمتها."
   - q: "هل يعمل مع كل النماذج؟"
@@ -43,7 +43,7 @@ MCP بروتوكول **موحّد**:
 ## البنية
 
 ```
-[LLM]  ←→  [MCP Client]  ←→  [MCP Server]  ←→  [الأداة]
+[LLM] ←→ [MCP Client] ←→ [MCP Server] ←→ [الأداة]
 ```
 
 **LLM**: النموذج (Claude، GPT، إلخ)
@@ -57,43 +57,43 @@ Anthropic والمجتمع بنيا عشرات الخوادم:
 
 ### للتخزين
 
-- **Google Drive** — قراءة/كتابة ملفّاتك
-- **Dropbox** — مشابه
-- **OneDrive** — مايكروسوفت
-- **Local Filesystem** — قراءة جهازك
+- **Google Drive**، قراءة/كتابة ملفّاتك
+- **Dropbox**، مشابه
+- **OneDrive**، مايكروسوفت
+- **Local Filesystem**، قراءة جهازك
 
 ### للتطوير
 
-- **GitHub** — Issues، PRs، ملفّات، commits
-- **GitLab** — مشابه
-- **PostgreSQL** — استعلامات SQL
-- **MongoDB** — استعلامات NoSQL
-- **SQLite** — قواعد بيانات محلية
+- **GitHub**، Issues، PRs، ملفّات، commits
+- **GitLab**، مشابه
+- **PostgreSQL**، استعلامات SQL
+- **MongoDB**، استعلامات NoSQL
+- **SQLite**، قواعد بيانات محلية
 
 ### للتواصل
 
-- **Slack** — قراءة رسائل، إرسال
-- **Discord** — مشابه
-- **Gmail** — قراءة، إرسال
-- **Notion** — قراءة/تحديث صفحات
+- **Slack**، قراءة رسائل، إرسال
+- **Discord**، مشابه
+- **Gmail**، قراءة، إرسال
+- **Notion**، قراءة/تحديث صفحات
 
 ### للأعمال
 
-- **Linear** — إدارة مشاريع
-- **Jira** — Issues
-- **Salesforce** — CRM
-- **HubSpot** — Marketing/CRM
+- **Linear**، إدارة مشاريع
+- **Jira**، Issues
+- **Salesforce**، CRM
+- **HubSpot**، Marketing/CRM
 
 ### للمعرفة
 
-- **Perplexity** — بحث
-- **Wikipedia** — قراءة مقالات
-- **arXiv** — أوراق علمية
+- **Perplexity**، بحث
+- **Wikipedia**، قراءة مقالات
+- **arXiv**، أوراق علمية
 
 ### للأتمتة
 
-- **Zapier** — 5000+ تكامل
-- **Puppeteer** — تصفّح ويب
+- **Zapier**، 5000+ تكامل
+- **Puppeteer**، تصفّح ويب
 
 ## كيف تفعّله في Claude
 
@@ -136,7 +136,7 @@ claude --mcp github,gdrive,slack
 > عند الانتهاء، أنشئ PR
 ```
 
-Claude يقرأ من GitHub، يعدّل الكود، ينشئ PR — كل ذلك تلقائياً.
+Claude يقرأ من GitHub، يعدّل الكود، ينشئ PR، كل ذلك تلقائياً.
 
 ### 2) للمكتب
 
@@ -222,7 +222,7 @@ MCP بُني للأمان:
 
 ### 2) التحقّق قبل الأفعال الخطرة
 
-قبل حذف ملفّ، إرسال إيميل، دفع commit — Claude يسأل تأكيداً.
+قبل حذف ملفّ، إرسال إيميل، دفع commit، Claude يسأل تأكيداً.
 
 ### 3) العزل
 
@@ -255,23 +255,23 @@ Claude يتعطّل إذا فشل Server. لا تعتمد كلياً.
 
 ### حالات استخدام
 
-- **HR**: Claude يقرأ ملفّات موظّفين (Google Drive) ويجيب استفسارات
-- **Sales**: Claude يستعلم CRM (Salesforce)، يكتب مقترحات
-- **Support**: Claude يقرأ Zendesk، يقترح ردوداً
-- **Engineering**: Claude يقرأ GitHub + Linear، يخطّط sprints
+- HR: Claude يقرأ ملفّات موظّفين (Google Drive) ويجيب استفسارات
+- Sales: Claude يستعلم CRM (Salesforce)، يكتب مقترحات
+- Support: Claude يقرأ Zendesk، يقترح ردوداً
+- Engineering: Claude يقرأ GitHub + Linear، يخطّط sprints
 
 ### التحدّيات
 
-- **الأمن**: بيانات حسّاسة تحتاج ضوابط صارمة
-- **الحوكمة**: من يستطيع تفعيل أيّ Server
-- **التكلفة**: استعلامات كثيرة = فواتير API
+- الأمن: بيانات حسّاسة تحتاج ضوابط صارمة
+- الحوكمة: من يستطيع تفعيل أيّ Server
+- التكلفة: استعلامات كثيرة = فواتير API
 
 ## المستقبل
 
-- **OpenAI وGoogle يوسّعان الدعم** — 2026 عام الاعتماد الواسع
-- **Servers أكثر تخصّصاً** — Servers لكل صناعة (طبّي، قانوني، مالي)
-- **معايير الأمان أشدّ** — مع نضج البروتوكول
-- **تجربة مستخدم أبسط** — Setup بضغطة زرّ
+- **OpenAI وGoogle يوسّعان الدعم**، 2026 عام الاعتماد الواسع
+- **Servers أكثر تخصّصاً**، Servers لكل صناعة (طبّي، قانوني، مالي)
+- **معايير الأمان أشدّ**، مع نضج البروتوكول
+- **تجربة مستخدم أبسط**، Setup بضغطة زرّ
 
 ## المصادر الرسمية
 
@@ -282,4 +282,4 @@ Claude يتعطّل إذا فشل Server. لا تعتمد كلياً.
 
 ---
 
-**اقرأ أيضاً**: [Claude — الدليل الشامل](/claude-anthropic-complete-guide) · [Claude Code — دليل المطوّر](/claude-code-developer-guide) · [Claude Artifacts و Projects](/claude-artifacts-and-projects) · [OpenAI API — دليل البدء](/openai-api-getting-started)
+**اقرأ أيضاً**: [Claude، الدليل الشامل](/claude-anthropic-complete-guide) · [Claude Code، دليل المطوّر](/claude-code-developer-guide) · [Claude Artifacts و Projects](/claude-artifacts-and-projects) · [OpenAI API، دليل البدء](/openai-api-getting-started)

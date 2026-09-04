@@ -1,9 +1,9 @@
 ---
-title: "أكواد Bash و PowerShell — أتمتة سطر الأوامر"
+title: "أكواد Bash و PowerShell، أتمتة سطر الأوامر"
 description: "أكواد Bash (macOS/Linux) وPowerShell (Windows) لأتمتة المهام اليومية: ملفّات، شبكة، مراقبة."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Bash scripts"
   - "PowerShell"
@@ -13,7 +13,7 @@ faq:
   - q: "أيّهما أستخدم؟"
     a: "Bash على macOS/Linux (أو WSL على Windows). PowerShell على Windows. للأتمتة عبر الأنظمة: Python أفضل خيار."
   - q: "هل PowerShell يعمل على macOS/Linux؟"
-    a: "نعم منذ 2016 — PowerShell 7+ متعدّد الأنظمة. لكن Bash أكثر شيوعاً على تلك الأنظمة."
+    a: "نعم منذ 2016، PowerShell 7+ متعدّد الأنظمة. لكن Bash أكثر شيوعاً على تلك الأنظمة."
 ---
 
 أوامر سطر الأوامر توفّر وقتاً هائلاً. هذه أكواد جاهزة للأتمتة.
@@ -27,13 +27,13 @@ faq:
 
 # البحث عن ملفّات
 find /path -name "*.log" -type f
-find /path -mtime +7  # أقدم من 7 أيام
-find /path -size +100M  # أكبر من 100MB
+find /path -mtime +7 # أقدم من 7 أيام
+find /path -size +100M # أكبر من 100MB
 
 # البحث في المحتوى
 grep -r "pattern" /path
-grep -rn "TODO" .  # مع أرقام الأسطر
-grep -rl "pattern" .  # فقط أسماء الملفّات
+grep -rn "TODO". # مع أرقام الأسطر
+grep -rl "pattern". # فقط أسماء الملفّات
 
 # نسخ/نقل
 cp -r source/ destination/
@@ -42,7 +42,7 @@ mv old_name new_name
 # حذف بحذر
 rm file.txt
 rm -r folder/
-rm -rf /path  # خطر! تحقّق قبل التنفيذ
+rm -rf /path # خطر! تحقّق قبل التنفيذ
 
 # ضغط
 tar -czvf archive.tar.gz folder/
@@ -53,11 +53,11 @@ unzip archive.zip
 
 ```bash
 # عدّ الأسطر/الكلمات
-wc -l file.txt      # عدد الأسطر
-wc -w file.txt      # عدد الكلمات
+wc -l file.txt # عدد الأسطر
+wc -w file.txt # عدد الكلمات
 
 # استخراج أعمدة (CSV)
-cut -d',' -f1,3 data.csv  # العمود 1 و 3
+cut -d',' -f1,3 data.csv # العمود 1 و 3
 
 # استبدال (sed)
 sed -i 's/old/new/g' file.txt
@@ -69,7 +69,7 @@ sort -u file.txt
 # أوّل/آخر أسطر
 head -n 20 file.txt
 tail -n 20 file.txt
-tail -f app.log  # متابعة حيّة
+tail -f app.log # متابعة حيّة
 ```
 
 ### حلقات وشرطيات
@@ -127,17 +127,17 @@ nc -zv google.com 443
 
 ```bash
 # استخدام القرص
-df -h                    # كل الأقسام
-du -sh /path/*           # حجم كل مجلّد
+df -h # كل الأقسام
+du -sh /path/* # حجم كل مجلّد
 
 # العمليات
 ps aux | grep python
-top                      # مراقبة حيّة
-htop                     # (أفضل، يحتاج تثبيت)
+top # مراقبة حيّة
+htop # (أفضل، يحتاج تثبيت)
 
 # الذاكرة
-free -h                  # (Linux فقط)
-vm_stat                  # (macOS)
+free -h # (Linux فقط)
+vm_stat # (macOS)
 
 # قتل عملية
 kill -9 <PID>
@@ -289,7 +289,7 @@ Get-Service | Where-Object { $_.Status -eq "Running" }
 # check_disk.ps1
 
 $drives = Get-PSDrive -PSProvider FileSystem
-$threshold = 80  # نسبة الامتلاء التي تُنشط التنبيه
+$threshold = 80 # نسبة الامتلاء التي تُنشط التنبيه
 
 foreach ($drive in $drives) {
     if ($drive.Used -and $drive.Free) {
@@ -349,11 +349,11 @@ $env:API_KEY = "sk-..."
 
 ## نصائح ذهبية
 
-1. **`shellcheck` لـBash** — أداة تحقّق من الأخطاء
-2. **PowerShell ISE أو VS Code** — كتابة أفضل
+1. **`shellcheck` لـBash**، أداة تحقّق من الأخطاء
+2. **PowerShell ISE أو VS Code**، كتابة أفضل
 3. **دائماً استخدم quotes** حول متغيّرات فيها مسافات
-4. **`set -e` في Bash** — يوقف السكريبت عند أوّل خطأ
-5. **`$ErrorActionPreference = "Stop"` في PowerShell** — نفس الفكرة
+4. **`set -e` في Bash**، يوقف السكريبت عند أوّل خطأ
+5. **`$ErrorActionPreference = "Stop"` في PowerShell**، نفس الفكرة
 
 ## المصادر الرسمية
 

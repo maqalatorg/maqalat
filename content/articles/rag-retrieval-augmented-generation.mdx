@@ -1,9 +1,9 @@
 ---
-title: "RAG — تعزيز الذكاء الاصطناعي بالاسترجاع"
+title: "RAG، تعزيز الذكاء الاصطناعي بالاسترجاع"
 description: "شرح تفصيلي لـRAG (Retrieval-Augmented Generation): كيف تربط LLM بمعرفتك الخاصّة، مع أمثلة بناء عملية."
 cluster: "ai"
 publishedAt: "2026-09-04"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "RAG"
   - "Retrieval Augmented Generation"
@@ -12,17 +12,17 @@ tags:
   - "LlamaIndex"
 faq:
   - q: "ما RAG؟"
-    a: "Retrieval-Augmented Generation — تقنية تربط النموذج اللغوي بقاعدة معرفة خاصّة بك. حين تسأل، النظام: (1) يبحث في مصادرك، (2) يجد الأجزاء المتعلّقة، (3) يمرّرها للنموذج، (4) النموذج يجيب مبنيّاً عليها. تحلّ مشكلة الهلوسة وتعطي النموذج معلومات حديثة."
+    a: "Retrieval-Augmented Generation، تقنية تربط النموذج اللغوي بقاعدة معرفة خاصّة بك. حين تسأل، النظام: (1) يبحث في مصادرك، (2) يجد الأجزاء المتعلّقة، (3) يمرّرها للنموذج، (4) النموذج يجيب مبنيّاً عليها. تحلّ مشكلة الهلوسة وتعطي النموذج معلومات حديثة."
   - q: "ما الفرق بين RAG و Fine-tuning؟"
     a: "Fine-tuning: تُدرّب النموذج على بياناتك (مكلف، بطيء، صعب التحديث). RAG: تحتفظ بالبيانات في قاعدة منفصلة، النموذج يقرأها عند الحاجة (رخيص، سريع، سهل التحديث). للمعلومات المتغيّرة: RAG. لتغيير أسلوب/سلوك النموذج: Fine-tuning."
   - q: "ما Vector Database؟"
-    a: "قاعدة بيانات خاصّة لتخزين Embeddings (تمثيلات رقمية للنصّ). تُتيح البحث الدلالي (Semantic Search) — تبحث بالمعنى، ليس فقط الكلمات. الأشهر: Pinecone، Weaviate، Chroma، Qdrant، Milvus. Postgres مع pgvector خيار مفتوح."
+    a: "قاعدة بيانات خاصّة لتخزين Embeddings (تمثيلات رقمية للنصّ). تُتيح البحث الدلالي (Semantic Search)، تبحث بالمعنى، ليس فقط الكلمات. الأشهر: Pinecone، Weaviate، Chroma، Qdrant، Milvus. Postgres مع pgvector خيار مفتوح."
   - q: "متى أستخدم RAG؟"
     a: "خمس حالات: (1) شات بوت شركتك يعرف وثائقك، (2) بحث في PDFs الأكاديمية، (3) مساعد قانوني في أنظمتك، (4) FAQ ديناميكي، (5) أيّ استخدام يحتاج النموذج معرفة **محدّدة** لا يعرفها من التدريب."
   - q: "أدوات جاهزة تبني RAG بسرعة؟"
-    a: "Custom GPTs (ChatGPT Plus)، Claude Projects (Pro)، NotebookLM (Google، مجاني) — كلها RAG جاهزة. للمطوّرين: LangChain، LlamaIndex، Haystack. لبناء مؤسّسي: Azure AI Search، AWS Kendra، Vertex AI Search."
+    a: "Custom GPTs (ChatGPT Plus)، Claude Projects (Pro)، NotebookLM (Google، مجاني)، كلها RAG جاهزة. للمطوّرين: LangChain، LlamaIndex، Haystack. لبناء مؤسّسي: Azure AI Search، AWS Kendra، Vertex AI Search."
   - q: "ما تحدّيات RAG؟"
-    a: "خمسة: (1) جودة الاسترجاع — إذا لم يجد الأجزاء المناسبة، الجواب سيّئ، (2) حجم Chunks — كبير جدّاً أو صغير جدّاً يضرّ، (3) التكلفة — Embeddings + التخزين + الاستعلامات، (4) التحديث — إضافة بيانات جديدة، (5) الأمان — حماية بيانات المستخدمين المدمجة."
+    a: "خمسة: (1) جودة الاسترجاع، إذا لم يجد الأجزاء المناسبة، الجواب سيّئ، (2) حجم Chunks، كبير جدّاً أو صغير جدّاً يضرّ، (3) التكلفة، Embeddings + التخزين + الاستعلامات، (4) التحديث، إضافة بيانات جديدة، (5) الأمان، حماية بيانات المستخدمين المدمجة."
   - q: "هل RAG يحلّ الهلوسة تماماً؟"
     a: "يُقلّلها بشكل جذريّ لكن لا يُلغيها كلياً. النموذج قد: (1) يفسّر المصدر بشكل خاطئ، (2) يجمع معلومات من مصادر متعارضة، (3) 'يخترع' حين الأجزاء المسترجَعة غير كافية. لهذا: تُوصى بإضافة اقتباسات صريحة (Citations) في الردود."
 ---
@@ -55,10 +55,10 @@ faq:
 
 ### الخطوة 1: التحضير (مرّة واحدة)
 
-1. **جمع المصادر**: PDFs، Word، مواقع، قواعد بيانات
-2. **التقسيم (Chunking)**: تقطيع النصوص لأجزاء صغيرة (500-1000 كلمة عادةً)
-3. **التحويل لـEmbeddings**: كل chunk يُحوَّل لمتّجه رقمي (Vector)
-4. **التخزين**: حفظ في Vector Database
+1. جمع المصادر: PDFs، Word، مواقع، قواعد بيانات
+2. التقسيم (Chunking): تقطيع النصوص لأجزاء صغيرة (500-1000 كلمة عادةً)
+3. التحويل لـEmbeddings: كل chunk يُحوَّل لمتّجه رقمي (Vector)
+4. التخزين: حفظ في Vector Database
 
 ### الخطوة 2: الاستعلام (كل مرّة)
 
@@ -97,7 +97,7 @@ faq:
 - Projects مع مستندات
 - كل محادثة تعرفها
 
-**3) NotebookLM (Google — مجاني)**:
+**3) NotebookLM (Google، مجاني)**:
 - ارفع مصادر (PDFs، فيديوهات، مواقع)
 - بحث ذكيّ بمصادر
 
@@ -164,9 +164,9 @@ print(answer)
 
 ### خدمات مُدارة كاملة
 
-- **Azure OpenAI + Cognitive Search** — Microsoft
-- **AWS Kendra + Bedrock** — Amazon
-- **Vertex AI Search** — Google
+- **Azure OpenAI + Cognitive Search**، Microsoft
+- **AWS Kendra + Bedrock**، Amazon
+- **Vertex AI Search**، Google
 
 ## أنواع RAG
 
@@ -176,10 +176,10 @@ print(answer)
 
 ### 2) Advanced RAG
 
-- **Hybrid Search**: دمج البحث الدلالي مع البحث بالكلمات (BM25)
-- **Re-ranking**: نموذج ثانوي يُعيد ترتيب النتائج
-- **Query Rewriting**: توسيع أو تحسين السؤال قبل البحث
-- **Multi-hop**: يبحث عدّة مرّات لأسئلة معقّدة
+- Hybrid Search: دمج البحث الدلالي مع البحث بالكلمات (BM25)
+- Re-ranking: نموذج ثانوي يُعيد ترتيب النتائج
+- Query Rewriting: توسيع أو تحسين السؤال قبل البحث
+- Multi-hop: يبحث عدّة مرّات لأسئلة معقّدة
 
 ### 3) Agentic RAG
 
@@ -234,26 +234,26 @@ print(answer)
 
 ### 1) جودة الـChunks
 
-- **صغيرة جدّاً (< 100 كلمة)**: تفقد السياق
-- **كبيرة جدّاً (> 2000 كلمة)**: تشوّش النموذج
-- **الأنسب**: 500-1000 كلمة لكل chunk
-- **Overlap**: 100-200 كلمة تداخل بين chunks متتالية
+- صغيرة جدّاً (< 100 كلمة): تفقد السياق
+- كبيرة جدّاً (> 2000 كلمة): تشوّش النموذج
+- الأنسب: 500-1000 كلمة لكل chunk
+- Overlap: 100-200 كلمة تداخل بين chunks متتالية
 
 ### 2) اختيار Embedding Model
 
-- **OpenAI text-embedding-3-large**: الأدقّ، مكلف
-- **OpenAI text-embedding-3-small**: توازن جيّد
-- **Cohere Embed**: منافس قوي
-- **BGE (BAAI)**: مفتوح المصدر ممتاز
-- **Nomic Embed**: مفتوح المصدر مجاني
+- OpenAI text-embedding-3-large: الأدقّ، مكلف
+- OpenAI text-embedding-3-small: توازن جيّد
+- Cohere Embed: منافس قوي
+- BGE (BAAI): مفتوح المصدر ممتاز
+- Nomic Embed: مفتوح المصدر مجاني
 
 **للعربية**: **BGE-M3** أو **Cohere Multilingual** الأفضل.
 
 ### 3) عدد الـChunks المسترجَعة (Top-K)
 
-- **Top-3**: سريع، قد يفوت
-- **Top-10**: يُفضّل عادةً
-- **Top-20+**: قد يُشوّش النموذج
+- Top-3: سريع، قد يفوت
+- Top-10: يُفضّل عادةً
+- Top-20+: قد يُشوّش النموذج
 
 ### 4) Prompt Template
 
@@ -272,15 +272,15 @@ print(answer)
 
 ### 5) إضافة الاقتباسات
 
-- **Citations**: كل جملة مع مصدرها
+- Citations: كل جملة مع مصدرها
 - يزيد الثقة
 - يُساعد المستخدم على التحقّق
 
 ### 6) التقييم
 
-- **مقاييس**: Precision، Recall، MRR
-- **أدوات**: Ragas، TruLens
-- **الاختبار البشري**: عيّنة استعلامات، تقييم يدوي
+- مقاييس: Precision، Recall، MRR
+- أدوات: Ragas، TruLens
+- الاختبار البشري: عيّنة استعلامات، تقييم يدوي
 
 ## القيود
 
@@ -300,17 +300,17 @@ print(answer)
 
 - بياناتك على السحابة
 - التسريبات ممكنة
-- **حلّ**: RAG محلي (Ollama + Chroma)
+- حلّ: RAG محلي (Ollama + Chroma)
 
 ### 4) العربية
 
 - الـEmbeddings الإنجليزية أدقّ من العربية
-- **حلّ**: نماذج متعدّدة اللغات (Cohere Multilingual، BGE-M3)
+- حلّ: نماذج متعدّدة اللغات (Cohere Multilingual، BGE-M3)
 
 ### 5) التحديث
 
 - إضافة PDF جديد → إعادة Embedding
-- **حلّ**: أتمتة (Cron job، Watch folder)
+- حلّ: أتمتة (Cron job، Watch folder)
 
 ## RAG vs Fine-tuning vs Both
 
@@ -323,22 +323,22 @@ print(answer)
 
 **نصيحة**: **ابدأ بـRAG**. إذا مشكلة السلوك (لا المعرفة) → أضف Fine-tuning.
 
-## RAG بالعربية — تحدّيات خاصّة
+## RAG بالعربية، تحدّيات خاصّة
 
 ### 1) التقطيع (Chunking)
 
 - الأدوات الأوّلية مصمّمة للإنجليزية
-- **الحلّ**: مكتبة CAMeL Tools، أو تقسيم يدوي حسب علامات الترقيم
+- الحلّ: مكتبة CAMeL Tools، أو تقسيم يدوي حسب علامات الترقيم
 
 ### 2) Embeddings
 
-- **الأفضل للعربية**: BGE-M3، Cohere Multilingual
+- الأفضل للعربية: BGE-M3، Cohere Multilingual
 - OpenAI text-embedding-3-large جيّد لكن ليس الأمثل
 
 ### 3) الفصحى vs العامية
 
 - إذا مصادرك فصحى وأسئلة المستخدم عامية = مشكلة
-- **الحلّ**: تطبيع الأسئلة قبل البحث
+- الحلّ: تطبيع الأسئلة قبل البحث
 
 ### 4) الترجمة كخيار
 
@@ -363,8 +363,8 @@ print(answer)
 - [LlamaIndex Docs](https://docs.llamaindex.ai)
 - [Pinecone Learning](https://www.pinecone.io/learn/)
 - [OpenAI Embeddings](https://platform.openai.com/docs/guides/embeddings)
-- [Anthropic Cookbook — RAG](https://github.com/anthropics/anthropic-cookbook)
+- [Anthropic Cookbook، RAG](https://github.com/anthropics/anthropic-cookbook)
 
 ---
 
-**اقرأ أيضاً**: [Custom GPTs — كيف تبني GPT خاصّاً](/custom-gpts-guide) · [Claude Artifacts و Projects](/claude-artifacts-and-projects) · [Deep Research و NotebookLM](/deep-research-notebooklm-guide) · [OpenAI API — دليل البدء](/openai-api-getting-started)
+**اقرأ أيضاً**: [Custom GPTs، كيف تبني GPT خاصّاً](/custom-gpts-guide) · [Claude Artifacts و Projects](/claude-artifacts-and-projects) · [Deep Research و NotebookLM](/deep-research-notebooklm-guide) · [OpenAI API، دليل البدء](/openai-api-getting-started)

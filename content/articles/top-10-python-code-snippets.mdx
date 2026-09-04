@@ -3,7 +3,7 @@ title: "أفضل 10 أكواد Python يبحث عنها المطوّرون"
 description: "مجموعة أكواد Python عملية يبحث عنها المطوّرون: قراءة ملفّات، APIs، Web Scraping، Data Analysis، Automation."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Python code"
   - "أكواد بايثون"
@@ -50,7 +50,7 @@ from typing import Optional
 def fetch_data(url: str, headers: Optional[dict] = None, timeout: int = 30) -> dict:
     """Fetch JSON from URL with error handling."""
     response = requests.get(url, headers=headers or {}, timeout=timeout)
-    response.raise_for_status()  # يرفع HTTPError إذا فشل
+    response.raise_for_status() # يرفع HTTPError إذا فشل
     return response.json()
 
 # استخدام
@@ -72,7 +72,7 @@ def fetch_with_retry(url: str, retries: int = 3) -> dict:
         except requests.HTTPError as e:
             if i == retries - 1:
                 raise
-            sleep(2 ** i)  # Exponential backoff
+            sleep(2 ** i) # Exponential backoff
 ```
 
 ## 3) Web Scraping (BeautifulSoup)
@@ -154,7 +154,7 @@ send_email(
     body="مرحباً،\n\nأودّ...",
     smtp_host="smtp.gmail.com",
     smtp_port=465,
-    password="your-app-password"  # ليست كلمة السرّ العادية
+    password="your-app-password" # ليست كلمة السرّ العادية
 )
 ```
 
@@ -168,7 +168,7 @@ from contextlib import contextmanager
 def db_connection(db_path: str):
     """Context manager for SQLite connections."""
     conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row  # الوصول كـdict
+    conn.row_factory = sqlite3.Row # الوصول كـdict
     try:
         yield conn
         conn.commit()
@@ -234,7 +234,7 @@ from pathlib import Path
 def resize_and_watermark(input_path: str, output_path: str, size: tuple = (800, 800)) -> None:
     """Resize image and add watermark."""
     img = Image.open(input_path)
-    img.thumbnail(size)  # يحافظ على النسبة
+    img.thumbnail(size) # يحافظ على النسبة
     
     # حفظ
     img.save(output_path, quality=85, optimize=True)
@@ -324,10 +324,10 @@ async def get_user(email: EmailStr):
 
 ## نصائح ذهبية
 
-1. **استخدم Type hints دائماً** — يساعد IDE و AI
-2. **Handle errors** — لا تفترض النجاح
+1. **استخدم Type hints دائماً**، يساعد IDE و AI
+2. **Handle errors**، لا تفترض النجاح
 3. **Use logging** بدل `print` للإنتاج
-4. **Write tests** — pytest معياري
+4. **Write tests**، pytest معياري
 5. **Environment variables** لـSecrets، لا في الكود
 
 ## المصادر الرسمية
@@ -340,4 +340,4 @@ async def get_user(email: EmailStr):
 
 ---
 
-**اقرأ أيضاً**: [أكواد أتمتة يومية](/ai-daily-automation-code) · [Web Scraping — دليل عملي](/web-scraping-guide) · [OpenAI API — دليل البدء](/openai-api-getting-started) · [Claude Code — دليل المطوّر](/claude-code-developer-guide)
+**اقرأ أيضاً**: [أكواد أتمتة يومية](/ai-daily-automation-code) · [Web Scraping، دليل عملي](/web-scraping-guide) · [OpenAI API، دليل البدء](/openai-api-getting-started) · [Claude Code، دليل المطوّر](/claude-code-developer-guide)

@@ -1,9 +1,9 @@
 ---
-title: "Context Window — نافذة السياق وكيف تتعامل معها"
+title: "Context Window، نافذة السياق وكيف تتعامل معها"
 description: "شرح Context Window في نماذج AI 2026، الأحجام الحالية، وكيف تُدير المحادثات الطويلة."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Context Window"
   - "نافذة السياق"
@@ -17,7 +17,7 @@ faq:
   - q: "ماذا يحصل حين أتجاوز الحدّ؟"
     a: "النموذج يرفض الطلب أو يقصّ الجزء الأقدم من المحادثة. في محادثة طويلة قد ينسى بداية الحوار."
   - q: "لماذا الأداء يقلّ في وسط السياق الطويل؟"
-    a: "ظاهرة موثّقة اسمها 'Lost in the Middle' — النماذج تركّز أكثر على أوّل وآخر السياق. للمعلومات الحرجة، ضعها في البداية أو النهاية."
+    a: "ظاهرة موثّقة اسمها 'Lost in the Middle'، النماذج تركّز أكثر على أوّل وآخر السياق. للمعلومات الحرجة، ضعها في البداية أو النهاية."
 ---
 
 Context Window هو حدود ذاكرة النموذج داخل محادثة واحدة. فهمه ضروري لإدارة محادثات طويلة، تحميل مستندات، وتجنّب أخطاء "النسيان".
@@ -62,9 +62,9 @@ Context Window هو حدود ذاكرة النموذج داخل محادثة و�
 
 ### أدوات
 
-- **OpenAI Tokenizer**: [platform.openai.com/tokenizer](https://platform.openai.com/tokenizer)
-- **Anthropic Token Counter**: في Claude Console
-- **Google AI Studio**: في Gemini Playground
+- OpenAI Tokenizer: [platform.openai.com/tokenizer](https://platform.openai.com/tokenizer)
+- Anthropic Token Counter: في Claude Console
+- Google AI Studio: في Gemini Playground
 
 ### تقدير سريع
 
@@ -72,14 +72,14 @@ Context Window هو حدود ذاكرة النموذج داخل محادثة و�
 - عربي: 1 كلمة ≈ 2-4 توكنات (العربية أثقل بسبب التشكيل والتصريف)
 - كود: 1 سطر ≈ 5-20 توكنات
 
-## Lost in the Middle — التحدّي الأكبر
+## Lost in the Middle، التحدّي الأكبر
 
 باحثو Stanford (2023) اكتشفوا ظاهرة: **النماذج تركّز على أوّل وآخر السياق، وتُهمل الوسط** ([Lost in the Middle](https://arxiv.org/abs/2307.03172)).
 
 **التطبيق العملي**:
 - ضع المعلومات الحرجة في **بداية** أو **نهاية** البرومت
 - تجنّب دفن المعلومة المهمّة في منتصف مستند طويل
-- إذا سياقك كبير، لخّص وأعِد ترتيب — لا ترمِ كل شيء
+- إذا سياقك كبير، لخّص وأعِد ترتيب، لا ترمِ كل شيء
 
 ## استراتيجيات لإدارة السياق
 
@@ -110,9 +110,9 @@ Claude Projects وChatGPT Custom GPTs يحفظون سياقاً ثابتاً ب�
 
 **تحذير**: 1 مليون توكن سياق **لا يعني** أنّ النموذج يستخدمها كلها بجودة عالية. أبحاث عملية 2024-2025 أظهرت:
 
-- **200K الأولى**: أداء ممتاز
-- **200K-500K**: أداء يقلّ 10-20%
-- **500K+**: أداء يقلّ 30-40% في مسائل الاستدلال المعقّد
+- 200K الأولى: أداء ممتاز
+- 200K-500K: أداء يقلّ 10-20%
+- 500K+: أداء يقلّ 30-40% في مسائل الاستدلال المعقّد
 
 **النتيجة**: استخدم أدنى سياق يكفيك. لا تُغرقه بلا حاجة.
 
@@ -140,19 +140,19 @@ Claude Projects وChatGPT Custom GPTs يحفظون سياقاً ثابتاً ب�
 
 ## نصائح ذهبية
 
-1. **راقب استخدامك** — بعض الأدوات تُظهر عدد التوكنات
-2. **اختصر** — كلما قلّ السياق زاد الأداء
+1. **راقب استخدامك**، بعض الأدوات تُظهر عدد التوكنات
+2. **اختصر**، كلما قلّ السياق زاد الأداء
 3. **حمّل الملفّات** بدل النسخ
 4. **قسّم** المشاريع الكبيرة
 5. **لخّص** المحادثات الطويلة قبل الوصول للحدّ
 
 ## المصادر الرسمية
 
-- [OpenAI — Context Length](https://platform.openai.com/docs/models)
-- [Anthropic — Context Windows](https://docs.anthropic.com/en/docs/build-with-claude/context-windows)
-- [Google — Gemini Long Context](https://ai.google.dev/gemini-api/docs/long-context)
-- [Lost in the Middle — Stanford](https://arxiv.org/abs/2307.03172)
+- [OpenAI، Context Length](https://platform.openai.com/docs/models)
+- [Anthropic، Context Windows](https://docs.anthropic.com/en/docs/build-with-claude/context-windows)
+- [Google، Gemini Long Context](https://ai.google.dev/gemini-api/docs/long-context)
+- [Lost in the Middle، Stanford](https://arxiv.org/abs/2307.03172)
 
 ---
 
-**اقرأ أيضاً**: [هندسة البرومت — الدليل الشامل](/prompt-engineering-complete-guide) · [Temperature و Top-P](/temperature-top-p-explained) · [مصطلحات الذكاء الاصطناعي](/ai-terminology-for-non-technical) · [System vs User Prompt](/system-vs-user-prompt)
+**اقرأ أيضاً**: [هندسة البرومت، الدليل الشامل](/prompt-engineering-complete-guide) · [Temperature و Top-P](/temperature-top-p-explained) · [مصطلحات الذكاء الاصطناعي](/ai-terminology-for-non-technical) · [System vs User Prompt](/system-vs-user-prompt)

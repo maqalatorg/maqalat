@@ -1,9 +1,9 @@
 ---
-title: "الأنظمة متعدّدة الوكلاء — AutoGen و CrewAI و LangGraph"
-description: "دليل شامل لـMulti-Agent Systems: AutoGen (Microsoft)، CrewAI، LangGraph. متى تستخدمها، وأمثلة عملية."
+title: "الأنظمة متعدّدة الوكلاء، AutoGen و CrewAI و LangGraph"
+description: "دليل لـMulti-Agent Systems: AutoGen (Microsoft)، CrewAI، LangGraph. متى تستخدمها، وأمثلة عملية."
 cluster: "ai"
 publishedAt: "2026-09-04"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Multi-Agent"
   - "AutoGen"
@@ -16,7 +16,7 @@ faq:
   - q: "متى نحتاجها؟"
     a: "أربع حالات: (1) **مهمّة متعدّدة الخطوات** معقّدة، (2) **تحتاج تخصّصات متعدّدة**، (3) **قرارات مترابطة** (وكيل يعتمد على مخرج آخر)، (4) **workflows موازية** (وكلاء يعملون في نفس الوقت). **بسيطة**: لا تحتاج."
   - q: "أشهر الأدوات؟"
-    a: "ثلاثة رئيسية: (1) **AutoGen** (Microsoft، مفتوح) — الأشمل، (2) **CrewAI** — الأسهل، مبنيّ على الأدوار، (3) **LangGraph** (LangChain) — قابل للتحكّم بدقّة. **الأنسب لك**: يعتمد على مشروعك."
+    a: "ثلاثة رئيسية: (1) **AutoGen** (Microsoft، مفتوح)، الأشمل، (2) **CrewAI**، الأسهل، مبنيّ على الأدوار، (3) **LangGraph** (LangChain)، قابل للتحكّم بدقّة. **الأنسب لك**: يعتمد على مشروعك."
   - q: "AutoGen vs CrewAI vs LangGraph؟"
     a: "**AutoGen**: قوي جدّاً، محادثات بين وكلاء، Microsoft يدعمه. **CrewAI**: أبسط، Role-based، مثالي للمبتدئ. **LangGraph**: Graph-based، تحكّم دقيق، مثالي للمعقّد. **قاعدة**: ابدأ بـCrewAI، تعمّق بـLangGraph."
   - q: "أمثلة استخدام؟"
@@ -27,7 +27,7 @@ faq:
     a: "خمسة: (1) **الكلفة المتضاعفة**، (2) **البطء** (خطوات متعدّدة)، (3) **صعوبة التصحيح** (أيّ وكيل أخطأ؟)، (4) **الاعتماد الزائد**، (5) **الأمان** (كل وكيل نقطة هجوم محتمَلة). **الحلّ**: Monitoring دقيق، أدوات مثل LangSmith."
 ---
 
-**Multi-Agent Systems** أحدث اتّجاهات AI. **فرق من الوكلاء** يعملون معاً — تقليد فرق البشر. من مساعد واحد إلى **شركة كاملة من AI Agents**. هذا الدليل شامل.
+**Multi-Agent Systems** أحدث اتّجاهات AI. **فرق من الوكلاء** يعملون معاً، تقليد فرق البشر. من مساعد واحد إلى **شركة كاملة من AI Agents**. هذا الدليل شامل.
 
 ## المفهوم
 
@@ -45,17 +45,17 @@ faq:
 ### الأدوار الشائعة
 
 **فريق تقرير**:
-- **باحث**: يبحث المعلومات
-- **كاتب**: يصيغ المسوّدة
-- **مراجع**: يفحص ويدقّق
-- **ناشر**: يُقدّم النهائي
+- باحث: يبحث المعلومات
+- كاتب: يصيغ المسوّدة
+- مراجع: يفحص ويدقّق
+- ناشر: يُقدّم النهائي
 
 **فريق برمجة**:
-- **Product Manager**: يفهم المتطلّبات
-- **Architect**: يصمّم
-- **Developer**: يكتب الكود
-- **QA**: يختبر
-- **DevOps**: ينشر
+- Product Manager: يفهم المتطلّبات
+- Architect: يصمّم
+- Developer: يكتب الكود
+- QA: يختبر
+- DevOps: ينشر
 
 **فريق تسويق**:
 - **باحث سوق**
@@ -187,21 +187,21 @@ writing_task = Task(
 crew = Crew(
     agents=[researcher, writer],
     tasks=[research_task, writing_task],
-    process="sequential"  # أو hierarchical
+    process="sequential" # أو hierarchical
 )
 
 result = crew.kickoff()
 print(result)
 ```
 
-**بساطة مذهلة** — 30 سطر لفريق كامل.
+**بساطة مذهلة**، 30 سطر لفريق كامل.
 
 ### الميّزات
 
 - **Sequential** أو **Hierarchical** processes
 - **Memory** مشتركة بين الوكلاء
 - **Tools** مخصّصة لكل وكيل
-- **Delegation** — وكيل يفوّض لآخر
+- **Delegation**، وكيل يفوّض لآخر
 
 ### الأنسب لـ
 
@@ -213,7 +213,7 @@ print(result)
 
 ## LangGraph (LangChain)
 
-فصّلناها في [مقال LangChain](/langchain-guide) — لكن باختصار:
+فصّلناها في [مقال LangChain](/langchain-guide)، لكن باختصار:
 
 ### الفكرة
 
@@ -280,13 +280,13 @@ app = workflow.compile()
 - **OpenAI** أطلقته 2024
 - **تجريبي**
 - **بسيط جدّاً**
-- **الفكرة**: Handoffs بين وكلاء
+- الفكرة: Handoffs بين وكلاء
 
 ### MetaGPT
 
 - **يحاكي شركة كاملة**
 - CEO، Product Manager، Engineer، QA
-- **الأنسب**: تطوير برامج كاملة
+- الأنسب: تطوير برامج كاملة
 
 ### AgentGPT
 
@@ -348,30 +348,30 @@ app = workflow.compile()
 ### 1) بحث + تقرير
 
 **الفريق**:
-- **باحث**: Perplexity، Google
-- **محلّل**: يفهم البيانات
-- **كاتب**: يصوغ التقرير
-- **مراجع**: يدقّق
+- باحث: Perplexity، Google
+- محلّل: يفهم البيانات
+- كاتب: يصوغ التقرير
+- مراجع: يدقّق
 
 **الأثر**: تقرير احترافي في **ساعات** بدل أيّام.
 
 ### 2) تطوير برمجي
 
 **الفريق**:
-- **PM**: يحدّد المتطلّبات
-- **Architect**: يصمّم
-- **Coder**: يكتب
-- **Tester**: يختبر
-- **Reviewer**: يراجع
+- PM: يحدّد المتطلّبات
+- Architect: يصمّم
+- Coder: يكتب
+- Tester: يختبر
+- Reviewer: يراجع
 
 **الأثر**: **MetaGPT** يبني تطبيقات كاملة.
 
 ### 3) خدمة العملاء
 
 **الفريق**:
-- **Router**: يفرز الاستفسار
-- **Specialist**: يجيب (مالي، تقني، عام)
-- **Escalation**: إذا معقّد
+- Router: يفرز الاستفسار
+- Specialist: يجيب (مالي، تقني، عام)
+- Escalation: إذا معقّد
 
 ### 4) حملة تسويقية
 
@@ -418,12 +418,12 @@ app = workflow.compile()
 
 **أيّ وكيل أخطأ؟**:
 - صعب تتبّع
-- **الحلّ**: LangSmith، Helicone
+- الحلّ: LangSmith، Helicone
 
 ### 4) الاعتماد الزائد
 
 - **نظام معقّد** = فرص أخطاء
-- **KISS Principle**: Keep It Simple
+- KISS Principle: Keep It Simple
 
 **قاعدة**: **ابدأ بـSingle Agent**، انتقل إذا لزم.
 
@@ -431,7 +431,7 @@ app = workflow.compile()
 
 - كل وكيل نقطة هجوم
 - Prompt Injection قد ينتشر
-- **الحلّ**: Guardrails، Least Privilege
+- الحلّ: Guardrails، Least Privilege
 
 ## Best Practices
 
@@ -477,17 +477,17 @@ app = workflow.compile()
 
 ### استخدمها إذا
 
-- ✅ مهمّة **متعدّدة الخطوات معقّدة**
-- ✅ **تحتاج تخصّصات مختلفة**
-- ✅ **الوقت متاح** (ليس Real-time حرج)
-- ✅ **الميزانية كافية**
+- مهمّة **متعدّدة الخطوات معقّدة**
+- **تحتاج تخصّصات مختلفة**
+- **الوقت متاح** (ليس Real-time حرج)
+- **الميزانية كافية**
 
 ### لا تستخدمها إذا
 
-- ❌ مهمّة بسيطة (وكيل واحد يكفي)
-- ❌ Real-time (بطيء)
-- ❌ ميزانية ضيّقة
-- ❌ لا فريق تقنيّ
+- مهمّة بسيطة (وكيل واحد يكفي)
+- Real-time (بطيء)
+- ميزانية ضيّقة
+- لا فريق تقنيّ
 
 ## المستقبل
 
@@ -528,7 +528,7 @@ app = workflow.compile()
 
 **HUMAIN، G42، الشركات الكبرى**:
 - **Multi-Agent Engineers** = طلب متزايد
-- **رواتب**: 25-60K ريال/شهر
+- رواتب: 25-60K ريال/شهر
 
 ### الاستخدام العملي
 
@@ -547,4 +547,4 @@ app = workflow.compile()
 
 ---
 
-**اقرأ أيضاً**: [LangChain — بناء تطبيقات AI](/langchain-guide) · [MCP — بروتوكول سياق النموذج](/mcp-model-context-protocol) · [MLOps](/mlops-guide) · [Cursor — محرّر الكود الذكيّ](/cursor-ai-code-editor)
+**اقرأ أيضاً**: [LangChain، بناء تطبيقات AI](/langchain-guide) · [MCP، بروتوكول سياق النموذج](/mcp-model-context-protocol) · [MLOps](/mlops-guide) · [Cursor، محرّر الكود الذكيّ](/cursor-ai-code-editor)

@@ -1,9 +1,9 @@
 ---
-title: "أكواد أتمتة يومية — ادخل عصر الـAutomation"
+title: "أكواد أتمتة يومية، ادخل عصر الـAutomation"
 description: "مجموعة أكواد Python وBash لأتمتة مهامّك اليومية: ملفّات، إيميلات، تقارير، مواعيد."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Automation"
   - "أتمتة"
@@ -139,7 +139,7 @@ def monitor_website(url: str, check_interval: int = 60) -> None:
     while True:
         try:
             r = requests.get(url, timeout=10)
-            if r.status_code != 200:
+            if r.status_code!= 200:
                 print(f"⚠️ {url} — HTTP {r.status_code}")
                 # send_alert()
         except Exception as e:
@@ -201,7 +201,7 @@ def excel_to_json(excel_path: str, json_path: str, sheet: str = None) -> None:
 excel_to_json("customers.xlsx", "customers.json")
 ```
 
-## 10) Bash — أتمتة بسيطة
+## 10) Bash، أتمتة بسيطة
 
 ### مسح ملفّات مؤقّتة
 
@@ -268,17 +268,17 @@ crontab -e
 
 ## أدوات بلا كود
 
-- **Zapier** — 5000+ تكامل
-- **Make.com** (سابقاً Integromat) — أقوى وأرخص
-- **n8n** — مفتوح المصدر، ذاتي الاستضافة
-- **IFTTT** — للأتمتة الشخصية البسيطة
+- **Zapier**، 5000+ تكامل
+- **Make.com** (سابقاً Integromat)، أقوى وأرخص
+- **n8n**، مفتوح المصدر، ذاتي الاستضافة
+- **IFTTT**، للأتمتة الشخصية البسيطة
 
 ## نصائح ذهبية
 
-1. **ابدأ بأتمتة مهمّة واحدة** — أنجزها، ثمّ توسّع
-2. **Logging** لكل سكريبت — تحتاج معرفة ما حدث
-3. **Error handling** — الأتمتة تفشل، جهّز التنبيهات
-4. **Idempotent** — السكريبت الذي يعمل مرّتَين لا يُنتج ضرراً
+1. **ابدأ بأتمتة مهمّة واحدة**، أنجزها، ثمّ توسّع
+2. **Logging** لكل سكريبت، تحتاج معرفة ما حدث
+3. **Error handling**، الأتمتة تفشل، جهّز التنبيهات
+4. **Idempotent**، السكريبت الذي يعمل مرّتَين لا يُنتج ضرراً
 5. **Environment variables** لـSecrets
 
 ## المصادر الرسمية
@@ -290,4 +290,4 @@ crontab -e
 
 ---
 
-**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [Web Scraping — دليل](/web-scraping-guide) · [أكواد Excel و Sheets](/excel-sheets-automation-code) · [OpenAI API — البدء](/openai-api-getting-started)
+**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [Web Scraping، دليل](/web-scraping-guide) · [أكواد Excel و Sheets](/excel-sheets-automation-code) · [OpenAI API، البدء](/openai-api-getting-started)

@@ -1,9 +1,9 @@
 ---
-title: "Temperature و Top-P — التحكّم بإبداع النموذج"
+title: "Temperature و Top-P، التحكّم بإبداع النموذج"
 description: "شرح Temperature و Top-P في نماذج AI، كيف يؤثّران على المخرج، ومتى تستخدم كل قيمة."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Temperature"
   - "Top-P"
@@ -22,16 +22,16 @@ faq:
 
 كل مخرج من نموذج AI فيه عنصر عشوائي متحكَّم به. **Temperature وTop-P** يحدّدان مقدار هذا العشوائي. فهمهما يفتح تحكّماً في جودة ونوع المخرج.
 
-## Temperature — درجة الحرارة
+## Temperature، درجة الحرارة
 
 ### الشرح البسيط
 
 النموذج، عند توليد كل كلمة تالية، يحسب احتمالات لعدّة كلمات. **Temperature** يحدّد كم يميل لاختيار الكلمة الأعلى احتمالاً vs. كلمة أقلّ.
 
-- **Temperature = 0**: النموذج يختار **دائماً** الكلمة الأعلى احتمالاً. مخرج ثابت متوقّع.
-- **Temperature = 0.5**: يوازن بين الأعلى والأقلّ احتمالاً.
-- **Temperature = 1**: عشوائية متوسّطة (الافتراضي).
-- **Temperature = 1.5-2**: عشوائي جدّاً، أحياناً غير منطقي.
+- Temperature = 0: النموذج يختار **دائماً** الكلمة الأعلى احتمالاً. مخرج ثابت متوقّع.
+- Temperature = 0.5: يوازن بين الأعلى والأقلّ احتمالاً.
+- Temperature = 1: عشوائية متوسّطة (الافتراضي).
+- Temperature = 1.5-2: عشوائي جدّاً، أحياناً غير منطقي.
 
 ### متى تستخدم كل قيمة
 
@@ -54,16 +54,16 @@ faq:
 **Temperature = 0.7**: "قهوة قيام" (متوازن، إبداعي)
 **Temperature = 1.5**: "زجاجة قهوة" (غريب، قد لا يعجب)
 
-## Top-P — Nucleus Sampling
+## Top-P، Nucleus Sampling
 
 ### الشرح البسيط
 
 بدل التحكّم بالعشوائية، Top-P يحدّد **من أيّ فئة اختيار**. النموذج يرتّب الكلمات بالاحتمالات ويختار من أعلى X% منها.
 
-- **Top-P = 0.1**: يختار من أعلى 10% احتمالاً. مخرج محافظ.
-- **Top-P = 0.5**: من أعلى 50%.
-- **Top-P = 0.9**: من أعلى 90% (الافتراضي في كثير من النماذج).
-- **Top-P = 1.0**: بلا قيد.
+- Top-P = 0.1: يختار من أعلى 10% احتمالاً. مخرج محافظ.
+- Top-P = 0.5: من أعلى 50%.
+- Top-P = 0.9: من أعلى 90% (الافتراضي في كثير من النماذج).
+- Top-P = 1.0: بلا قيد.
 
 ### الفرق عن Temperature
 
@@ -130,7 +130,7 @@ response = model.generate_content(
 أقصى طول للمخرج. مهم لأنّ الفوترة بالتوكن.
 
 ```python
-max_tokens=2000  # لا يتجاوز 2000 توكن في المخرج
+max_tokens=2000 # لا يتجاوز 2000 توكن في المخرج
 ```
 
 ### frequency_penalty (0 إلى 2)
@@ -220,16 +220,16 @@ response_format: {"type": "json_object"}
 ## نصائح ذهبية
 
 1. **ابدأ بالافتراضي** ثم عدّل حسب الحاجة
-2. **جرّب قيماً متطرّفة** (0 vs 1.5) على نفس البرومت — لتحسّ الفرق
-3. **للإنتاج الحقيقي**: ثبّت القيم واختبر جودتها إحصائياً
-4. **للتجربة**: استخدم Playground قبل الاستثمار في API
+2. **جرّب قيماً متطرّفة** (0 vs 1.5) على نفس البرومت، لتحسّ الفرق
+3. للإنتاج الحقيقي: ثبّت القيم واختبر جودتها إحصائياً
+4. للتجربة: استخدم Playground قبل الاستثمار في API
 
 ## المصادر الرسمية
 
-- [OpenAI — API Parameters](https://platform.openai.com/docs/api-reference/chat/create)
-- [Anthropic — Sampling Parameters](https://docs.anthropic.com/en/api/messages)
-- [Google AI — Generation Config](https://ai.google.dev/gemini-api/docs/models/generative-models)
+- [OpenAI، API Parameters](https://platform.openai.com/docs/api-reference/chat/create)
+- [Anthropic، Sampling Parameters](https://docs.anthropic.com/en/api/messages)
+- [Google AI، Generation Config](https://ai.google.dev/gemini-api/docs/models/generative-models)
 
 ---
 
-**اقرأ أيضاً**: [هندسة البرومت — الدليل الشامل](/prompt-engineering-complete-guide) · [System vs User Prompt](/system-vs-user-prompt) · [Context Window](/context-window-explained) · [Chain of Thought](/chain-of-thought-prompting)
+**اقرأ أيضاً**: [هندسة البرومت، الدليل الشامل](/prompt-engineering-complete-guide) · [System vs User Prompt](/system-vs-user-prompt) · [Context Window](/context-window-explained) · [Chain of Thought](/chain-of-thought-prompting)

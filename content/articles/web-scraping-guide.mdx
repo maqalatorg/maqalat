@@ -1,9 +1,9 @@
 ---
-title: "Web Scraping — دليل عملي بـPython 2026"
-description: "دليل شامل لسحب البيانات من المواقع بـPython: BeautifulSoup، Playwright، Scrapy، مع القواعد القانونية."
+title: "Web Scraping، دليل عملي بـPython 2026"
+description: "دليل لسحب البيانات من المواقع بـPython: BeautifulSoup، Playwright، Scrapy، مع القواعد القانونية."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "Web Scraping"
   - "Python"
@@ -22,18 +22,18 @@ faq:
 
 ### قبل السحب
 
-1. **اقرأ robots.txt**: `https://example.com/robots.txt`
+1. اقرأ robots.txt: `https://example.com/robots.txt`
 2. **راجع Terms of Service**
-3. **تحقّق من API رسمي** — أفضل من السحب
-4. **راعِ Rate Limits** — لا تُثقل الخادم
+3. **تحقّق من API رسمي**، أفضل من السحب
+4. **راعِ Rate Limits**، لا تُثقل الخادم
 5. **لا تسحب بيانات شخصية** بلا موافقة (GDPR)
-6. **حقوق الطبع** — البيانات المسحوبة قد تكون محميّة
+6. **حقوق الطبع**، البيانات المسحوبة قد تكون محميّة
 
 ### القاعدة الأخلاقية
 
-- **البيانات العامّة (بلا تسجيل)**: غالباً مقبولة
-- **البيانات خلف تسجيل**: تحتاج موافقة صريحة
-- **البيانات الشخصية**: احترم الخصوصية
+- البيانات العامّة (بلا تسجيل): غالباً مقبولة
+- البيانات خلف تسجيل: تحتاج موافقة صريحة
+- البيانات الشخصية: احترم الخصوصية
 
 ## المستوى 1: BeautifulSoup (المواقع البسيطة)
 
@@ -127,7 +127,7 @@ def scrape_dynamic_site(url: str):
 from playwright.sync_api import sync_playwright
 
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=False)  # False للمشاهدة
+    browser = p.chromium.launch(headless=False) # False للمشاهدة
     page = browser.new_page()
     
     # تسجيل الدخول
@@ -166,7 +166,7 @@ class ProductSpider(scrapy.Spider):
     start_urls = ["https://example.com/products"]
     
     custom_settings = {
-        "DOWNLOAD_DELAY": 1,  # ثانية بين كل طلب
+        "DOWNLOAD_DELAY": 1, # ثانية بين كل طلب
         "USER_AGENT": "Mozilla/5.0 (Research Bot)"
     }
     
@@ -207,7 +207,7 @@ import time
 
 for url in urls:
     scrape(url)
-    time.sleep(2)  # 2 ثانية بين طلبات
+    time.sleep(2) # 2 ثانية بين طلبات
 ```
 
 ### 3) Retry Logic
@@ -232,9 +232,9 @@ import requests_cache
 
 session = requests_cache.CachedSession(
     "scraping_cache",
-    expire_after=3600  # ساعة
+    expire_after=3600 # ساعة
 )
-response = session.get(url)  # يُخزّن ولا يُعيد الطلب
+response = session.get(url) # يُخزّن ولا يُعيد الطلب
 ```
 
 ### 5) Rotate User-Agents
@@ -243,8 +243,8 @@ response = session.get(url)  # يُخزّن ولا يُعيد الطلب
 import random
 
 USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ...",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ...",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)...",
     # إلخ
 ]
 
@@ -276,7 +276,7 @@ response = requests.get(url, proxies={"http": random.choice(proxies)})
 
 ### 2) RSS Feeds
 
-كثير من المواقع الإخبارية توفّر RSS — استخدمها بدل السحب.
+كثير من المواقع الإخبارية توفّر RSS، استخدمها بدل السحب.
 
 ### 3) Sitemap.xml
 
@@ -288,9 +288,9 @@ https://example.com/sitemap.xml
 
 ### 4) Third-Party Data Providers
 
-- **SimilarWeb** — بيانات مواقع
-- **Ahrefs API** — SEO
-- **DataForSEO** — SERP
+- **SimilarWeb**، بيانات مواقع
+- **Ahrefs API**، SEO
+- **DataForSEO**، SERP
 
 ## أخطاء شائعة
 
@@ -335,4 +335,4 @@ https://example.com/sitemap.xml
 
 ---
 
-**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد أتمتة يومية](/ai-daily-automation-code) · [أكواد Excel و Sheets](/excel-sheets-automation-code) · [Claude Code — دليل المطوّر](/claude-code-developer-guide)
+**اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد أتمتة يومية](/ai-daily-automation-code) · [أكواد Excel و Sheets](/excel-sheets-automation-code) · [Claude Code، دليل المطوّر](/claude-code-developer-guide)

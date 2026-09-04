@@ -3,7 +3,7 @@ title: "أفضل أكواد JavaScript يبحث عنها المطوّرون"
 description: "أكواد JavaScript جاهزة للمطوّرين: DOM، Fetch، Async، Arrays، Objects، والأشهر في 2026."
 cluster: "ai"
 publishedAt: "2026-09-03"
-author: "فريق مقالات — قسم التقنية"
+author: "فريق مقالات، قسم التقنية"
 tags:
   - "JavaScript"
   - "JS snippets"
@@ -70,13 +70,13 @@ const user = { name: "أحمد", email: "a@example.com", age: 30 };
 const { name, email } = user;
 
 // Rest & Spread
-const { age, ...withoutAge } = user;
-const updated = { ...user, age: 31 };
+const { age,...withoutAge } = user;
+const updated = {...user, age: 31 };
 
 // Object → Array
-Object.keys(user);    // ['name', 'email', 'age']
-Object.values(user);  // ['أحمد', 'a@example.com', 30]
-Object.entries(user); // [['name', 'أحمد'], ...]
+Object.keys(user); // ['name', 'email', 'age']
+Object.values(user); // ['أحمد', 'a@example.com', 30]
+Object.entries(user); // [['name', 'أحمد'],...]
 
 // Array → Object
 const entries = [["a", 1], ["b", 2]];
@@ -88,7 +88,7 @@ const deepCopy = JSON.parse(JSON.stringify(user)); // للـobjects البسيط
 const deepCopy2 = structuredClone(user);
 
 // دمج objects
-const merged = { ...obj1, ...obj2 };
+const merged = {...obj1,...obj2 };
 ```
 
 ## Async/Await
@@ -194,19 +194,19 @@ const name = "أحمد";
 const greeting = `مرحبا ${name}، كيف حالك؟`;
 
 // طرق مفيدة
-"مرحبا".includes("مر");       // true
-"مرحبا".startsWith("م");      // true
-"مرحبا".padStart(10, "*");    // "*****مرحبا"
-"مرحبا".repeat(3);            // "مرحبامرحبامرحبا"
-" hello ".trim();             // "hello"
+"مرحبا".includes("مر"); // true
+"مرحبا".startsWith("م"); // true
+"مرحبا".padStart(10, "*"); // "*****مرحبا"
+"مرحبا".repeat(3); // "مرحبامرحبامرحبا"
+" hello ".trim(); // "hello"
 
 // Split & Join
 const words = "one,two,three".split(",");
 const joined = words.join(" | ");
 
 // Replace
-"مرحبا مرحبا".replace("مرحبا", "أهلا");        // "أهلا مرحبا"
-"مرحبا مرحبا".replaceAll("مرحبا", "أهلا");     // "أهلا أهلا"
+"مرحبا مرحبا".replace("مرحبا", "أهلا"); // "أهلا مرحبا"
+"مرحبا مرحبا".replaceAll("مرحبا", "أهلا"); // "أهلا أهلا"
 
 // Regex
 const emails = "email: ahmed@x.com, sara@y.com".match(/[\w.]+@[\w.]+/g);
@@ -219,10 +219,10 @@ const emails = "email: ahmed@x.com, sara@y.com".match(/[\w.]+@[\w.]+/g);
 const now = new Date();
 
 // تنسيق عربي
-now.toLocaleDateString("ar-SA");       // "١٤٤٧/٣/٢٠ هـ"
+now.toLocaleDateString("ar-SA"); // "١٤٤٧/٣/٢٠ هـ"
 now.toLocaleDateString("ar-SA", {
   calendar: "gregory"
-});                                     // "٢٠٢٦/٩/٣"
+}); // "٢٠٢٦/٩/٣"
 
 // حساب فرق أيّام
 const daysBetween = Math.floor(
@@ -324,11 +324,11 @@ async function copyToClipboard(text) {
 
 ## نصائح ذهبية
 
-1. **استخدم `const` افتراضياً، `let` عند الحاجة** — لا تستخدم `var`
-2. **`===` بدل `==`** — دائماً
-3. **Async/Await بدل .then chains** — أوضح
-4. **Optional Chaining** — `user?.address?.city`
-5. **Nullish Coalescing** — `value ?? defaultValue`
+1. **استخدم `const` افتراضياً، `let` عند الحاجة**، لا تستخدم `var`
+2. **`===` بدل `==`**، دائماً
+3. **Async/Await بدل.then chains**، أوضح
+4. **Optional Chaining**، `user?.address?.city`
+5. **Nullish Coalescing**، `value ?? defaultValue`
 
 ## المصادر الرسمية
 
