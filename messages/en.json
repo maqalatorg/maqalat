@@ -147,6 +147,12 @@
   "cluster": {
     "empty": "No articles in this section yet."
   },
+  "card": {
+    "featured": "Featured",
+    "min": "min",
+    "read": "Read",
+    "viewAll": "Browse all articles"
+  },
   "article": {
     "breadcrumbHome": "Home",
     "authorDefault": "Maqalat",

@@ -1,5 +1,6 @@
-import Link from "next/link";
-import { Clock, Calendar, ArrowLeft, Sparkles } from "lucide-react";
+import { Clock, Calendar, ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import type { Article } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
 import { ClusterIcon } from "./ClusterIcon";
@@ -8,9 +9,13 @@ import { ClusterIcon } from "./ClusterIcon";
  * Featured article — magazine-style hero with iconic cover, no emojis.
  */
 export function FeaturedArticle({ article }: { article: Article }) {
+  const locale = useLocale();
+  const t = useTranslations("card");
+  const isEn = locale === "en";
+  const Arrow = isEn ? ArrowRight : ArrowLeft;
   const cluster = findCluster(article.frontmatter.cluster);
   const date = new Date(article.frontmatter.publishedAt).toLocaleDateString(
-    "ar-SA-u-nu-latn",
+    isEn ? "en-US" : "ar-SA-u-nu-latn",
     { year: "numeric", month: "long", day: "numeric" },
   );
 
@@ -35,7 +40,7 @@ export function FeaturedArticle({ article }: { article: Article }) {
           )}
           <div className="absolute top-4 start-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur text-white text-xs font-medium border border-white/30">
             <Sparkles className="w-3.5 h-3.5" />
-            المقال المميّز
+            {t("featured")}
           </div>
         </div>
 
@@ -45,7 +50,7 @@ export function FeaturedArticle({ article }: { article: Article }) {
             <div className="mb-3">
               <span className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 font-medium">
                 <ClusterIcon name={cluster.icon} className="w-3.5 h-3.5" strokeWidth={2} />
-                {cluster.titleAr}
+                {isEn ? cluster.titleEn : cluster.titleAr}
               </span>
             </div>
           )}
@@ -63,11 +68,11 @@ export function FeaturedArticle({ article }: { article: Article }) {
               </span>
               <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
               <span className="inline-flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5" /> {article.readingMinutes} دقيقة
+                <Clock className="w-3.5 h-3.5" /> {article.readingMinutes} {t("min")}
               </span>
             </div>
             <div className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-700 dark:text-emerald-400 group-hover:gap-2.5 transition-all">
-              اقرأ <ArrowLeft className="w-4 h-4" />
+              {t("read")} <Arrow className="w-4 h-4" />
             </div>
           </div>
         </div>

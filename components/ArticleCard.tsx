@@ -1,13 +1,17 @@
-import Link from "next/link";
 import { Clock, Calendar } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import type { Article } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
 import { ClusterIcon } from "./ClusterIcon";
 
 export function ArticleCard({ article }: { article: Article }) {
+  const locale = useLocale();
+  const t = useTranslations("card");
+  const isEn = locale === "en";
   const cluster = findCluster(article.frontmatter.cluster);
   const date = new Date(article.frontmatter.publishedAt).toLocaleDateString(
-    "ar-SA-u-nu-latn",
+    isEn ? "en-US" : "ar-SA-u-nu-latn",
     { year: "numeric", month: "long", day: "numeric" },
   );
 
@@ -17,7 +21,7 @@ export function ArticleCard({ article }: { article: Article }) {
         <div className="mb-4">
           <span className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 font-medium">
             <ClusterIcon name={cluster.icon} className="w-3.5 h-3.5" strokeWidth={2} />
-            {cluster.titleAr}
+            {isEn ? cluster.titleEn : cluster.titleAr}
           </span>
         </div>
       )}
@@ -35,7 +39,7 @@ export function ArticleCard({ article }: { article: Article }) {
           <Calendar className="w-3.5 h-3.5" /> {date}
         </span>
         <span className="inline-flex items-center gap-1">
-          <Clock className="w-3.5 h-3.5" /> {article.readingMinutes} د
+          <Clock className="w-3.5 h-3.5" /> {article.readingMinutes} {t("min")}
         </span>
       </div>
     </Link>

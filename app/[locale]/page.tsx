@@ -27,6 +27,9 @@ function HomeBody() {
 
   const all = getAllArticles(currentLocale);
   const [featured, ...rest] = all;
+  // Cap latest section to keep homepage HTML lightweight (was 200+ cards, ~2MB).
+  // Full catalog is discoverable via cluster hubs in the Sections grid below.
+  const latest = rest.slice(0, 24);
   const popular = getPopularArticles(6, currentLocale);
 
   return (
@@ -53,7 +56,7 @@ function HomeBody() {
         </section>
       )}
 
-      {rest.length > 0 && (
+      {latest.length > 0 && (
         <section id="latest" className="pt-14 scroll-mt-20">
           <div className="flex items-baseline justify-between mb-6">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100">
@@ -64,7 +67,7 @@ function HomeBody() {
             </span>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {rest.map((a) => (
+            {latest.map((a) => (
               <ArticleCard key={a.slug} article={a} />
             ))}
           </div>

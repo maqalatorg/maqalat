@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "prebuild": "npm run verify:links",
     "build": "next build",
     "start": "next start",
+    "verify:links": "node scripts/verify-links.mjs",
     "index:ping": "node scripts/ping_google_indexing.mjs",
     "indexnow:ping": "node scripts/ping_indexnow.mjs"
   },
