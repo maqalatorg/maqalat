@@ -18,11 +18,11 @@ faq:
   - q: "أشهر Vector Databases 2026؟"
     a: "الأبرز: **Pinecone**، SaaS، الأشهر تجارياً، **Weaviate**، مفتوح المصدر، سحابي، **Chroma**، خفيف للتطوير، **Qdrant**، مفتوح، أداء عالٍ، **Milvus**، الأشمل للمؤسّسات. **Postgres + pgvector** بديل ممتاز إذا لديك Postgres."
   - q: "متى أستخدم Vector DB؟"
-    a: "أشهرها: **RAG** (Retrieval Augmented Generation)، **بحث دلالي** (Semantic Search)، **أنظمة التوصيات** (منتجات مشابهة)، **البحث بالصور/الصوت المشابه**. **لا تحتاجها إذا**: بحث بسيط بالكلمات، بيانات صغيرة (<10K)."
+    a: "أشهرها: **RAG** (Retrieval Augmented Generation)، **بحث دلالي** (Semantic Search)، **أنظمة التوصيات** (منتجات مشابهة)، **البحث بالصور/الصوت المشابه**. **لا تحتاجها إذا**: بحث بسيط بالكلمات، بيانات صغيرة (&lt;10K)."
   - q: "الأداء؟ الأسعار؟"
     a: "**Pinecone**: أسعار من 70$/شهر (Starter)، ممتاز الأداء. **Weaviate Cloud**: من 25$/شهر. **Qdrant Cloud**: مجاني بحدود، مدفوع للـProduction. **Chroma**: مجاني (self-hosted). **pgvector**: مجاني (مع Postgres). **الأداء عام**: كلها < 100ms لملايين vectors."
   - q: "هل يمكنني بناء واحد بنفسي؟"
-    a: "نعم، لكن غير موصى للـProduction. **بدائل بسيطة**: NumPy مع Cosine Similarity (للـ<100K vectors). **مكتبات جاهزة**: FAISS (Facebook)، Annoy (Spotify)، HNSWlib. **لكن Vector DBs الجاهزة أوفر** في الجهد على المدى الطويل."
+    a: "نعم، لكن غير موصى للـProduction. **بدائل بسيطة**: NumPy مع Cosine Similarity (للـ&lt;100K vectors). **مكتبات جاهزة**: FAISS (Facebook)، Annoy (Spotify)، HNSWlib. **لكن Vector DBs الجاهزة أوفر** في الجهد على المدى الطويل."
   - q: "الفرق بين Approximate و Exact Search؟"
     a: "**Exact**: يفحص كل vector، بطيء على المليارات. **Approximate (ANN)**: خوارزميات مثل HNSW، IVF، أسرع بـ100-1000x، **بدقّة 95-99%**. كل Vector DBs الحديثة تستخدم ANN. **الفرق بالنسبة لك**: نتائج ممتازة بسرعة عالية."
 ---
@@ -96,7 +96,7 @@ faq:
 
 - **SaaS كامل**، لا إدارة خادم
 - Serverless: يتوسّع تلقائياً
-- سريع جدّاً: <100ms على مليارات
+- سريع جدّاً: &lt;100ms على مليارات
 - **Multi-region**
 - **Enterprise-grade** security
 - **Namespaces** لتنظيم البيانات
@@ -315,7 +315,7 @@ results = collection.query(
 ### القيود
 
 - **الأداء أقلّ** من Vector DBs المتخصّصة على المليارات
-- مثالي لـ: <10M vectors
+- مثالي لـ: &lt;10M vectors
 
 ### مثال
 
@@ -345,7 +345,7 @@ LIMIT 5;
 |---|---|---|---|---|---|---|
 | **النوع** | SaaS | مفتوح | مفتوح | مفتوح | مفتوح | Postgres |
 | **السعر** | مدفوع | مجاني/مدفوع | مجاني | مجاني/مدفوع | مجاني | مجاني |
-| **الأداء** | ممتاز | ممتاز | متوسّط | ممتاز | ممتاز | جيّد (لبيانات <10M) |
+| **الأداء** | ممتاز | ممتاز | متوسّط | ممتاز | ممتاز | جيّد (لبيانات &lt;10M) |
 | **السهولة** | الأسهل | متوسّط | للتطوير | متوسّط | معقّد | إن Postgres موجود |
 | **الأنسب لـ** | Production بلا صداع | مرونة | Prototypes | أداء + مفتوح | Enterprise كبير | Postgres shops |
 
@@ -380,7 +380,7 @@ LIMIT 5;
 
 **استخدم pgvector إذا**:
 - Postgres موجود أصلاً
-- <10M vectors
+- &lt;10M vectors
 - لا تريد خادم إضافي
 
 ## Embeddings، الاختيار

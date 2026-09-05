@@ -50,7 +50,12 @@ function AboutBody() {
       </ul>
 
       <h2>{t("whoTitle")}</h2>
-      <p>{t.rich("whoBody", { b: (chunks) => <strong>{chunks}</strong> })}</p>
+      <p>
+        {t.rich("whoBody", {
+          b: (chunks) => <strong>{chunks}</strong>,
+          link: (chunks) => <Link href="/methodology">{chunks}</Link>,
+        })}
+      </p>
 
       <h2>{t("contactTitle")}</h2>
       <p>
