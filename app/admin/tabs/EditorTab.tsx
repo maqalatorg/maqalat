@@ -110,7 +110,7 @@ export function EditorTab() {
       ? `\n<video src="${j.url}" controls style={{width: "100%"}} />\n`
       : `\n![](${j.url})\n`;
     insertAtCursor(snippet);
-    setMsg(`رُفع ✓ (${(j.size / 1024).toFixed(0)} KB) — تم إدراج المرجع`);
+    setMsg(`رُفع (${(j.size / 1024).toFixed(0)} KB)، تم إدراج المرجع`);
   }
 
   function insertAtCursor(text: string) {
