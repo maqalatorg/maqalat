@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "index:ping": "node scripts/ping_google_indexing.mjs"
+    "index:ping": "node scripts/ping_google_indexing.mjs",
+    "indexnow:ping": "node scripts/ping_indexnow.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
