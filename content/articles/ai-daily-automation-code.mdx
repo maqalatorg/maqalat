@@ -56,9 +56,9 @@ def send_slack_alert(webhook_url: str, message: str) -> None:
 try:
     # كودك
     result = risky_operation()
-    send_slack_alert(WEBHOOK, f"✅ نجح: {result}")
+    send_slack_alert(WEBHOOK, f"[OK] نجح: {result}")
 except Exception as e:
-    send_slack_alert(WEBHOOK, f"❌ فشل: {e}")
+    send_slack_alert(WEBHOOK, f"[FAIL] فشل: {e}")
 ```
 
 ## 3) قراءة إيميلات (IMAP)
@@ -140,10 +140,10 @@ def monitor_website(url: str, check_interval: int = 60) -> None:
         try:
             r = requests.get(url, timeout=10)
             if r.status_code!= 200:
-                print(f"⚠️ {url} — HTTP {r.status_code}")
+                print(f"[WARN] {url} — HTTP {r.status_code}")
                 # send_alert()
         except Exception as e:
-            print(f"❌ {url} — {e}")
+            print(f"[ERR] {url} — {e}")
             # send_alert()
         
         time.sleep(check_interval)
@@ -235,7 +235,7 @@ find "$BACKUP_DIR" -name "*.sql.gz" -mtime +30 -delete
 #!/bin/bash
 USAGE=$(df / | awk 'NR==2 {print $5}' | sed 's/%//')
 if [ "$USAGE" -gt 80 ]; then
-    echo "⚠️ القرص ممتلئ: $USAGE%"
+    echo "[WARN] القرص ممتلئ: $USAGE%"
     # send alert
 fi
 ```

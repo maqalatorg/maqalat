@@ -161,13 +161,13 @@ echo "بدء النسخ الاحتياطي..."
 tar -czf "$BACKUP_FILE" "$SOURCE"
 
 if [ $? -eq 0 ]; then
-    echo "✅ نجح النسخ: $BACKUP_FILE"
+    echo "[OK] نجح النسخ: $BACKUP_FILE"
     
     # احذف نسخ أقدم من 30 يوم
     find "$BACKUP_DIR" -name "backup_*.tar.gz" -mtime +30 -delete
-    echo "🗑️ حُذفت النسخ القديمة"
+    echo "[CLEAN] حُذفت النسخ القديمة"
 else
-    echo "❌ فشل النسخ"
+    echo "[FAIL] فشل النسخ"
     exit 1
 fi
 ```
@@ -297,7 +297,7 @@ foreach ($drive in $drives) {
         $percent = [math]::Round(($drive.Used / $total) * 100, 2)
         
         if ($percent -gt $threshold) {
-            Write-Warning "⚠️ القرص $($drive.Name): $percent%"
+            Write-Warning "[WARN] القرص $($drive.Name): $percent%"
             
             # إرسال إيميل تنبيه (اختياري)
             Send-MailMessage -To "admin@example.com" `

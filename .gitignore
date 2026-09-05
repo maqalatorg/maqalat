@@ -40,3 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 scripts/audit_report.json
+scripts/faq_targets.json
