@@ -11,7 +11,8 @@ export default createMiddleware({
 export const config = {
   matcher: [
     // Match everything except Next.js internals, API routes, static assets, and
-    // SEO/system files that must not be locale-rewritten (sitemap, robots, ads.txt).
-    "/((?!api|admin|_next/static|_next/image|favicon\\.ico|icon|apple-icon|opengraph-image|og-default|sitemap\\.xml|robots\\.txt|ads\\.txt|fonts).*)",
+    // SEO/system files that must not be locale-rewritten (sitemap, robots, ads.txt,
+    // IndexNow 32-char hex key file).
+    "/((?!api|admin|_next/static|_next/image|favicon\\.ico|icon|apple-icon|opengraph-image|og-default|sitemap\\.xml|robots\\.txt|ads\\.txt|[a-f0-9]{32}\\.txt|fonts).*)",
   ],
 };
