@@ -9,6 +9,10 @@ import { getAllArticles, getPopularArticles } from "@/lib/blog";
 import { ENABLED_CLUSTERS } from "@/lib/clusters";
 import type { Locale } from "@/i18n/config";
 
+// ISR: render once per hour and cache at the edge. Homepage reads 200+ MDX
+// files via getAllArticles(); serving from cache drops TTFB from ~3s to <200ms.
+export const revalidate = 3600;
+
 export default async function HomePage({
   params,
 }: {
