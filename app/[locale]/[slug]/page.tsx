@@ -11,6 +11,7 @@ import {
   getRelatedArticles,
   hasArabicVersion,
   hasEnglishVersion,
+  toSummary,
   type ArticleLocale,
 } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
@@ -127,6 +128,12 @@ const RESERVED_SLUGS = new Set([
   "ads.txt",
 ]);
 
+// ISR: cache article HTML at the edge for 1h. Article MDX is read from
+// disk + related-articles pass touches 228 files → dynamic TTFB was
+// ~1s. Cache brings it under 100ms and eliminates the Ahrefs "Slow page"
+// warning on 165+ pages.
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   // Emit (locale, slug) combinations only where the file actually exists.
   // AR articles for /{slug}; EN articles for /en/{slug} — no ghost pages.
@@ -225,7 +232,12 @@ export default async function ArticlePage({
 
   const t = await getTranslations({ locale, namespace: "article" });
   const cluster = findCluster(article.frontmatter.cluster);
-  const related = getRelatedArticles(article, 3);
+  // 6 related (was 3): the extra 3 are cross-cluster and rotated by a
+  // hash of the current slug, spreading inbound dofollow links across
+  // the tail of the catalog — kills Ahrefs "only 1 incoming internal
+  // link" warnings for 32 pages. toSummary drops the MDX body so the
+  // RSC payload stays lean.
+  const related = getRelatedArticles(article, 6).map(toSummary);
 
   const dateStr = new Date(article.frontmatter.publishedAt).toLocaleDateString(
     isEn ? "en-US" : "ar-SA",

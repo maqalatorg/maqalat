@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/components/ArticleCard";
 import { FeaturedArticle } from "@/components/FeaturedArticle";
 import { ClusterIcon } from "@/components/ClusterIcon";
-import { getAllArticles, getPopularArticles } from "@/lib/blog";
+import { getAllArticles, getPopularArticles, toSummary } from "@/lib/blog";
 import { ENABLED_CLUSTERS } from "@/lib/clusters";
 import type { Locale } from "@/i18n/config";
 
@@ -29,12 +29,16 @@ function HomeBody() {
   const isEn = currentLocale === "en";
   const Arrow = isEn ? ArrowRight : ArrowLeft;
 
-  const all = getAllArticles(currentLocale);
+  // Trim the MDX body from every card article. Without this, 24 latest +
+  // 6 popular + 1 featured cards each carry ~30KB of body text in the RSC
+  // payload — homepage HTML balloons to ~1MB. toSummary drops it.
+  const all = getAllArticles(currentLocale).map(toSummary);
+  const totalCount = all.length;
   const [featured, ...rest] = all;
-  // Cap latest section to keep homepage HTML lightweight (was 200+ cards, ~2MB).
+  // Cap latest section to keep homepage HTML lightweight.
   // Full catalog is discoverable via cluster hubs in the Sections grid below.
   const latest = rest.slice(0, 24);
-  const popular = getPopularArticles(6, currentLocale);
+  const popular = getPopularArticles(6, currentLocale).map(toSummary);
 
   return (
     <div className="max-w-6xl mx-auto px-4">
@@ -72,7 +76,7 @@ function HomeBody() {
               {t("latestTitle")}
             </h2>
             <span className="text-sm text-slate-500">
-              {t("articleCount", { count: all.length })}
+              {t("articleCount", { count: totalCount })}
             </span>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

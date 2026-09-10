@@ -26,6 +26,21 @@ export type Article = {
   readingMinutes: number;
 };
 
+/**
+ * Same shape as Article, minus the (potentially large) MDX body.
+ * Use for lists / cards / homepage grids so we don't serialize the
+ * full body into every RSC payload — 3 related articles alone were
+ * adding ~90KB to each article HTML.
+ */
+export type ArticleSummary = Omit<Article, "content">;
+
+/** Strip the `content` field from an Article for use in cards / lists. */
+export function toSummary(a: Article): ArticleSummary {
+  const { content: _unused, ...rest } = a;
+  void _unused;
+  return rest;
+}
+
 const CONTENT_DIR = path.join(process.cwd(), "content", "articles");
 
 /**
@@ -124,10 +139,29 @@ export function getPopularArticles(limit?: number, locale: ArticleLocale = "ar")
 }
 
 /**
- * Get related articles for a given article — restricted to the same locale.
- * Priority: same cluster first, then newest from other clusters.
+ * Deterministic string hash → non-negative integer.
+ * Used to rotate cross-cluster picks per article so that tail-of-list
+ * articles receive incoming dofollow links instead of always the newest
+ * ones being surfaced.
  */
-export function getRelatedArticles(article: Article, count = 4): Article[] {
+function hashSlug(s: string): number {
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+  return h;
+}
+
+/**
+ * Get related articles for a given article — restricted to the same locale.
+ *
+ * Selection strategy:
+ *   half: same-cluster newest-first (topical relevance)
+ *   half: cross-cluster, rotated by hash(currentSlug) so different articles
+ *         surface different siblings. Without this rotation, the newest
+ *         cross-cluster articles get all the inlinks and older articles
+ *         end up with just one incoming link — exactly the pattern Ahrefs
+ *         flags as "Page has only one dofollow incoming internal link".
+ */
+export function getRelatedArticles(article: Article, count = 6): Article[] {
   const all = getAllArticles(article.locale);
   const sameCluster = all.filter(
     (a) => a.frontmatter.cluster === article.frontmatter.cluster && a.slug !== article.slug,
@@ -135,7 +169,22 @@ export function getRelatedArticles(article: Article, count = 4): Article[] {
   const others = all.filter(
     (a) => a.frontmatter.cluster !== article.frontmatter.cluster,
   );
-  return [...sameCluster, ...others].slice(0, count);
+
+  const sameQuota = Math.min(sameCluster.length, Math.ceil(count / 2));
+  const crossQuota = count - sameQuota;
+
+  // Rotate the cross-cluster list by a hash-derived offset so each article
+  // pulls a different window; siblings that were previously invisible
+  // (position > 3 in the newest-first list) now get their share of links.
+  const offset = crossQuota > 0 ? hashSlug(article.slug) % Math.max(others.length, 1) : 0;
+  const rotatedOthers = others.length
+    ? [...others.slice(offset), ...others.slice(0, offset)]
+    : [];
+
+  return [
+    ...sameCluster.slice(0, sameQuota),
+    ...rotatedOthers.slice(0, crossQuota),
+  ];
 }
 
 /** Strip MDX/markdown to plain text for full-text search indexing. */

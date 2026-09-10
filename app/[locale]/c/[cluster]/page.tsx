@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ClusterIcon } from "@/components/ClusterIcon";
-import { getArticlesByCluster } from "@/lib/blog";
+import { getArticlesByCluster, toSummary } from "@/lib/blog";
 import { CLUSTERS, findCluster } from "@/lib/clusters";
 import {
   SITE_URL,
@@ -85,7 +85,9 @@ export default async function ClusterPage({
 
   const isEn = locale === "en";
   const t = await getTranslations({ locale, namespace: "cluster" });
-  const articles = getArticlesByCluster(slug, locale as "ar" | "en");
+  // Trim MDX body — cluster pages list ~15-30 articles each; without this
+  // the RSC payload carries ~450KB of unused article body.
+  const articles = getArticlesByCluster(slug, locale as "ar" | "en").map(toSummary);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
