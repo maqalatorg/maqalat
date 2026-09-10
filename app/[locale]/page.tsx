@@ -38,6 +38,11 @@ function HomeBody() {
 
   return (
     <div className="max-w-6xl mx-auto px-4">
+      <h1 className="sr-only">
+        {isEn
+          ? "Maqalat — Your Modern Reference for Everything You Need to Know"
+          : "مقالات — مرجعك الحديث لكل ما تحتاج معرفته"}
+      </h1>
       {featured && (
         <section className="pt-8 sm:pt-10">
           <FeaturedArticle article={featured} />

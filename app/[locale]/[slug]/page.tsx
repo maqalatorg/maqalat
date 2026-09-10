@@ -19,7 +19,10 @@ import {
   faqJsonLd,
   breadcrumbJsonLd,
   howToJsonLd,
+  normalizeMetaDescription,
+  normalizeTitle,
   SITE_URL,
+  DEFAULT_OG,
 } from "@/lib/seo";
 import { mdxComponents } from "@/mdx-components";
 
@@ -149,6 +152,7 @@ export async function generateMetadata({
 
   const fm = article.frontmatter;
   const canonicalPath = loc === "ar" ? `/${slug}` : `/${loc}/${slug}`;
+  const canonicalUrl = `${SITE_URL}${canonicalPath}`;
 
   // Build hreflang alternates for whichever versions actually exist.
   const languages: Record<string, string> = {};
@@ -156,21 +160,38 @@ export async function generateMetadata({
   if (hasEnglishVersion(slug)) languages.en = `${SITE_URL}/en/${slug}`;
   languages["x-default"] = languages.ar || languages.en;
 
+  // Enforce Google's healthy title/description windows.
+  const seoTitle = normalizeTitle(fm.title);
+  const titleCtx = loc === "en"
+    ? `A practical Maqalat guide on ${fm.title}.`
+    : `دليل عملي من مقالات حول ${fm.title}.`;
+  const seoDescription = normalizeMetaDescription(fm.description, titleCtx);
+  const coverUrl = fm.cover
+    ? (fm.cover.startsWith("http") ? fm.cover : `${SITE_URL}${fm.cover}`)
+    : `${SITE_URL}${DEFAULT_OG}`;
+
   return {
-    title: fm.title,
-    description: fm.description,
+    title: seoTitle,
+    description: seoDescription,
     openGraph: {
-      title: fm.title,
-      description: fm.description,
+      title: seoTitle,
+      description: seoDescription,
       type: "article",
       locale: loc === "en" ? "en_US" : "ar_SA",
       publishedTime: fm.publishedAt,
       modifiedTime: fm.updatedAt,
-      url: `${SITE_URL}${canonicalPath}`,
-      images: fm.cover ? [fm.cover] : ["/og-default.png"],
+      url: canonicalUrl,
+      siteName: loc === "en" ? "Maqalat" : "مقالات",
+      images: [{ url: coverUrl, width: 1200, height: 630, alt: seoTitle }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seoTitle,
+      description: seoDescription,
+      images: [coverUrl],
     },
     alternates: {
-      canonical: `${SITE_URL}${canonicalPath}`,
+      canonical: canonicalUrl,
       languages,
     },
   };

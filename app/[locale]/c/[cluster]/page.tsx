@@ -5,7 +5,12 @@ import { ArticleCard } from "@/components/ArticleCard";
 import { ClusterIcon } from "@/components/ClusterIcon";
 import { getArticlesByCluster } from "@/lib/blog";
 import { CLUSTERS, findCluster } from "@/lib/clusters";
-import { SITE_URL } from "@/lib/seo";
+import {
+  SITE_URL,
+  DEFAULT_OG,
+  normalizeTitle,
+  normalizeMetaDescription,
+} from "@/lib/seo";
 import { locales } from "@/i18n/config";
 
 // ISR: cache the cluster page at the edge for 1h. Cuts TTFB ~1s → <100ms.
@@ -26,18 +31,43 @@ export async function generateMetadata({
   const cluster = findCluster(slug);
   if (!cluster) return {};
   const isEn = locale === "en";
-  const title = isEn ? cluster.titleEn : cluster.titleAr;
-  const description = isEn ? cluster.descriptionEn : cluster.descriptionAr;
+  const rawTitle = isEn ? cluster.titleEn : cluster.titleAr;
+  const rawDescription = isEn ? cluster.descriptionEn : cluster.descriptionAr;
   const path = locale === "ar" ? `/c/${slug}` : `/${locale}/c/${slug}`;
+  const canonicalUrl = `${SITE_URL}${path}`;
   const siteName = isEn ? "Maqalat" : "مقالات";
+  const seoTitle = normalizeTitle(rawTitle);
+  const seoDescription = normalizeMetaDescription(
+    rawDescription,
+    isEn ? `Curated ${rawTitle} content on Maqalat.` : `أفضل محتوى ${rawTitle} على مقالات.`,
+  );
+  const coverUrl = `${SITE_URL}${DEFAULT_OG}`;
+
+  // Cluster pages exist for both AR and EN — always emit both.
+  const arUrl = `${SITE_URL}/c/${slug}`;
+  const enUrl = `${SITE_URL}/en/c/${slug}`;
+
   return {
-    title: `${title} — ${siteName}`,
-    description,
-    alternates: { canonical: `${SITE_URL}${path}` },
+    title: seoTitle,
+    description: seoDescription,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: { ar: arUrl, en: enUrl, "x-default": arUrl },
+    },
     openGraph: {
-      title: `${title} — ${siteName}`,
-      description,
-      url: `${SITE_URL}${path}`,
+      type: "website",
+      locale: isEn ? "en_US" : "ar_SA",
+      siteName,
+      title: seoTitle,
+      description: seoDescription,
+      url: canonicalUrl,
+      images: [{ url: coverUrl, width: 1200, height: 630, alt: seoTitle }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seoTitle,
+      description: seoDescription,
+      images: [coverUrl],
     },
   };
 }

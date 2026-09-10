@@ -7,6 +7,62 @@ export const DEFAULT_OG = "/og-default.png";
 export const AUTHOR = "مقالات";
 export const CONTACT_EMAIL = "maqalatorg@gmail.com";
 
+/**
+ * SEO metadata length guardrails (bytes-agnostic, char-counted).
+ * Google truncates ~55-60 for titles and ~155-160 for descriptions.
+ * We reserve TITLE_SUFFIX_RESERVE chars for the site-name suffix
+ * appended by the root layout template `%s | Maqalat/مقالات`.
+ */
+export const TITLE_MAX = 60;
+export const TITLE_SUFFIX_RESERVE = 12; // " | مقالات" ~= 10, buffer 2
+export const DESC_MIN = 120;
+export const DESC_MAX = 155;
+
+/**
+ * Truncate on a word boundary, adding an ellipsis when we actually cut.
+ * Never returns a string longer than `max` characters.
+ */
+export function seoTruncate(s: string, max: number): string {
+  if (!s) return s;
+  if (s.length <= max) return s;
+  const window = s.slice(0, max - 1);
+  const lastSpace = Math.max(
+    window.lastIndexOf(" "),
+    window.lastIndexOf("، "),
+    window.lastIndexOf("، "),
+    window.lastIndexOf("."),
+    window.lastIndexOf("،"),
+  );
+  const cut = lastSpace > max * 0.6 ? window.slice(0, lastSpace) : window;
+  return `${cut.trimEnd()}…`;
+}
+
+/**
+ * Ensure a meta description falls within Google's healthy window.
+ * If too long → truncate on a word boundary.
+ * If too short → append the title context so search snippets have body.
+ */
+export function normalizeMetaDescription(desc: string, titleCtx?: string): string {
+  const d = (desc || "").trim();
+  if (d.length > DESC_MAX) return seoTruncate(d, DESC_MAX);
+  if (d.length >= DESC_MIN) return d;
+  if (!titleCtx) return d;
+  // Extend by appending a natural continuation with the title context.
+  const separator = d.endsWith(".") || d.endsWith("،") || d.endsWith("؟") ? " " : " — ";
+  const extended = `${d}${separator}${titleCtx.trim()}`;
+  return extended.length > DESC_MAX ? seoTruncate(extended, DESC_MAX) : extended;
+}
+
+/**
+ * Prepare the page title so that after Next.js appends the site suffix
+ * (` | مقالات`) we still fit under TITLE_MAX.
+ */
+export function normalizeTitle(title: string): string {
+  const t = (title || "").trim();
+  const budget = TITLE_MAX - TITLE_SUFFIX_RESERVE;
+  return t.length <= budget ? t : seoTruncate(t, budget);
+}
+
 /** Cluster (topic) definitions. Keep in sync with lib/clusters.ts. */
 export type ClusterSlug =
   | "calendar"
