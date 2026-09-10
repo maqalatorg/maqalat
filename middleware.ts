@@ -5,15 +5,9 @@ export default createMiddleware({
   ...routing,
   // Don't auto-redirect based on browser Accept-Language — keeps AR URLs stable.
   // Users switch via the LanguageSwitcher component.
+  // (alternateLinks is set in routing.ts so both middleware and
+  // navigation share the same source of truth.)
   localeDetection: false,
-  // Disable next-intl's automatic Link-header hreflang emission. It adds
-  // <.../en/{path}>; rel="alternate"; hreflang="en" for EVERY response,
-  // even for AR articles whose EN sibling doesn't exist — Ahrefs then flags
-  // them as "Hreflang to redirect or broken page" (178 pages).
-  // We emit hreflang exactly where warranted from generateMetadata in each
-  // page (articles gate on hasEnglishVersion; static + cluster pages both
-  // exist for both locales, so they always emit both).
-  alternateLinks: false,
 });
 
 export const config = {
