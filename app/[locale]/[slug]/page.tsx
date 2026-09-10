@@ -104,9 +104,7 @@ import { locales } from "@/i18n/config";
 
 import { ArticleCard } from "@/components/ArticleCard";
 import { FAQ } from "@/components/FAQ";
-import { RatingStars } from "@/components/RatingStars";
-import { CommentsSection } from "@/components/CommentsSection";
-import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { ArticleBelowFold } from "@/components/ArticleBelowFold";
 import { JsonLd } from "@/components/JsonLd";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { ClusterIcon } from "@/components/ClusterIcon";
@@ -340,18 +338,10 @@ export default async function ArticlePage({
           <MDXRemote source={article.content} components={mdxComponents} />
         </div>
 
-        {/* Rating */}
-        <section className="mt-12 card p-5">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-3">
-            {t("ratingQuestion")}
-          </h2>
-          <RatingStars slug={slug} />
-        </section>
-
-        {/* FAQ */}
+        {/* FAQ (server-rendered — content, not decoration) */}
         {article.frontmatter.faq && <FAQ items={article.frontmatter.faq} />}
 
-        {/* Related */}
+        {/* Related (server-rendered but body-trimmed via toSummary) */}
         {related.length > 0 && (
           <section className="mt-12">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">
@@ -365,11 +355,12 @@ export default async function ArticlePage({
           </section>
         )}
 
-        {/* Newsletter */}
-        <NewsletterSignup source={`article:${slug}`} />
-
-        {/* Comments */}
-        <CommentsSection slug={slug} />
+        {/* Rating + Newsletter + Comments (dynamic import, ssr:false — keeps ~15KB out of RSC) */}
+        <ArticleBelowFold
+          slug={slug}
+          ratingLabel={t("ratingQuestion")}
+          newsletterSource={`article:${slug}`}
+        />
       </article>
     </>
   );
