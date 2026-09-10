@@ -1,22 +1,12 @@
 import type { Viewport } from "next";
-import { Cairo } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { headers } from "next/headers";
-import "./globals.css";
-
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { GoogleAnalytics } from "@/components/GoogleAnalytics";
-import { GoogleAdSense } from "@/components/GoogleAdSense";
-import { PageViewTracker } from "@/components/PageViewTracker";
 import { SITE_URL } from "@/lib/seo";
-import { defaultLocale, isRtl } from "@/i18n/config";
 
-const cairo = Cairo({
-  subsets: ["arabic", "latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-cairo",
-  display: "swap",
-});
+// Root layout is intentionally minimal — no <html>, no headers()/cookies().
+// The <html lang dir> tag and all providers live in app/[locale]/layout.tsx
+// so that ISR (revalidate) on individual pages actually kicks in. Reading
+// headers() here would opt every descendant page into dynamic rendering,
+// which is why article/cluster/home HTML was being served as
+// `Cache-Control: no-cache` despite `export const revalidate = 3600`.
 
 // Base metadata — locale-specific metadata is generated in app/[locale]/layout.tsx.
 // Values here apply to system routes (sitemap, robots, og-default.png) and act as
@@ -48,34 +38,10 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Middleware sets x-next-intl-locale header. Fall back to defaultLocale for
-  // request paths not matched by middleware (sitemap.xml, robots.txt, etc).
-  const headersList = await headers();
-  const locale = headersList.get("x-next-intl-locale") || defaultLocale;
-  const dir = isRtl(locale) ? "rtl" : "ltr";
-
-  return (
-    <html
-      lang={locale}
-      dir={dir}
-      suppressHydrationWarning
-      className={cairo.variable}
-    >
-      <body className="font-sans antialiased">
-        <ThemeProvider>
-          <div className="watermark-bg" aria-hidden="true" />
-          {children}
-        </ThemeProvider>
-        <Analytics />
-        <GoogleAnalytics />
-        <GoogleAdSense />
-        <PageViewTracker />
-      </body>
-    </html>
-  );
+  return children;
 }

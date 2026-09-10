@@ -1,14 +1,28 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Cairo } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { GoogleAdSense } from "@/components/GoogleAdSense";
+import { PageViewTracker } from "@/components/PageViewTracker";
 import { siteJsonLd, SITE_URL } from "@/lib/seo";
-import { locales, type Locale } from "@/i18n/config";
+import { locales, isRtl, type Locale } from "@/i18n/config";
 import { routing } from "@/i18n/routing";
+
+// Load the font once at the locale layout level (was in root layout).
+const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-cairo",
+  display: "swap",
+});
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -79,13 +93,30 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const dir = isRtl(locale) ? "rtl" : "ltr";
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <JsonLd data={siteJsonLd()} />
-      <Header />
-      <main className="relative z-10 min-h-screen">{children}</main>
-      <Footer />
-    </NextIntlClientProvider>
+    <html
+      lang={locale}
+      dir={dir}
+      suppressHydrationWarning
+      className={cairo.variable}
+    >
+      <body className="font-sans antialiased">
+        <ThemeProvider>
+          <div className="watermark-bg" aria-hidden="true" />
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <JsonLd data={siteJsonLd()} />
+            <Header />
+            <main className="relative z-10 min-h-screen">{children}</main>
+            <Footer />
+          </NextIntlClientProvider>
+        </ThemeProvider>
+        <Analytics />
+        <GoogleAnalytics />
+        <GoogleAdSense />
+        <PageViewTracker />
+      </body>
+    </html>
   );
 }
