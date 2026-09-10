@@ -63,6 +63,57 @@ export function normalizeTitle(title: string): string {
   return t.length <= budget ? t : seoTruncate(t, budget);
 }
 
+/**
+ * Build a complete Metadata object for a static page (about, contact, etc.)
+ * with:
+ *   - canonical URL matching the current path
+ *   - og:url === canonical (fixes Ahrefs "Open Graph URL not matching canonical")
+ *   - complete OG (siteName, type, locale, image w/ dimensions + alt)
+ *   - twitter card
+ *   - hreflang alternates for both locales
+ * Both ar and en static pages exist for every path in this set, so we
+ * always emit ar + en + x-default.
+ */
+export function staticPageMetadata(opts: {
+  locale: "ar" | "en";
+  path: string; // e.g. "/about"  (no locale prefix)
+  title: string;
+  description: string;
+}) {
+  const { locale, path, title, description } = opts;
+  const isEn = locale === "en";
+  const arUrl = path === "/" ? SITE_URL : `${SITE_URL}${path}`;
+  const enUrl = path === "/" ? `${SITE_URL}/en` : `${SITE_URL}/en${path}`;
+  const canonicalUrl = isEn ? enUrl : arUrl;
+  const siteName = isEn ? SITE_NAME_EN : SITE_NAME_AR;
+  const seoTitle = normalizeTitle(title);
+  const seoDescription = normalizeMetaDescription(description);
+  const coverUrl = `${SITE_URL}${DEFAULT_OG}`;
+  return {
+    title: seoTitle,
+    description: seoDescription,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: { ar: arUrl, en: enUrl, "x-default": arUrl },
+    },
+    openGraph: {
+      type: "website" as const,
+      locale: isEn ? "en_US" : "ar_SA",
+      siteName,
+      title: seoTitle,
+      description: seoDescription,
+      url: canonicalUrl,
+      images: [{ url: coverUrl, width: 1200, height: 630, alt: seoTitle }],
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: seoTitle,
+      description: seoDescription,
+      images: [coverUrl],
+    },
+  };
+}
+
 /** Cluster (topic) definitions. Keep in sync with lib/clusters.ts. */
 export type ClusterSlug =
   | "calendar"

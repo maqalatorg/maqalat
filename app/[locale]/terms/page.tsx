@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { SITE_URL } from "@/lib/seo";
+import { staticPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -9,14 +9,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
-  const path = isEn ? "/en/terms" : "/terms";
-  return {
+  return staticPageMetadata({
+    locale: locale as "ar" | "en",
+    path: "/terms",
     title: isEn ? "Terms of Use" : "شروط الاستخدام",
     description: isEn
-      ? "Terms of use for the Maqalat website."
-      : "شروط استخدام موقع مقالات.",
-    alternates: { canonical: `${SITE_URL}${path}` },
-  };
+      ? "Terms of use for the Maqalat website — how you can use our content, comment policy, and account rules."
+      : "شروط استخدام موقع مقالات — كيف يُسمح باستخدام المحتوى، سياسة التعليقات، وقواعد الحساب.",
+  });
 }
 
 export default async function TermsPage({

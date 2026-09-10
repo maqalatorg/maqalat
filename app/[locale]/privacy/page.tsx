@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { SITE_URL } from "@/lib/seo";
+import { staticPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -9,14 +9,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
-  const path = isEn ? "/en/privacy" : "/privacy";
-  return {
+  return staticPageMetadata({
+    locale: locale as "ar" | "en",
+    path: "/privacy",
     title: isEn ? "Privacy Policy" : "سياسة الخصوصية",
     description: isEn
-      ? "How Maqalat collects and uses your data."
-      : "كيف نجمع ونستخدم بياناتك على موقع مقالات.",
-    alternates: { canonical: `${SITE_URL}${path}` },
-  };
+      ? "How Maqalat collects and uses your data — what we store, why, and your rights to access or delete it."
+      : "كيف نجمع ونستخدم بياناتك على مقالات — ما نُخزّنه، ولماذا، وحقّك في الوصول أو الحذف.",
+  });
 }
 
 export default async function PrivacyPage({

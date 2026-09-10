@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { SITE_URL } from "@/lib/seo";
+import { staticPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -9,21 +9,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
-  const path = isEn ? "/en/methodology" : "/methodology";
-  return {
+  return staticPageMetadata({
+    locale: locale as "ar" | "en",
+    path: "/methodology",
     title: isEn ? "Verification Methodology" : "منهجية التحقّق",
     description: isEn
       ? "The exact process Maqalat follows to research, source, review, and publish every article — step by step."
       : "الإجراء الفعلي الذي نتّبعه لبحث كل مقال، توثيقه بمصادره، مراجعته، ونشره — خطوة خطوة.",
-    alternates: {
-      canonical: `${SITE_URL}${path}`,
-      languages: {
-        ar: `${SITE_URL}/methodology`,
-        en: `${SITE_URL}/en/methodology`,
-        "x-default": `${SITE_URL}/methodology`,
-      },
-    },
-  };
+  });
 }
 
 export default async function MethodologyPage({

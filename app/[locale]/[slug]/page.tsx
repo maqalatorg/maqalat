@@ -1,5 +1,5 @@
 import { MDXRemote } from "next-mdx-remote-client/rsc";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { Calendar, Clock, User } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -211,7 +211,17 @@ export default async function ArticlePage({
   const loc = locale as ArticleLocale;
   const isEn = loc === "en";
   const article = getArticle(slug, loc);
-  if (!article) notFound();
+  if (!article) {
+    // If the EN version doesn't exist but the AR one does, 301 to the AR
+    // canonical instead of returning 404. This preserves link equity from
+    // any legacy /en/{slug} URLs that Ahrefs / Google still remember, and
+    // collapses two Ahrefs error buckets (404 pages + hreflang-to-broken)
+    // to zero without creating duplicate content.
+    if (isEn && hasArabicVersion(slug)) {
+      permanentRedirect(`/${slug}`);
+    }
+    notFound();
+  }
 
   const t = await getTranslations({ locale, namespace: "article" });
   const cluster = findCluster(article.frontmatter.cluster);

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { SITE_URL } from "@/lib/seo";
+import { staticPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -9,14 +9,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
-  const path = isEn ? "/en/editorial-policy" : "/editorial-policy";
-  return {
+  return staticPageMetadata({
+    locale: locale as "ar" | "en",
+    path: "/editorial-policy",
     title: isEn ? "Editorial Policy" : "السياسة التحريرية",
     description: isEn
-      ? "How Maqalat picks topics, verifies sources, and handles corrections."
-      : "كيف نختار المواضيع، نتحقّق من المعلومات، ونتعامل مع الأخطاء.",
-    alternates: { canonical: `${SITE_URL}${path}` },
-  };
+      ? "How Maqalat picks topics, verifies sources, handles corrections, and separates opinion from reporting."
+      : "كيف نختار المواضيع، نتحقّق من المصادر، نصحّح الأخطاء، ونفصل الرأي عن الخبر — سياسة تحريرية شفّافة.",
+  });
 }
 
 export default async function EditorialPolicyPage({

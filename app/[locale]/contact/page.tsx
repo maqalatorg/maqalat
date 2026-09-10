@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Mail, MessageCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { SITE_URL } from "@/lib/seo";
+import { staticPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -11,12 +11,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contact" });
-  const path = locale === "ar" ? "/contact" : `/${locale}/contact`;
-  return {
+  return staticPageMetadata({
+    locale: locale as "ar" | "en",
+    path: "/contact",
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: `${SITE_URL}${path}` },
-  };
+  });
 }
 
 export default async function ContactPage({

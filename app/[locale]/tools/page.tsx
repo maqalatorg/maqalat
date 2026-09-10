@@ -12,7 +12,7 @@ import {
   Coins,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { SITE_URL } from "@/lib/seo";
+import { staticPageMetadata } from "@/lib/seo";
 import type { Locale } from "@/i18n/config";
 
 export async function generateMetadata({
@@ -22,18 +22,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "tools" });
-  const path = locale === "ar" ? "/tools" : `/${locale}/tools`;
-  return {
+  return staticPageMetadata({
+    locale: locale as "ar" | "en",
+    path: "/tools",
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: `${SITE_URL}${path}` },
-    openGraph: {
-      title: t("metaTitle"),
-      description: t("metaDescription"),
-      url: `${SITE_URL}${path}`,
-      type: "website",
-    },
-  };
+  });
 }
 
 type Tool = {
