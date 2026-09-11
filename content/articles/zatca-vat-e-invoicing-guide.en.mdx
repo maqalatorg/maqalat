@@ -1,0 +1,179 @@
+---
+title: "Saudi E-Invoicing and VAT (ZATCA) 2026"
+description: "Comprehensive guide to e-invoicing and Value Added Tax (VAT) in Saudi Arabia: phases, requirements, the Fatoora integration platform, and penalties."
+cluster: "government"
+publishedAt: "2026-09-11"
+author: "Maqalat"
+tags:
+  - "e-invoicing"
+  - "ZATCA"
+  - "Saudi VAT"
+  - "Fatoora"
+  - "electronic invoice"
+faq:
+  - q: "What is e-invoicing in Saudi Arabia?"
+    a: "A mandatory system operated by the Zakat, Tax and Customs Authority (ZATCA) to issue tax invoices electronically instead of on paper. Phase 1 launched on 4 December 2021 for taxable establishments, and Phase 2 (linking and integration) rolls out in waves by establishment size."
+  - q: "Who is subject to VAT in Saudi Arabia?"
+    a: "Every Saudi establishment whose annual revenue exceeds 375,000 SAR must register and collect. Establishments between 187,500 and 375,000 SAR may register voluntarily. Foreign companies operating in Saudi Arabia are also covered."
+  - q: "What is the current VAT rate?"
+    a: "15% since 1 July 2020 (raised from a prior 5%). The rate applies to most goods and services, with specific exemptions (certain health and education services, some real estate, and some financial transactions)."
+  - q: "What are the two e-invoicing phases?"
+    a: "Phase 1 (Issuance), from 4 December 2021, stopped hand-written invoices and required establishments to issue certified electronic invoices. Phase 2 (Linking and Integration), from 1 January 2023, requires invoicing systems to connect in real time with ZATCA via Fatoora, rolled out in waves."
+  - q: "What are the penalties for e-invoicing violations?"
+    a: "Fines ranging from 1,000 to 50,000 SAR per violation, depending on type: not issuing electronic invoices, issuing non-compliant invoices, not retaining invoices, and not reporting to ZATCA. First offenses are often warnings; repetition escalates."
+  - q: "How do I issue an e-invoice as a small business?"
+    a: "Via ZATCA-approved invoicing systems. The official list on [zatca.gov.sa](https://zatca.gov.sa) contains dozens of systems, some free for small businesses (with monthly invoice caps) and some paid. The system must be officially certified."
+  - q: "When are VAT returns due?"
+    a: "Monthly for establishments with annual revenue over 40 million SAR; quarterly for others. The end of the Gregorian month following the return cycle (e.g., Q1 return before end of April)."
+---
+
+The **e-invoicing** system launched by the [Zakat, Tax and Customs Authority (ZATCA)](https://zatca.gov.sa) is the most significant transformation in the Saudi tax system since the introduction of VAT in 2018. This guide covers the full system: scope, phases, invoices, and taxpayer obligations.
+
+## Zakat, Tax and Customs Authority (ZATCA)
+
+The Authority was established in 2021 by merging three bodies: the Zakat and Income Authority, Customs, and the earlier zakat and income function. It handles:
+
+- Management of **Value Added Tax** (15%) on goods and services
+- **Sharia Zakat** on establishments owned by Saudis and GCC citizens
+- **Income tax** on non-Saudi establishments operating in the Kingdom
+- **Excise Tax** (like sweetened beverages and tobacco)
+- **Customs** on imported goods
+- **E-invoicing**
+
+---
+
+## E-Invoicing — Phases
+
+### Phase 1: Issuance (4 December 2021)
+
+**What changed**:
+
+- End of hand-written invoices
+- Establishments required to have a ZATCA-approved e-invoicing system
+- Invoices contain a mandatory QR code
+- Retained electronically for six years
+
+**Who is subject**:
+
+- Every VAT-registered establishment
+- Includes physical stores, e-commerce, and professional services
+
+### Phase 2: Linking and Integration (1 January 2023)
+
+**What changed**:
+
+- Direct linking of invoicing systems with **Fatoora** (ZATCA's system)
+- Every issued invoice is sent instantly to ZATCA for validation before delivery to the customer
+- Applied to establishments in waves:
+  - Group 1 (revenue > 3 billion SAR): January 2023
+  - Group 2 (> 500 million): July 2023
+  - Subsequent groups in stages until all establishments are covered
+- Groups expand by establishment revenue
+
+**How the system works in Phase 2**:
+
+1. The establishment issues the invoice from its system
+2. The system sends it to Fatoora via API
+3. Fatoora validates and issues a confirmation code
+4. The final invoice is printed or sent to the customer with the code
+
+---
+
+## E-Invoice Requirements
+
+Every invoice must contain:
+
+| Item | Description |
+|---|---|
+| **Seller's Tax Number** | 15 digits |
+| **Seller's trade name and address** | As in the commercial registration |
+| **Buyer's Tax Number** | If an establishment (B2B) |
+| **Sequential invoice number** | Cannot be repeated |
+| **Issuance date** | Actual time of issuance |
+| **Description of goods/services** | Detailed, no abbreviations |
+| **Pre-tax price** | Per line |
+| **Tax amount** | 15% usually |
+| **Total including tax** | In Saudi Riyals |
+| **QR Code** | Mandatory (generated by a standardized formula) |
+| **Confirmation Code** | From Fatoora (Phase 2 only) |
+
+---
+
+## Official Invoice Types
+
+The system recognizes two main types:
+
+### 1. Tax Invoice
+
+For B2B transactions (between two VAT-registered establishments). Contains all data above.
+
+### 2. Simplified Tax Invoice
+
+For B2C transactions (establishment with consumer). Fewer data points, but the QR code is mandatory. Example: a store receipt.
+
+**Distinguishing rules**:
+
+- If the buyer is an establishment with a tax number, issue a full tax invoice
+- If the buyer is an individual, the simplified invoice suffices
+
+---
+
+## Common Violation Penalties
+
+| Violation | Fine |
+|---|---|
+| **Not issuing an e-invoice** | 1,000–50,000 SAR by case |
+| **Issuing a non-compliant invoice** | 5,000 SAR per violation |
+| **Deleting/modifying an invoice after issuance** | 5,000–50,000 SAR |
+| **Not retaining invoices for six years** | 50,000 SAR |
+| **Not registering for VAT despite eligibility** | 10,000 SAR + due tax |
+| **Not filing the return on time** | 1,000–25,000 SAR |
+
+Fines double on repetition. To appeal a fine, use the objection portal at [zatca.gov.sa](https://zatca.gov.sa).
+
+---
+
+## Filing a VAT Return
+
+### Filing Cycle
+
+- **Monthly**: for establishments with annual revenue > 40 million SAR
+- **Quarterly**: for others
+
+### Steps via ZATCA
+
+1. Log in to the [zatca.gov.sa](https://zatca.gov.sa) portal with your establishment account
+2. Go to VAT return
+3. Fill in revenue, inputs, and collected tax
+4. The system computes net tax due (tax on sales minus recoverable input tax)
+5. Pay the tax via SADAD
+6. Receive the filing certificate instantly
+
+---
+
+## Additional Questions
+
+**When does VAT apply to GCC transactions?**
+The GCC VAT Framework treats sales between registered GCC states as imports/exports. Details are set entity-by-entity.
+
+**Are digital services (SaaS) subject to VAT?**
+Yes, digital services consumed in Saudi Arabia are subject to 15% even if the provider is foreign. Foreign companies register in VAT via "Non-Resident Registration".
+
+**What if I receive an invoice without a QR code?**
+You may refuse to accept it as accounting evidence and ask the seller to issue a compliant invoice. Accepting it may cost you the right to recover input tax.
+
+**Are individuals subject to VAT?**
+No. Individuals not conducting commercial activity are exempt. Even an individual who sells occasionally (like selling their personal car) is not considered a taxpayer.
+
+---
+
+## Official Sources
+
+- [Zakat, Tax and Customs Authority, zatca.gov.sa](https://zatca.gov.sa)
+- [Saudi VAT Regulation, Laws Portal](https://laws.boe.gov.sa)
+- [Fatoora e-invoicing platform](https://fatoora.zatca.gov.sa)
+- [Approved invoicing systems list](https://zatca.gov.sa)
+
+---
+
+**Read also**: [Zakat Calculator](/en/zakat-calculator-guide) · [Najiz Judicial Services Guide](/en/najiz-services-guide) · [Saudi Salary Dates 2026](/en/saudi-salary-dates-2026-2027)

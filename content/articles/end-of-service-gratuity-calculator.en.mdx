@@ -1,0 +1,141 @@
+---
+title: "Saudi End-of-Service Gratuity Calculator 2026, Compute It Precisely"
+description: "Interactive calculator for Saudi end-of-service gratuity per Articles 84–85 of the Labor Law, with resignation, dismissal, and retirement cases explained."
+cluster: "government"
+publishedAt: "2026-09-11"
+author: "Maqalat"
+tags:
+  - "end of service gratuity Saudi"
+  - "Saudi labor law article 84"
+  - "resignation gratuity"
+  - "eosb calculator"
+  - "Saudi termination pay"
+faq:
+  - q: "How is end-of-service gratuity calculated in Saudi Arabia?"
+    a: "Per Article 84 of the Labor Law: half a month's wage for each of the first five years, plus one full month's wage for each subsequent year. Fractions of a year are pro-rated. The base is the last wage — basic salary plus fixed allowances (variable commissions excluded)."
+  - q: "Do I get end-of-service gratuity if I resign?"
+    a: "Article 85 restricts the entitlement on resignation: less than 2 years = nothing, 2–5 years = one third of the full amount, 5–10 years = two thirds, 10+ years = the full amount. The underlying calculation still uses the Article 84 formula, only the coefficient changes."
+  - q: "When does the gratuity drop to zero entirely?"
+    a: "Only if the worker is dismissed for one of the specific grave offenses listed in Article 80 (assault, breach of essential contract duties, dishonorable conduct, sabotage, contract fraud, or unauthorized absence exceeding the statutory thresholds). Outside those, the gratuity must be paid."
+  - q: "Are allowances included in the wage base?"
+    a: "Yes — fixed allowances (housing, transport, and any allowance paid regularly) count toward the wage for gratuity purposes. Variable allowances (commissions, overtime, discretionary bonuses) do not, per Article 2 of the Labor Law."
+  - q: "Does the calculation differ for fixed-term contracts?"
+    a: "For a fixed-term contract, terminating it before the end date without valid cause obligates payment of either the remaining contract salary or the end-of-service gratuity, whichever is higher (Article 77). When the contract completes its full term, gratuity is paid in full per Article 84."
+  - q: "When must the employer pay the gratuity after termination?"
+    a: "Article 88 requires the employer to pay all dues (including gratuity) within one week of contract end if the employer terminated the relationship, and within two weeks if the worker resigned. Delays give the worker grounds to file at the Labor Office."
+  - q: "Does the female-worker marriage exemption still apply?"
+    a: "No. Royal Decree M/46 (1440 AH / 2019) removed the historical clause that granted a female worker her full gratuity for leaving within six months of marriage or three months of childbirth. These cases now follow the standard Article 85 resignation tiers."
+---
+
+End-of-service gratuity (EOSB) is the most contested payment between employees and employers in Saudi Arabia — not because the law is unclear, but because many sources circulate an outdated or partial formula. This guide builds the calculation directly from Articles 84, 85, and 87 of the Saudi Labor Law and gives you an interactive calculator that shows the exact entitlement with a full numeric breakdown.
+
+<EndOfServiceCalculator />
+
+## The Official Formula, Article 84
+
+Article 84 of the Saudi Labor Law (Royal Decree M/51, 1426 AH, as amended) reads:
+
+> "When the work relationship ends, the employer shall pay the worker an end-of-service award calculated as half a month's wage for each of the first five years, and one month's wage for each subsequent year. The last wage shall be the basis for calculating the award. The worker shall also be entitled to an award for portions of a year in proportion to the time worked."
+
+Three unchanging rules come out of that text:
+
+| Rule | Detail |
+|---|---|
+| **Service under 5 years** | Half month's wage × number of years (and fractions) |
+| **Service over 5 years** | Half-month × 5 years + full-month × (total years – 5) |
+| **Wage basis** | Last monthly wage (basic + fixed allowances) |
+| **Year fractions** | Pro-rated daily (days worked ÷ 365) |
+
+**Simple example**: 7 years of service, last wage 10,000 SAR.
+- First 5 years: 5 × (10,000 ÷ 2) = 25,000 SAR
+- Following 2 years: 2 × 10,000 = 20,000 SAR
+- **Total**: 45,000 SAR
+
+---
+
+## The Article 85 Exception, Resignation
+
+The key difference between employer termination and voluntary resignation is that the latter carries clear reduction coefficients:
+
+| Service length | Entitlement on resignation |
+|---|---|
+| Under 2 years | Zero (no gratuity) |
+| 2 to under 5 years | One third of the amount (33.3%) |
+| 5 to under 10 years | Two thirds of the amount (66.7%) |
+| 10 years or more | Full amount (100%) |
+
+**Applied to our example**: if the same worker resigned (7 years, 10,000 SAR), they get two thirds of 45,000 = **30,000 SAR**. The 15,000 SAR gap explains why an amicable exit agreement is often better than an individual resignation.
+
+---
+
+## The Special Case, Article 87
+
+Article 87 grants the worker **the full amount even when they leave the job** in three specific cases:
+
+1. **Force majeure beyond their control** (chronic illness, external circumstances).
+2. **Reaching the statutory retirement age** (60 for men, 55 for women under GOSI rules).
+3. **A female worker leaving because of marriage or childbirth** — this clause was **repealed by Royal Decree M/46 of 1440 AH** and no longer applies; the case is now treated as a regular resignation.
+
+This is the point where many outdated online guides go wrong, quoting the original text without noting the amendment.
+
+---
+
+## The Article 80 Exception, Forfeiture
+
+The gratuity is forfeited entirely if the worker is dismissed disciplinarily for one of the offenses listed exhaustively in Article 80:
+
+- Assaulting the employer or a supervisor during work
+- Failing to perform essential contractual duties despite written warning
+- Committing dishonorable acts or acts of moral turpitude
+- Intentionally damaging the establishment to cause material loss
+- Fraud in obtaining the job
+- Unjustified absence exceeding 20 days per year or 10 consecutive days after a written warning
+- Disclosing industrial or trade secrets
+
+Only in these cases is the gratuity forfeited. Any dismissal outside them still obligates the employer to pay in full.
+
+---
+
+## How the Calculator Works
+
+The calculator above runs entirely inside your browser and sends no data to any server:
+
+- It applies the Article 84 formula step by step
+- Splits the duration between half-month and full-month tiers
+- Applies the Article 85 resignation coefficient (0 / 33% / 67% / 100%)
+- Shows numerator and denominator in the details panel
+- Handles fractional years via daily pro-rating
+
+The result is informational — for an actual dispute, file with the Labor Office or the Labor Court.
+
+---
+
+## Practical Questions
+
+**Does unused annual leave count toward the gratuity?**
+No. It is paid separately under Article 111 (compensation for accrued leave days at the last wage).
+
+**What if the employer delays paying the gratuity?**
+You may file with the Labor Office within one year of the entitlement date (Article 222). Delays may trigger additional interest or compensation by court ruling.
+
+**Is the gratuity always in Saudi Riyals?**
+Yes. Even if the contract wage is denominated in a foreign currency, it converts to SAR at the exchange rate on the day the relationship ended.
+
+**Can gratuity be waived in a contract?**
+No. Under Article 8 of the Labor Law, any clause conflicting with the law is void, even if signed before the law took effect — unless it grants the worker more than the law does.
+
+**Does the gratuity apply to non-Saudi workers?**
+Yes, without distinction. The Labor Law applies to "every contract under which a person works for an employer, under their management or supervision" (Article 3).
+
+---
+
+## Official Sources
+
+- [Saudi Labor Law, Royal Decree M/51 and amendments](https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/b7cabaa5-8901-434b-813e-a9a5001a03b6/1)
+- [Ministry of Human Resources and Social Development, hrsd.gov.sa](https://www.hrsd.gov.sa)
+- [Royal Decree M/46, 1440 AH Labor Law amendments](https://laws.boe.gov.sa)
+- [Bureau of Experts, Saudi Laws Portal](https://laws.boe.gov.sa)
+
+---
+
+**Read also**: [Saudi Salary Dates 2026, Government Schedule](/en/saudi-salary-dates-2026-2027) · [Saudi Iqama Renewal Guide 2026](/en/iqama-renewal-guide) · [Zakat Calculator](/en/zakat-calculator-guide)

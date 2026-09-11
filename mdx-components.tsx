@@ -11,6 +11,7 @@ import { MenstrualCycleCalculator } from "@/components/MenstrualCycleCalculator"
 import { EventCountdown } from "@/components/EventCountdown";
 import { ZakatCalculator } from "@/components/ZakatCalculator";
 import { BMICalculator } from "@/components/BMICalculator";
+import { EndOfServiceCalculator } from "@/components/EndOfServiceCalculator";
 
 export const mdxComponents: MDXComponents = {
   a: ({ href = "", children, ...rest }) => {
@@ -45,6 +46,7 @@ export const mdxComponents: MDXComponents = {
   EventCountdown,
   ZakatCalculator,
   BMICalculator,
+  EndOfServiceCalculator,
 };
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {

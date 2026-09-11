@@ -8,6 +8,7 @@ import {
   Globe,
   Shirt,
   Sparkles,
+  Landmark,
   Folder,
   type LucideIcon,
 } from "lucide-react";
@@ -22,6 +23,7 @@ const ICONS: Record<string, LucideIcon> = {
   Globe,
   Shirt,
   Sparkles,
+  Landmark,
 };
 
 export function ClusterIcon({

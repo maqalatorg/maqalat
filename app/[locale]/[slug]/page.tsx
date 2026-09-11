@@ -11,7 +11,7 @@ import {
   getRelatedArticles,
   hasArabicVersion,
   hasEnglishVersion,
-  toSummary,
+  toCardData,
   type ArticleLocale,
 } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
@@ -96,6 +96,17 @@ const TOOL_HOWTO: Record<string, { name: string; description: string; totalTime:
       { name: "اختر التقويم", text: "حدّد اتّجاه التحويل: هجري إلى ميلادي أو العكس." },
       { name: "أدخل التاريخ", text: "اليوم والشهر والسنة في الحقول." },
       { name: "اقرأ النتيجة", text: "التحويل فوري بحسب بيانات أم القرى دون خادم." },
+    ],
+  },
+  "end-of-service-gratuity-calculator": {
+    name: "احسب مكافأة نهاية الخدمة",
+    description: "حاسبة تُطبّق معادلة المادّتين ٨٤-٨٥ من نظام العمل السعودي مع تفصيل حالات الاستقالة والفصل والتقاعد.",
+    totalTime: "PT30S",
+    steps: [
+      { name: "أدخل آخر أجر شهري", text: "الأساسي + البدلات الثابتة (بلا العمولات المتغيّرة)." },
+      { name: "أدخل سنوات وأشهر الخدمة", text: "المدّة الكاملة عند صاحب العمل بالسنوات والأشهر." },
+      { name: "اختر سبب الإنهاء", text: "إنهاء من صاحب العمل / استقالة / تقاعد / تراضٍ — يُحدّد المادّة." },
+      { name: "اقرأ الاستحقاق", text: "تعرض الحاسبة الاستحقاق الكامل والمعامل المطبَّق والنتيجة النهائية." },
     ],
   },
 };
@@ -230,12 +241,13 @@ export default async function ArticlePage({
 
   const t = await getTranslations({ locale, namespace: "article" });
   const cluster = findCluster(article.frontmatter.cluster);
-  // 6 related (was 3): the extra 3 are cross-cluster and rotated by a
-  // hash of the current slug, spreading inbound dofollow links across
-  // the tail of the catalog — kills Ahrefs "only 1 incoming internal
-  // link" warnings for 32 pages. toSummary drops the MDX body so the
-  // RSC payload stays lean.
-  const related = getRelatedArticles(article, 6).map(toSummary);
+  // 6 related (was 3): stride-sampled so every article receives roughly
+  // the same number of incoming dofollow links — kills Ahrefs "only 1
+  // incoming internal link" warnings. toCardData strips the MDX body
+  // AND the unused frontmatter fields (faq/tags/cover/author/updatedAt)
+  // so the RSC payload stays lean — related-card serialization dropped
+  // from ~14KB → ~1.6KB per related article.
+  const related = getRelatedArticles(article, 6).map(toCardData);
 
   const dateStr = new Date(article.frontmatter.publishedAt).toLocaleDateString(
     isEn ? "en-US" : "ar-SA",
@@ -341,7 +353,7 @@ export default async function ArticlePage({
         {/* FAQ (server-rendered — content, not decoration) */}
         {article.frontmatter.faq && <FAQ items={article.frontmatter.faq} />}
 
-        {/* Related (server-rendered but body-trimmed via toSummary) */}
+        {/* Related (server-rendered, card-trimmed via toCardData) */}
         {related.length > 0 && (
           <section className="mt-12">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">
