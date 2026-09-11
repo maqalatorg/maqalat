@@ -11,7 +11,7 @@ import {
   getRelatedArticles,
   hasArabicVersion,
   hasEnglishVersion,
-  toCardData,
+  toSummary,
   type ArticleLocale,
 } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
@@ -247,7 +247,7 @@ export default async function ArticlePage({
   // AND the unused frontmatter fields (faq/tags/cover/author/updatedAt)
   // so the RSC payload stays lean — related-card serialization dropped
   // from ~14KB → ~1.6KB per related article.
-  const related = getRelatedArticles(article, 6).map(toCardData);
+  const related = getRelatedArticles(article, 6).map(toSummary);
 
   const dateStr = new Date(article.frontmatter.publishedAt).toLocaleDateString(
     isEn ? "en-US" : "ar-SA",
@@ -353,7 +353,7 @@ export default async function ArticlePage({
         {/* FAQ (server-rendered — content, not decoration) */}
         {article.frontmatter.faq && <FAQ items={article.frontmatter.faq} />}
 
-        {/* Related (server-rendered, card-trimmed via toCardData) */}
+        {/* Related (server-rendered but body-trimmed via toSummary) */}
         {related.length > 0 && (
           <section className="mt-12">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">
