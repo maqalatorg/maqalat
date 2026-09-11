@@ -174,9 +174,18 @@ function authorEntityForArticle(a: Author, loc: "ar" | "en") {
     ...(a.email ? { email: a.email } : {}),
     ...(a.sameAs && a.sameAs.length ? { sameAs: a.sameAs } : {}),
   };
+  const role = authorRole(a, loc);
   return a.kind === "team"
-    ? { ...base, description: authorRole(a, loc), parentOrganization: { "@id": `${SITE_URL}#org` } }
-    : { ...base, jobTitle: authorRole(a, loc), worksFor: { "@id": `${SITE_URL}#org` } };
+    ? {
+        ...base,
+        ...(role ? { description: role } : {}),
+        parentOrganization: { "@id": `${SITE_URL}#org` },
+      }
+    : {
+        ...base,
+        ...(role ? { jobTitle: role } : {}),
+        worksFor: { "@id": `${SITE_URL}#org` },
+      };
 }
 
 /** Generate JSON-LD for a blog post (Article schema) with strong publisher signals. */
@@ -228,9 +237,27 @@ export function articleJsonLd(opts: {
   };
 }
 
-/** ProfilePage + Person JSON-LD for /author/[slug]. */
+/** ProfilePage + Person/Organization JSON-LD for /author/[slug]. */
 export function authorProfileJsonLd(a: Author, loc: "ar" | "en" = "ar") {
   const url = authorProfileUrl(a.slug, loc);
+  const anchor = a.kind === "team" ? "org" : "person";
+  const entityType = a.kind === "team" ? "Organization" : "Person";
+  const role = authorRole(a, loc);
+  const bio = authorBio(a, loc);
+  const roleField = a.kind === "team" ? "description" : "jobTitle";
+  const entity: Record<string, unknown> = {
+    "@type": entityType,
+    "@id": `${url}#${anchor}`,
+    name: authorName(a, loc),
+    url,
+    ...(a.image ? { image: `${SITE_URL}${a.image}` } : {}),
+    ...(a.email ? { email: a.email } : {}),
+    ...(a.sameAs && a.sameAs.length ? { sameAs: a.sameAs } : {}),
+  };
+  if (role) entity[roleField] = role;
+  if (bio) entity.description = bio;
+  entity[a.kind === "team" ? "parentOrganization" : "worksFor"] = { "@id": `${SITE_URL}#org` };
+
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -239,21 +266,10 @@ export function authorProfileJsonLd(a: Author, loc: "ar" | "en" = "ar") {
         "@id": `${url}#page`,
         url,
         inLanguage: loc === "en" ? "en" : "ar-SA",
-        mainEntity: { "@id": `${url}#person` },
+        mainEntity: { "@id": `${url}#${anchor}` },
         isPartOf: { "@id": `${SITE_URL}#site` },
       },
-      {
-        "@type": "Person",
-        "@id": `${url}#person`,
-        name: authorName(a, loc),
-        jobTitle: authorRole(a, loc),
-        description: authorBio(a, loc),
-        url,
-        ...(a.image ? { image: `${SITE_URL}${a.image}` } : {}),
-        ...(a.email ? { email: a.email } : {}),
-        ...(a.sameAs && a.sameAs.length ? { sameAs: a.sameAs } : {}),
-        worksFor: { "@id": `${SITE_URL}#org` },
-      },
+      entity,
     ],
   };
 }
