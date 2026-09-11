@@ -15,6 +15,7 @@ import {
   type ArticleLocale,
 } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
+import { getAuthor, authorName, authorRole } from "@/lib/authors";
 import {
   articleJsonLd,
   faqJsonLd,
@@ -268,6 +269,8 @@ export default async function ArticlePage({
           publishedAt: article.frontmatter.publishedAt,
           updatedAt: article.frontmatter.updatedAt,
           author: article.frontmatter.author,
+          authorSlug: article.frontmatter.authorSlug,
+          reviewedBySlug: article.frontmatter.reviewedBySlug,
           locale: loc,
           keywords: article.frontmatter.tags,
         })}
@@ -331,10 +334,34 @@ export default async function ArticlePage({
             {article.frontmatter.description}
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-slate-500">
-            <span className="inline-flex items-center gap-1.5">
-              <User className="w-4 h-4" />{" "}
-              {article.frontmatter.author || t("authorDefault")}
-            </span>
+            {(() => {
+              const authorEntity = article.frontmatter.authorSlug
+                ? getAuthor(article.frontmatter.authorSlug)
+                : null;
+              if (authorEntity) {
+                const name = authorName(authorEntity, loc);
+                const role = article.frontmatter.authorRole || authorRole(authorEntity, loc);
+                return (
+                  <Link
+                    href={`/author/${authorEntity.slug}`}
+                    className="inline-flex items-center gap-1.5 hover:text-emerald-700"
+                    rel="author"
+                  >
+                    <User className="w-4 h-4" />
+                    <span>
+                      {name}
+                      {role ? ` — ${role}` : ""}
+                    </span>
+                  </Link>
+                );
+              }
+              return (
+                <span className="inline-flex items-center gap-1.5">
+                  <User className="w-4 h-4" />{" "}
+                  {article.frontmatter.author || t("authorDefault")}
+                </span>
+              );
+            })()}
             <span className="inline-flex items-center gap-1.5">
               <Calendar className="w-4 h-4" /> {dateStr}
             </span>

@@ -13,6 +13,9 @@ export type ArticleFrontmatter = {
   updatedAt?: string; // ISO date
   cover?: string;
   author?: string;
+  authorSlug?: string;
+  authorRole?: string;
+  reviewedBySlug?: string;
   tags?: string[];
   faq?: { q: string; a: string }[];
   draft?: boolean;
@@ -39,6 +42,36 @@ export function toSummary(a: Article): ArticleSummary {
   const { content: _unused, ...rest } = a;
   void _unused;
   return rest;
+}
+
+/**
+ * Minimal shape needed to render an ArticleCard / FeaturedArticle.
+ * Drops frontmatter fields the card never reads (faq, tags, cover,
+ * updatedAt, author, draft) — on a big cluster page (178 AI articles)
+ * that trims ~250KB of unused JSON out of the RSC-serialized HTML.
+ */
+export type ArticleCardData = {
+  slug: string;
+  locale: ArticleLocale;
+  readingMinutes: number;
+  frontmatter: Pick<
+    ArticleFrontmatter,
+    "title" | "description" | "cluster" | "publishedAt"
+  >;
+};
+
+export function toCardData(a: Article): ArticleCardData {
+  return {
+    slug: a.slug,
+    locale: a.locale,
+    readingMinutes: a.readingMinutes,
+    frontmatter: {
+      title: a.frontmatter.title,
+      description: a.frontmatter.description,
+      cluster: a.frontmatter.cluster,
+      publishedAt: a.frontmatter.publishedAt,
+    },
+  };
 }
 
 const CONTENT_DIR = path.join(process.cwd(), "content", "articles");
@@ -129,6 +162,10 @@ export function getArticlesByCluster(clusterSlug: string, locale: ArticleLocale 
   return getAllArticles(locale).filter((a) => a.frontmatter.cluster === clusterSlug);
 }
 
+export function getArticlesByAuthor(authorSlug: string, locale: ArticleLocale = "ar"): Article[] {
+  return getAllArticles(locale).filter((a) => a.frontmatter.authorSlug === authorSlug);
+}
+
 /**
  * List popular articles for a locale.
  * Placeholder: currently returns newest first.
@@ -173,17 +210,50 @@ export function getRelatedArticles(article: Article, count = 6): Article[] {
   const sameQuota = Math.min(sameCluster.length, Math.ceil(count / 2));
   const crossQuota = count - sameQuota;
 
-  // Rotate the cross-cluster list by a hash-derived offset so each article
-  // pulls a different window; siblings that were previously invisible
-  // (position > 3 in the newest-first list) now get their share of links.
-  const offset = crossQuota > 0 ? hashSlug(article.slug) % Math.max(others.length, 1) : 0;
-  const rotatedOthers = others.length
-    ? [...others.slice(offset), ...others.slice(0, offset)]
-    : [];
+  // Deterministic stride sampling. Every article in a pool is picked
+  // exactly `quota` times across the site — perfect internal-link
+  // distribution. Without this, a big cluster like AI (178 articles)
+  // leaves 170+ older siblings with zero same-cluster inlinks, which
+  // Ahrefs flags as "only one dofollow incoming internal link".
+  //
+  // For pool of size N, stride = floor(N / (quota+1)) guarantees the
+  // `quota` picks land on distinct positions and every target position
+  // is reached by exactly `quota` sources.
+  const hash = hashSlug(article.slug);
+  const myIdxIn = (pool: Article[]) =>
+    pool.findIndex((a) => a.slug === article.slug);
+  const strideSample = (
+    fullPool: Article[],
+    excludeSelf: boolean,
+    n: number,
+  ): Article[] => {
+    const N = fullPool.length;
+    if (N === 0 || n === 0) return [];
+    if (N <= n + (excludeSelf ? 1 : 0)) {
+      return excludeSelf ? fullPool.filter((a) => a.slug !== article.slug) : fullPool;
+    }
+    // Anchor per-article: use current article's index if it's in the pool,
+    // otherwise use hash-mod so different source articles pick different
+    // windows of the cross-cluster pool (uniform inlink distribution).
+    const anchorIdx = excludeSelf ? Math.max(0, myIdxIn(fullPool)) : hash % N;
+    const step = Math.max(1, Math.floor(N / (n + (excludeSelf ? 1 : 0))));
+    const picks: Article[] = [];
+    for (let k = 1; k <= n; k++) {
+      const j = (anchorIdx + step * k) % N;
+      picks.push(fullPool[j]);
+    }
+    return picks;
+  };
 
+  // For sameCluster we anchor to the current article's position in the
+  // full cluster list (before filtering out self) so strides walk a
+  // ring past the current article.
+  const sameFull = all.filter(
+    (a) => a.frontmatter.cluster === article.frontmatter.cluster,
+  );
   return [
-    ...sameCluster.slice(0, sameQuota),
-    ...rotatedOthers.slice(0, crossQuota),
+    ...strideSample(sameFull, true, sameQuota),
+    ...strideSample(others, false, crossQuota),
   ];
 }
 

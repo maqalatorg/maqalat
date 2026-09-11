@@ -7,6 +7,8 @@ export const DEFAULT_OG = "/og-default.png";
 export const AUTHOR = "مقالات";
 export const CONTACT_EMAIL = "maqalatorg@gmail.com";
 
+import { getAuthor, authorName, authorRole, authorBio, authorProfileUrl, type Author } from "./authors";
+
 /**
  * SEO metadata length guardrails (bytes-agnostic, char-counted).
  * Google truncates ~55-60 for titles and ~155-160 for descriptions.
@@ -159,6 +161,24 @@ function publisherEntity() {
   };
 }
 
+function authorEntityForArticle(a: Author, loc: "ar" | "en") {
+  const schemaType = a.kind === "team" ? "Organization" : "Person";
+  const anchor = a.kind === "team" ? "org" : "person";
+  const url = authorProfileUrl(a.slug, loc);
+  const base = {
+    "@type": schemaType,
+    "@id": `${url}#${anchor}`,
+    name: authorName(a, loc),
+    url,
+    ...(a.image ? { image: `${SITE_URL}${a.image}` } : {}),
+    ...(a.email ? { email: a.email } : {}),
+    ...(a.sameAs && a.sameAs.length ? { sameAs: a.sameAs } : {}),
+  };
+  return a.kind === "team"
+    ? { ...base, description: authorRole(a, loc), parentOrganization: { "@id": `${SITE_URL}#org` } }
+    : { ...base, jobTitle: authorRole(a, loc), worksFor: { "@id": `${SITE_URL}#org` } };
+}
+
 /** Generate JSON-LD for a blog post (Article schema) with strong publisher signals. */
 export function articleJsonLd(opts: {
   title: string;
@@ -168,6 +188,8 @@ export function articleJsonLd(opts: {
   publishedAt: string;
   updatedAt?: string;
   author?: string;
+  authorSlug?: string;
+  reviewedBySlug?: string;
   locale?: "ar" | "en";
   keywords?: string[];
   wordCount?: number;
@@ -175,6 +197,8 @@ export function articleJsonLd(opts: {
   const loc = opts.locale ?? "ar";
   const path = loc === "ar" ? `/${opts.slug}` : `/${loc}/${opts.slug}`;
   const org = publisherEntity();
+  const person = opts.authorSlug ? getAuthor(opts.authorSlug) : null;
+  const reviewer = opts.reviewedBySlug ? getAuthor(opts.reviewedBySlug) : null;
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -184,12 +208,15 @@ export function articleJsonLd(opts: {
     datePublished: opts.publishedAt,
     dateModified: opts.updatedAt || opts.publishedAt,
     inLanguage: loc === "en" ? "en" : "ar-SA",
-    author: {
-      "@type": "Organization",
-      "@id": `${SITE_URL}#org`,
-      name: opts.author || AUTHOR,
-      url: SITE_URL,
-    },
+    author: person
+      ? authorEntityForArticle(person, loc)
+      : {
+          "@type": "Organization",
+          "@id": `${SITE_URL}#org`,
+          name: opts.author || AUTHOR,
+          url: SITE_URL,
+        },
+    ...(reviewer ? { reviewedBy: authorEntityForArticle(reviewer, loc) } : {}),
     publisher: org,
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -198,6 +225,36 @@ export function articleJsonLd(opts: {
     isAccessibleForFree: true,
     ...(opts.keywords && opts.keywords.length ? { keywords: opts.keywords.join(", ") } : {}),
     ...(opts.wordCount ? { wordCount: opts.wordCount } : {}),
+  };
+}
+
+/** ProfilePage + Person JSON-LD for /author/[slug]. */
+export function authorProfileJsonLd(a: Author, loc: "ar" | "en" = "ar") {
+  const url = authorProfileUrl(a.slug, loc);
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": `${url}#page`,
+        url,
+        inLanguage: loc === "en" ? "en" : "ar-SA",
+        mainEntity: { "@id": `${url}#person` },
+        isPartOf: { "@id": `${SITE_URL}#site` },
+      },
+      {
+        "@type": "Person",
+        "@id": `${url}#person`,
+        name: authorName(a, loc),
+        jobTitle: authorRole(a, loc),
+        description: authorBio(a, loc),
+        url,
+        ...(a.image ? { image: `${SITE_URL}${a.image}` } : {}),
+        ...(a.email ? { email: a.email } : {}),
+        ...(a.sameAs && a.sameAs.length ? { sameAs: a.sameAs } : {}),
+        worksFor: { "@id": `${SITE_URL}#org` },
+      },
+    ],
   };
 }
 

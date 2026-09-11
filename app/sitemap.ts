@@ -6,6 +6,7 @@ import {
   hasEnglishVersion,
 } from "@/lib/blog";
 import { ENABLED_CLUSTERS } from "@/lib/clusters";
+import { AUTHORS } from "@/lib/authors";
 import { SITE_URL } from "@/lib/seo";
 
 /**
@@ -85,5 +86,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  return [...staticPages, ...clusterPages, ...articlePages];
+  const authorPages: MetadataRoute.Sitemap = Object.keys(AUTHORS).flatMap((slug) => {
+    const arUrl = `${SITE_URL}/author/${slug}`;
+    const enUrl = `${SITE_URL}/en/author/${slug}`;
+    const alternates = { languages: { ar: arUrl, en: enUrl, "x-default": arUrl } };
+    return [
+      { url: arUrl, lastModified: now, changeFrequency: "monthly" as const, priority: 0.5, alternates },
+      { url: enUrl, lastModified: now, changeFrequency: "monthly" as const, priority: 0.4, alternates },
+    ];
+  });
+
+  return [...staticPages, ...clusterPages, ...authorPages, ...articlePages];
 }

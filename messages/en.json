@@ -87,7 +87,7 @@
   },
   "about": {
     "metaTitle": "About",
-    "metaDescription": "Maqalat — a bilingual reference platform built on official sources, careful writing, and full transparency.",
+    "metaDescription": "About Maqalat — who we are, why we write, and our editorial principles: primary official sources, honesty about limits, and no fabricated claims.",
     "h1": "About",
     "intro": "<b>Maqalat</b> is a bilingual reference platform for topics that matter — calendar and events, universities, health, finance, cars, and more. Every article is written to be read, not skimmed.",
     "missionTitle": "Mission",
@@ -106,7 +106,7 @@
   },
   "contact": {
     "metaTitle": "Contact",
-    "metaDescription": "How to reach the Maqalat team.",
+    "metaDescription": "How to reach the Maqalat team — send feedback, a correction, a content suggestion, or a collaboration inquiry. We reply within 48 business hours.",
     "h1": "Contact",
     "subtitle": "Suggestions, notes, and corrections are all welcome.",
     "emailCardTitle": "Email",
@@ -161,5 +161,12 @@
     "relatedTitle": "Related Articles",
     "onlyInArabic": "This article is only available in Arabic.",
     "readInArabic": "Read in Arabic"
+  },
+  "author": {
+    "breadcrumb": "Authors",
+    "articlesTitle": "Articles by {name}",
+    "empty": "No articles published by this author yet.",
+    "publishedCount": "{count} published articles",
+    "sameAsLabel": "Verification & professional links"
   }
 }
