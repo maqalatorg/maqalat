@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ClusterIcon } from "@/components/ClusterIcon";
-import { getArticlesByCluster, toSummary } from "@/lib/blog";
+import { getArticlesByCluster, toCardData } from "@/lib/blog";
 import { CLUSTERS, findCluster } from "@/lib/clusters";
 import {
   SITE_URL,
@@ -85,9 +85,12 @@ export default async function ClusterPage({
 
   const isEn = locale === "en";
   const t = await getTranslations({ locale, namespace: "cluster" });
-  // Trim MDX body — cluster pages list ~15-30 articles each; without this
-  // the RSC payload carries ~450KB of unused article body.
-  const articles = getArticlesByCluster(slug, locale as "ar" | "en").map(toSummary);
+  // Trim to card-only shape — cluster pages list up to ~180 articles
+  // (AI cluster today); without this the RSC payload carries the full
+  // MDX body + unused frontmatter (~1.4KB faq per article), pushing
+  // /c/ai HTML past 290KB. toCardData keeps only slug + reading time
+  // + the 4 frontmatter fields the card renders.
+  const articles = getArticlesByCluster(slug, locale as "ar" | "en").map(toCardData);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">

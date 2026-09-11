@@ -1,4 +1,5 @@
-import { SITE_URL, CONTACT_EMAIL } from "./seo";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://maqalat.org";
+const CONTACT_EMAIL = "maqalatorg@gmail.com";
 
 export type AuthorKind = "person" | "team";
 

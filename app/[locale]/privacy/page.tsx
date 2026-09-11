@@ -14,8 +14,8 @@ export async function generateMetadata({
     path: "/privacy",
     title: isEn ? "Privacy Policy" : "سياسة الخصوصية",
     description: isEn
-      ? "How Maqalat collects and uses your data — what we store, why, and your rights to access or delete it."
-      : "كيف نجمع ونستخدم بياناتك على مقالات — ما نُخزّنه، ولماذا، وحقّك في الوصول أو الحذف.",
+      ? "How Maqalat collects and uses your data — what we store, why, third-party services, Google AdSense advertising, and your rights to access or delete it."
+      : "كيف نجمع ونستخدم بياناتك على مقالات: ما نُخزّنه، ولماذا، خدمات الطرف الثالث، إعلانات Google AdSense، وحقوقك في الوصول أو الحذف.",
   });
 }
 

@@ -14,8 +14,8 @@ export async function generateMetadata({
     path: "/methodology",
     title: isEn ? "Verification Methodology" : "منهجية التحقّق",
     description: isEn
-      ? "The exact process Maqalat follows to research, source, review, and publish every article — step by step."
-      : "الإجراء الفعلي الذي نتّبعه لبحث كل مقال، توثيقه بمصادره، مراجعته، ونشره — خطوة خطوة.",
+      ? "The exact process Maqalat follows to research, source, human-review, and publish every article — step by step, with a strict source hierarchy."
+      : "الإجراء الفعلي الذي نتّبعه لبحث كل مقال، توثيقه بمصادر رسمية أوّلية، مراجعته يدوياً، ونشره — خطوة خطوة، مع تسلسل هرمي صارم للمصادر.",
   });
 }
 

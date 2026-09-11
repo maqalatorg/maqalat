@@ -14,8 +14,8 @@ export async function generateMetadata({
     path: "/terms",
     title: isEn ? "Terms of Use" : "شروط الاستخدام",
     description: isEn
-      ? "Terms of use for the Maqalat website — how you can use our content, comment policy, and account rules."
-      : "شروط استخدام موقع مقالات — كيف يُسمح باستخدام المحتوى، سياسة التعليقات، وقواعد الحساب.",
+      ? "Terms of use for the Maqalat website — how you can use our content, comment policy, account rules, intellectual property, and liability for external links."
+      : "شروط استخدام موقع مقالات: كيف يُسمَح باستخدام المحتوى، سياسة التعليقات، قواعد الحساب، الملكية الفكرية، وحدود المسؤولية والروابط الخارجية.",
   });
 }
 

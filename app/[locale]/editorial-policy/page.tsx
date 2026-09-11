@@ -14,8 +14,8 @@ export async function generateMetadata({
     path: "/editorial-policy",
     title: isEn ? "Editorial Policy" : "السياسة التحريرية",
     description: isEn
-      ? "How Maqalat picks topics, verifies sources, handles corrections, and separates opinion from reporting."
-      : "كيف نختار المواضيع، نتحقّق من المصادر، نصحّح الأخطاء، ونفصل الرأي عن الخبر — سياسة تحريرية شفّافة.",
+      ? "How Maqalat picks topics, verifies sources, handles corrections, and separates opinion from reporting — a transparent policy on AI use and reader rights."
+      : "كيف نختار المواضيع، نتحقّق من المصادر، نصحّح الأخطاء، ونفصل الرأي عن الخبر — سياسة تحريرية شفّافة عن استخدام الذكاء الاصطناعي وحقوق القارئ.",
   });
 }
 

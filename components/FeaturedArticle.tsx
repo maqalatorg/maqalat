@@ -1,15 +1,15 @@
 import { Clock, Calendar, ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import type { ArticleSummary } from "@/lib/blog";
+import type { ArticleCardData } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
 import { ClusterIcon } from "./ClusterIcon";
 
 /**
  * Featured article — magazine-style hero with iconic cover, no emojis.
- * Accepts the trimmed summary (no MDX body) to keep the RSC payload small.
+ * Accepts the minimal card shape to keep the RSC payload small.
  */
-export function FeaturedArticle({ article }: { article: ArticleSummary }) {
+export function FeaturedArticle({ article }: { article: ArticleCardData }) {
   const locale = useLocale();
   const t = useTranslations("card");
   const isEn = locale === "en";

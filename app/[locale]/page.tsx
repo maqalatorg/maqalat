@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { ArticleCard } from "@/components/ArticleCard";
 import { FeaturedArticle } from "@/components/FeaturedArticle";
 import { ClusterIcon } from "@/components/ClusterIcon";
-import { getAllArticles, getPopularArticles, toSummary } from "@/lib/blog";
+import { getAllArticles, getPopularArticles, toCardData } from "@/lib/blog";
 import { ENABLED_CLUSTERS } from "@/lib/clusters";
 import type { Locale } from "@/i18n/config";
 
@@ -29,16 +29,16 @@ function HomeBody() {
   const isEn = currentLocale === "en";
   const Arrow = isEn ? ArrowRight : ArrowLeft;
 
-  // Trim the MDX body from every card article. Without this, 24 latest +
-  // 6 popular + 1 featured cards each carry ~30KB of body text in the RSC
-  // payload — homepage HTML balloons to ~1MB. toSummary drops it.
-  const all = getAllArticles(currentLocale).map(toSummary);
+  // toCardData strips the MDX body AND the unused frontmatter fields
+  // (faq / tags / cover / author / updatedAt) — homepage HTML drops
+  // from ~1MB → well under the Ahrefs 250KB threshold.
+  const all = getAllArticles(currentLocale).map(toCardData);
   const totalCount = all.length;
   const [featured, ...rest] = all;
   // Cap latest section to keep homepage HTML lightweight.
   // Full catalog is discoverable via cluster hubs in the Sections grid below.
   const latest = rest.slice(0, 24);
-  const popular = getPopularArticles(6, currentLocale).map(toSummary);
+  const popular = getPopularArticles(6, currentLocale).map(toCardData);
 
   return (
     <div className="max-w-6xl mx-auto px-4">

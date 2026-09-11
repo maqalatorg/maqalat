@@ -1,14 +1,14 @@
 import { Clock, Calendar } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import type { ArticleSummary } from "@/lib/blog";
+import type { ArticleCardData } from "@/lib/blog";
 import { findCluster } from "@/lib/clusters";
 import { ClusterIcon } from "./ClusterIcon";
 
-// Accept the trimmed summary (no MDX body) — full Article is assignable
-// to ArticleSummary because Omit only drops the `content` field, so
-// existing callers passing full articles still type-check.
-export function ArticleCard({ article }: { article: ArticleSummary }) {
+// Accept the trimmed card shape — a full Article is still assignable
+// because ArticleCardData only requires a subset of the frontmatter
+// fields the card actually renders.
+export function ArticleCard({ article }: { article: ArticleCardData }) {
   const locale = useLocale();
   const t = useTranslations("card");
   const isEn = locale === "en";
