@@ -100,9 +100,18 @@ async function pingUrl(token, url) {
   const token = await getAccessToken();
   console.log("✅ Token OK\n");
 
-  console.log("📄 Fetching sitemap…");
-  const urls = await fetchSitemapUrls();
-  console.log(`✅ ${urls.length} URLs found\n`);
+  // Optional CLI args: specific URLs to ping instead of the whole sitemap.
+  // Use for targeted re-ping after metadata edits: `node scripts/ping_google_indexing.mjs URL1 URL2 …`
+  const cliUrls = process.argv.slice(2).filter((a) => a.startsWith("http"));
+  let urls;
+  if (cliUrls.length > 0) {
+    console.log(`🎯 Targeted mode: ${cliUrls.length} URL(s) from CLI\n`);
+    urls = cliUrls;
+  } else {
+    console.log("📄 Fetching sitemap…");
+    urls = await fetchSitemapUrls();
+    console.log(`✅ ${urls.length} URLs found\n`);
+  }
 
   const batch = urls.slice(0, DAILY_QUOTA);
   const skipped = urls.length - batch.length;
