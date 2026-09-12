@@ -584,33 +584,6 @@
     "score": 4
   },
   {
-    "file": "common-prompt-mistakes.mdx",
-    "slug": "common-prompt-mistakes",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 554,
-    "passivePct": 0,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 7,
-    "bareNumbers": 3,
-    "hasTable": true,
-    "headings": 4,
-    "faqCount": 2,
-    "questionHeadings": 0,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "faq-2",
-      "thin-554w",
-      "orphan"
-    ],
-    "inbound": 0,
-    "score": 4
-  },
-  {
     "file": "driving-license-saudi-guide.mdx",
     "slug": "driving-license-saudi-guide",
     "locale": "ar",
@@ -683,33 +656,6 @@
       "ymyl-cite-33"
     ],
     "inbound": 3,
-    "score": 4
-  },
-  {
-    "file": "gpt-4-vs-gpt-5-vs-o3.mdx",
-    "slug": "gpt-4-vs-gpt-5-vs-o3",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 610,
-    "passivePct": 0.3,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 9,
-    "bareNumbers": 21,
-    "hasTable": true,
-    "headings": 11,
-    "faqCount": 3,
-    "questionHeadings": 0,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "faq-3",
-      "thin-610w",
-      "inbound-2"
-    ],
-    "inbound": 2,
     "score": 4
   },
   {
@@ -2271,20 +2217,20 @@
     "locale": "ar",
     "cluster": "ai",
     "isYmyl": false,
-    "words": 701,
-    "passivePct": 0.4,
-    "human": 2,
+    "words": 880,
+    "passivePct": 0.8,
+    "human": 3,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 7,
+    "links": 8,
     "bareNumbers": 32,
     "hasTable": true,
-    "headings": 10,
+    "headings": 11,
     "faqCount": 2,
     "questionHeadings": 0,
     "flagCount": 2,
     "flags": [
-      "human-2",
+      "human-3",
       "faq-2",
       "inbound-2"
     ],
@@ -2422,6 +2368,32 @@
     "score": 3
   },
   {
+    "file": "common-prompt-mistakes.mdx",
+    "slug": "common-prompt-mistakes",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 917,
+    "passivePct": 0.3,
+    "human": 4,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 9,
+    "bareNumbers": 3,
+    "hasTable": true,
+    "headings": 6,
+    "faqCount": 2,
+    "questionHeadings": 0,
+    "flagCount": 2,
+    "flags": [
+      "human-4",
+      "faq-2",
+      "orphan"
+    ],
+    "inbound": 0,
+    "score": 3
+  },
+  {
     "file": "constitutional-ai-and-rlhf.mdx",
     "slug": "constitutional-ai-and-rlhf",
     "locale": "ar",
@@ -2445,32 +2417,6 @@
       "inbound-2"
     ],
     "inbound": 2,
-    "score": 3
-  },
-  {
-    "file": "context-window-explained.mdx",
-    "slug": "context-window-explained",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 597,
-    "passivePct": 0.7,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 10,
-    "bareNumbers": 33,
-    "hasTable": true,
-    "headings": 10,
-    "faqCount": 4,
-    "questionHeadings": 1,
-    "flagCount": 2,
-    "flags": [
-      "human-0",
-      "thin-597w",
-      "inbound-1"
-    ],
-    "inbound": 1,
     "score": 3
   },
   {
@@ -4303,6 +4249,31 @@
     "score": 2
   },
   {
+    "file": "context-window-explained.mdx",
+    "slug": "context-window-explained",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 815,
+    "passivePct": 0.9,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 13,
+    "bareNumbers": 34,
+    "hasTable": true,
+    "headings": 12,
+    "faqCount": 4,
+    "questionHeadings": 1,
+    "flagCount": 1,
+    "flags": [
+      "human-0",
+      "inbound-1"
+    ],
+    "inbound": 1,
+    "score": 2
+  },
+  {
     "file": "countdown-ramadan-eid-national-day.en.mdx",
     "slug": "countdown-ramadan-eid-national-day",
     "locale": "en",
@@ -4575,6 +4546,31 @@
       "no-table"
     ],
     "inbound": 7,
+    "score": 2
+  },
+  {
+    "file": "gpt-4-vs-gpt-5-vs-o3.mdx",
+    "slug": "gpt-4-vs-gpt-5-vs-o3",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 808,
+    "passivePct": 0.5,
+    "human": 7,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 10,
+    "bareNumbers": 21,
+    "hasTable": true,
+    "headings": 13,
+    "faqCount": 3,
+    "questionHeadings": 0,
+    "flagCount": 1,
+    "flags": [
+      "faq-3",
+      "inbound-2"
+    ],
+    "inbound": 2,
     "score": 2
   },
   {
@@ -5981,30 +5977,6 @@
     "score": 1
   },
   {
-    "file": "effective-prompt-writing-rules.mdx",
-    "slug": "effective-prompt-writing-rules",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 764,
-    "passivePct": 0.4,
-    "human": 1,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 7,
-    "bareNumbers": 13,
-    "hasTable": true,
-    "headings": 16,
-    "faqCount": 4,
-    "questionHeadings": 0,
-    "flagCount": 1,
-    "flags": [
-      "human-1"
-    ],
-    "inbound": 9,
-    "score": 1
-  },
-  {
     "file": "elevenlabs-voice-cloning-guide.mdx",
     "slug": "elevenlabs-voice-cloning-guide",
     "locale": "ar",
@@ -6531,5 +6503,27 @@
     ],
     "inbound": 6,
     "score": 1
+  },
+  {
+    "file": "effective-prompt-writing-rules.mdx",
+    "slug": "effective-prompt-writing-rules",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 983,
+    "passivePct": 0.6,
+    "human": 7,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 9,
+    "bareNumbers": 13,
+    "hasTable": true,
+    "headings": 18,
+    "faqCount": 4,
+    "questionHeadings": 0,
+    "flagCount": 0,
+    "flags": [],
+    "inbound": 9,
+    "score": 0
   }
 ]
