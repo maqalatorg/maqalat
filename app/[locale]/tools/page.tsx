@@ -6,6 +6,7 @@ import {
   Scale,
   Timer,
   CalendarClock,
+  CalendarDays,
   Heart,
   Baby,
   Wallet,
@@ -34,6 +35,7 @@ type Tool = {
   href: string;
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   nameKey:
+    | "todayName"
     | "hijriName"
     | "salaryName"
     | "zakatName"
@@ -43,6 +45,7 @@ type Tool = {
     | "cycleName"
     | "countdownName";
   descKey:
+    | "todayDesc"
     | "hijriDesc"
     | "salaryDesc"
     | "zakatDesc"
@@ -51,10 +54,11 @@ type Tool = {
     | "pregnancyDesc"
     | "cycleDesc"
     | "countdownDesc";
-  badgeKey?: "hijriBadge";
+  badgeKey?: "hijriBadge" | "todayBadge";
 };
 
 const TOOLS: Tool[] = [
+  { href: "/todays-date-hijri-gregorian", icon: CalendarDays, nameKey: "todayName", descKey: "todayDesc", badgeKey: "todayBadge" },
   { href: "/hijri-gregorian-converter-2026", icon: CalendarClock, nameKey: "hijriName", descKey: "hijriDesc", badgeKey: "hijriBadge" },
   { href: "/saudi-salary-dates-2026-2027", icon: Wallet, nameKey: "salaryName", descKey: "salaryDesc" },
   { href: "/zakat-calculator-guide", icon: Coins, nameKey: "zakatName", descKey: "zakatDesc" },

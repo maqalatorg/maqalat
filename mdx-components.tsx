@@ -12,6 +12,9 @@ import { EventCountdown } from "@/components/EventCountdown";
 import { ZakatCalculator } from "@/components/ZakatCalculator";
 import { BMICalculator } from "@/components/BMICalculator";
 import { EndOfServiceCalculator } from "@/components/EndOfServiceCalculator";
+import { CurrentDate } from "@/components/CurrentDate";
+import { DrivingSchoolCostEstimator } from "@/components/DrivingSchoolCostEstimator";
+import { SourcesBox } from "@/components/SourcesBox";
 
 export const mdxComponents: MDXComponents = {
   a: ({ href = "", children, ...rest }) => {
@@ -47,6 +50,9 @@ export const mdxComponents: MDXComponents = {
   ZakatCalculator,
   BMICalculator,
   EndOfServiceCalculator,
+  CurrentDate,
+  DrivingSchoolCostEstimator,
+  SourcesBox,
 };
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {

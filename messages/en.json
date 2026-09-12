@@ -124,6 +124,9 @@
     "subtitle": "Precise calculators and converters that run in your browser. No signup. No download.",
     "useCta": "Open Tool",
     "hijriBadge": "Most Used",
+    "todayBadge": "Live",
+    "todayName": "What Month Is It — Live Hijri & Gregorian Date",
+    "todayDesc": "Today's date in Riyadh time, both calendars, with month name, number, and weekday.",
     "hijriName": "Hijri ↔ Gregorian Converter",
     "hijriDesc": "Instant date conversion between both calendars, 1900 to 2100.",
     "salaryName": "Saudi Salary Calendar",
@@ -167,6 +170,17 @@
     "articlesTitle": "Articles by {name}",
     "empty": "No articles published by this author yet.",
     "publishedCount": "{count} published articles",
-    "sameAsLabel": "Verification & professional links"
+    "sameAsLabel": "Verification & professional links",
+    "standardsTitle": "Editorial Standards",
+    "standardsIntro": "How the Maqalat team operates — published openly so readers can hold us accountable:",
+    "standardSourcesLabel": "Sources",
+    "standardSourcesBody": "Every procedural, legal, financial, or medical number is linked to its official source inline in the text, not only in a footer list.",
+    "standardYmylLabel": "Sensitive content (YMYL)",
+    "standardYmylBody": "Medical, financial, and legal articles carry a safety notice and direct readers to a licensed professional. We never present content as a substitute for a doctor.",
+    "standardHonestyLabel": "Honesty about limits",
+    "standardHonestyBody": "When we cannot find an updated official source, we say so openly: 'no source found — consult the authority,' instead of guessing.",
+    "standardCorrectionsLabel": "Corrections",
+    "standardCorrectionsBody": "Any error is corrected within 48 business hours with a visible update date. Report an error via the email above.",
+    "standardsSeePolicy": "Read the full editorial policy"
   }
 }

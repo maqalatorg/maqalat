@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { User, Mail, ExternalLink } from "lucide-react";
+import { User, Mail, ExternalLink, ShieldCheck } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import {
@@ -172,6 +172,56 @@ export default async function AuthorPage({
             </div>
           )}
         </header>
+
+        <section className="mb-12 rounded-2xl border border-emerald-100 dark:border-emerald-900/40 bg-emerald-50/50 dark:bg-emerald-950/20 p-6">
+          <h2 className="flex items-center gap-2 text-xl font-bold text-emerald-900 dark:text-emerald-200 mb-3">
+            <ShieldCheck className="w-5 h-5" />
+            {t("standardsTitle")}
+          </h2>
+          <p className="text-sm text-slate-700 dark:text-slate-300 mb-5">
+            {t("standardsIntro")}
+          </p>
+          <dl className="grid gap-4 sm:grid-cols-2 text-sm">
+            <div>
+              <dt className="font-semibold text-slate-900 dark:text-slate-100 mb-1">
+                {t("standardSourcesLabel")}
+              </dt>
+              <dd className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                {t("standardSourcesBody")}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-slate-900 dark:text-slate-100 mb-1">
+                {t("standardYmylLabel")}
+              </dt>
+              <dd className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                {t("standardYmylBody")}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-slate-900 dark:text-slate-100 mb-1">
+                {t("standardHonestyLabel")}
+              </dt>
+              <dd className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                {t("standardHonestyBody")}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-slate-900 dark:text-slate-100 mb-1">
+                {t("standardCorrectionsLabel")}
+              </dt>
+              <dd className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                {t("standardCorrectionsBody")}
+              </dd>
+            </div>
+          </dl>
+          <Link
+            href="/editorial-policy"
+            className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-700 dark:text-emerald-400 hover:underline"
+          >
+            {t("standardsSeePolicy")} →
+          </Link>
+        </section>
 
         <section>
           <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">

@@ -110,6 +110,14 @@ export default async function EditorialPolicyPage({
           <li>Right to delete your comment: fulfilled within 48 hours.</li>
         </ul>
 
+        <h2>9. Date integrity</h2>
+        <p>
+          The <strong>publication date</strong> shown on every article is the actual first date the article went live on this site. We do not adjust historical publish dates to simulate organic growth or backfill an editorial calendar — Google's Publisher Policies explicitly prohibit misrepresentation, and readers deserve accurate temporal context, especially in fast-moving areas like AI and government regulations.
+        </p>
+        <p>
+          Where relevant, we display a separate <strong>"last updated"</strong> date that reflects a genuine substantive revision (new facts, corrected numbers, updated sources). We never rewrite the past to make content look newer than it is.
+        </p>
+
         <p className="mt-8 text-slate-500 italic">
           This policy is a living document — we update it whenever we learn something new. Last updated: {dateStr}.
         </p>
@@ -183,6 +191,14 @@ export default async function EditorialPolicyPage({
         <li>حق طلب المصدر: نُقدّمه فوراً.</li>
         <li>حق طلب حذف تعليقك: نُلبّي الطلب خلال ٤٨ ساعة.</li>
       </ul>
+
+      <h2>٩. سلامة التواريخ</h2>
+      <p>
+        <strong>تاريخ النشر</strong> الظاهر على كل مقال هو التاريخ الفعلي الذي أصبح فيه المقال متاحاً على الموقع لأوّل مرّة. لا نُعدّل تواريخ النشر التاريخية لتبدو كأنها نمو عضوي متدرّج أو لتعبئة تقويم تحريري وهمي — سياسات ناشري Google تحظر التصريحات غير النزيهة صراحةً، والقارئ يستحقّ سياقاً زمنياً دقيقاً، خاصّة في مجالات سريعة التغيّر مثل الذكاء الاصطناعي واللوائح الحكومية.
+      </p>
+      <p>
+        حين يوجد سبب، نُظهر <strong>«تاريخ آخر تحديث»</strong> منفصلاً يعكس مراجعة جوهرية حقيقية (وقائع جديدة، أرقام مُصحَّحة، مصادر محدَّثة). لا نُعيد كتابة الماضي لجعل المحتوى يبدو أحدث ممّا هو.
+      </p>
 
       <p className="mt-8 text-slate-500 italic">
         هذه السياسة كائنٌ حيّ — نُحدّثها كلّما تعلّمنا شيئاً جديداً. آخر تحديث: {dateStr}.
