@@ -11,7 +11,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 40,
+    "bareNumbers": 38,
     "hasTable": true,
     "headings": 6,
     "faqCount": 5,
@@ -20,66 +20,11 @@
     "flags": [
       "human-0",
       "thin-648w",
-      "ymyl-cite-40",
+      "ymyl-cite-38",
       "orphan"
     ],
     "inbound": 0,
     "score": 6
-  },
-  {
-    "file": "pregnancy-calculator-guide.mdx",
-    "slug": "pregnancy-calculator-guide",
-    "locale": "ar",
-    "cluster": "health",
-    "isYmyl": true,
-    "words": 653,
-    "passivePct": 0.8,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 9,
-    "bareNumbers": 4,
-    "hasTable": true,
-    "headings": 6,
-    "faqCount": 5,
-    "questionHeadings": 3,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "thin-653w",
-      "ymyl-cite-4",
-      "inbound-2"
-    ],
-    "inbound": 2,
-    "score": 6
-  },
-  {
-    "file": "ai-in-fashion-and-beauty.mdx",
-    "slug": "ai-in-fashion-and-beauty",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 685,
-    "passivePct": 2,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 0,
-    "bareNumbers": 14,
-    "hasTable": false,
-    "headings": 11,
-    "faqCount": 7,
-    "questionHeadings": 0,
-    "flagCount": 4,
-    "flags": [
-      "human-0",
-      "links-0",
-      "no-table",
-      "thin-685w",
-      "orphan"
-    ],
-    "inbound": 0,
-    "score": 5
   },
   {
     "file": "arabic-vs-english-prompting.mdx",
@@ -162,90 +107,6 @@
     "score": 5
   },
   {
-    "file": "chatgpt-best-work-uses.mdx",
-    "slug": "chatgpt-best-work-uses",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 586,
-    "passivePct": 0.5,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 7,
-    "bareNumbers": 33,
-    "hasTable": false,
-    "headings": 9,
-    "faqCount": 2,
-    "questionHeadings": 0,
-    "flagCount": 4,
-    "flags": [
-      "human-0",
-      "no-table",
-      "faq-2",
-      "thin-586w",
-      "inbound-1"
-    ],
-    "inbound": 1,
-    "score": 5
-  },
-  {
-    "file": "chatgpt-weaknesses-what-it-cannot-do.mdx",
-    "slug": "chatgpt-weaknesses-what-it-cannot-do",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 660,
-    "passivePct": 0.5,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 7,
-    "bareNumbers": 12,
-    "hasTable": false,
-    "headings": 8,
-    "faqCount": 2,
-    "questionHeadings": 1,
-    "flagCount": 4,
-    "flags": [
-      "human-0",
-      "no-table",
-      "faq-2",
-      "thin-660w",
-      "orphan"
-    ],
-    "inbound": 0,
-    "score": 5
-  },
-  {
-    "file": "common-prompt-mistakes.mdx",
-    "slug": "common-prompt-mistakes",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 338,
-    "passivePct": 0,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 7,
-    "bareNumbers": 3,
-    "hasTable": false,
-    "headings": 3,
-    "faqCount": 2,
-    "questionHeadings": 0,
-    "flagCount": 4,
-    "flags": [
-      "human-0",
-      "no-table",
-      "faq-2",
-      "thin-338w",
-      "orphan"
-    ],
-    "inbound": 0,
-    "score": 5
-  },
-  {
     "file": "driving-license-saudi-guide.en.mdx",
     "slug": "driving-license-saudi-guide",
     "locale": "en",
@@ -257,7 +118,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 34,
+    "bareNumbers": 32,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -265,7 +126,7 @@
     "flagCount": 2,
     "flags": [
       "human-0",
-      "ymyl-cite-34",
+      "ymyl-cite-32",
       "inbound-2"
     ],
     "inbound": 2,
@@ -294,32 +155,6 @@
       "no-table",
       "faq-3",
       "thin-684w",
-      "inbound-2"
-    ],
-    "inbound": 2,
-    "score": 5
-  },
-  {
-    "file": "kafala-transfer-guide.en.mdx",
-    "slug": "kafala-transfer-guide",
-    "locale": "en",
-    "cluster": "government",
-    "isYmyl": true,
-    "words": 902,
-    "passivePct": 0,
-    "human": 4,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 8,
-    "bareNumbers": 5,
-    "hasTable": true,
-    "headings": 7,
-    "faqCount": 7,
-    "questionHeadings": 0,
-    "flagCount": 2,
-    "flags": [
-      "human-4",
-      "ymyl-cite-5",
       "inbound-2"
     ],
     "inbound": 2,
@@ -363,7 +198,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 21,
+    "bareNumbers": 19,
     "hasTable": true,
     "headings": 9,
     "faqCount": 7,
@@ -371,10 +206,36 @@
     "flagCount": 2,
     "flags": [
       "human-1",
-      "ymyl-cite-21",
+      "ymyl-cite-19",
       "orphan"
     ],
     "inbound": 0,
+    "score": 5
+  },
+  {
+    "file": "pregnancy-calculator-guide.mdx",
+    "slug": "pregnancy-calculator-guide",
+    "locale": "ar",
+    "cluster": "health",
+    "isYmyl": true,
+    "words": 659,
+    "passivePct": 0.8,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 9,
+    "bareNumbers": 2,
+    "hasTable": true,
+    "headings": 6,
+    "faqCount": 5,
+    "questionHeadings": 3,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "thin-659w",
+      "inbound-2"
+    ],
+    "inbound": 2,
     "score": 5
   },
   {
@@ -389,7 +250,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 42,
+    "bareNumbers": 39,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -397,7 +258,7 @@
     "flagCount": 2,
     "flags": [
       "human-4",
-      "ymyl-cite-42",
+      "ymyl-cite-39",
       "orphan"
     ],
     "inbound": 0,
@@ -415,7 +276,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 24,
+    "bareNumbers": 20,
     "hasTable": true,
     "headings": 9,
     "faqCount": 7,
@@ -423,33 +284,7 @@
     "flagCount": 2,
     "flags": [
       "human-3",
-      "ymyl-cite-24",
-      "orphan"
-    ],
-    "inbound": 0,
-    "score": 5
-  },
-  {
-    "file": "tawakkalna-complete-guide.en.mdx",
-    "slug": "tawakkalna-complete-guide",
-    "locale": "en",
-    "cluster": "government",
-    "isYmyl": true,
-    "words": 719,
-    "passivePct": 0,
-    "human": 2,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 7,
-    "bareNumbers": 5,
-    "hasTable": true,
-    "headings": 6,
-    "faqCount": 7,
-    "questionHeadings": 1,
-    "flagCount": 2,
-    "flags": [
-      "human-2",
-      "ymyl-cite-5",
+      "ymyl-cite-20",
       "orphan"
     ],
     "inbound": 0,
@@ -493,7 +328,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 25,
+    "bareNumbers": 20,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -501,7 +336,7 @@
     "flagCount": 2,
     "flags": [
       "human-1",
-      "ymyl-cite-25",
+      "ymyl-cite-20",
       "orphan"
     ],
     "inbound": 0,
@@ -533,33 +368,6 @@
     "score": 4
   },
   {
-    "file": "age-calculator-guide.en.mdx",
-    "slug": "age-calculator-guide",
-    "locale": "en",
-    "cluster": "calendar",
-    "isYmyl": false,
-    "words": 668,
-    "passivePct": 0,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 2,
-    "bareNumbers": 75,
-    "hasTable": true,
-    "headings": 5,
-    "faqCount": 5,
-    "questionHeadings": 0,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "links-2",
-      "thin-668w",
-      "orphan"
-    ],
-    "inbound": 0,
-    "score": 4
-  },
-  {
     "file": "ai-and-seo-white-hat.mdx",
     "slug": "ai-and-seo-white-hat",
     "locale": "ar",
@@ -571,7 +379,7 @@
     "aiOpen": 0,
     "aiEnd": 1,
     "links": 8,
-    "bareNumbers": 25,
+    "bareNumbers": 22,
     "hasTable": false,
     "headings": 8,
     "faqCount": 3,
@@ -598,7 +406,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 48,
+    "bareNumbers": 47,
     "hasTable": false,
     "headings": 9,
     "faqCount": 2,
@@ -608,9 +416,9 @@
       "human-3",
       "no-table",
       "faq-2",
-      "orphan"
+      "inbound-1"
     ],
-    "inbound": 0,
+    "inbound": 1,
     "score": 4
   },
   {
@@ -625,7 +433,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 43,
+    "bareNumbers": 42,
     "hasTable": false,
     "headings": 7,
     "faqCount": 2,
@@ -641,134 +449,26 @@
     "score": 4
   },
   {
-    "file": "ai-in-cybersecurity-attack-defense.mdx",
-    "slug": "ai-in-cybersecurity-attack-defense",
+    "file": "ai-in-fashion-and-beauty.mdx",
+    "slug": "ai-in-fashion-and-beauty",
     "locale": "ar",
     "cluster": "ai",
     "isYmyl": false,
-    "words": 1252,
-    "passivePct": 1.1,
+    "words": 725,
+    "passivePct": 1.9,
     "human": 0,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 25,
+    "links": 4,
+    "bareNumbers": 8,
     "hasTable": false,
-    "headings": 8,
+    "headings": 12,
     "faqCount": 7,
     "questionHeadings": 0,
     "flagCount": 3,
     "flags": [
       "human-0",
-      "links-1",
-      "no-table",
-      "orphan"
-    ],
-    "inbound": 0,
-    "score": 4
-  },
-  {
-    "file": "ai-in-gaming.mdx",
-    "slug": "ai-in-gaming",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 1005,
-    "passivePct": 1.1,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 23,
-    "hasTable": false,
-    "headings": 10,
-    "faqCount": 7,
-    "questionHeadings": 0,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "links-1",
-      "no-table",
-      "orphan"
-    ],
-    "inbound": 0,
-    "score": 4
-  },
-  {
-    "file": "ai-in-real-estate-proptech.mdx",
-    "slug": "ai-in-real-estate-proptech",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 1002,
-    "passivePct": 1.7,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 37,
-    "hasTable": false,
-    "headings": 10,
-    "faqCount": 7,
-    "questionHeadings": 0,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "links-1",
-      "no-table",
-      "inbound-1"
-    ],
-    "inbound": 1,
-    "score": 4
-  },
-  {
-    "file": "ai-music-generation-suno-udio.mdx",
-    "slug": "ai-music-generation-suno-udio",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 1050,
-    "passivePct": 1.3,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 29,
-    "hasTable": false,
-    "headings": 11,
-    "faqCount": 7,
-    "questionHeadings": 0,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "links-1",
-      "no-table",
-      "orphan"
-    ],
-    "inbound": 0,
-    "score": 4
-  },
-  {
-    "file": "ai-pcs-apple-intelligence-copilot.mdx",
-    "slug": "ai-pcs-apple-intelligence-copilot",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 1224,
-    "passivePct": 0.2,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 43,
-    "hasTable": false,
-    "headings": 10,
-    "faqCount": 7,
-    "questionHeadings": 1,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "links-1",
+      "links-4",
       "no-table",
       "orphan"
     ],
@@ -787,7 +487,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 4,
-    "bareNumbers": 33,
+    "bareNumbers": 20,
     "hasTable": false,
     "headings": 18,
     "faqCount": 7,
@@ -797,9 +497,9 @@
       "human-0",
       "links-4",
       "no-table",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 4
   },
   {
@@ -841,7 +541,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 20,
+    "bareNumbers": 19,
     "hasTable": false,
     "headings": 5,
     "faqCount": 3,
@@ -857,57 +557,57 @@
     "score": 4
   },
   {
-    "file": "countdown-ramadan-eid-national-day.mdx",
-    "slug": "countdown-ramadan-eid-national-day",
-    "locale": "ar",
-    "cluster": "calendar",
-    "isYmyl": false,
-    "words": 643,
-    "passivePct": 1.6,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 2,
-    "bareNumbers": 0,
-    "hasTable": true,
-    "headings": 5,
-    "faqCount": 5,
-    "questionHeadings": 1,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "links-2",
-      "thin-643w",
-      "inbound-1"
-    ],
-    "inbound": 1,
-    "score": 4
-  },
-  {
-    "file": "deepseek-deep-dive.mdx",
-    "slug": "deepseek-deep-dive",
+    "file": "chatgpt-weaknesses-what-it-cannot-do.mdx",
+    "slug": "chatgpt-weaknesses-what-it-cannot-do",
     "locale": "ar",
     "cluster": "ai",
     "isYmyl": false,
-    "words": 965,
-    "passivePct": 0.6,
-    "human": 1,
+    "words": 660,
+    "passivePct": 0.5,
+    "human": 0,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 32,
+    "links": 7,
+    "bareNumbers": 7,
     "hasTable": false,
-    "headings": 12,
-    "faqCount": 7,
-    "questionHeadings": 3,
+    "headings": 8,
+    "faqCount": 2,
+    "questionHeadings": 1,
+    "flagCount": 4,
+    "flags": [
+      "human-0",
+      "no-table",
+      "faq-2",
+      "thin-660w"
+    ],
+    "inbound": 3,
+    "score": 4
+  },
+  {
+    "file": "common-prompt-mistakes.mdx",
+    "slug": "common-prompt-mistakes",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 554,
+    "passivePct": 0,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 7,
+    "bareNumbers": 3,
+    "hasTable": true,
+    "headings": 4,
+    "faqCount": 2,
+    "questionHeadings": 0,
     "flagCount": 3,
     "flags": [
-      "human-1",
-      "links-1",
-      "no-table",
-      "inbound-1"
+      "human-0",
+      "faq-2",
+      "thin-554w",
+      "orphan"
     ],
-    "inbound": 1,
+    "inbound": 0,
     "score": 4
   },
   {
@@ -947,7 +647,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 55,
+    "bareNumbers": 43,
     "hasTable": true,
     "headings": 7,
     "faqCount": 7,
@@ -955,36 +655,9 @@
     "flagCount": 2,
     "flags": [
       "human-4",
-      "ymyl-cite-55"
+      "ymyl-cite-43"
     ],
     "inbound": 5,
-    "score": 4
-  },
-  {
-    "file": "gemini-live-and-veo.mdx",
-    "slug": "gemini-live-and-veo",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 672,
-    "passivePct": 0,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 7,
-    "bareNumbers": 17,
-    "hasTable": true,
-    "headings": 6,
-    "faqCount": 2,
-    "questionHeadings": 0,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "faq-2",
-      "thin-672w",
-      "inbound-2"
-    ],
-    "inbound": 2,
     "score": 4
   },
   {
@@ -999,7 +672,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 39,
+    "bareNumbers": 33,
     "hasTable": true,
     "headings": 9,
     "faqCount": 7,
@@ -1007,7 +680,7 @@
     "flagCount": 2,
     "flags": [
       "human-2",
-      "ymyl-cite-39"
+      "ymyl-cite-33"
     ],
     "inbound": 3,
     "score": 4
@@ -1034,9 +707,9 @@
       "human-0",
       "faq-3",
       "thin-610w",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 4
   },
   {
@@ -1047,23 +720,23 @@
     "isYmyl": false,
     "words": 610,
     "passivePct": 0,
-    "human": 0,
+    "human": 1,
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 4,
-    "bareNumbers": 14,
+    "bareNumbers": 11,
     "hasTable": true,
     "headings": 7,
     "faqCount": 5,
     "questionHeadings": 2,
     "flagCount": 3,
     "flags": [
-      "human-0",
+      "human-1",
       "links-4",
       "thin-610w",
-      "orphan"
+      "inbound-2"
     ],
-    "inbound": 0,
+    "inbound": 2,
     "score": 4
   },
   {
@@ -1078,7 +751,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 16,
+    "bareNumbers": 15,
     "hasTable": false,
     "headings": 13,
     "faqCount": 2,
@@ -1094,30 +767,28 @@
     "score": 4
   },
   {
-    "file": "humanoid-robots-and-ai.mdx",
-    "slug": "humanoid-robots-and-ai",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 988,
-    "passivePct": 0.5,
-    "human": 0,
+    "file": "kafala-transfer-guide.en.mdx",
+    "slug": "kafala-transfer-guide",
+    "locale": "en",
+    "cluster": "government",
+    "isYmyl": true,
+    "words": 902,
+    "passivePct": 0,
+    "human": 4,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 42,
-    "hasTable": false,
-    "headings": 8,
+    "links": 8,
+    "bareNumbers": 3,
+    "hasTable": true,
+    "headings": 7,
     "faqCount": 7,
-    "questionHeadings": 1,
-    "flagCount": 3,
+    "questionHeadings": 0,
+    "flagCount": 1,
     "flags": [
-      "human-0",
-      "links-1",
-      "no-table",
-      "inbound-1"
+      "human-4",
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 4
   },
   {
@@ -1168,33 +839,6 @@
       "inbound-2"
     ],
     "inbound": 2,
-    "score": 4
-  },
-  {
-    "file": "multi-agent-systems.mdx",
-    "slug": "multi-agent-systems",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 1124,
-    "passivePct": 1.1,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 24,
-    "hasTable": false,
-    "headings": 10,
-    "faqCount": 7,
-    "questionHeadings": 2,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "links-1",
-      "no-table",
-      "orphan"
-    ],
-    "inbound": 0,
     "score": 4
   },
   {
@@ -1273,33 +917,6 @@
     "score": 4
   },
   {
-    "file": "nvidia-chip-war.mdx",
-    "slug": "nvidia-chip-war",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 1178,
-    "passivePct": 1.2,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 49,
-    "hasTable": false,
-    "headings": 10,
-    "faqCount": 7,
-    "questionHeadings": 0,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "links-1",
-      "no-table",
-      "orphan"
-    ],
-    "inbound": 0,
-    "score": 4
-  },
-  {
     "file": "react-nextjs-essential-snippets.mdx",
     "slug": "react-nextjs-essential-snippets",
     "locale": "ar",
@@ -1311,7 +928,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 6,
+    "bareNumbers": 5,
     "hasTable": false,
     "headings": 5,
     "faqCount": 2,
@@ -1321,9 +938,9 @@
       "human-0",
       "no-table",
       "faq-2",
-      "orphan"
+      "inbound-1"
     ],
-    "inbound": 0,
+    "inbound": 1,
     "score": 4
   },
   {
@@ -1338,7 +955,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 41,
+    "bareNumbers": 39,
     "hasTable": false,
     "headings": 8,
     "faqCount": 2,
@@ -1375,9 +992,9 @@
       "human-0",
       "no-table",
       "faq-2",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 4
   },
   {
@@ -1392,7 +1009,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 14,
+    "bareNumbers": 13,
     "hasTable": false,
     "headings": 7,
     "faqCount": 2,
@@ -1419,7 +1036,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 27,
+    "bareNumbers": 25,
     "hasTable": false,
     "headings": 7,
     "faqCount": 2,
@@ -1429,9 +1046,9 @@
       "human-0",
       "no-table",
       "faq-2",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 4
   },
   {
@@ -1446,7 +1063,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 4,
-    "bareNumbers": 31,
+    "bareNumbers": 15,
     "hasTable": false,
     "headings": 14,
     "faqCount": 7,
@@ -1473,7 +1090,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 1,
+    "bareNumbers": 0,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -1498,7 +1115,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 14,
+    "bareNumbers": 13,
     "hasTable": true,
     "headings": 7,
     "faqCount": 7,
@@ -1506,7 +1123,7 @@
     "flagCount": 2,
     "flags": [
       "thin-684w",
-      "ymyl-cite-14"
+      "ymyl-cite-13"
     ],
     "inbound": 5,
     "score": 4
@@ -1523,7 +1140,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 30,
+    "bareNumbers": 24,
     "hasTable": true,
     "headings": 6,
     "faqCount": 7,
@@ -1531,7 +1148,7 @@
     "flagCount": 2,
     "flags": [
       "human-3",
-      "ymyl-cite-30"
+      "ymyl-cite-24"
     ],
     "inbound": 5,
     "score": 4
@@ -1573,7 +1190,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 20,
+    "bareNumbers": 18,
     "hasTable": false,
     "headings": 7,
     "faqCount": 2,
@@ -1583,6 +1200,31 @@
       "human-0",
       "no-table",
       "faq-2",
+      "orphan"
+    ],
+    "inbound": 0,
+    "score": 4
+  },
+  {
+    "file": "tawakkalna-complete-guide.en.mdx",
+    "slug": "tawakkalna-complete-guide",
+    "locale": "en",
+    "cluster": "government",
+    "isYmyl": true,
+    "words": 719,
+    "passivePct": 0,
+    "human": 2,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 7,
+    "bareNumbers": 2,
+    "hasTable": true,
+    "headings": 6,
+    "faqCount": 7,
+    "questionHeadings": 1,
+    "flagCount": 1,
+    "flags": [
+      "human-2",
       "orphan"
     ],
     "inbound": 0,
@@ -1600,7 +1242,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 15,
+    "bareNumbers": 14,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -1608,7 +1250,7 @@
     "flagCount": 2,
     "flags": [
       "human-1",
-      "ymyl-cite-15"
+      "ymyl-cite-14"
     ],
     "inbound": 4,
     "score": 4
@@ -1650,7 +1292,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 1,
+    "bareNumbers": 0,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -1675,42 +1317,16 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 6,
+    "bareNumbers": 5,
     "hasTable": true,
     "headings": 7,
     "faqCount": 7,
     "questionHeadings": 0,
     "flagCount": 1,
     "flags": [
-      "ymyl-cite-6"
+      "ymyl-cite-5"
     ],
     "inbound": 7,
-    "score": 3
-  },
-  {
-    "file": "age-calculator-guide.mdx",
-    "slug": "age-calculator-guide",
-    "locale": "ar",
-    "cluster": "calendar",
-    "isYmyl": false,
-    "words": 590,
-    "passivePct": 0.8,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 2,
-    "bareNumbers": 1,
-    "hasTable": true,
-    "headings": 5,
-    "faqCount": 5,
-    "questionHeadings": 0,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "links-2",
-      "thin-590w"
-    ],
-    "inbound": 5,
     "score": 3
   },
   {
@@ -1719,21 +1335,21 @@
     "locale": "ar",
     "cluster": "ai",
     "isYmyl": false,
-    "words": 1150,
-    "passivePct": 1.1,
+    "words": 1190,
+    "passivePct": 1.2,
     "human": 0,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 0,
-    "bareNumbers": 60,
+    "links": 4,
+    "bareNumbers": 18,
     "hasTable": true,
-    "headings": 13,
+    "headings": 14,
     "faqCount": 7,
     "questionHeadings": 2,
     "flagCount": 2,
     "flags": [
       "human-0",
-      "links-0",
+      "links-4",
       "orphan"
     ],
     "inbound": 0,
@@ -1751,7 +1367,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 18,
+    "bareNumbers": 17,
     "hasTable": true,
     "headings": 7,
     "faqCount": 2,
@@ -1777,7 +1393,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 41,
+    "bareNumbers": 22,
     "hasTable": false,
     "headings": 18,
     "faqCount": 7,
@@ -1803,7 +1419,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 9,
+    "bareNumbers": 8,
     "hasTable": false,
     "headings": 14,
     "faqCount": 2,
@@ -1829,7 +1445,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 21,
+    "bareNumbers": 9,
     "hasTable": false,
     "headings": 14,
     "faqCount": 7,
@@ -1855,7 +1471,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 20,
+    "bareNumbers": 10,
     "hasTable": false,
     "headings": 15,
     "faqCount": 7,
@@ -1864,9 +1480,9 @@
     "flags": [
       "human-0",
       "no-table",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 3
   },
   {
@@ -1881,7 +1497,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 33,
+    "bareNumbers": 25,
     "hasTable": false,
     "headings": 17,
     "faqCount": 7,
@@ -1907,7 +1523,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 93,
+    "bareNumbers": 90,
     "hasTable": false,
     "headings": 12,
     "faqCount": 7,
@@ -1933,7 +1549,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 2,
+    "bareNumbers": 1,
     "hasTable": false,
     "headings": 9,
     "faqCount": 7,
@@ -1959,7 +1575,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 13,
-    "bareNumbers": 32,
+    "bareNumbers": 29,
     "hasTable": false,
     "headings": 15,
     "faqCount": 7,
@@ -1985,7 +1601,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 11,
+    "bareNumbers": 7,
     "hasTable": false,
     "headings": 17,
     "faqCount": 7,
@@ -1994,9 +1610,9 @@
     "flags": [
       "human-0",
       "no-table",
-      "orphan"
+      "inbound-1"
     ],
-    "inbound": 0,
+    "inbound": 1,
     "score": 3
   },
   {
@@ -2011,7 +1627,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 16,
+    "bareNumbers": 9,
     "hasTable": false,
     "headings": 13,
     "faqCount": 7,
@@ -2037,7 +1653,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 58,
+    "bareNumbers": 55,
     "hasTable": false,
     "headings": 13,
     "faqCount": 7,
@@ -2063,7 +1679,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 36,
+    "bareNumbers": 30,
     "hasTable": false,
     "headings": 16,
     "faqCount": 7,
@@ -2089,7 +1705,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 62,
+    "bareNumbers": 35,
     "hasTable": false,
     "headings": 15,
     "faqCount": 7,
@@ -2104,6 +1720,32 @@
     "score": 3
   },
   {
+    "file": "ai-in-cybersecurity-attack-defense.mdx",
+    "slug": "ai-in-cybersecurity-attack-defense",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1294,
+    "passivePct": 1.2,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 5,
+    "bareNumbers": 6,
+    "hasTable": false,
+    "headings": 9,
+    "faqCount": 7,
+    "questionHeadings": 0,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "no-table",
+      "orphan"
+    ],
+    "inbound": 0,
+    "score": 3
+  },
+  {
     "file": "ai-in-elections-and-democracy.mdx",
     "slug": "ai-in-elections-and-democracy",
     "locale": "ar",
@@ -2115,7 +1757,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 19,
+    "bareNumbers": 4,
     "hasTable": false,
     "headings": 14,
     "faqCount": 7,
@@ -2130,32 +1772,6 @@
     "score": 3
   },
   {
-    "file": "ai-in-energy-nuclear-renewable.mdx",
-    "slug": "ai-in-energy-nuclear-renewable",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 1575,
-    "passivePct": 0.5,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 11,
-    "bareNumbers": 80,
-    "hasTable": false,
-    "headings": 16,
-    "faqCount": 7,
-    "questionHeadings": 0,
-    "flagCount": 2,
-    "flags": [
-      "human-0",
-      "no-table",
-      "inbound-2"
-    ],
-    "inbound": 2,
-    "score": 3
-  },
-  {
     "file": "ai-in-gaming-and-game-dev.mdx",
     "slug": "ai-in-gaming-and-game-dev",
     "locale": "ar",
@@ -2167,7 +1783,33 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 35,
+    "bareNumbers": 19,
+    "hasTable": false,
+    "headings": 11,
+    "faqCount": 7,
+    "questionHeadings": 0,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "no-table",
+      "orphan"
+    ],
+    "inbound": 0,
+    "score": 3
+  },
+  {
+    "file": "ai-in-gaming.mdx",
+    "slug": "ai-in-gaming",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1044,
+    "passivePct": 1.1,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 5,
+    "bareNumbers": 8,
     "hasTable": false,
     "headings": 11,
     "faqCount": 7,
@@ -2193,7 +1835,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 12,
+    "bareNumbers": 5,
     "hasTable": false,
     "headings": 9,
     "faqCount": 7,
@@ -2219,7 +1861,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 31,
+    "bareNumbers": 25,
     "hasTable": false,
     "headings": 13,
     "faqCount": 7,
@@ -2228,9 +1870,9 @@
     "flags": [
       "human-0",
       "no-table",
-      "orphan"
+      "inbound-1"
     ],
-    "inbound": 0,
+    "inbound": 1,
     "score": 3
   },
   {
@@ -2245,7 +1887,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 14,
+    "bareNumbers": 9,
     "hasTable": false,
     "headings": 13,
     "faqCount": 7,
@@ -2271,7 +1913,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 24,
+    "bareNumbers": 10,
     "hasTable": false,
     "headings": 15,
     "faqCount": 7,
@@ -2297,7 +1939,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 31,
+    "bareNumbers": 23,
     "hasTable": false,
     "headings": 10,
     "faqCount": 5,
@@ -2306,9 +1948,9 @@
     "flags": [
       "human-0",
       "no-table",
-      "orphan"
+      "inbound-1"
     ],
-    "inbound": 0,
+    "inbound": 1,
     "score": 3
   },
   {
@@ -2323,7 +1965,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 58,
+    "bareNumbers": 49,
     "hasTable": false,
     "headings": 17,
     "faqCount": 7,
@@ -2375,7 +2017,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 39,
+    "bareNumbers": 31,
     "hasTable": false,
     "headings": 13,
     "faqCount": 7,
@@ -2401,7 +2043,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 9,
+    "bareNumbers": 6,
     "hasTable": false,
     "headings": 11,
     "faqCount": 7,
@@ -2427,7 +2069,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 15,
+    "bareNumbers": 11,
     "hasTable": false,
     "headings": 9,
     "faqCount": 7,
@@ -2453,7 +2095,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 3,
-    "bareNumbers": 30,
+    "bareNumbers": 18,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -2479,7 +2121,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 35,
+    "bareNumbers": 20,
     "hasTable": false,
     "headings": 16,
     "faqCount": 7,
@@ -2505,9 +2147,61 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 19,
+    "bareNumbers": 16,
     "hasTable": false,
     "headings": 16,
+    "faqCount": 7,
+    "questionHeadings": 1,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "no-table",
+      "orphan"
+    ],
+    "inbound": 0,
+    "score": 3
+  },
+  {
+    "file": "ai-music-generation-suno-udio.mdx",
+    "slug": "ai-music-generation-suno-udio",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1092,
+    "passivePct": 1.3,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 5,
+    "bareNumbers": 17,
+    "hasTable": false,
+    "headings": 12,
+    "faqCount": 7,
+    "questionHeadings": 0,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "no-table",
+      "orphan"
+    ],
+    "inbound": 0,
+    "score": 3
+  },
+  {
+    "file": "ai-pcs-apple-intelligence-copilot.mdx",
+    "slug": "ai-pcs-apple-intelligence-copilot",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1263,
+    "passivePct": 0.2,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 5,
+    "bareNumbers": 32,
+    "hasTable": false,
+    "headings": 11,
     "faqCount": 7,
     "questionHeadings": 1,
     "flagCount": 2,
@@ -2531,7 +2225,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 8,
+    "bareNumbers": 3,
     "hasTable": false,
     "headings": 8,
     "faqCount": 7,
@@ -2540,35 +2234,9 @@
     "flags": [
       "human-0",
       "no-table",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
-    "score": 3
-  },
-  {
-    "file": "ai-translation-deepl-industry.mdx",
-    "slug": "ai-translation-deepl-industry",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 1192,
-    "passivePct": 0.8,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 41,
-    "hasTable": true,
-    "headings": 9,
-    "faqCount": 7,
-    "questionHeadings": 0,
-    "flagCount": 2,
-    "flags": [
-      "human-0",
-      "links-1",
-      "orphan"
-    ],
-    "inbound": 0,
+    "inbound": 2,
     "score": 3
   },
   {
@@ -2583,7 +2251,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 12,
+    "bareNumbers": 9,
     "hasTable": false,
     "headings": 10,
     "faqCount": 7,
@@ -2595,6 +2263,32 @@
       "inbound-1"
     ],
     "inbound": 1,
+    "score": 3
+  },
+  {
+    "file": "chatgpt-best-work-uses.mdx",
+    "slug": "chatgpt-best-work-uses",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 701,
+    "passivePct": 0.4,
+    "human": 2,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 7,
+    "bareNumbers": 32,
+    "hasTable": true,
+    "headings": 10,
+    "faqCount": 2,
+    "questionHeadings": 0,
+    "flagCount": 2,
+    "flags": [
+      "human-2",
+      "faq-2",
+      "inbound-2"
+    ],
+    "inbound": 2,
     "score": 3
   },
   {
@@ -2635,7 +2329,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 31,
+    "bareNumbers": 30,
     "hasTable": false,
     "headings": 10,
     "faqCount": 2,
@@ -2672,7 +2366,7 @@
       "faq-2",
       "thin-659w"
     ],
-    "inbound": 3,
+    "inbound": 4,
     "score": 3
   },
   {
@@ -2687,7 +2381,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 13,
-    "bareNumbers": 13,
+    "bareNumbers": 11,
     "hasTable": false,
     "headings": 12,
     "faqCount": 7,
@@ -2713,7 +2407,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 17,
+    "bareNumbers": 14,
     "hasTable": true,
     "headings": 6,
     "faqCount": 2,
@@ -2739,7 +2433,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 7,
+    "bareNumbers": 5,
     "hasTable": false,
     "headings": 10,
     "faqCount": 7,
@@ -2748,9 +2442,9 @@
     "flags": [
       "human-0",
       "no-table",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 3
   },
   {
@@ -2765,7 +2459,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 36,
+    "bareNumbers": 33,
     "hasTable": true,
     "headings": 10,
     "faqCount": 4,
@@ -2780,29 +2474,29 @@
     "score": 3
   },
   {
-    "file": "countdown-ramadan-eid-national-day.en.mdx",
+    "file": "countdown-ramadan-eid-national-day.mdx",
     "slug": "countdown-ramadan-eid-national-day",
-    "locale": "en",
+    "locale": "ar",
     "cluster": "calendar",
     "isYmyl": false,
-    "words": 819,
-    "passivePct": 0,
+    "words": 689,
+    "passivePct": 1.5,
     "human": 0,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 2,
-    "bareNumbers": 25,
+    "links": 6,
+    "bareNumbers": 0,
     "hasTable": true,
-    "headings": 5,
+    "headings": 6,
     "faqCount": 5,
-    "questionHeadings": 0,
+    "questionHeadings": 1,
     "flagCount": 2,
     "flags": [
       "human-0",
-      "links-2",
-      "orphan"
+      "thin-689w",
+      "inbound-2"
     ],
-    "inbound": 0,
+    "inbound": 2,
     "score": 3
   },
   {
@@ -2817,7 +2511,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 12,
+    "bareNumbers": 10,
     "hasTable": false,
     "headings": 8,
     "faqCount": 3,
@@ -2828,7 +2522,7 @@
       "no-table",
       "faq-3"
     ],
-    "inbound": 5,
+    "inbound": 6,
     "score": 3
   },
   {
@@ -2843,7 +2537,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 26,
+    "bareNumbers": 25,
     "hasTable": true,
     "headings": 10,
     "faqCount": 2,
@@ -2858,6 +2552,32 @@
     "score": 3
   },
   {
+    "file": "deepseek-deep-dive.mdx",
+    "slug": "deepseek-deep-dive",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1011,
+    "passivePct": 0.6,
+    "human": 1,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 5,
+    "bareNumbers": 21,
+    "hasTable": false,
+    "headings": 13,
+    "faqCount": 7,
+    "questionHeadings": 3,
+    "flagCount": 2,
+    "flags": [
+      "human-1",
+      "no-table",
+      "inbound-1"
+    ],
+    "inbound": 1,
+    "score": 3
+  },
+  {
     "file": "diffusion-models-explained.mdx",
     "slug": "diffusion-models-explained",
     "locale": "ar",
@@ -2869,7 +2589,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 6,
-    "bareNumbers": 26,
+    "bareNumbers": 18,
     "hasTable": false,
     "headings": 15,
     "faqCount": 7,
@@ -2878,35 +2598,9 @@
     "flags": [
       "human-0",
       "no-table",
-      "orphan"
+      "inbound-1"
     ],
-    "inbound": 0,
-    "score": 3
-  },
-  {
-    "file": "effective-prompt-writing-rules.mdx",
-    "slug": "effective-prompt-writing-rules",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 559,
-    "passivePct": 0.4,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 7,
-    "bareNumbers": 13,
-    "hasTable": false,
-    "headings": 15,
-    "faqCount": 4,
-    "questionHeadings": 0,
-    "flagCount": 3,
-    "flags": [
-      "human-0",
-      "no-table",
-      "thin-559w"
-    ],
-    "inbound": 9,
+    "inbound": 1,
     "score": 3
   },
   {
@@ -2921,7 +2615,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 3,
-    "bareNumbers": 28,
+    "bareNumbers": 21,
     "hasTable": true,
     "headings": 11,
     "faqCount": 7,
@@ -2947,7 +2641,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 2,
+    "bareNumbers": 1,
     "hasTable": true,
     "headings": 7,
     "faqCount": 7,
@@ -2965,21 +2659,21 @@
     "locale": "ar",
     "cluster": "ai",
     "isYmyl": false,
-    "words": 1142,
-    "passivePct": 1.1,
+    "words": 1176,
+    "passivePct": 1,
     "human": 0,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 0,
-    "bareNumbers": 32,
+    "links": 4,
+    "bareNumbers": 10,
     "hasTable": false,
-    "headings": 9,
+    "headings": 10,
     "faqCount": 7,
     "questionHeadings": 1,
     "flagCount": 3,
     "flags": [
       "human-0",
-      "links-0",
+      "links-4",
       "no-table"
     ],
     "inbound": 3,
@@ -2997,7 +2691,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 10,
+    "bareNumbers": 8,
     "hasTable": false,
     "headings": 8,
     "faqCount": 2,
@@ -3012,29 +2706,29 @@
     "score": 3
   },
   {
-    "file": "fine-tuning-lora-qlora.mdx",
-    "slug": "fine-tuning-lora-qlora",
+    "file": "gemini-live-and-veo.mdx",
+    "slug": "gemini-live-and-veo",
     "locale": "ar",
     "cluster": "ai",
     "isYmyl": false,
-    "words": 1308,
-    "passivePct": 0.7,
+    "words": 672,
+    "passivePct": 0,
     "human": 0,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 2,
-    "bareNumbers": 43,
+    "links": 7,
+    "bareNumbers": 17,
     "hasTable": true,
-    "headings": 12,
-    "faqCount": 7,
-    "questionHeadings": 2,
-    "flagCount": 2,
+    "headings": 6,
+    "faqCount": 2,
+    "questionHeadings": 0,
+    "flagCount": 3,
     "flags": [
       "human-0",
-      "links-2",
-      "orphan"
+      "faq-2",
+      "thin-672w"
     ],
-    "inbound": 0,
+    "inbound": 3,
     "score": 3
   },
   {
@@ -3049,7 +2743,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 11,
+    "bareNumbers": 10,
     "hasTable": false,
     "headings": 13,
     "faqCount": 7,
@@ -3112,7 +2806,7 @@
       "no-table",
       "faq-2"
     ],
-    "inbound": 3,
+    "inbound": 5,
     "score": 3
   },
   {
@@ -3127,7 +2821,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 35,
+    "bareNumbers": 22,
     "hasTable": false,
     "headings": 12,
     "faqCount": 7,
@@ -3153,7 +2847,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 1,
+    "bareNumbers": 0,
     "hasTable": true,
     "headings": 9,
     "faqCount": 7,
@@ -3177,7 +2871,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 4,
-    "bareNumbers": 1,
+    "bareNumbers": 0,
     "hasTable": true,
     "headings": 7,
     "faqCount": 5,
@@ -3188,33 +2882,33 @@
       "links-4",
       "thin-520w"
     ],
-    "inbound": 6,
+    "inbound": 8,
     "score": 3
   },
   {
-    "file": "humanoid-robots-2026.mdx",
-    "slug": "humanoid-robots-2026",
+    "file": "humanoid-robots-and-ai.mdx",
+    "slug": "humanoid-robots-and-ai",
     "locale": "ar",
     "cluster": "ai",
     "isYmyl": false,
-    "words": 1133,
+    "words": 1024,
     "passivePct": 0.5,
     "human": 0,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 11,
-    "bareNumbers": 71,
+    "links": 5,
+    "bareNumbers": 24,
     "hasTable": false,
-    "headings": 10,
+    "headings": 9,
     "faqCount": 7,
-    "questionHeadings": 2,
+    "questionHeadings": 1,
     "flagCount": 2,
     "flags": [
       "human-0",
       "no-table",
-      "inbound-2"
+      "inbound-1"
     ],
-    "inbound": 2,
+    "inbound": 1,
     "score": 3
   },
   {
@@ -3229,7 +2923,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 4,
-    "bareNumbers": 14,
+    "bareNumbers": 8,
     "hasTable": true,
     "headings": 8,
     "faqCount": 5,
@@ -3255,14 +2949,14 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 13,
+    "bareNumbers": 10,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
     "questionHeadings": 0,
     "flagCount": 1,
     "flags": [
-      "ymyl-cite-13"
+      "ymyl-cite-10"
     ],
     "inbound": 7,
     "score": 3
@@ -3279,7 +2973,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 1,
+    "bareNumbers": 0,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -3303,7 +2997,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 17,
+    "bareNumbers": 15,
     "hasTable": false,
     "headings": 11,
     "faqCount": 2,
@@ -3329,7 +3023,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 6,
+    "bareNumbers": 4,
     "hasTable": false,
     "headings": 12,
     "faqCount": 3,
@@ -3355,7 +3049,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 3,
-    "bareNumbers": 7,
+    "bareNumbers": 4,
     "hasTable": true,
     "headings": 9,
     "faqCount": 7,
@@ -3381,7 +3075,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 13,
+    "bareNumbers": 12,
     "hasTable": false,
     "headings": 12,
     "faqCount": 7,
@@ -3407,7 +3101,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 12,
+    "bareNumbers": 9,
     "hasTable": false,
     "headings": 13,
     "faqCount": 7,
@@ -3422,29 +3116,55 @@
     "score": 3
   },
   {
-    "file": "neuralink-brain-computer-interfaces.mdx",
-    "slug": "neuralink-brain-computer-interfaces",
+    "file": "multi-agent-systems.mdx",
+    "slug": "multi-agent-systems",
     "locale": "ar",
     "cluster": "ai",
     "isYmyl": false,
-    "words": 1290,
-    "passivePct": 0.6,
+    "words": 1167,
+    "passivePct": 1.1,
     "human": 0,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 10,
-    "bareNumbers": 35,
+    "links": 5,
+    "bareNumbers": 6,
     "hasTable": false,
-    "headings": 14,
+    "headings": 11,
     "faqCount": 7,
-    "questionHeadings": 1,
+    "questionHeadings": 2,
     "flagCount": 2,
     "flags": [
       "human-0",
       "no-table",
-      "inbound-2"
+      "orphan"
     ],
-    "inbound": 2,
+    "inbound": 0,
+    "score": 3
+  },
+  {
+    "file": "nvidia-chip-war.mdx",
+    "slug": "nvidia-chip-war",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1220,
+    "passivePct": 1.1,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 5,
+    "bareNumbers": 26,
+    "hasTable": false,
+    "headings": 11,
+    "faqCount": 7,
+    "questionHeadings": 0,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "no-table",
+      "orphan"
+    ],
+    "inbound": 0,
     "score": 3
   },
   {
@@ -3453,21 +3173,21 @@
     "locale": "ar",
     "cluster": "ai",
     "isYmyl": false,
-    "words": 865,
-    "passivePct": 1.3,
+    "words": 903,
+    "passivePct": 1.2,
     "human": 0,
     "aiOpen": 0,
     "aiEnd": 0,
-    "links": 0,
-    "bareNumbers": 14,
+    "links": 4,
+    "bareNumbers": 6,
     "hasTable": true,
-    "headings": 12,
+    "headings": 13,
     "faqCount": 7,
     "questionHeadings": 0,
     "flagCount": 2,
     "flags": [
       "human-0",
-      "links-0",
+      "links-4",
       "orphan"
     ],
     "inbound": 0,
@@ -3485,7 +3205,7 @@
     "aiOpen": 0,
     "aiEnd": 1,
     "links": 10,
-    "bareNumbers": 22,
+    "bareNumbers": 20,
     "hasTable": false,
     "headings": 9,
     "faqCount": 7,
@@ -3537,7 +3257,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 38,
+    "bareNumbers": 36,
     "hasTable": false,
     "headings": 6,
     "faqCount": 2,
@@ -3574,7 +3294,7 @@
       "no-table",
       "faq-2"
     ],
-    "inbound": 3,
+    "inbound": 4,
     "score": 3
   },
   {
@@ -3678,32 +3398,6 @@
     "score": 3
   },
   {
-    "file": "self-driving-cars-explained.mdx",
-    "slug": "self-driving-cars-explained",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 988,
-    "passivePct": 0.1,
-    "human": 1,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 1,
-    "bareNumbers": 41,
-    "hasTable": true,
-    "headings": 11,
-    "faqCount": 7,
-    "questionHeadings": 0,
-    "flagCount": 2,
-    "flags": [
-      "human-1",
-      "links-1",
-      "inbound-1"
-    ],
-    "inbound": 1,
-    "score": 3
-  },
-  {
     "file": "temperature-top-p-explained.mdx",
     "slug": "temperature-top-p-explained",
     "locale": "ar",
@@ -3715,7 +3409,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 9,
+    "bareNumbers": 6,
     "hasTable": true,
     "headings": 9,
     "faqCount": 4,
@@ -3724,9 +3418,9 @@
     "flags": [
       "human-0",
       "thin-682w",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 3
   },
   {
@@ -3741,7 +3435,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 9,
+    "bareNumbers": 8,
     "hasTable": false,
     "headings": 12,
     "faqCount": 2,
@@ -3752,7 +3446,7 @@
       "no-table",
       "faq-2"
     ],
-    "inbound": 14,
+    "inbound": 15,
     "score": 3
   },
   {
@@ -3767,7 +3461,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 6,
-    "bareNumbers": 20,
+    "bareNumbers": 13,
     "hasTable": false,
     "headings": 11,
     "faqCount": 7,
@@ -3776,9 +3470,9 @@
     "flags": [
       "human-0",
       "no-table",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 3
   },
   {
@@ -3793,7 +3487,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 4,
-    "bareNumbers": 15,
+    "bareNumbers": 9,
     "hasTable": true,
     "headings": 8,
     "faqCount": 6,
@@ -3834,6 +3528,56 @@
     "score": 3
   },
   {
+    "file": "age-calculator-guide.en.mdx",
+    "slug": "age-calculator-guide",
+    "locale": "en",
+    "cluster": "calendar",
+    "isYmyl": false,
+    "words": 716,
+    "passivePct": 0,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 6,
+    "bareNumbers": 33,
+    "hasTable": true,
+    "headings": 6,
+    "faqCount": 5,
+    "questionHeadings": 0,
+    "flagCount": 1,
+    "flags": [
+      "human-0",
+      "inbound-1"
+    ],
+    "inbound": 1,
+    "score": 2
+  },
+  {
+    "file": "age-calculator-guide.mdx",
+    "slug": "age-calculator-guide",
+    "locale": "ar",
+    "cluster": "calendar",
+    "isYmyl": false,
+    "words": 635,
+    "passivePct": 0.8,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 6,
+    "bareNumbers": 0,
+    "hasTable": true,
+    "headings": 6,
+    "faqCount": 5,
+    "questionHeadings": 0,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "thin-635w"
+    ],
+    "inbound": 6,
+    "score": 2
+  },
+  {
     "file": "ai-beginners-common-mistakes.mdx",
     "slug": "ai-beginners-common-mistakes",
     "locale": "ar",
@@ -3845,7 +3589,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 7,
+    "bareNumbers": 5,
     "hasTable": false,
     "headings": 5,
     "faqCount": 7,
@@ -3870,7 +3614,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 18,
+    "bareNumbers": 6,
     "hasTable": false,
     "headings": 9,
     "faqCount": 7,
@@ -3905,7 +3649,7 @@
       "human-0",
       "faq-2"
     ],
-    "inbound": 3,
+    "inbound": 4,
     "score": 2
   },
   {
@@ -3920,7 +3664,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 16,
-    "bareNumbers": 31,
+    "bareNumbers": 25,
     "hasTable": false,
     "headings": 8,
     "faqCount": 7,
@@ -3945,7 +3689,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 16,
-    "bareNumbers": 3,
+    "bareNumbers": 2,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -3953,9 +3697,9 @@
     "flagCount": 1,
     "flags": [
       "human-0",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 2
   },
   {
@@ -3970,7 +3714,7 @@
     "aiOpen": 0,
     "aiEnd": 1,
     "links": 15,
-    "bareNumbers": 22,
+    "bareNumbers": 12,
     "hasTable": true,
     "headings": 6,
     "faqCount": 7,
@@ -3980,7 +3724,7 @@
       "ai-ender",
       "human-0"
     ],
-    "inbound": 11,
+    "inbound": 12,
     "score": 2
   },
   {
@@ -3995,7 +3739,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 56,
+    "bareNumbers": 54,
     "hasTable": true,
     "headings": 10,
     "faqCount": 2,
@@ -4006,6 +3750,31 @@
       "faq-2"
     ],
     "inbound": 16,
+    "score": 2
+  },
+  {
+    "file": "ai-in-energy-nuclear-renewable.mdx",
+    "slug": "ai-in-energy-nuclear-renewable",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1575,
+    "passivePct": 0.5,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 11,
+    "bareNumbers": 42,
+    "hasTable": false,
+    "headings": 16,
+    "faqCount": 7,
+    "questionHeadings": 0,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "no-table"
+    ],
+    "inbound": 4,
     "score": 2
   },
   {
@@ -4020,7 +3789,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 19,
+    "bareNumbers": 5,
     "hasTable": true,
     "headings": 12,
     "faqCount": 7,
@@ -4070,7 +3839,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 23,
+    "bareNumbers": 17,
     "hasTable": false,
     "headings": 13,
     "faqCount": 7,
@@ -4081,6 +3850,31 @@
       "no-table"
     ],
     "inbound": 7,
+    "score": 2
+  },
+  {
+    "file": "ai-in-real-estate-proptech.mdx",
+    "slug": "ai-in-real-estate-proptech",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1044,
+    "passivePct": 1.6,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 5,
+    "bareNumbers": 20,
+    "hasTable": false,
+    "headings": 11,
+    "faqCount": 7,
+    "questionHeadings": 0,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "no-table"
+    ],
+    "inbound": 4,
     "score": 2
   },
   {
@@ -4095,7 +3889,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 21,
+    "bareNumbers": 15,
     "hasTable": true,
     "headings": 9,
     "faqCount": 7,
@@ -4103,9 +3897,9 @@
     "flagCount": 1,
     "flags": [
       "human-0",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 2
   },
   {
@@ -4120,9 +3914,34 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 13,
-    "bareNumbers": 38,
+    "bareNumbers": 25,
     "hasTable": true,
     "headings": 17,
+    "faqCount": 7,
+    "questionHeadings": 0,
+    "flagCount": 1,
+    "flags": [
+      "human-0",
+      "inbound-2"
+    ],
+    "inbound": 2,
+    "score": 2
+  },
+  {
+    "file": "ai-translation-deepl-industry.mdx",
+    "slug": "ai-translation-deepl-industry",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1231,
+    "passivePct": 0.8,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 5,
+    "bareNumbers": 19,
+    "hasTable": true,
+    "headings": 10,
     "faqCount": 7,
     "questionHeadings": 0,
     "flagCount": 1,
@@ -4145,7 +3964,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 45,
+    "bareNumbers": 21,
     "hasTable": true,
     "headings": 18,
     "faqCount": 7,
@@ -4170,7 +3989,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 16,
+    "bareNumbers": 8,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -4195,7 +4014,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 11,
+    "bareNumbers": 4,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -4220,7 +4039,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 15,
-    "bareNumbers": 23,
+    "bareNumbers": 21,
     "hasTable": true,
     "headings": 7,
     "faqCount": 2,
@@ -4245,7 +4064,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 14,
-    "bareNumbers": 31,
+    "bareNumbers": 28,
     "hasTable": true,
     "headings": 8,
     "faqCount": 2,
@@ -4255,7 +4074,7 @@
       "human-0",
       "faq-2"
     ],
-    "inbound": 10,
+    "inbound": 11,
     "score": 2
   },
   {
@@ -4270,7 +4089,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 52,
+    "bareNumbers": 50,
     "hasTable": false,
     "headings": 8,
     "faqCount": 4,
@@ -4295,7 +4114,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 24,
+    "bareNumbers": 12,
     "hasTable": false,
     "headings": 11,
     "faqCount": 7,
@@ -4320,7 +4139,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 58,
+    "bareNumbers": 57,
     "hasTable": true,
     "headings": 6,
     "faqCount": 6,
@@ -4345,7 +4164,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 9,
+    "bareNumbers": 4,
     "hasTable": true,
     "headings": 8,
     "faqCount": 3,
@@ -4405,7 +4224,7 @@
       "human-1",
       "faq-3"
     ],
-    "inbound": 13,
+    "inbound": 14,
     "score": 2
   },
   {
@@ -4420,7 +4239,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 10,
+    "bareNumbers": 8,
     "hasTable": true,
     "headings": 16,
     "faqCount": 7,
@@ -4445,7 +4264,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 49,
+    "bareNumbers": 40,
     "hasTable": true,
     "headings": 15,
     "faqCount": 7,
@@ -4453,9 +4272,9 @@
     "flagCount": 1,
     "flags": [
       "human-0",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 2
   },
   {
@@ -4470,11 +4289,36 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 9,
+    "bareNumbers": 7,
     "hasTable": true,
     "headings": 7,
     "faqCount": 7,
     "questionHeadings": 2,
+    "flagCount": 1,
+    "flags": [
+      "human-0",
+      "inbound-2"
+    ],
+    "inbound": 2,
+    "score": 2
+  },
+  {
+    "file": "countdown-ramadan-eid-national-day.en.mdx",
+    "slug": "countdown-ramadan-eid-national-day",
+    "locale": "en",
+    "cluster": "calendar",
+    "isYmyl": false,
+    "words": 867,
+    "passivePct": 0,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 6,
+    "bareNumbers": 21,
+    "hasTable": true,
+    "headings": 6,
+    "faqCount": 5,
+    "questionHeadings": 0,
     "flagCount": 1,
     "flags": [
       "human-0",
@@ -4495,7 +4339,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 21,
+    "bareNumbers": 19,
     "hasTable": true,
     "headings": 5,
     "faqCount": 3,
@@ -4505,7 +4349,7 @@
       "human-0",
       "faq-3"
     ],
-    "inbound": 6,
+    "inbound": 7,
     "score": 2
   },
   {
@@ -4520,7 +4364,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 12,
+    "bareNumbers": 6,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -4545,7 +4389,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 36,
+    "bareNumbers": 32,
     "hasTable": false,
     "headings": 10,
     "faqCount": 4,
@@ -4555,7 +4399,7 @@
       "human-3",
       "no-table"
     ],
-    "inbound": 4,
+    "inbound": 5,
     "score": 2
   },
   {
@@ -4570,7 +4414,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 45,
+    "bareNumbers": 40,
     "hasTable": false,
     "headings": 12,
     "faqCount": 7,
@@ -4581,6 +4425,31 @@
       "no-table"
     ],
     "inbound": 4,
+    "score": 2
+  },
+  {
+    "file": "fine-tuning-lora-qlora.mdx",
+    "slug": "fine-tuning-lora-qlora",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1344,
+    "passivePct": 0.7,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 6,
+    "bareNumbers": 35,
+    "hasTable": true,
+    "headings": 13,
+    "faqCount": 7,
+    "questionHeadings": 2,
+    "flagCount": 1,
+    "flags": [
+      "human-0",
+      "orphan"
+    ],
+    "inbound": 0,
     "score": 2
   },
   {
@@ -4595,7 +4464,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 31,
+    "bareNumbers": 29,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -4620,7 +4489,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 52,
+    "bareNumbers": 13,
     "hasTable": false,
     "headings": 9,
     "faqCount": 7,
@@ -4630,7 +4499,7 @@
       "human-0",
       "no-table"
     ],
-    "inbound": 9,
+    "inbound": 10,
     "score": 2
   },
   {
@@ -4645,7 +4514,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 26,
+    "bareNumbers": 11,
     "hasTable": true,
     "headings": 15,
     "faqCount": 7,
@@ -4670,7 +4539,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 8,
+    "bareNumbers": 7,
     "hasTable": true,
     "headings": 8,
     "faqCount": 3,
@@ -4695,7 +4564,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 24,
+    "bareNumbers": 13,
     "hasTable": false,
     "headings": 11,
     "faqCount": 7,
@@ -4720,7 +4589,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 32,
+    "bareNumbers": 14,
     "hasTable": true,
     "headings": 15,
     "faqCount": 7,
@@ -4731,6 +4600,31 @@
       "orphan"
     ],
     "inbound": 0,
+    "score": 2
+  },
+  {
+    "file": "humanoid-robots-2026.mdx",
+    "slug": "humanoid-robots-2026",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1133,
+    "passivePct": 0.5,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 11,
+    "bareNumbers": 39,
+    "hasTable": false,
+    "headings": 10,
+    "faqCount": 7,
+    "questionHeadings": 2,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "no-table"
+    ],
+    "inbound": 3,
     "score": 2
   },
   {
@@ -4770,7 +4664,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 7,
-    "bareNumbers": 39,
+    "bareNumbers": 31,
     "hasTable": true,
     "headings": 10,
     "faqCount": 7,
@@ -4820,7 +4714,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 21,
+    "bareNumbers": 11,
     "hasTable": true,
     "headings": 9,
     "faqCount": 6,
@@ -4845,7 +4739,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 6,
-    "bareNumbers": 31,
+    "bareNumbers": 20,
     "hasTable": true,
     "headings": 8,
     "faqCount": 6,
@@ -4870,7 +4764,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 6,
-    "bareNumbers": 19,
+    "bareNumbers": 11,
     "hasTable": true,
     "headings": 8,
     "faqCount": 6,
@@ -4920,7 +4814,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 5,
-    "bareNumbers": 22,
+    "bareNumbers": 15,
     "hasTable": true,
     "headings": 8,
     "faqCount": 6,
@@ -4970,7 +4864,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 6,
-    "bareNumbers": 35,
+    "bareNumbers": 25,
     "hasTable": true,
     "headings": 9,
     "faqCount": 6,
@@ -4995,7 +4889,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 16,
-    "bareNumbers": 10,
+    "bareNumbers": 6,
     "hasTable": false,
     "headings": 10,
     "faqCount": 7,
@@ -5020,7 +4914,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 18,
+    "bareNumbers": 6,
     "hasTable": true,
     "headings": 11,
     "faqCount": 7,
@@ -5028,9 +4922,9 @@
     "flagCount": 1,
     "flags": [
       "human-0",
-      "orphan"
+      "inbound-1"
     ],
-    "inbound": 0,
+    "inbound": 1,
     "score": 2
   },
   {
@@ -5055,7 +4949,7 @@
       "human-0",
       "no-table"
     ],
-    "inbound": 3,
+    "inbound": 4,
     "score": 2
   },
   {
@@ -5070,7 +4964,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 37,
+    "bareNumbers": 31,
     "hasTable": true,
     "headings": 13,
     "faqCount": 7,
@@ -5078,9 +4972,9 @@
     "flagCount": 1,
     "flags": [
       "human-0",
-      "inbound-1"
+      "inbound-2"
     ],
-    "inbound": 1,
+    "inbound": 2,
     "score": 2
   },
   {
@@ -5120,7 +5014,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 6,
-    "bareNumbers": 10,
+    "bareNumbers": 5,
     "hasTable": true,
     "headings": 9,
     "faqCount": 6,
@@ -5159,6 +5053,31 @@
     "score": 2
   },
   {
+    "file": "neuralink-brain-computer-interfaces.mdx",
+    "slug": "neuralink-brain-computer-interfaces",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1290,
+    "passivePct": 0.6,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 10,
+    "bareNumbers": 15,
+    "hasTable": false,
+    "headings": 14,
+    "faqCount": 7,
+    "questionHeadings": 1,
+    "flagCount": 2,
+    "flags": [
+      "human-0",
+      "no-table"
+    ],
+    "inbound": 3,
+    "score": 2
+  },
+  {
     "file": "perplexity-ai-search-guide.mdx",
     "slug": "perplexity-ai-search-guide",
     "locale": "ar",
@@ -5170,7 +5089,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 23,
+    "bareNumbers": 17,
     "hasTable": true,
     "headings": 11,
     "faqCount": 7,
@@ -5195,7 +5114,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 14,
+    "bareNumbers": 7,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -5245,7 +5164,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 15,
+    "bareNumbers": 7,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -5270,7 +5189,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 5,
-    "bareNumbers": 28,
+    "bareNumbers": 18,
     "hasTable": true,
     "headings": 8,
     "faqCount": 6,
@@ -5320,7 +5239,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 6,
-    "bareNumbers": 23,
+    "bareNumbers": 22,
     "hasTable": true,
     "headings": 10,
     "faqCount": 7,
@@ -5384,6 +5303,31 @@
     "score": 2
   },
   {
+    "file": "self-driving-cars-explained.mdx",
+    "slug": "self-driving-cars-explained",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 1022,
+    "passivePct": 0.1,
+    "human": 1,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 5,
+    "bareNumbers": 8,
+    "hasTable": true,
+    "headings": 12,
+    "faqCount": 7,
+    "questionHeadings": 0,
+    "flagCount": 1,
+    "flags": [
+      "human-1",
+      "inbound-2"
+    ],
+    "inbound": 2,
+    "score": 2
+  },
+  {
     "file": "small-language-models-slm.mdx",
     "slug": "small-language-models-slm",
     "locale": "ar",
@@ -5395,7 +5339,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 29,
+    "bareNumbers": 17,
     "hasTable": false,
     "headings": 16,
     "faqCount": 7,
@@ -5405,7 +5349,7 @@
       "human-0",
       "no-table"
     ],
-    "inbound": 3,
+    "inbound": 4,
     "score": 2
   },
   {
@@ -5420,7 +5364,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 28,
+    "bareNumbers": 21,
     "hasTable": true,
     "headings": 12,
     "faqCount": 7,
@@ -5456,31 +5400,6 @@
       "no-table"
     ],
     "inbound": 5,
-    "score": 2
-  },
-  {
-    "file": "tokenization-explained.mdx",
-    "slug": "tokenization-explained",
-    "locale": "ar",
-    "cluster": "ai",
-    "isYmyl": false,
-    "words": 919,
-    "passivePct": 1.6,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 6,
-    "bareNumbers": 13,
-    "hasTable": true,
-    "headings": 15,
-    "faqCount": 7,
-    "questionHeadings": 1,
-    "flagCount": 1,
-    "flags": [
-      "human-0",
-      "inbound-2"
-    ],
-    "inbound": 2,
     "score": 2
   },
   {
@@ -5534,31 +5453,6 @@
     "score": 2
   },
   {
-    "file": "zakat-calculator-guide.en.mdx",
-    "slug": "zakat-calculator-guide",
-    "locale": "en",
-    "cluster": "calendar",
-    "isYmyl": false,
-    "words": 951,
-    "passivePct": 0,
-    "human": 0,
-    "aiOpen": 0,
-    "aiEnd": 0,
-    "links": 5,
-    "bareNumbers": 76,
-    "hasTable": true,
-    "headings": 9,
-    "faqCount": 7,
-    "questionHeadings": 5,
-    "flagCount": 1,
-    "flags": [
-      "human-0",
-      "inbound-2"
-    ],
-    "inbound": 2,
-    "score": 2
-  },
-  {
     "file": "agi-superintelligence-debate.mdx",
     "slug": "agi-superintelligence-debate",
     "locale": "ar",
@@ -5570,7 +5464,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 21,
+    "bareNumbers": 5,
     "hasTable": true,
     "headings": 13,
     "faqCount": 7,
@@ -5594,7 +5488,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 13,
-    "bareNumbers": 51,
+    "bareNumbers": 37,
     "hasTable": true,
     "headings": 7,
     "faqCount": 7,
@@ -5618,7 +5512,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 14,
-    "bareNumbers": 18,
+    "bareNumbers": 10,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -5642,7 +5536,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 21,
+    "bareNumbers": 14,
     "hasTable": true,
     "headings": 10,
     "faqCount": 7,
@@ -5651,7 +5545,7 @@
     "flags": [
       "human-0"
     ],
-    "inbound": 8,
+    "inbound": 10,
     "score": 1
   },
   {
@@ -5666,7 +5560,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 14,
-    "bareNumbers": 11,
+    "bareNumbers": 4,
     "hasTable": true,
     "headings": 10,
     "faqCount": 7,
@@ -5675,7 +5569,7 @@
     "flags": [
       "human-0"
     ],
-    "inbound": 9,
+    "inbound": 11,
     "score": 1
   },
   {
@@ -5690,7 +5584,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 13,
-    "bareNumbers": 17,
+    "bareNumbers": 10,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -5714,7 +5608,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 19,
+    "bareNumbers": 10,
     "hasTable": true,
     "headings": 9,
     "faqCount": 7,
@@ -5738,7 +5632,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 20,
-    "bareNumbers": 28,
+    "bareNumbers": 16,
     "hasTable": true,
     "headings": 7,
     "faqCount": 7,
@@ -5762,7 +5656,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 48,
+    "bareNumbers": 24,
     "hasTable": true,
     "headings": 12,
     "faqCount": 7,
@@ -5786,7 +5680,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 66,
+    "bareNumbers": 43,
     "hasTable": true,
     "headings": 12,
     "faqCount": 7,
@@ -5795,7 +5689,7 @@
     "flags": [
       "human-0"
     ],
-    "inbound": 16,
+    "inbound": 17,
     "score": 1
   },
   {
@@ -5810,7 +5704,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 37,
+    "bareNumbers": 13,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -5891,7 +5785,7 @@
     "flags": [
       "human-0"
     ],
-    "inbound": 6,
+    "inbound": 7,
     "score": 1
   },
   {
@@ -5906,7 +5800,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 35,
+    "bareNumbers": 30,
     "hasTable": true,
     "headings": 15,
     "faqCount": 7,
@@ -5930,7 +5824,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 18,
+    "bareNumbers": 8,
     "hasTable": true,
     "headings": 11,
     "faqCount": 7,
@@ -5954,7 +5848,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 24,
-    "bareNumbers": 23,
+    "bareNumbers": 16,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -5978,7 +5872,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 12,
+    "bareNumbers": 9,
     "hasTable": true,
     "headings": 8,
     "faqCount": 4,
@@ -6002,7 +5896,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 21,
+    "bareNumbers": 18,
     "hasTable": true,
     "headings": 8,
     "faqCount": 7,
@@ -6026,7 +5920,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 39,
+    "bareNumbers": 28,
     "hasTable": true,
     "headings": 13,
     "faqCount": 7,
@@ -6035,7 +5929,7 @@
     "flags": [
       "human-0"
     ],
-    "inbound": 3,
+    "inbound": 4,
     "score": 1
   },
   {
@@ -6050,7 +5944,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 44,
+    "bareNumbers": 36,
     "hasTable": true,
     "headings": 13,
     "faqCount": 7,
@@ -6059,7 +5953,7 @@
     "flags": [
       "human-1"
     ],
-    "inbound": 4,
+    "inbound": 6,
     "score": 1
   },
   {
@@ -6087,6 +5981,30 @@
     "score": 1
   },
   {
+    "file": "effective-prompt-writing-rules.mdx",
+    "slug": "effective-prompt-writing-rules",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 764,
+    "passivePct": 0.4,
+    "human": 1,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 7,
+    "bareNumbers": 13,
+    "hasTable": true,
+    "headings": 16,
+    "faqCount": 4,
+    "questionHeadings": 0,
+    "flagCount": 1,
+    "flags": [
+      "human-1"
+    ],
+    "inbound": 9,
+    "score": 1
+  },
+  {
     "file": "elevenlabs-voice-cloning-guide.mdx",
     "slug": "elevenlabs-voice-cloning-guide",
     "locale": "ar",
@@ -6098,7 +6016,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 8,
-    "bareNumbers": 35,
+    "bareNumbers": 30,
     "hasTable": true,
     "headings": 11,
     "faqCount": 7,
@@ -6146,7 +6064,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 9,
-    "bareNumbers": 45,
+    "bareNumbers": 38,
     "hasTable": true,
     "headings": 14,
     "faqCount": 7,
@@ -6170,7 +6088,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 17,
-    "bareNumbers": 13,
+    "bareNumbers": 10,
     "hasTable": true,
     "headings": 12,
     "faqCount": 7,
@@ -6194,7 +6112,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 12,
-    "bareNumbers": 26,
+    "bareNumbers": 8,
     "hasTable": true,
     "headings": 11,
     "faqCount": 7,
@@ -6203,7 +6121,7 @@
     "flags": [
       "human-0"
     ],
-    "inbound": 11,
+    "inbound": 12,
     "score": 1
   },
   {
@@ -6290,7 +6208,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 17,
+    "bareNumbers": 16,
     "hasTable": true,
     "headings": 17,
     "faqCount": 7,
@@ -6299,7 +6217,7 @@
     "flags": [
       "human-0"
     ],
-    "inbound": 5,
+    "inbound": 6,
     "score": 1
   },
   {
@@ -6386,7 +6304,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 6,
-    "bareNumbers": 1,
+    "bareNumbers": 0,
     "hasTable": true,
     "headings": 10,
     "faqCount": 7,
@@ -6410,7 +6328,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 10,
-    "bareNumbers": 24,
+    "bareNumbers": 23,
     "hasTable": true,
     "headings": 11,
     "faqCount": 7,
@@ -6434,7 +6352,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 14,
-    "bareNumbers": 147,
+    "bareNumbers": 116,
     "hasTable": true,
     "headings": 7,
     "faqCount": 6,
@@ -6443,7 +6361,7 @@
     "flags": [
       "human-0"
     ],
-    "inbound": 5,
+    "inbound": 7,
     "score": 1
   },
   {
@@ -6458,7 +6376,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 14,
-    "bareNumbers": 31,
+    "bareNumbers": 28,
     "hasTable": true,
     "headings": 7,
     "faqCount": 6,
@@ -6467,7 +6385,7 @@
     "flags": [
       "human-1"
     ],
-    "inbound": 8,
+    "inbound": 10,
     "score": 1
   },
   {
@@ -6506,7 +6424,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 11,
-    "bareNumbers": 38,
+    "bareNumbers": 15,
     "hasTable": true,
     "headings": 13,
     "faqCount": 7,
@@ -6515,7 +6433,31 @@
     "flags": [
       "human-0"
     ],
-    "inbound": 7,
+    "inbound": 8,
+    "score": 1
+  },
+  {
+    "file": "tokenization-explained.mdx",
+    "slug": "tokenization-explained",
+    "locale": "ar",
+    "cluster": "ai",
+    "isYmyl": false,
+    "words": 919,
+    "passivePct": 1.6,
+    "human": 0,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 6,
+    "bareNumbers": 13,
+    "hasTable": true,
+    "headings": 15,
+    "faqCount": 7,
+    "questionHeadings": 1,
+    "flagCount": 1,
+    "flags": [
+      "human-0"
+    ],
+    "inbound": 3,
     "score": 1
   },
   {
@@ -6530,7 +6472,7 @@
     "aiOpen": 0,
     "aiEnd": 0,
     "links": 13,
-    "bareNumbers": 33,
+    "bareNumbers": 27,
     "hasTable": true,
     "headings": 19,
     "faqCount": 7,
@@ -6540,6 +6482,30 @@
       "human-0"
     ],
     "inbound": 3,
+    "score": 1
+  },
+  {
+    "file": "zakat-calculator-guide.en.mdx",
+    "slug": "zakat-calculator-guide",
+    "locale": "en",
+    "cluster": "calendar",
+    "isYmyl": false,
+    "words": 951,
+    "passivePct": 0,
+    "human": 1,
+    "aiOpen": 0,
+    "aiEnd": 0,
+    "links": 5,
+    "bareNumbers": 76,
+    "hasTable": true,
+    "headings": 9,
+    "faqCount": 7,
+    "questionHeadings": 5,
+    "flagCount": 1,
+    "flags": [
+      "human-1"
+    ],
+    "inbound": 4,
     "score": 1
   },
   {
@@ -6563,7 +6529,7 @@
     "flags": [
       "human-0"
     ],
-    "inbound": 4,
+    "inbound": 6,
     "score": 1
   }
 ]

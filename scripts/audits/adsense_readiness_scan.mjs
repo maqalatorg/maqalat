@@ -26,8 +26,8 @@ const AI_TELL_ENDERS = [
   /من\s+المهم\s+أن\s+نذكر/g,
   /مما\s+سبق\s+يتّضح/g,
 ];
-const HUMAN_SIGNALS = [
-  /—/g, // em-dash
+const HUMAN_SIGNALS_AR = [
+  /—/g,
   /خلافاً\s+ل/g,
   /أنصح|ننصح|لا\s+أنصح|لا\s+ننصح/g,
   /راجعت|تحقّقت|تحقّقنا|راجعنا|فحصنا/g,
@@ -35,13 +35,31 @@ const HUMAN_SIGNALS = [
   /في\s+رأيي|في\s+تجربتي/g,
   /خطأ\s+شائع/g,
 ];
+const HUMAN_SIGNALS_EN = [
+  /—/g,
+  /\bunlike\s+what/gi,
+  /\bwe\s+(recommend|advise|checked|verified|reviewed|found)/gi,
+  /\bwe\s+don'?t\s+(recommend|advise)/gi,
+  /\bin\s+our\s+(view|experience|testing)/gi,
+  /\bcommon\s+mistake/gi,
+  /\bcontrary\s+to/gi,
+];
 const PASSIVE_PATTERN = /(?<![ء-ي])(يُ|تُ)[ء-ي]{2,}/g;
 const INLINE_LINK = /\]\([^)]+\)/g;
-const NUMBER_WITHOUT_CITE =
-  /(?<![\]\d\.])\b\d{2,}(?:٫\d+)?\b(?!\s*[\)\]])/g; // 2+ digit numbers not inside a link
-const TABLE_MARKER = /^\|[\s\S]*?\|[-:]+\|/m;
+// A "bare" number is 2+ digits NOT preceded by a citation context word.
+// Citation contexts: المادة / Article / Art. / §, or inside a markdown link,
+// or a year in a common range, or a percentage figure already tied to a source
+// via nearby link on the same line (we don't detect that — accept some FP).
+const NUMBER_WITHOUT_CITE = new RegExp(
+  "(?<![\\]\\d\\.])" +                                    // not inside a link or decimal
+    "(?<!(المادة|Article|Art\\.|§|Section|Chapter)\\s?)" + // not preceded by citation word
+    "\\b(?!(19|20)\\d{2}\\b)" +                            // ignore 4-digit years 1900-2099
+    "\\d{2,}(?:٫\\d+)?" +                                  // 2+ digits
+    "\\b(?!\\s*[\\)\\]])",
+  "g",
+);
+const TABLE_MARKER = /^\s*\|.*\|\s*$\s*^\s*\|[\s\-:|]+\|\s*$/m;
 const HEADING = /^##\s/gm;
-const FAQ_FIELD_HITS = /^\s*-\s+q:/gm;
 const H1_H2_QUESTION = /^##\s.+[؟?]/gm;
 
 const YMYL_CLUSTERS = new Set([
@@ -69,7 +87,8 @@ for (const f of files) {
     (n, r) => n + (body.match(r) || []).length,
     0,
   );
-  const human = HUMAN_SIGNALS.reduce(
+  const humanSignals = isEn ? HUMAN_SIGNALS_EN : HUMAN_SIGNALS_AR;
+  const human = humanSignals.reduce(
     (n, r) => n + (body.match(r) || []).length,
     0,
   );
