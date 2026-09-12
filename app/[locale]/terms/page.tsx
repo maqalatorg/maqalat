@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { staticPageMetadata } from "@/lib/seo";
+import { staticPageMetadata, staticPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -28,9 +29,20 @@ export default async function TermsPage({
   setRequestLocale(locale);
   const isEn = locale === "en";
   const dateStr = new Date().toLocaleDateString(isEn ? "en-US" : "ar-SA");
+  const jsonLd = staticPageJsonLd({
+    type: "WebPage",
+    path: isEn ? "/en/terms" : "/terms",
+    title: isEn ? "Terms of Use" : "شروط الاستخدام",
+    description: isEn
+      ? "Terms of use for the Maqalat website — how you can use our content, comment policy, account rules, intellectual property, and liability for external links."
+      : "شروط استخدام موقع مقالات: كيف يُسمَح باستخدام المحتوى، سياسة التعليقات، قواعد الحساب، الملكية الفكرية، وحدود المسؤولية والروابط الخارجية.",
+    locale: isEn ? "en" : "ar",
+  });
 
   if (isEn) {
     return (
+      <>
+      <JsonLd data={jsonLd} />
       <article className="max-w-3xl mx-auto px-4 py-12 prose-maqalat">
         <h1 className="text-4xl font-extrabold mb-2">Terms of Use</h1>
         <p className="text-sm text-slate-500">Last updated: {dateStr}</p>
@@ -76,10 +88,13 @@ export default async function TermsPage({
           We reserve the right to modify these terms at any time. Continued use of the site after any change constitutes acceptance of the new terms.
         </p>
       </article>
+      </>
     );
   }
 
   return (
+    <>
+    <JsonLd data={jsonLd} />
     <article className="max-w-3xl mx-auto px-4 py-12 prose-maqalat">
       <h1 className="text-4xl font-extrabold mb-2">شروط الاستخدام</h1>
       <p className="text-sm text-slate-500">آخر تحديث: {dateStr}</p>
@@ -125,5 +140,6 @@ export default async function TermsPage({
         نحتفظ بحق تعديل هذه الشروط في أي وقت. الاستمرار في استخدام الموقع بعد التعديل يعني قبولك للشروط الجديدة.
       </p>
     </article>
+    </>
   );
 }

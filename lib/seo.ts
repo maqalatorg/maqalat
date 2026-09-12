@@ -274,6 +274,33 @@ export function authorProfileJsonLd(a: Author, loc: "ar" | "en" = "ar") {
   };
 }
 
+/** JSON-LD for a static trust page (AboutPage / ContactPage / WebPage). */
+export function staticPageJsonLd(opts: {
+  type: "AboutPage" | "ContactPage" | "WebPage";
+  path: string;
+  title: string;
+  description: string;
+  locale?: "ar" | "en";
+  lastModified?: string;
+}) {
+  const loc = opts.locale ?? "ar";
+  const url = `${SITE_URL}${opts.path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": opts.type,
+    "@id": `${url}#page`,
+    url,
+    name: opts.title,
+    headline: opts.title,
+    description: opts.description,
+    inLanguage: loc === "en" ? "en" : "ar-SA",
+    isPartOf: { "@id": `${SITE_URL}#site` },
+    about: { "@id": `${SITE_URL}#org` },
+    publisher: { "@id": `${SITE_URL}#org` },
+    ...(opts.lastModified ? { dateModified: opts.lastModified } : {}),
+  };
+}
+
 /** JSON-LD for the site itself (Organization + WebSite). */
 export function siteJsonLd() {
   return {

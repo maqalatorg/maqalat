@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { staticPageMetadata } from "@/lib/seo";
+import { staticPageMetadata, staticPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -28,9 +29,22 @@ export default async function EditorialPolicyPage({
   setRequestLocale(locale);
   const isEn = locale === "en";
   const dateStr = new Date().toLocaleDateString(isEn ? "en-US" : "ar-SA");
+  const title = isEn ? "Editorial Policy" : "السياسة التحريرية";
+  const description = isEn
+    ? "How Maqalat picks topics, verifies sources, handles corrections, and separates opinion from reporting — a transparent policy on AI use and reader rights."
+    : "كيف نختار المواضيع، نتحقّق من المصادر، نصحّح الأخطاء، ونفصل الرأي عن الخبر — سياسة تحريرية شفّافة عن استخدام الذكاء الاصطناعي وحقوق القارئ.";
+  const jsonLd = staticPageJsonLd({
+    type: "WebPage",
+    path: isEn ? "/en/editorial-policy" : "/editorial-policy",
+    title,
+    description,
+    locale: isEn ? "en" : "ar",
+  });
 
   if (isEn) {
     return (
+      <>
+      <JsonLd data={jsonLd} />
       <article className="max-w-3xl mx-auto px-4 py-12 prose-maqalat">
         <h1 className="text-4xl font-extrabold mb-4">Editorial Policy</h1>
         <p className="text-lg text-slate-600 dark:text-slate-400">
@@ -100,10 +114,13 @@ export default async function EditorialPolicyPage({
           This policy is a living document — we update it whenever we learn something new. Last updated: {dateStr}.
         </p>
       </article>
+      </>
     );
   }
 
   return (
+    <>
+    <JsonLd data={jsonLd} />
     <article className="max-w-3xl mx-auto px-4 py-12 prose-maqalat">
       <h1 className="text-4xl font-extrabold mb-4">السياسة التحريرية</h1>
       <p className="text-lg text-slate-600 dark:text-slate-400">
@@ -171,5 +188,6 @@ export default async function EditorialPolicyPage({
         هذه السياسة كائنٌ حيّ — نُحدّثها كلّما تعلّمنا شيئاً جديداً. آخر تحديث: {dateStr}.
       </p>
     </article>
+    </>
   );
 }

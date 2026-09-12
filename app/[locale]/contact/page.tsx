@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Mail, MessageCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { staticPageMetadata } from "@/lib/seo";
+import { staticPageMetadata, staticPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -26,7 +27,22 @@ export default async function ContactPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <ContactBody />;
+  const t = await getTranslations({ locale, namespace: "contact" });
+  const isEn = locale === "en";
+  return (
+    <>
+      <JsonLd
+        data={staticPageJsonLd({
+          type: "ContactPage",
+          path: isEn ? "/en/contact" : "/contact",
+          title: t("metaTitle"),
+          description: t("metaDescription"),
+          locale: isEn ? "en" : "ar",
+        })}
+      />
+      <ContactBody />
+    </>
+  );
 }
 
 function ContactBody() {

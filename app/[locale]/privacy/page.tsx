@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { staticPageMetadata } from "@/lib/seo";
+import { staticPageMetadata, staticPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -28,9 +29,20 @@ export default async function PrivacyPage({
   setRequestLocale(locale);
   const isEn = locale === "en";
   const dateStr = new Date().toLocaleDateString(isEn ? "en-US" : "ar-SA");
+  const jsonLd = staticPageJsonLd({
+    type: "WebPage",
+    path: isEn ? "/en/privacy" : "/privacy",
+    title: isEn ? "Privacy Policy" : "سياسة الخصوصية",
+    description: isEn
+      ? "How Maqalat collects and uses your data — what we store, why, third-party services, Google AdSense advertising, and your rights to access or delete it."
+      : "كيف نجمع ونستخدم بياناتك على مقالات: ما نُخزّنه، ولماذا، خدمات الطرف الثالث، إعلانات Google AdSense، وحقوقك في الوصول أو الحذف.",
+    locale: isEn ? "en" : "ar",
+  });
 
   if (isEn) {
     return (
+      <>
+      <JsonLd data={jsonLd} />
       <article className="max-w-3xl mx-auto px-4 py-12 prose-maqalat">
         <h1 className="text-4xl font-extrabold mb-2">Privacy Policy</h1>
         <p className="text-sm text-slate-500">Last updated: {dateStr}</p>
@@ -75,10 +87,13 @@ export default async function PrivacyPage({
           We may update this policy from time to time. The latest change date is shown above. Continued use of the site after any change constitutes acceptance of the new policy.
         </p>
       </article>
+      </>
     );
   }
 
   return (
+    <>
+    <JsonLd data={jsonLd} />
     <article className="max-w-3xl mx-auto px-4 py-12 prose-maqalat">
       <h1 className="text-4xl font-extrabold mb-2">سياسة الخصوصية</h1>
       <p className="text-sm text-slate-500">آخر تحديث: {dateStr}</p>
@@ -123,5 +138,6 @@ export default async function PrivacyPage({
         قد نُحدّث هذه السياسة من وقت لآخر. آخر تعديل موضّح أعلى الصفحة. الاستمرار في استخدام الموقع بعد التعديل يعني قبولك للسياسة الجديدة.
       </p>
     </article>
+    </>
   );
 }

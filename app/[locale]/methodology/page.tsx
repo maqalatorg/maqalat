@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { staticPageMetadata } from "@/lib/seo";
+import { staticPageMetadata, staticPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -28,9 +29,20 @@ export default async function MethodologyPage({
   setRequestLocale(locale);
   const isEn = locale === "en";
   const dateStr = new Date().toLocaleDateString(isEn ? "en-US" : "ar-SA");
+  const jsonLd = staticPageJsonLd({
+    type: "WebPage",
+    path: isEn ? "/en/methodology" : "/methodology",
+    title: isEn ? "Verification Methodology" : "منهجية التحقّق",
+    description: isEn
+      ? "The exact process Maqalat follows to research, source, human-review, and publish every article — step by step, with a strict source hierarchy."
+      : "الإجراء الفعلي الذي نتّبعه لبحث كل مقال، توثيقه بمصادر رسمية أوّلية، مراجعته يدوياً، ونشره — خطوة خطوة، مع تسلسل هرمي صارم للمصادر.",
+    locale: isEn ? "en" : "ar",
+  });
 
   if (isEn) {
     return (
+      <>
+      <JsonLd data={jsonLd} />
       <article className="max-w-3xl mx-auto px-4 py-12 prose-maqalat">
         <h1 className="text-4xl font-extrabold mb-4">Verification Methodology</h1>
         <p className="text-lg text-slate-600 dark:text-slate-400">
@@ -143,10 +155,13 @@ export default async function MethodologyPage({
           we update it whenever the process changes.
         </p>
       </article>
+      </>
     );
   }
 
   return (
+    <>
+    <JsonLd data={jsonLd} />
     <article className="max-w-3xl mx-auto px-4 py-12 prose-maqalat">
       <h1 className="text-4xl font-extrabold mb-4">منهجية التحقّق</h1>
       <p className="text-lg text-slate-600 dark:text-slate-400">
@@ -243,5 +258,6 @@ export default async function MethodologyPage({
         الإجراءات.
       </p>
     </article>
+    </>
   );
 }

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { staticPageMetadata } from "@/lib/seo";
+import { staticPageMetadata, staticPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -26,7 +27,22 @@ export default async function AboutPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <AboutBody />;
+  const t = await getTranslations({ locale, namespace: "about" });
+  const isEn = locale === "en";
+  return (
+    <>
+      <JsonLd
+        data={staticPageJsonLd({
+          type: "AboutPage",
+          path: isEn ? "/en/about" : "/about",
+          title: t("metaTitle"),
+          description: t("metaDescription"),
+          locale: isEn ? "en" : "ar",
+        })}
+      />
+      <AboutBody />
+    </>
+  );
 }
 
 function AboutBody() {
