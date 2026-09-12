@@ -43,7 +43,7 @@ export default async function EditorialPolicyPage({
         </p>
         <ul>
           <li><strong>Saudi government bodies</strong>: King Abdulaziz Center, Ministry of Education, Capital Market Authority, Communications and Information Technology Commission, Ministry of Islamic Affairs.</li>
-          <li><strong>Global medical authorities</strong>: Mayo Clinic, NIH, Harvard T.H. Chan School of Public Health, WHO.</li>
+          <li><strong>Global medical authorities</strong>: Harvard T.H. Chan School of Public Health (Nutrition Source), NIH, WHO, CDC, ACOG, Cochrane.</li>
           <li><strong>Financial sources</strong>: Tadawul, CMA, Bloomberg, Reuters.</li>
           <li><strong>Astronomy references</strong>: International Astronomy Center, NASA JPL Horizons.</li>
         </ul>
@@ -53,7 +53,7 @@ export default async function EditorialPolicyPage({
         <ul>
           <li>Original publication date</li>
           <li>Last updated date (when applicable)</li>
-          <li>Author (individual or team)</li>
+          <li>Author — see <a href="/en/author/founder">the editorial team profile</a> for who publishes here.</li>
           <li>Sources used (inline links or an end-of-article list)</li>
         </ul>
 
@@ -74,6 +74,10 @@ export default async function EditorialPolicyPage({
           <li><strong>Minor error</strong> (typo, punctuation): we correct it silently.</li>
           <li>The <strong>update date</strong> is shown at the top of the article after any substantive change.</li>
         </ul>
+        <p>
+          Email <a href="mailto:maqalatorg@gmail.com">maqalatorg@gmail.com</a> with the
+          article link and where the error is — we respond within 48 hours.
+        </p>
 
         <h2>6. Independence</h2>
         <p>
@@ -110,7 +114,7 @@ export default async function EditorialPolicyPage({
       <p>لا ننشر أي ادعاء رقمي، طبي، قانوني، أو مالي بلا مصدر رسمي موثّق. المصادر التي نعتمدها:</p>
       <ul>
         <li><strong>الجهات الحكومية السعودية</strong>: مركز الملك عبدالعزيز للحوار الوطني، وزارة التعليم، هيئة السوق المالية، هيئة الاتصالات، وزارة الشؤون الإسلامية…</li>
-        <li><strong>الجهات الطبية العالمية</strong>: Mayo Clinic, NIH, Harvard T.H. Chan School of Public Health, WHO.</li>
+        <li><strong>الجهات الطبية العالمية</strong>: Harvard T.H. Chan School of Public Health (Nutrition Source)، NIH، WHO، CDC، ACOG، Cochrane.</li>
         <li><strong>الجهات المالية</strong>: تداول، هيئة السوق المالية، Bloomberg، Reuters.</li>
         <li><strong>مصادر البحث الفلكي</strong>: مركز الفلك الدولي، NASA JPL Horizons.</li>
       </ul>
@@ -120,7 +124,7 @@ export default async function EditorialPolicyPage({
       <ul>
         <li>تاريخ النشر الأصلي</li>
         <li>تاريخ آخر تحديث (إن وُجد)</li>
-        <li>الكاتب (فرد أو فريق)</li>
+        <li>الكاتب — راجع <a href="/author/founder">صفحة فريق التحرير</a> لمعرفة من ينشر هنا.</li>
         <li>المصادر المستخدَمة (كروابط في المتن أو قائمة نهاية)</li>
       </ul>
 
@@ -141,6 +145,10 @@ export default async function EditorialPolicyPage({
         <li><strong>خطأ طفيف</strong> (إملاء، ترقيم): نُصحّحه صامتاً.</li>
         <li>نُوضّح <strong>تاريخ التحديث</strong> في أعلى المقال بعد كل تصحيح جوهري.</li>
       </ul>
+      <p>
+        أرسل رابط المقال ومكان الخطأ إلى <a href="mailto:maqalatorg@gmail.com">maqalatorg@gmail.com</a>
+        {" "}— نرد خلال ٤٨ ساعة.
+      </p>
 
       <h2>٦. الاستقلالية</h2>
       <p>

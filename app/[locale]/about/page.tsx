@@ -53,6 +53,7 @@ function AboutBody() {
       <p>
         {t.rich("whoBody", {
           b: (chunks) => <strong>{chunks}</strong>,
+          team: (chunks) => <Link href="/author/founder" rel="author">{chunks}</Link>,
           link: (chunks) => <Link href="/methodology">{chunks}</Link>,
         })}
       </p>
