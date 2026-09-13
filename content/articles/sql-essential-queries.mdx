@@ -390,4 +390,22 @@ db.execute("SELECT * FROM users WHERE email = ?", (email,))
 
 ---
 
+## أفضل قواعد بيانات لكل استخدام
+
+اختيار قاعدة البيانات المناسبة يوفّر عليك ساعات من الاستعلامات البطيئة:
+
+| قاعدة البيانات | الأنسب لـ | ملاحظات |
+|---|---|---|
+| **[MySQL](https://www.mysql.com/)** | تطبيقات ويب صغيرة ومتوسّطة | الأشهر عالمياً، سهلة التعلّم |
+| **[PostgreSQL](https://www.postgresql.org/)** | تطبيقات متقدّمة، بيانات معقّدة | الأقوى مفتوحة المصدر، تدعم JSON وأنواعاً متقدّمة |
+| **[SQLite](https://www.sqlite.org/)** | تطبيقات الجوّال، مشاريع بسيطة | ملف واحد، بلا خادم |
+| **[MS SQL Server](https://www.microsoft.com/sql-server/)** | مؤسّسات كبيرة، ويندوز | تكامل ممتاز مع Excel وPower BI |
+| **[Oracle](https://www.oracle.com/database/)** | البنوك، الشركات الكبيرة | باهظة، لكن قوية جدّاً |
+| **[BigQuery (Google)](https://cloud.google.com/bigquery)** | تحليلات ضخمة، بيانات كبيرة | سحابية، تدفع لكل استعلام |
+| **[Snowflake](https://www.snowflake.com/)** | مستودعات بيانات مؤسّسية | سحابية، منفصلة الحوسبة عن التخزين |
+
+للسعودي المبتدئ: ابدأ بـSQLite ثم انتقل لـPostgreSQL. للمحلّل المؤسّسي: تعلّم BigQuery أو Snowflake — هي الأكثر طلباً في السعودية اليوم.
+
+---
+
 **اقرأ أيضاً**: [أفضل ١٠ أكواد Python](/top-10-python-code-snippets) · [أكواد أتمتة يومية](/ai-daily-automation-code) · [أكواد Excel و Sheets](/excel-sheets-automation-code) · [Web Scraping](/web-scraping-guide)
