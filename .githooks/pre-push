@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+# Runs the same verify-links check Vercel runs in prebuild.
+# If this passes, the push won't hit "verify-links: N BROKEN internal link(s)"
+# on Vercel (which was the root cause of ~15 consecutive failed deploys on
+# 2026-09-13). Any commit that changes content/articles/**.mdx OR touches
+# committed articles referencing untracked slugs will be caught here in ~1s
+# instead of ~5s of Vercel time + full deploy-cycle re-round.
+#
+# To skip in an emergency: `git push --no-verify` (but expect Vercel Error).
+
+set -e
+
+# Only run when pushing MDX or component/lib changes that affect builds.
+# Pure memory/doc pushes skip.
+changed=$(git diff --name-only "@{push}" HEAD 2>/dev/null || git diff --name-only HEAD~1 HEAD)
+if ! echo "$changed" | grep -qE '(content/articles/|components/|lib/|app/|mdx-components\.tsx|next\.config)'; then
+  exit 0
+fi
+
+echo "→ pre-push: running verify-links (Vercel prebuild check)…"
+node scripts/verify-links.mjs
