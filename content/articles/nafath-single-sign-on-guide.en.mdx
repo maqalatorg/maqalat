@@ -1,0 +1,150 @@
+---
+title: "Nafath National Single Sign-On 2026: Registration, App, and Common Issues"
+description: "Guide to Nafath — linking to Absher, signing in to government services, activating the app, and why it sometimes fails."
+cluster: "government"
+publishedAt: "2026-09-12"
+updatedAt: "2026-09-12"
+author: "Maqalat"
+authorSlug: "founder"
+tags:
+  - "Nafath"
+  - "Single sign-on"
+  - "Government services"
+  - "Absher"
+faq:
+  - q: "What is Nafath?"
+    a: "A unified sign-on system for Saudi government platforms, run by the Digital Government Authority in cooperation with the National Information Center. Lets you access 700+ government services with one account and one password, instead of separate accounts per platform."
+  - q: "Nafath vs Absher?"
+    a: "Absher is the Ministry of Interior platform for security services (passports, traffic, iqama, data updates). Nafath is a unified sign-on system that uses Absher data to authenticate you before allowing access to any other government platform (Qiwa, Sakani, Citizen Account, etc.)."
+  - q: "How do I activate the Nafath app?"
+    a: "Download 'Nafath' from App Store or Google Play. Open, enter your ID, activate with the OTP sent to your Absher-registered mobile. After activation, any sign-in request appears as an alert in the app for you to approve."
+  - q: "Why aren't I getting a Nafath alert?"
+    a: "Most common: (1) your Absher mobile differs from the activated Nafath mobile, (2) the app isn't updated to the latest version, (3) notifications are disabled in phone settings, (4) the phone battery is low and the app is throttled in background."
+  - q: "Can I use Nafath without the app?"
+    a: "Yes — the alternative is SMS verification. But the safest and easiest is the app — it can't be intercepted like SMS, and responds faster."
+---
+
+Nafath is the **bridge** connecting your Absher account to every other Saudi government service: Qiwa, Sakani, Citizen Account, Social Security, Sehhaty, Najiz, Nusuk, and ~700 more. It's operated by the [Digital Government Authority](https://dga.gov.sa/) in cooperation with the National Information Center. URL: [nafath.sa](https://www.nafath.sa/) or the "Nafath" app.
+
+## Why Nafath exists
+
+Before Nafath, each government platform had its own account:
+- One account in Qiwa, one in Sakani, one in GOSI, one in Education…
+- A separate password for each, sometimes with different data.
+- Forgetting one meant complex re-registration.
+
+Nafath solved this by making **Absher data** (tied to your national ID, biometrics, and photo) the single **source of truth**. Any platform that needs to confirm you are "you" asks via Nafath, which asks Absher and confirms or denies.
+
+## How Nafath actually works
+
+Take signing in to Qiwa as an example:
+
+1. You open qiwa.sa and click "Sign In."
+2. Nafath screen appears.
+3. You enter your ID number.
+4. **A notification appears in the Nafath app on your phone** with a random number (e.g., "47").
+5. **The same number is shown on the Qiwa screen**.
+6. If they match, you press "Approve" in the app.
+7. Qiwa opens — you're in.
+
+The random number prevents fraud — no one can trick you into signing in to a fake site because the number won't match.
+
+## First-time app activation
+
+| Step | Detail |
+|---|---|
+| 1 | Download "Nafath" from App Store or Google Play |
+| 2 | Open the app and choose "Activate Account" |
+| 3 | Enter your ID number |
+| 4 | Enter the OTP sent to your Absher-registered mobile |
+| 5 | Set a PIN for additional protection (4 digits) |
+| 6 | Enable face or fingerprint for quick sign-in |
+| 7 | App is ready — home screen shows "Activated" |
+
+## Signing in to any service via Nafath
+
+After activation, signing in to any government platform is easier than getting coffee:
+
+1. Go to the platform's site (Qiwa, Sakani, Sehhaty…) and choose "Sign in with Nafath."
+2. Enter your ID number.
+3. A number appears on the screen — look at your phone.
+4. Notification in Nafath app with a matching number.
+5. Press "Approve" + face or PIN.
+6. The platform opens — no password per platform needed.
+
+## Alternatives to the app
+
+What if you don't want the Nafath app?
+
+- **SMS**: the system sends a verification code from a short number. Enter it in the platform.
+- **Automated call**: the system calls your mobile and states the verification code.
+
+Both alternatives work, but SMS is less secure (can be intercepted in rare cases). The app remains the best.
+
+## Common sign-in issues
+
+| Issue | Cause | Fix |
+|---|---|---|
+| "Alert didn't arrive" | Absher mobile differs from app mobile | Update Absher mobile to match the app mobile |
+| "Number doesn't match" | You're trying to sign in to a fake site | Close the page immediately, go to the official platform site |
+| "Request expired" | You delayed pressing "Approve" | Only 60 seconds to respond — re-sign in |
+| "Account temporarily locked" | 5 wrong attempts | Auto-unlocks in 30 minutes |
+| App opens and shows nothing | Needs update | Update from the app store |
+
+## Nafath for residents
+
+Residents (iqama holders) use Nafath the same way, provided their data is correct in Absher (iqama number, birthdate, photo, mobile). Residents can sign in to: Qiwa, Musaned, Sehhaty, Najiz, etc. Some services are Saudi-only (Sakani, Citizen Account) regardless of Nafath.
+
+## Nafath Business (for establishments)
+
+A separate version for establishments, letting a company's authorised representative sign in to business services: Qiwa (as an employer), Absher Business, ZATCA tax platform, and more. Activation requires linking the commercial registration to the representative's ID.
+
+## Nafath security
+
+- **Never share your PIN** with anyone.
+- **Never approve a sign-in you didn't initiate**: a common scam. If a notification arrives and you weren't signing in, reject it.
+- **Keep the app updated**: updates patch vulnerabilities.
+- **If you lose your phone**: from the Nafath website via browser, deactivate, then activate on a new phone.
+
+## Related articles
+
+- [Absher — the complete guide](/en/absher-complete-guide)
+- [Qiwa platform — labour market](/en/qiwa-platform-guide)
+- [Sehhaty — the complete guide](/en/sehhaty-app-complete-guide)
+
+## Nafath in the Saudi Digital Identity Stack
+
+Nafath doesn't hang alone in space — it's three interconnected layers forming your complete digital identity in the Kingdom:
+
+| Layer | Role | What it provides |
+|---|---|---|
+| **[Absher](https://www.absher.sa/)** | Source of original data | Identity, fingerprint, photo, registered mobile |
+| **[Nafath](https://www.nafath.sa/)** | Unified sign-on bridge | Verifies you own the identity via your app |
+| **[Tawakkalna](/en/tawakkalna-complete-guide)** | Visible digital identity | Digital version of the national ID legally accepted |
+
+The practical difference: **Absher** stores your data, **Nafath** uses it for verification, **Tawakkalna** displays it to the other party (police, airport, bank). You don't choose "the best" — you need all three together, but Nafath is the most-used daily because it's the gateway to any digital platform.
+
+## Nafath and the Official Electronic Signature
+
+Since 2023, Nafath integrated what's known as **"the official Electronic Signature"** — used by the beneficiary to sign government documents with a legal validity equivalent to a handwritten signature, under the **Electronic Transactions Law** issued by Royal Decree (M/18) of 1428 AH. This includes:
+
+- **Signing employment contracts** in Qiwa without needing to visit a labor office.
+- **Signing powers of attorney** in Najiz without a notary public.
+- **Signing tax declarations** with ZATCA.
+- **Signing academic-life certificates** and academic documents via the "Musaddaq" platform.
+
+This evolution transforms Nafath from a mere "smart password" to an **integrated digital signature infrastructure**. Reference: [Digital Government Authority — dga.gov.sa](https://dga.gov.sa/) and [Electronic Transactions Law](https://laws.boe.gov.sa/) in the Saudi legal codes collection.
+
+## Nafath by the Numbers in 2026 (per DGA)
+
+- More than **700+ government services** linked to Nafath (2026)
+- More than **20 million activated users**
+- **One billion login operations** annually via the system
+- **99.9%** service uptime SLA official
+
+These numbers reflect that Nafath has become **the Kingdom's official digital-government infrastructure** — if it goes down one day, e-government stops entirely. This is why the system is built with dual data centers in Riyadh and Jeddah, with automatic failover between them. Official source: [DGA Annual Report](https://dga.gov.sa/).
+
+**Sources:**
+- [Official Nafath — nafath.sa](https://www.nafath.sa/)
+- [Digital Government Authority — dga.gov.sa](https://dga.gov.sa/)
+- [National Information Center (NIC) — nic.gov.sa](https://www.nic.gov.sa/)
