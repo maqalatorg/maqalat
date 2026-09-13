@@ -29,7 +29,7 @@ export function LanguageSwitcher() {
       className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors disabled:opacity-60"
     >
       <Languages className="w-4 h-4" strokeWidth={2.2} />
-      <span className="hidden sm:inline">{otherLabel}</span>
+      <span className="font-semibold tracking-wide">{otherLocale}</span>
     </button>
   );
 }

@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { SearchBar } from "./SearchBar";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { MobileMenu } from "./MobileMenu";
 import { getSearchIndex } from "@/lib/blog";
 import type { Locale } from "@/i18n/config";
 
@@ -21,7 +22,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-[color-mix(in_srgb,var(--bg)_82%,transparent)] border-b border-slate-200/60 dark:border-slate-800/60">
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <div className="relative max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
         {/* Logo */}
         <Link
           href="/"
@@ -61,6 +62,7 @@ export function Header() {
           </div>
           <LanguageSwitcher />
           <ThemeToggle />
+          <MobileMenu items={NAV} ariaLabel={t("nav.menuAria")} />
         </div>
       </div>
     </header>
