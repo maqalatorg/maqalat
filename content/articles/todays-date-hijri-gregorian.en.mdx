@@ -1,0 +1,123 @@
+---
+title: "What Month Is It Today? Live Hijri & Gregorian Date (Umm al-Qura)"
+description: "Check what month and day it is right now in Saudi Arabia in both the Gregorian and Umm al-Qura Hijri calendars — month number, name, weekday, and days left in the month."
+cluster: "calendar"
+publishedAt: "2026-09-12"
+updatedAt: "2026-09-12"
+author: "Maqalat"
+authorSlug: "founder"
+tags:
+  - "Today's date"
+  - "Hijri calendar"
+  - "Gregorian calendar"
+  - "Umm al-Qura"
+  - "Current month"
+faq:
+  - q: "What month is it today in the Gregorian calendar?"
+    a: "The Gregorian month number and name appear in the tool at the top of this page, computed against Riyadh time. The tool refreshes every minute — no page reload needed."
+  - q: "What is today's Hijri date?"
+    a: "The tool above shows the current Hijri day, month number, and month name (Muharram, Safar, Rabi’ al-Awwal…) based on the Umm al-Qura calendar officially adopted in Saudi Arabia. No approximation."
+  - q: "Why does Ramadan move backwards every year?"
+    a: "The Hijri (lunar) year is about 11 days shorter than the Gregorian (solar) year — roughly 354 days vs. 365. So each Hijri month advances about 11 days earlier in the Gregorian year, and Ramadan cycles through all seasons over about 33 years."
+  - q: "When does a Hijri day begin?"
+    a: "At sunset, not at midnight. That is why 1 Ramadan effectively begins at maghrib on the Gregorian day before. The tool above follows the Umm al-Qura day, which starts at Riyadh sunset."
+  - q: "Where does the Hijri date on this page come from?"
+    a: "From your browser's Intl.DateTimeFormat API with the islamic-umalqura option — the same Umm al-Qura data adopted by Saudi Arabia via the Astronomy Center at KACST."
+---
+
+<CurrentDate />
+
+## What you're looking at
+
+The tool shows today's date in Riyadh time using both calendars: Gregorian (solar) and Hijri (lunar, per Umm al-Qura). Each card gives you three things: **day number**, **month name**, and **month number** from 1 to 12. Below the two cards, a single summary line answers the most common question directly: "what's today's date?"
+
+The Hijri day begins at **sunset the previous Gregorian day**, not at midnight. So if you open this page after maghrib in Saudi Arabia, the Hijri date you see is what many traditional almanacs would print for **tomorrow** in Gregorian terms. The tool follows Umm al-Qura's rule automatically.
+
+---
+
+## Gregorian months in order
+
+| # | Name (Arabic) | Name (English) | Days |
+|---|---|---|---|
+| 1 | يناير | January | 31 |
+| 2 | فبراير | February | 28 / 29 |
+| 3 | مارس | March | 31 |
+| 4 | أبريل | April | 30 |
+| 5 | مايو | May | 31 |
+| 6 | يونيو | June | 30 |
+| 7 | يوليو | July | 31 |
+| 8 | أغسطس | August | 31 |
+| 9 | سبتمبر | September | 30 |
+| 10 | أكتوبر | October | 31 |
+| 11 | نوفمبر | November | 30 |
+| 12 | ديسمبر | December | 31 |
+
+A common Gregorian year is 365 days; a leap year is 366 days (one day added to February). Leap-year rule: divisible by 4 and not by 100, or divisible by 400. So 2024 is a leap year, 1900 is not, 2000 is.
+
+---
+
+## Hijri months in order
+
+| # | Name | Notes |
+|---|---|---|
+| 1 | Muharram | Islamic New Year; Ashura on the 10th |
+| 2 | Safar | — |
+| 3 | Rabi’ al-Awwal | Mawlid (12th, according to most) |
+| 4 | Rabi’ al-Thani (Rabi’ al-Akhir) | — |
+| 5 | Jumada al-Ula | — |
+| 6 | Jumada al-Akhirah (al-Thaniya) | — |
+| 7 | Rajab | One of the four sacred months |
+| 8 | Sha’ban | Immediately before Ramadan |
+| 9 | Ramadan | The month of fasting |
+| 10 | Shawwal | Eid al-Fitr on the 1st |
+| 11 | Dhu al-Qi’dah | One of the four sacred months |
+| 12 | Dhu al-Hijjah | Hajj, Day of Arafah (9th), Eid al-Adha (10th) |
+
+A Hijri month is 29 or 30 days. A Hijri year is typically 354 days (355 in a lunar leap year). In Saudi Arabia, month starts are set by the Umm al-Qura astronomical calculation and confirmed by moon sighting where required.
+
+---
+
+## Why does Ramadan shift each year?
+
+The ~11-day gap between the lunar and solar years means every Hijri month advances by roughly 11 days on the Gregorian calendar each year. Over about 33 years, Ramadan completes a full cycle through all seasons. A quick view:
+
+- **2024 CE**: Ramadan started in March (spring).
+- **2025 CE**: Ramadan advanced to late February.
+- **2030 CE**: Ramadan is expected in January (winter).
+- **2035 CE**: Ramadan returns to around November.
+
+That is why an older Saudi may recall fasting in the peak of summer heat as a child and in the cold of winter as an adult — both are literally true, roughly 17 years apart.
+
+---
+
+## How this page computes the date
+
+We use your browser's `Intl.DateTimeFormat` API with the `islamic-umalqura` option, set to the `Asia/Riyadh` time zone. Every modern browser (Chrome, Safari, Firefox, Edge) ships with the same official Umm al-Qura data published by [KACST](https://www.kacst.gov.sa/) at the [official Umm al-Qura site](https://www.ummulqura.org.sa/). No server, no internet connection, no data ever leaves your device.
+
+This means the tool is **day-accurate through 1500 AH (~2076 CE)** and does not rely on the approximate lunar-year formula that many other websites use.
+
+---
+
+## Common questions people search for
+
+- **"What month is it right now?"** The Gregorian card above shows the month number (1–12) with its name.
+- **"What is today's Hijri date?"** The Hijri card gives the day, month number, month name, and year (AH).
+- **"What is the current Hijri month?"** The month number appears directly below the month name.
+- **"How many days are left in the month?"** The summary strip below the cards states how many days remain in the current Gregorian month.
+- **"What day of the week is it?"** The weekday (Saturday, Sunday…) appears in the large header above the tool.
+
+---
+
+## Related tools
+
+- [Hijri ↔ Gregorian converter](/en/hijri-gregorian-converter-2026) — convert any date between the two calendars.
+- [Age calculator](/en/age-calculator-guide) — from a birth date in either calendar.
+- [Event countdown](/en/countdown-ramadan-eid-national-day) — Ramadan, both Eids, and Saudi National Day.
+- [Saudi salary calendar](/en/saudi-salary-dates-2026-2027) — official pay dates in both calendars.
+
+---
+
+**Sources:**
+- [Official Umm al-Qura calendar — ummulqura.org.sa](https://www.ummulqura.org.sa/)
+- [King Abdulaziz City for Science and Technology (KACST)](https://www.kacst.gov.sa/)
+- [ECMA-402 Intl.DateTimeFormat](https://tc39.es/ecma402/#datetimeformat-objects) specification for the `islamic-umalqura` option.
