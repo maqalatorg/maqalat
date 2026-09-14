@@ -1,4 +1,5 @@
 import { MDXRemote } from "next-mdx-remote-client/rsc";
+import remarkGfm from "remark-gfm";
 import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { Calendar, Clock, User } from "lucide-react";
@@ -374,7 +375,11 @@ export default async function ArticlePage({
 
         {/* Body */}
         <div className="prose-maqalat">
-          <MDXRemote source={article.content} components={mdxComponents} />
+          <MDXRemote
+            source={article.content}
+            components={mdxComponents}
+            options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+          />
         </div>
 
         {/* FAQ (server-rendered — content, not decoration) */}
